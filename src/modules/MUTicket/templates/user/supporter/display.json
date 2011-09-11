@@ -1,0 +1,3 @@
+{* purpose of this template: supporters display json view in user area *}
+{muticketTemplateHeaders contentType='application/json'}
+{$supporter->toJson()}

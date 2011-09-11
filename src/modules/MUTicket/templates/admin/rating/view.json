@@ -1,0 +1,8 @@
+{* purpose of this template: ratings view json view in admin area *}
+{muticketTemplateHeaders contentType='application/json'}
+[
+{foreach item='item' from=$items name='ratings'}
+    {if not $smarty.foreach.ratings.first},{/if}
+    {$item->toJson()}
+{/foreach}
+]

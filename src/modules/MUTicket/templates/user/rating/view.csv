@@ -1,0 +1,5 @@
+{* purpose of this template: ratings view csv view in user area *}
+{muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='Ratings.csv'}
+"{gt text='Ratingvalue'}"{foreach item='rating' from=$items}
+"{$rating.ratingvalue|formatnumber}"{/foreach}
+

@@ -1,0 +1,6 @@
+{* purpose of this template: tickets view csv view in admin area *}
+{muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='Tickets.csv'}
+"{gt text='Title'}";"{gt text='Text'}";"{gt text='Parent_id'}";"{gt text='Images'}";"{gt text='Files'}";"{gt text='State'}";"{gt text='T_rating'}";"{gt text='Rated'}""{gt text='Parent'}"
+{foreach item='ticket' from=$items}
+"{$ticket.title|replace:"\"":""}";"{$ticket.text|replace:"\"":""}";"{$ticket.parent_id|replace:"\"":""}";"{$ticket.images}";"{$ticket.files}";"{$ticket.state|replace:"\"":""}";"{$ticket.t_rating|replace:"\"":""}";"{$ticket.rated|replace:"\"":""}"{if isset($ticket.Parent) && $ticket.Parent ne null}{$ticket.Parent.title|default:""}{/if}{/foreach}
+

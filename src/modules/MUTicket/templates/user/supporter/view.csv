@@ -1,0 +1,5 @@
+{* purpose of this template: supporters view csv view in user area *}
+{muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='Supporters.csv'}
+"{gt text='Username'}";"{gt text='Supportcats'}"{foreach item='supporter' from=$items}
+"{$supporter.username|replace:"\"":""}";"{$supporter.supportcats|replace:"\"":""}"{/foreach}
+

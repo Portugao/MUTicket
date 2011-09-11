@@ -1,0 +1,6 @@
+{* purpose of this template: supporters xml inclusion template in user area *}
+<supporter id="{$item.id}" createdon="{$item.createdDate|dateformat}" updatedon="{$item.updatedDate|dateformat}">
+    <id>{$item.id}</id>
+    <username><![CDATA[{$item.username}]]></username>
+    <supportcats><![CDATA[{$item.supportcats}]]></supportcats>
+</supporter>

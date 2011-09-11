@@ -1,0 +1,9 @@
+{* purpose of this template: ratings view xml view in user area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+<ratings>
+{foreach item='item' from=$items}
+    {include file='user/rating/include.xml'}
+{foreachelse}
+    <noRating />
+{/foreach}
+</ratings>

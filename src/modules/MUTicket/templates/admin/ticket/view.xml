@@ -1,0 +1,9 @@
+{* purpose of this template: tickets view xml view in admin area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+<tickets>
+{foreach item='item' from=$items}
+    {include file='admin/ticket/include.xml'}
+{foreachelse}
+    <noTicket />
+{/foreach}
+</tickets>

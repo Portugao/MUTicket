@@ -1,0 +1,10 @@
+
+# generated at Sun Sep 11 16:08:57 CEST 2011 by ModuleStudio 0.5.2 (http://modulestudio.de)
+# ----------------------------------------------------------------------
+# Purpose of file: give access to upload files treated in this directory
+# ----------------------------------------------------------------------
+deny from all
+<FilesMatch "\.(pdf|doc|odt)$">
+    order allow,deny
+    allow from all
+</filesmatch>

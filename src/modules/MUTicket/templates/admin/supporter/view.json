@@ -1,0 +1,8 @@
+{* purpose of this template: supporters view json view in admin area *}
+{muticketTemplateHeaders contentType='application/json'}
+[
+{foreach item='item' from=$items name='supporters'}
+    {if not $smarty.foreach.supporters.first},{/if}
+    {$item->toJson()}
+{/foreach}
+]

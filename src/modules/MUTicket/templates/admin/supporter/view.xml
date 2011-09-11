@@ -1,0 +1,9 @@
+{* purpose of this template: supporters view xml view in admin area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+<supporters>
+{foreach item='item' from=$items}
+    {include file='admin/supporter/include.xml'}
+{foreachelse}
+    <noSupporter />
+{/foreach}
+</supporters>

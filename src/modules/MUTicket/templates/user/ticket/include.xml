@@ -1,0 +1,13 @@
+{* purpose of this template: tickets xml inclusion template in user area *}
+<ticket id="{$item.id}" createdon="{$item.createdDate|dateformat}" updatedon="{$item.updatedDate|dateformat}">
+    <id>{$item.id}</id>
+    <title><![CDATA[{$item.title}]]></title>
+    <text><![CDATA[{$item.text}]]></text>
+    <parent_id>{$item.parent_id}</parent_id>
+    <images>{$item.images}</images>
+    <files>{$item.files}</files>
+    <state><![CDATA[{$item.state}]]></state>
+    <t_rating>{$item.t_rating}</t_rating>
+    <rated>{$item.rated}</rated>
+    <parent>{if isset($item.Parent) && $item.Parent ne null}{$item.Parent.title|default:""}{/if}</parent>
+</ticket>

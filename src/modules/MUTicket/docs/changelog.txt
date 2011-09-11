@@ -1,0 +1,4 @@
+CHANGELOG
+---------
+
+Changes in MUTicket 1.0.0

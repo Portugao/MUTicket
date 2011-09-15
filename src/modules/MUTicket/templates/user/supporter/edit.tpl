@@ -31,6 +31,11 @@
             {formtextinput group='supporter' id='supportcats' mandatory=true readOnly=false __title='Input the supportcats of the supporter' textMode='singleline' maxLength=255 cssClass='required'}
             {muticketValidationError id='supportcats' class='required'}
         </div>
+        <div class="z-formrow">
+            {formlabel for='state' __text='State' mandatorysym='1'}
+            {formcheckbox group='supporter' id='state' readOnly=false __title='state ?' cssClass='required'}
+            {muticketValidationError id='state' class='required'}
+        </div>
     </fieldset>
 
     {if $mode ne 'create'}

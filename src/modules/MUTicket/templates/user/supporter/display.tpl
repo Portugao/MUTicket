@@ -11,6 +11,8 @@
 <dl id="MUTicket_body">
     <dt>{gt text='Supportcats'}</dt>
     <dd>{$supporter.supportcats}</dd>
+    <dt>{gt text='State'}</dt>
+    <dd>{$supporter.state|yesno:true}</dd>
 </dl>
     {include file='user/include_standardfields_display.tpl' obj=$supporter}
 

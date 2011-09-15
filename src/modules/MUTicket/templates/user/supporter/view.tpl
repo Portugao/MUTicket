@@ -19,6 +19,7 @@
     <colgroup>
         <col id="cusername" />
         <col id="csupportcats" />
+        <col id="cstate" />
         <col id="cintactions" />
     </colgroup>
     <thead>
@@ -28,6 +29,9 @@
         </th>
         <th id="hsupportcats" scope="col" align="left" valign="middle">
             {sortlink __linktext='Supportcats' sort='supportcats' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='supporter'}
+        </th>
+        <th id="hstate" scope="col" align="center" valign="middle">
+            {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='supporter'}
         </th>
         <th id="hintactions" scope="col" align="left" valign="middle" class="z-wrap z-order-unsorted">{gt text='Actions'}</th>
     </tr>
@@ -41,6 +45,9 @@
         </td>
         <td headers="hsupportcats" align="left" valign="top">
             {$supporter.supportcats}
+        </td>
+        <td headers="hstate" align="center" valign="top">
+            {$supporter.state|yesno:true}
         </td>
         <td headers="hintactions" align="left" valign="top" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='supporter' id=$supporter.id}" title="{$supporter.username|replace:"\"":""}">
@@ -63,7 +70,7 @@
     </tr>
     {foreachelse}
         <tr class="z-datatableempty">
-          <td align="left" valign="top" colspan="3">
+          <td align="left" valign="top" colspan="4">
             {gt text='No supporters found.'}
           </td>
         </tr>

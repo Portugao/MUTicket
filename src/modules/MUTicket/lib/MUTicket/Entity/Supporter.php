@@ -180,7 +180,7 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function preSaveCallback()
     {
-        // echo 'saving a record ...';
+        // echo 'saving a record ...';		
         $this->validate();
     }
 

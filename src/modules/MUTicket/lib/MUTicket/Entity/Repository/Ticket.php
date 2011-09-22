@@ -18,5 +18,31 @@
  */
 class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_Ticket
 {
-    // feel free to add your own methods here, like for example reusable DQL queries
+    /**
+     * Select with a given where clause and pagination parameters.
+     *
+     * @param string  $where          The where clause to use when retrieving the collection (optional) (default='').
+     * @param string  $orderBy        The order-by clause to use when retrieving the collection (optional) (default='').
+     * @param integer $currentPage    Where to start selection
+     * @param integer $resultsPerPage Amount of items to select
+     * @param boolean $useJoins       Whether to include joining related objects (optional) (default=true).
+     *
+     * @return Array with retrieved collection and amount of total records affected by this query.
+     */
+    public function selectWherePaginated($where = '', $orderBy = '', $currentPage = 1, $resultsPerPage = 25, $useJoins = true)
+    {
+    	
+    $state = (int) FormUtil::getPassedValue('state',2 , 'GET', FILTER_VALIDATE_INT);
+    
+    if(isset($state)) {	
+		if (!empty($where) && $state != 2) {
+			$where .= ' AND ';
+		}
+		if($state != 2)
+		$where .= 'tbl.state = \'' . DataUtil::formatForStore($state) . '\'';
+		
+        	return parent::selectWherePaginated($where, $orderBy, $currentPage, $resultsPerPage,
+			$useJoins);
+    }
+    }
 }

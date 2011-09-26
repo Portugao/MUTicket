@@ -166,6 +166,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     public function postPersistCallback()
     {
         // echo 'inserted a record ...';
+        $this->getText();
     }
 
     /**

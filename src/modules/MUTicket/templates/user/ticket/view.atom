@@ -48,7 +48,7 @@
         </summary>
         <content type="html">
             <![CDATA[
-                {$ticket.state|replace:'<br>':'<br />'}
+                {$ticket.title|replace:'<br>':'<br />'}
             ]]>
         </content>
     </entry>

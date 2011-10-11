@@ -16,6 +16,17 @@
         </a>
     {/checkpermissionblock}
 
+    {if isset($showAllEntries) && $showAllEntries eq 1}
+        {gt text='Back to paginated view' assign='linkTitle'}
+        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket'}" title="{$linkTitle}" class="z-icon-es-view">
+            {$linkTitle}
+        </a>
+    {else}
+        {gt text='Show all entries' assign='linkTitle'}
+        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket' all=1}" title="{$linkTitle}" class="z-icon-es-view">
+            {$linkTitle}
+        </a>
+    {/if}
 
 <table class="z-datatable">
     <colgroup>
@@ -47,13 +58,13 @@
         <th id="hfiles" scope="col" align="left" valign="middle">
             {sortlink __linktext='Files' sort='files' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hstate" scope="col" align="left" valign="middle">
+        <th id="hstate" scope="col" align="center" valign="middle">
             {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="ht_rating" scope="col" align="right" valign="middle">
+        <th id="ht_rating" scope="col" align="center" valign="middle">
             {sortlink __linktext='T_rating' sort='t_rating' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hrated" scope="col" align="right" valign="middle">
+        <th id="hrated" scope="col" align="center" valign="middle">
             {sortlink __linktext='Rated' sort='rated' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
         <th id="hparent" scope="col" align="left" valign="middle">
@@ -99,14 +110,14 @@
             {else}&nbsp;{/if}
 
         </td>
-        <td headers="hstate" align="left" valign="top">
-            {$ticket.state}
+        <td headers="hstate" align="center" valign="top">
+            {$ticket.state|yesno:true}
         </td>
-        <td headers="ht_rating" align="right" valign="top">
-            {$ticket.t_rating}
+        <td headers="ht_rating" align="center" valign="top">
+            {$ticket.t_rating|yesno:true}
         </td>
-        <td headers="hrated" align="right" valign="top">
-            {$ticket.rated}
+        <td headers="hrated" align="center" valign="top">
+            {$ticket.rated|yesno:true}
         </td>
         <td headers="hparent" align="left" valign="top">
             {if isset($ticket.Parent) && $ticket.Parent ne null}
@@ -157,6 +168,9 @@
     </tbody>
 </table>
 
-    {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+    {if !isset($showAllEntries) || $showAllEntries ne 1}
+        {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+    {/if}
 </div>
 {include file='admin/footer.tpl'}
+

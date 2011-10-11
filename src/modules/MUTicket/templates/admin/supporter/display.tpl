@@ -3,7 +3,7 @@
 <div class="muticket-supporter muticket-display">
 {gt text='Supporter' assign='templateTitle'}
 {assign var='templateTitle' value=$supporter.username|default:$templateTitle}
-{pagesetvar name='title' value=$templateTitle}
+{pagesetvar name='title' value=$templateTitle|@html_entity_decode}
 <div class="z-admin-content-pagetitle">
     {icon type='display' size='small' __alt='Details'}
     <h3>{$templateTitle|notifyfilters:'muticket.filter_hooks.supporters.filter'}</h3>
@@ -49,3 +49,4 @@
 
 </div>
 {include file='admin/footer.tpl'}
+

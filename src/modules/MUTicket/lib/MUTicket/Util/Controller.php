@@ -17,4 +17,8 @@
 class MUTicket_Util_Controller extends MUTicket_Util_Base_Controller
 {
     // feel free to add your own convenience methods here
+    public static function getKindOfUser() {
+    	
+    	$supporter = MUTicket_Entity_Repository_Supporter::selectWhere();
+    }
 }

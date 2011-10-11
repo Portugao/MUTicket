@@ -258,7 +258,7 @@ class MUTicket_Form_Handler_Base_Admin_Ticket_Edit extends Zikula_Form_AbstractH
         $viewArgs = array('ot' => $this->objectType);
         $url = ModUtil::url('MUTicket', 'admin', 'view', $viewArgs);
 
-        if ($args['commandName'] != 'delete') {
+        if ($args['commandName'] != 'delete' && $args['commandName'] != 'cancel') {
             // redirect to the detail page of treated ticket
             $url = ModUtil::url('MUTicket', 'admin', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
         }
@@ -324,10 +324,16 @@ class MUTicket_Form_Handler_Base_Admin_Ticket_Edit extends Zikula_Form_AbstractH
         }
 
         $repeatCreateAction = false;
-        if ($args['commandName'] == 'create' && isset($ticketData['repeatcreation'])) {
-            $repeatCreateAction = $ticketData['repeatcreation'];
+        if (isset($ticketData['repeatcreation'])) {
+
+             if ($args['commandName'] == 'create') {
+
+                 $repeatCreateAction = $ticketData['repeatcreation'];
+
+             } 
             unset($ticketData['repeatcreation']);
         }
+
 
         // assign fetched data
         $ticket->merge($ticketData);
@@ -439,8 +445,8 @@ class MUTicket_Form_Handler_Base_Admin_Ticket_Edit extends Zikula_Form_AbstractH
                 return ModUtil::url('MUTicket', 'admin', 'view',
                     array('ot' => $this->objectType));
             case 'adminDisplay':
-                if ($args['commandName'] != 'delete') {
-                    return ModUtil::url('MUTicket', 'admin', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
+                if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
+                    return ModUtil::url('MUTicket', 'admin', 'display', array('ot' => 'ticket'));
                 }
                 return $this->getDefaultReturnUrl($args, $obj);
             case 'user':
@@ -449,8 +455,8 @@ class MUTicket_Form_Handler_Base_Admin_Ticket_Edit extends Zikula_Form_AbstractH
                 return ModUtil::url('MUTicket', 'user', 'view',
                     array('ot' => $this->objectType));
             case 'userDisplay':
-                if ($args['commandName'] != 'delete') {
-                    return ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
+                if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
+                    return ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket'));
                 }
                 return $this->getDefaultReturnUrl($args, $obj);
             case 'account':

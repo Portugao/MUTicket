@@ -36,11 +36,7 @@
             {muticketValidationError id='text' class='required'}
         </div>
         <div class="z-formrow">
-            {if $mode eq 'create'}
-                {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
-            {else}
-                {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
-            {/if}
+            {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
             {formuploadinput group='ticket' id='images' mandatory=false readOnly=false cssClass=''}
 
             <div class="z-formnote">{gt text='Allowed file extensions:'} gif, jpeg, jpg, png</div>
@@ -64,11 +60,7 @@
             {/if}
         </div>
         <div class="z-formrow">
-            {if $mode eq 'create'}
-                {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
-            {else}
-                {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
-            {/if}
+            {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
             {formuploadinput group='ticket' id='files' mandatory=false readOnly=false cssClass=''}
 
             <div class="z-formnote">{gt text='Allowed file extensions:'} pdf, doc, odt</div>
@@ -93,20 +85,18 @@
         </div>
         <div class="z-formrow">
             {formlabel for='state' __text='State' mandatorysym='1'}
-            {formtextinput group='ticket' id='state' mandatory=true readOnly=false __title='Input the state of the ticket' textMode='singleline' maxLength=50 cssClass='required'}
+            {formcheckbox group='ticket' id='state' readOnly=false __title='state ?' cssClass='required'}
             {muticketValidationError id='state' class='required'}
         </div>
         <div class="z-formrow">
             {formlabel for='t_rating' __text='T_rating' mandatorysym='1'}
-            {formintinput group='ticket' id='t_rating' mandatory=true __title='Input the t_rating of the ticket' maxLength=1 cssClass='required validate-digits'}
+            {formcheckbox group='ticket' id='t_rating' readOnly=false __title='t_rating ?' cssClass='required'}
             {muticketValidationError id='t_rating' class='required'}
-            {muticketValidationError id='t_rating' class='validate-digits'}
         </div>
         <div class="z-formrow">
             {formlabel for='rated' __text='Rated' mandatorysym='1'}
-            {formintinput group='ticket' id='rated' mandatory=true __title='Input the rated of the ticket' maxLength=1 cssClass='required validate-digits'}
+            {formcheckbox group='ticket' id='rated' readOnly=false __title='rated ?' cssClass='required'}
             {muticketValidationError id='rated' class='required'}
-            {muticketValidationError id='rated' class='validate-digits'}
         </div>
     </fieldset>
 

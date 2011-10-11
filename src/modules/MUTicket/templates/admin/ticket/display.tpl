@@ -3,7 +3,7 @@
 <div class="muticket-ticket muticket-display">
 {gt text='Ticket' assign='templateTitle'}
 {assign var='templateTitle' value=$ticket.title|default:$templateTitle}
-{pagesetvar name='title' value=$templateTitle}
+{pagesetvar name='title' value=$templateTitle|@html_entity_decode}
 <div class="z-admin-content-pagetitle">
     {icon type='display' size='small' __alt='Details'}
     <h3>{$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h3>
@@ -74,11 +74,11 @@
 {else}&nbsp;{/if}
 </dd>
     <dt>{gt text='State'}</dt>
-    <dd>{$ticket.state}</dd>
+    <dd>{$ticket.state|yesno:true}</dd>
     <dt>{gt text='T_rating'}</dt>
-    <dd>{$ticket.t_rating}</dd>
+    <dd>{$ticket.t_rating|yesno:true}</dd>
     <dt>{gt text='Rated'}</dt>
-    <dd>{$ticket.rated}</dd>
+    <dd>{$ticket.rated|yesno:true}</dd>
     <dt>{gt text='Parent'}</dt>
     <dd>
     {if isset($ticket.Parent) && $ticket.Parent ne null}
@@ -139,3 +139,4 @@
 
 </div>
 {include file='admin/footer.tpl'}
+

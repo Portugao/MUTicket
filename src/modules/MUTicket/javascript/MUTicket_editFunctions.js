@@ -273,5 +273,5 @@ function muticketCloseWindowFromInside(idPrefix, itemID)
 }
 
 
-// TODO: support auto-hiding notification windows (see http://code.zikula.org/core/ticket/2526 for more information)
+// TODO: support auto-hiding notification windows (see https://github.com/zikula/core/issues/121 for more information)
 

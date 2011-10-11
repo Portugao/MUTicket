@@ -1,4 +1,3 @@
-
 /**
  * Helper function to create new Zikula.UI.Window instances.
  * For edit forms we use "iframe: true" to ensure file uploads work without problems.
@@ -26,5 +25,4 @@ function muticketInitInlineWindow(containerElem, title)
     // return the instance
     return newWindow;
 }
-
 

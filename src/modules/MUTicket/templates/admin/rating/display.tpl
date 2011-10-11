@@ -3,7 +3,7 @@
 <div class="muticket-rating muticket-display">
 {gt text='Rating' assign='templateTitle'}
 {assign var='templateTitle' value=$rating.ratingvalue|default:$templateTitle}
-{pagesetvar name='title' value=$templateTitle}
+{pagesetvar name='title' value=$templateTitle|@html_entity_decode}
 <div class="z-admin-content-pagetitle">
     {icon type='display' size='small' __alt='Details'}
     <h3>{$templateTitle|notifyfilters:'muticket.filter_hooks.ratings.filter'}</h3>
@@ -45,3 +45,4 @@
 
 </div>
 {include file='admin/footer.tpl'}
+

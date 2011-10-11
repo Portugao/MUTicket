@@ -30,8 +30,8 @@
 {foreach item='supporter' from=$items}
     <item>
         <title><![CDATA[{if isset($supporter.updatedDate) && $supporter.updatedDate ne null}{$supporter.updatedDate|dateformat} - {/if}{$supporter.username|notifyfilters:'muticket.filterhook.supporters'}]]></title>
-        <link>{modurl modname='MUTicket' type='admin' func='delete' ot='supporter' id=$supporter.id fqurl='1'}</link>
-        <guid>{modurl modname='MUTicket' type='admin' func='delete' ot='supporter' id=$supporter.id fqurl='1'}</guid>
+        <link>{modurl modname='MUTicket' type='admin' func='display' ot='supporter' id=$supporter.id fqurl='1'}</link>
+        <guid>{modurl modname='MUTicket' type='admin' func='display' ot='supporter' id=$supporter.id fqurl='1'}</guid>
     {if isset($supporter.createdUserId)}
 {usergetvar name='uname' uid=$supporter.createdUserId assign='cr_uname'}
 {usergetvar name='name' uid=$supporter.createdUserId assign='cr_name'}

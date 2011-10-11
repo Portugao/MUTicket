@@ -4,10 +4,10 @@
     <title><![CDATA[{$item.title}]]></title>
     <text><![CDATA[{$item.text}]]></text>
     <parent_id>{$item.parent_id}</parent_id>
-    <images>{$item.images}</images>
-    <files>{$item.files}</files>
-    <state><![CDATA[{$item.state}]]></state>
-    <t_rating>{$item.t_rating}</t_rating>
-    <rated>{$item.rated}</rated>
+    <images{if $item.images ne ''} extension="{$item.imagesMeta.extension}" size="{$item.imagesMeta.size}" isImage="{if $item.imagesMeta.isImage}true{else}false{/if}"{if $item.imagesMeta.isImage} width="{$item.imagesMeta.width}" height="{$item.imagesMeta.height}" format="{$item.imagesMeta.format}"{/if}{/if}>{$item.images}</images>
+    <files{if $item.files ne ''} extension="{$item.filesMeta.extension}" size="{$item.filesMeta.size}" isImage="{if $item.filesMeta.isImage}true{else}false{/if}"{if $item.filesMeta.isImage} width="{$item.filesMeta.width}" height="{$item.filesMeta.height}" format="{$item.filesMeta.format}"{/if}{/if}>{$item.files}</files>
+    <state>{if !$item.state}0{else}1{/if}</state>
+    <t_rating>{if !$item.t_rating}0{else}1{/if}</t_rating>
+    <rated>{if !$item.rated}0{else}1{/if}</rated>
     <parent>{if isset($item.Parent) && $item.Parent ne null}{$item.Parent.title|default:""}{/if}</parent>
 </ticket>

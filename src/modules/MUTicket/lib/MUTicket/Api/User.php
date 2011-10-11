@@ -24,7 +24,14 @@ class MUTicket_Api_User extends MUTicket_Api_Base_User
     public function getlinks()
     {
         $links = array();
-            if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
+        
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url'   => ModUtil::url($this->name, 'admin', 'main'),
+                'text'  => $this->__('Backend'),
+                'title' => $this->__('Switch to administration area.'),
+                'class' => 'z-icon-es-options');
+        }        
+        if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
             $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket')),
                              'text' => $this->__('All Tickets'),
                              'title' => $this->__('List of all tickets'));

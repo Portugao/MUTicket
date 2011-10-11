@@ -16,6 +16,17 @@
         </a>
     {/checkpermissionblock}
 
+    {if isset($showAllEntries) && $showAllEntries eq 1}
+        {gt text='Back to paginated view' assign='linkTitle'}
+        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='supporter'}" title="{$linkTitle}" class="z-icon-es-view">
+            {$linkTitle}
+        </a>
+    {else}
+        {gt text='Show all entries' assign='linkTitle'}
+        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='supporter' all=1}" title="{$linkTitle}" class="z-icon-es-view">
+            {$linkTitle}
+        </a>
+    {/if}
 
 <table class="z-datatable">
     <colgroup>
@@ -81,6 +92,9 @@
     </tbody>
 </table>
 
-    {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+    {if !isset($showAllEntries) || $showAllEntries ne 1}
+        {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+    {/if}
 </div>
 {include file='admin/footer.tpl'}
+

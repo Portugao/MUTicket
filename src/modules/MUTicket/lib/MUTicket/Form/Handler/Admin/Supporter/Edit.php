@@ -151,8 +151,7 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
         // match all possible commands, but we return "ok" (true) for all cases.
         // You could also return $this->view->setErrorMsg('Unexpected command')
         return true;
-    }
-    
+    }    
     
     /**
      * Custom initialisation tasks.
@@ -163,15 +162,12 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
     	
     	ModUtil::dbInfoLoad('Groups');
     	ModUtil::dbInfoLoad('Categories');
+    	ModUtil::dbInfoLoad('Users');
     	$tables = DBUtil::getTables();
+    	$group_membership_column = $tables['group_membership_column'];
     	$categoryregistry_column = $tables['categories_registry_column'];
     	$categorycategory_column = $tables['categories_category_column'];
-    	$groups_column = $tables['groups_column'];
     	$users_column = $tables['users_column'];
-    	
-    	$column = array('gid');
-    	$where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
-    	$suppgroupid = DBUtil::selectObject('groups', $where);
     	
     //  make dropdownlist for categories
     
@@ -181,7 +177,8 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
   	
     	$categorypaths = DBUtil::selectObjectArray('categories_registry', $where2);
     	if ($categorypaths == false) {
-    		LogUtil::registerError($this->__('Error! No category path available. You have to apply one!'), 404);
+    		LogUtil::registerStatus($this->__('Attention! There is no category path available for the ticket table. So you can not use 
+    		categories. If you want to use them, please apply one!'));
     	}
     	
     	//get subcategories of the maincategory
@@ -198,19 +195,39 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
     	
      // make dropdownlist for users
     	
-    	// get users
+    	// get existing supporters
     	
-    	$where4 = "WHERE $users_column[parent_id] = '" . DataUtil::formatForStore($categorypath[category_id]) . "'";
-        
-        $users = DBUtil::selectObjectArray('users'); 
+    	$repository = $this->entityManager->getRepository('MUTicket_Entity_Supporter');
+    	
+    	$allSupporters = $repository->selectWhere();
+    	
+    	$existingUsers = array();
+    	
+    	foreach ($allSupporters as $supporter) {
+    		$existingUsers[] = $supporter['username'];
+    	}
+    	
+    	// get supporter ids
+    	
+    	$userids = MUTicket_Util_View::getSupporterIds();
+    	
+    	$where5 = "WHERE $users_column[uid] IN ($userids)";
+    	
+    	// get users from system which are not supporters and members of the correct group
+    	
+        $users = DBUtil::selectObjectArray('users', $where5); 
     	
     	$supportusers = array();
     	
-    	foreach ($users as $user) {
-    		if($user[uid] != 1) {
-    		$supportusers[] = array('value'	=> $user['uname'], 'text' => $user['uname']);
+    	if (is_array($users)) {   	
+    		foreach ($users as $user) {
+    			if($user[uid] != 1 && (in_array($user['uname'], $existingUsers)) == false) {
+    			$supportusers[] = array('value'	=> $user['uname'], 'text' => $user['uname']);
+    			}    		
     		}
-    		
+    	}
+    	else {
+    		LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
     	}
     	    	
     	$supporter = $this->view->get_template_vars('supporter');

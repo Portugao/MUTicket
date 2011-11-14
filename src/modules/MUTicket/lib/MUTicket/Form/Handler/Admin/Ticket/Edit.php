@@ -49,12 +49,14 @@ class MUTicket_Form_Handler_Admin_Ticket_Edit extends MUTicket_Form_Handler_Base
         $entity = null;
         $this->mode = ($hasIdentifier) ? 'edit' : 'create';
         
+        
+        // TODO delete this part, needed only for users
         $funcType = $this->request->getGet()->filter('func', null, FILTER_SANITIZE_STRING);
         if($funcType == 'display') {
          $this->mode = 'create';
         }
         
-        if($this->mode == 'create') {
+            if($this->mode == 'create' && $funcType != 'display') {
          $this->idValues['id'] = 0;
         }
         

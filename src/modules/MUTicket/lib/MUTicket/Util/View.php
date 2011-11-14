@@ -13,8 +13,74 @@
 
 /**
  * Utility implementation class for view helper methods.
+ * 
  */
 class MUTicket_Util_View extends MUTicket_Util_Base_View
 {
-    // feel free to add your own convenience methods here
+	/**
+	 * 
+	 * This method is for getting an array of userids of users that are
+	 * in the supporter group
+	 * 
+	 * @return array
+	 */
+    public static function getSupporterIds() {
+    	
+    	ModUtil::dbInfoLoad('Groups');
+    	$tables = DBUtil::getTables();
+    	$groups_column = $tables['groups_column'];
+    	
+    	// get supporter group
+    	
+    	$supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
+    	
+    	$where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
+    	
+    	// get supporter group id
+    	
+    	$supportergroupid = UserUtil::getGroupIdList($where);
+    	
+    	// get user id's of users, which are in the supporter group   	
+    	
+    	$supporterusersids = UserUtil::getUsersForGroup($supportergroupid);
+    	
+    	$userids = implode(',' , $supporterusersids);
+    	
+    	return $userids; 	
+    
+    }
+    
+    /**
+     * 
+     * This method is for getting an array of supporter_email addresses
+     * 
+     * @ return array
+     */
+    public static function getSupporterMails() {
+    	
+    	$serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+    	$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+    	
+    	$supporters = $repository->selectWhere();
+    	
+    	$supporternames = array();
+    	
+    	foreach ($supporters as $supporter) {
+    		$supporternames[] = $supporter['username'];
+    	}
+    	
+    	$supporteruids = array();
+    	
+    	foreach ($supporternames as $supportername) {
+    		$supporteruids[] = UserUtil::getIdFromName($supportername);
+    	}
+    	$supportermailadresses = array();
+    	
+    	foreach ($supporteruids as $supporteruid) {
+    	$supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
+        }
+        
+        return $supportermailadresses;
+    }
 }

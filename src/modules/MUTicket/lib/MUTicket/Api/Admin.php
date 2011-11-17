@@ -16,5 +16,36 @@
  */
 class MUTicket_Api_Admin extends MUTicket_Api_Base_Admin
 {
-    // feel free to add own api methods here
+    /**
+     * get available Admin panel links
+     *
+     * @return array Array of admin links
+     */
+    public function getlinks()
+    {
+        $links = array();
+
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_READ)) {
+            $links[] = array('url'   => ModUtil::url($this->name, 'user', 'main'),
+                'text'  => $this->__('Frontend'),
+                'title' => $this->__('Switch to user area.'),
+                'class' => 'z-icon-es-home');
+        }
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url'   => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'ticket')),
+                'text'  => $this->__('Tickets'),
+                'title' => $this->__('Ticket list'));
+        }
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url'   => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')),
+                'text'  => $this->__('Supporters'),
+                'title' => $this->__('Supporter list'));
+        }
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url'   => ModUtil::url($this->name, 'admin', 'config'),
+                'text'  => $this->__('Configuration'),
+                'title' => $this->__('Manage settings for this application'));
+        }
+        return $links;
+    }
 }

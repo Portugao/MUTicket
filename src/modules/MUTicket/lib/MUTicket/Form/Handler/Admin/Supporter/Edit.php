@@ -203,8 +203,14 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
     	
     	$existingUsers = array();
     	
-    	foreach ($allSupporters as $supporter) {
-    		$existingUsers[] = $supporter['username'];
+    	// get template vars of supporter
+    	$supporter = $this->view->get_template_vars('supporter');
+    	
+    	// put the existing supporter into the array, if editing a supporter without this supporter
+    	foreach ($allSupporters as $supporter2) {
+    		if ($supporter2['username'] != $supporter['username'] ) {
+    		$existingUsers[] = $supporter2['username'];
+    		}
     	}
     	
     	// get supporter ids
@@ -229,8 +235,7 @@ class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_B
     	else {
     		LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
     	}
-    	    	
-    	$supporter = $this->view->get_template_vars('supporter');
+
      	$supporter['supportcatsItems'] = $supportcats;
      	$supporter['usernameItems'] = $supportusers;
      	$this->view->assign('supporter', $supporter);

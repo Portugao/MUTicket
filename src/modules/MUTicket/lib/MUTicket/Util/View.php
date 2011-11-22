@@ -58,10 +58,9 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      */
     public static function getSupporterMails() {
     	
-    	$serviceManager = ServiceUtil::getManager();
-        $entityManager = $serviceManager->getService('doctrine.entitymanager');
-    	$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+    	$repository = MUTicket_Util_View::getSupporterRepository();
     	
+    	$where = 'tbl.state = 1';
     	$supporters = $repository->selectWhere();
     	
     	$supporternames = array();
@@ -82,5 +81,20 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
         }
         
         return $supportermailadresses;
+    }
+    
+    /**
+     * 
+     * This method is for getting a repository for supporters
+     * 
+     */
+    
+    public static function getSupporterRepository() {
+    	
+    	$serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+    	$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+    	
+    	return $repository;
     }
 }

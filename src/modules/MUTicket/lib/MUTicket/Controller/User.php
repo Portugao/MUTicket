@@ -103,4 +103,101 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         return MUTicket_Util_View::processTemplate($this->view, 'user', $objectType, 'view', $args);
     }
     
+    /**
+     * This method provides a generic item detail view.
+     *
+     * @param string  $ot           Treated object type.
+     * @param string  $tpl          Name of alternative template (for alternative display options, feeds and xml output)
+     * @param boolean $raw          Optional way to display a template instead of fetching it (needed for standalone output)
+     * @return mixed Output.
+     */
+    public function display($args)
+    {
+        // DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ));
+        // DEBUG: permission check aspect ends
+
+        // parameter specifying which type of objects we are treating
+        $objectType = $this->request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+        $utilArgs = array('controller' => 'user', 'action' => 'display');
+        if (!in_array($objectType, MUTicket_Util_Controller::getObjectTypes('controllerAction', $utilArgs))) {
+            $objectType = MUTicket_Util_Controller::getDefaultObjectType('controllerAction', $utilArgs);
+        }
+        $entityClass = 'MUTicket_Entity_' . ucfirst($objectType);
+        $repository = $this->entityManager->getRepository($entityClass);
+
+        $objectTemp = new $entityClass();
+        $idFields = $objectTemp->get_idFields();
+        $idValues = array();
+
+        // retrieve identifier of the object we wish to view
+        $idValues = MUTicket_Util_Controller::retrieveIdentifier($this->request, $args, $objectType, $idFields);
+        $hasIdentifier = MUTicket_Util_Controller::isValidIdentifier($idValues);
+
+        // check for unique permalinks (without id)
+        $hasSlug = false;
+        $slugTitle = '';
+        if ($hasIdentifier === false) {
+            $hasSlug = $objectTemp->get_hasUniqueSlug();
+            if ($hasSlug) {
+                $slugTitle = (isset($args['title']) && !empty($args['title'])) ? $args['title'] : $this->request->getGet()->filter('title', '', FILTER_SANITIZE_STRING);
+                $hasSlug = (!empty($slugTitle));
+            }
+        }
+
+        $this->throwNotFoundUnless(($hasIdentifier || $hasSlug), $this->__('Error! Invalid identifier received.'));
+
+        // assign object data fetched from the database
+        $objectData = null;
+        if ($hasSlug) {
+            $objectData = $repository->selectBySlug($slugTitle);
+        } else {
+            $objectData = $repository->selectById($idValues);
+        }
+        if ((!is_array($objectData) && !is_object($objectData)) || !isset($objectData[$idFields[0]])) {
+            $this->throwNotFound($this->__('No such item.'));
+        }
+
+        // build ModUrl instance for display hooks
+        $currentUrlArgs = array('ot' => $objectType);
+        foreach ($idFields as $idField) {
+            $currentUrlArgs[$idField] = $idValues[$idField];
+        }
+        $currentUrlObject = new Zikula_ModUrl('MUTicket', 'user', 'display', ZLanguage::getLanguageCode(), $currentUrlArgs);
+        
+        /*
+         * Own code for handling the user for the rating
+         */
+        
+        // get the supporterids
+        
+        $repositorySupporter = MUTicket_Util_View::getSupporterRepository();
+        
+        $supporters = $repositorySupporter->selectWhere();
+        
+        $supporterids = array();
+        
+        foreach ($supporters as $supporter) {
+        	$supporterids[] = $supporter['id'];
+        }
+        
+        // get actual userid
+        $userid = UserUtil::getVar('uid');
+        if (in_array($userid, $supporterids)) {
+        	$kind = 1;
+        }
+        else {
+        	$kind = 0;
+        }
+
+        // assign output data to view object.
+        $this->view->assign($objectType, $objectData)
+            ->assign('kind', $kind)
+            ->assign('currentUrlObject', $currentUrlObject)
+            ->assign($repository->getAdditionalTemplateParameters('controllerAction', $utilArgs));
+
+        // fetch and return the appropriate template
+        return MUTicket_Util_View::processTemplate($this->view, 'user', $objectType, 'display', $args);
+    }
+    
 }

@@ -83,6 +83,15 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         	$where = '';
         }
         $sortParam = $sort . ' ' . $sdir;
+        
+        /**
+         * Own code for the state of tickets
+         */
+        
+        // get state of the link
+         $state = $this->request->getGet()->filter('state','', FILTER_SANITIZE_STRING);
+         
+        // End of own code
 
         // get objects from database
         list($objectData, $objectCount) = $repository->selectWherePaginated($where, $sortParam, $currentPage, $resultsPerPage);
@@ -97,7 +106,9 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
                    ->assign('currentPage', $currentPage)
                    ->assign('pager', array('numitems'     => $objectCount,
                                            'itemsperpage' => $resultsPerPage))
-                   ->assign('currentUrlObject', $currentUrlObject);
+                   ->assign('currentUrlObject', $currentUrlObject)
+                   // own code
+                   ->assign('state', $state);
 
         // fetch and return the appropriate template
         return MUTicket_Util_View::processTemplate($this->view, 'user', $objectType, 'view', $args);

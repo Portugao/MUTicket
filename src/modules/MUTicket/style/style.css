@@ -126,4 +126,84 @@ button.muticketInlineButton {
     margin-top: 1em;
 }
 
+/*------------------------Own styles----------------------*/
+
+/*-------------------USER----------------------*/
+
+
+/*---------------Tickets-----------------------*/
+
+.ticket_user_header {
+   background: #eee;
+   position: relative;
+   float: left;
+   width: 100%;
+  /* -moz-border-radius: 5px;*/
+   border: 1px solid #CCCCCC;	
+}
+
+.ticket_user_header h2 {
+   background: none !important;
+   width: 70%;
+   float: left;
+   margin: 10px;
+   position: relative;
+}
+
+.ticket_user_header_menue {
+    float: right;
+    position: relative;
+    margin: 10px;	
+}
+
+.ticket_user_table {
+    clear: both;
+}
+
+.ticket_user_body  {
+    background: #ddd;
+    width: 100%;
+    padding: 0;
+  /*  -moz-border-radius: 10px;*/
+    border-bottom: 1px solid #333;
+    postion: relative;
+    float: left;
+    clear: both;
+}
+.ticket_user_body_left  {
+    float: left;
+    width: 27%;
+    padding: 1%;
+    position: relative;
+}
+
+.ticket_user_body_right  {
+    float: right;
+    width: 65%;
+    padding: 2%;
+    position: relative;
+    background: #eee;
+    -moz-border-radius: 0 0 10px 0;
+}
+
+#user_footer {
+    clear: both;
+}
+
+#ticket_inline_use {
+    margin: 20px 0 0 0;
+    float: left;
+    width: 100%;
+}
+
+/*--------------FORM------------------*/
+
+.muticket_form_hidden {
+    position: relative;
+    display: none;
+}
+
+
+
+
 

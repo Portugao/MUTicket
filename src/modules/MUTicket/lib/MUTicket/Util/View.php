@@ -52,7 +52,8 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     
     /**
      * 
-     * This method is for getting an array of supporter_email addresses
+     * This method is for getting an array of supporter email addresses for
+     * supporters that are active
      * 
      * @ return array
      */
@@ -85,6 +86,33 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     
     /**
      * 
+     * This method is for getting an array of supporter uids
+     * 
+     * @ return array
+     */
+    public static function getExistingSupporterUids() {
+    	
+    	$repository = MUTicket_Util_View::getSupporterRepository();
+    	
+    	$supporters = $repository->selectWhere();
+    	
+    	$supporternames = array();
+    	
+    	foreach ($supporters as $supporter) {
+    		$supporterids[] = $supporter['username'];
+    	}
+    	
+    	$supporteruids = array();
+    	
+    	foreach ($supporternames as $supportername) {
+    		$supporteruids[] = UserUtil::getIdFromName($supportername);
+    	}
+        
+        return $supporteruids;
+    }
+    
+    /**
+     * 
      * This method is for getting a repository for supporters
      * 
      */
@@ -96,5 +124,22 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     	$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
     	
     	return $repository;
+    }
+    
+    public static function ratingAllowed() {
+    	
+    	$uid = UserUtil::getVar('uid');
+    	
+    	// get supporteruids 	
+    	$supporteruids = MUTicket_Util_View::getExistingSupporterUids();
+    	
+    	if (in_array($uid, $supporteruids)) {
+    		$ratingallowed = 0;
+    	}
+    	else {
+    		$ratingallowed = 1;
+    	}
+    	
+    	$this->view->assign('ratingsallowed',$ratingallowed );
     }
 }

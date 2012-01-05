@@ -38,11 +38,25 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
 		if (!empty($where) && $state != 2) {
 			$where .= ' AND ';
 		}
-		if($state != 2)
+		if($state != 2) {
 		$where .= 'tbl.state = \'' . DataUtil::formatForStore($state) . '\'';
+    	}
+    }
 		
-        	return parent::selectWherePaginated($where, $orderBy, $currentPage, $resultsPerPage,
-			$useJoins);
+    $id = (int) FormUtil::getPassedValue('id','' , 'GET', FILTER_VALIDATE_INT);
+    
+    if(isset($id) && $id != '') {	
+		if (!empty($where)) {
+			$where .= ' AND ';
+		}
+		
+		if ($id != '') {
+		$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($id) . '\'';
+		}
     }
-    }
+            
+    return parent::selectWherePaginated($where, $orderBy, $currentPage, $resultsPerPage,
+	$useJoins = true);
+	
+    }    
 }

@@ -18,5 +18,5 @@
  */
 class MUTicket_Entity_Repository_Rating extends MUTicket_Entity_Repository_Base_Rating
 {
-    // feel free to add your own methods here, like for example reusable DQL queries
+    
 }

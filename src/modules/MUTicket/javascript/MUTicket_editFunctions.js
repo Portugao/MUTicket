@@ -87,7 +87,7 @@ function muticketSelectRelatedItem(objectType, idPrefix, inputField, selectedLis
 
     var li = Builder.node('li', {id: elemPrefix}, newTitle);
     if (includeEditing == true) {
-        var editHref = $(idPrefix + 'SelectorDoNew').href + '&' + objectType.toLowerCase() + 'id=' + newItemId;
+        var editHref = $(idPrefix + 'SelectorDoNew').href + '&id=' + newItemId;
         editLink = Builder.node('a', {id: elemPrefix + 'Edit', href: editHref}, 'edit');
         li.appendChild(editLink);
     }

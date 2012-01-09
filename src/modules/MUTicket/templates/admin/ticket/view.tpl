@@ -16,11 +16,13 @@
         </a>
     {/checkpermissionblock}
 
+    {assign var='all' value=0}
     {if isset($showAllEntries) && $showAllEntries eq 1}
         {gt text='Back to paginated view' assign='linkTitle'}
         <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket'}" title="{$linkTitle}" class="z-icon-es-view">
             {$linkTitle}
         </a>
+        {assign var='all' value=1}
     {else}
         {gt text='Show all entries' assign='linkTitle'}
         <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket' all=1}" title="{$linkTitle}" class="z-icon-es-view">
@@ -39,58 +41,58 @@
         <col id="ct_rating" />
         <col id="crated" />
         <col id="cparent" />
-        <col id="cintactions" />
+        <col id="citemactions" />
     </colgroup>
     <thead>
     <tr>
-        <th id="htitle" scope="col" align="left" valign="middle">
-            {sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="htitle" scope="col" class="z-left">
+            {sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="htext" scope="col" align="left" valign="middle">
-            {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="htext" scope="col" class="z-left">
+            {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hparent_id" scope="col" align="right" valign="middle">
-            {sortlink __linktext='Parent_id' sort='parent_id' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="hparent_id" scope="col" class="z-right">
+            {sortlink __linktext='Parent_id' sort='parent_id' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="himages" scope="col" align="left" valign="middle">
-            {sortlink __linktext='Images' sort='images' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="himages" scope="col" class="z-left">
+            {sortlink __linktext='Images' sort='images' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hfiles" scope="col" align="left" valign="middle">
-            {sortlink __linktext='Files' sort='files' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="hfiles" scope="col" class="z-left">
+            {sortlink __linktext='Files' sort='files' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hstate" scope="col" align="center" valign="middle">
-            {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="hstate" scope="col" class="z-center">
+            {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="ht_rating" scope="col" align="center" valign="middle">
-            {sortlink __linktext='T_rating' sort='t_rating' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="ht_rating" scope="col" class="z-center">
+            {sortlink __linktext='T_rating' sort='t_rating' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hrated" scope="col" align="center" valign="middle">
-            {sortlink __linktext='Rated' sort='rated' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="hrated" scope="col" class="z-center">
+            {sortlink __linktext='Rated' sort='rated' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hparent" scope="col" align="left" valign="middle">
-            {sortlink __linktext='Parent' sort='parent' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='ticket'}
+        <th id="hparent" scope="col" class="z-left">
+            {sortlink __linktext='Parent' sort='parent' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hintactions" scope="col" align="left" valign="middle" class="z-wrap z-order-unsorted">{gt text='Actions'}</th>
+        <th id="hitemactions" scope="col" class="z-right z-order-unsorted">{gt text='Actions'}</th>
     </tr>
     </thead>
     <tbody>
 
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
-        <td headers="htitle" align="left" valign="top">
+        <td headers="htitle" class="z-left">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
-        <td headers="htext" align="left" valign="top">
+        <td headers="htext" class="z-left">
             {$ticket.text}
         </td>
-        <td headers="hparent_id" align="right" valign="top">
+        <td headers="hparent_id" class="z-right">
             {$ticket.parent_id}
         </td>
-        <td headers="himages" align="left" valign="top">
+        <td headers="himages" class="z-left">
             {if $ticket.images ne ''}
               <a href="{$ticket.imagesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.imagesMeta.isImage} rel="imageviewer[ticket]"{/if}>
               {if $ticket.imagesMeta.isImage}
-                  <img src="{$ticket.images|muticketImageThumb:$ticket.imagesFullPath:80:50}" width="80" height="50" alt="{$ticket.title|replace:"\"":""}" />
+                  <img src="{$ticket.images|muticketImageThumb:$ticket.imagesFullPath:32:20}" width="32" height="20" alt="{$ticket.title|replace:"\"":""}" />
               {else}
                   {gt text='Download'} ({$ticket.imagesMeta.size|muticketGetFileSize:$ticket.imagesFullPath:false:false})
               {/if}
@@ -98,11 +100,11 @@
             {else}&nbsp;{/if}
 
         </td>
-        <td headers="hfiles" align="left" valign="top">
+        <td headers="hfiles" class="z-left">
             {if $ticket.files ne ''}
               <a href="{$ticket.filesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.filesMeta.isImage} rel="imageviewer[ticket]"{/if}>
               {if $ticket.filesMeta.isImage}
-                  <img src="{$ticket.files|muticketImageThumb:$ticket.filesFullPath:80:50}" width="80" height="50" alt="{$ticket.title|replace:"\"":""}" />
+                  <img src="{$ticket.files|muticketImageThumb:$ticket.filesFullPath:32:20}" width="32" height="20" alt="{$ticket.title|replace:"\"":""}" />
               {else}
                   {gt text='Download'} ({$ticket.filesMeta.size|muticketGetFileSize:$ticket.filesFullPath:false:false})
               {/if}
@@ -110,16 +112,16 @@
             {else}&nbsp;{/if}
 
         </td>
-        <td headers="hstate" align="center" valign="top">
+        <td headers="hstate" class="z-center">
             {$ticket.state|yesno:true}
         </td>
-        <td headers="ht_rating" align="center" valign="top">
+        <td headers="ht_rating" class="z-center">
             {$ticket.t_rating|yesno:true}
         </td>
-        <td headers="hrated" align="center" valign="top">
+        <td headers="hrated" class="z-center">
             {$ticket.rated|yesno:true}
         </td>
-        <td headers="hparent" align="left" valign="top">
+        <td headers="hparent" class="z-left">
             {if isset($ticket.Parent) && $ticket.Parent ne null}
                 <a href="{modurl modname='MUTicket' type='admin' func='display' ot='ticket' id=$ticket.Parent.id}">
                     {$ticket.Parent.title|default:""}
@@ -138,28 +140,21 @@
                 {gt text='Not set.'}
             {/if}
         </td>
-        <td headers="hintactions" align="left" valign="top" style="white-space: nowrap">
-            <a href="{modurl modname='MUTicket' type='admin' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
-                {icon type='display' size='extrasmall' __alt='Details'}
-            </a>
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
-            <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='ticket' id=$ticket.id}" title="{gt text='Edit'}">
-                {icon type='edit' size='extrasmall' __alt='Edit'}
-            </a>
-            <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='ticket' astemplate=$ticket.id}" title="{gt text='Reuse for new item'}">
-                {icon type='saveas' size='extrasmall' __alt='Reuse'}
-            </a>
-    {/checkpermissionblock}
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
-            <a href="{modurl modname='MUTicket' type='admin' func='delete' ot='ticket' id=$ticket.id}" title="{gt text='Delete'}">
-                {icon type='delete' size='extrasmall' __alt='Delete'}
-            </a>
-    {/checkpermissionblock}
+        <td headers="hitemactions" class="z-right z-nowrap z-w02">
+            {if count($ticket._actions) gt 0}
+            {strip}
+                {foreach item='option' from=$ticket._actions}
+                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
+                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
+                    </a>
+                {/foreach}
+            {/strip}
+            {/if}
         </td>
     </tr>
     {foreachelse}
         <tr class="z-admintableempty">
-          <td align="left" valign="top" colspan="9">
+          <td class="z-left" colspan="9">
             {gt text='No tickets found.'}
           </td>
         </tr>

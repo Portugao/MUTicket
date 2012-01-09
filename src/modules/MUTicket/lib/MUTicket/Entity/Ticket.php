@@ -26,7 +26,113 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  */
 class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 {
-    // feel free to add your own methods here
+    /**
+     * Collect available actions for this entity.
+     */
+    protected function prepareItemActions()
+    {
+        if (!empty($this->_actions)) {
+            return;
+        }
+
+        $currentType = FormUtil::getPassedValue('type', 'user', 'GETPOST', FILTER_SANITIZE_STRING);
+        $currentFunc = FormUtil::getPassedValue('func', 'main', 'GETPOST', FILTER_SANITIZE_STRING);
+        $dom = ZLanguage::getModuleDomain('MUTicket');
+        if ($currentType == 'admin') {
+            if (in_array($currentFunc, array('main', 'view'))) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'preview',
+                        'linkTitle' => __('Open preview page', $dom),
+                        'linkText' => __('Preview', $dom)
+                    );
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'display',
+                        'linkTitle' => str_replace('"', '', $this['title']),
+                        'linkText' => __('Details', $dom)
+                    );
+            }
+
+            if (in_array($currentFunc, array('main', 'view', 'display'))) {
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
+
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'edit',
+                        'linkTitle' => __('Edit', $dom),
+                        'linkText' => __('Edit', $dom)
+                    );
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'astemplate' => $this['id'])),
+                        'icon' => 'saveas',
+                        'linkTitle' => __('Reuse for new item', $dom),
+                        'linkText' => __('Reuse', $dom)
+                    );
+                }
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_DELETE)) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'delete', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'delete',
+                        'linkTitle' => __('Delete', $dom),
+                        'linkText' => __('Delete', $dom)
+                    );
+                }
+            }
+            if ($currentFunc == 'display') {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket')),
+                        'icon' => 'back',
+                        'linkTitle' => __('Back to overview', $dom),
+                        'linkText' => __('Back to overview', $dom)
+                    );
+            }
+        }
+        if ($currentType == 'user') {
+            if (in_array($currentFunc, array('main', 'view'))) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'display',
+                        'linkTitle' => str_replace('"', '', $this['title']),
+                        'linkText' => __('Details', $dom)
+                    );
+            }
+
+            if (in_array($currentFunc, array('main', 'view', 'display'))) {
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
+
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'edit',
+                        'linkTitle' => __('Edit', $dom),
+                        'linkText' => __('Edit', $dom)
+                    );
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'astemplate' => $this['id'])),
+                        'icon' => 'saveas',
+                        'linkTitle' => __('Reuse for new item', $dom),
+                        'linkText' => __('Reuse', $dom)
+                    );
+                }
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_DELETE)) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'delete', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                        'icon' => 'delete',
+                        'linkTitle' => __('Delete', $dom),
+                        'linkText' => __('Delete', $dom)
+                    );
+                }
+            }
+            if ($currentFunc == 'display') {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'view', 'arguments' => array('ot' => 'ticket')),
+                        'icon' => 'back',
+                        'linkTitle' => __('Back to overview', $dom),
+                        'linkText' => __('Back to overview', $dom)
+                    );
+            }
+        }
+    }
 
 
 
@@ -69,20 +175,25 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     	$this->getText();
     	$text = $this->text;
     	
-    	$toaddresses = MUTicket_Util_View::getSupporterMails();
+    	$toaddress = MUTicket_Util_View::getSupporterMails();
     	
     	$messagecontent = array();
     	$messagecontent['toname'] = 'Michael Ueberschaer';
-    	$messagecontent['toaddress'] = $toaddresses;
+    	$messagecontent['toaddress'] = $toaddress;
     	$messagecontent['subject'] = __('New Ticket');
-    	$messagecontent['body'] = __('Another ticked was created by a customer!') . '\n \n<br />'
-    	. $title .'\n'. $text;
+    	$messagecontent['html'] = true;
+    	$messagecontent['body'] = __('Another ticked was created by a customer!') . '<br />'
+    	. $title .'<br />'. $text;
     	
-    	if(!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
-    		LogUtil::registerError(Zikula_Form_AbstractHandler::__('Unable to send message'));
-    	}
-    	else {
-    		LogUtil::registerStatus(Zikula_Form_AbstractHandler::__('Your ticket was saved and sent to our support'));
+    	// if a supporter exists send the mail
+    	if ($toaddress != '') {
+    	
+    		if(!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
+    			LogUtil::registerError(Zikula_Form_AbstractHandler::__('Unable to send message'));
+    		}
+    		else {
+    			LogUtil::registerStatus(Zikula_Form_AbstractHandler::__('Your ticket was saved and sent to our support'));
+    		}
     	}
     	$this->performPostPersistCallback();
     }

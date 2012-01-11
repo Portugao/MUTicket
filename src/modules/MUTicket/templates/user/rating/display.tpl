@@ -13,25 +13,15 @@
     {include file='user/include_standardfields_display.tpl' obj=$rating}
 
 {if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
-<p>
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
-
-        <a href="{modurl modname='MUTicket' type='user' func='edit' ot='rating' id=$rating.id}" title="{gt text='Edit'}" class="z-icon-es-edit">
-            {gt text='Edit'}
+{if count($rating._actions) gt 0}
+    <p>{strip}
+    {foreach item='option' from=$rating._actions}
+        <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}" class="z-icon-es-{$option.icon}">
+            {$option.linkText|safetext}
         </a>
-        <a href="{modurl modname='MUTicket' type='user' func='edit' ot='rating' astemplate=$rating.id}" title="{gt text='Reuse for new item'}" class="z-icon-es-saveas">
-            {gt text='Reuse'}
-        </a>
-    {/checkpermissionblock}
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
-        <a href="{modurl modname='MUTicket' type='user' func='delete' ot='rating' id=$rating.id}" title="{gt text='Delete'}" class="z-icon-es-delete">
-            {gt text='Delete'}
-        </a>
-    {/checkpermissionblock}
-    <a href="{modurl modname='MUTicket' type='user' func='view' ot='rating'}" title="{gt text='Back to overview'}" class="z-icon-es-back">
-        {gt text='Back to overview'}
-    </a>
-</p>
+    {/foreach}
+    {/strip}</p>
+{/if}
 
 {* include display hooks *}
 {notifydisplayhooks eventname='muticket.ui_hooks.ratings.display_view' id=$rating.id urlobject=$currentUrlObject assign='hooks'}

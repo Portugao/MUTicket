@@ -1,5 +1,5 @@
 {* purpose of this template: ratings xml inclusion template in user area *}
 <rating id="{$item.id}" createdon="{$item.createdDate|dateformat}" updatedon="{$item.updatedDate|dateformat}">
     <id>{$item.id}</id>
-    <ratingvalue>{$item.ratingvalue|formatnumber}</ratingvalue>
+    <ratingvalue>{$item.ratingvalue}</ratingvalue>
 </rating>

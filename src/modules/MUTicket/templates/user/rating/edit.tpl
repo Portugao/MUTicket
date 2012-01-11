@@ -23,9 +23,9 @@
         <legend>{gt text='Content'}</legend>
         <div class="z-formrow">
             {formlabel for='ratingvalue' __text='Ratingvalue' mandatorysym='1'}
-            {formfloatinput group='rating' id='ratingvalue' mandatory=true __title='Input the ratingvalue of the rating' maxLength=15 cssClass='required validate-number'}
+            {formintinput group='rating' id='ratingvalue' mandatory=true __title='Enter the ratingvalue of the rating' maxLength=2 cssClass='required validate-digits'}
             {muticketValidationError id='ratingvalue' class='required'}
-            {muticketValidationError id='ratingvalue' class='validate-number'}
+            {muticketValidationError id='ratingvalue' class='validate-digits'}
         </div>
     </fieldset>
 
@@ -66,7 +66,7 @@
     {if $mode eq 'edit'}
         {formbutton id='btnUpdate' commandName='update' __text='Update rating' class='z-bt-save'}
       {if !$inlineUsage}
-        {gt text='Really delete this rating?' assign="deleteConfirmMsg"}
+        {gt text='Really delete this rating?' assign='deleteConfirmMsg'}
         {formbutton id='btnDelete' commandName='delete' __text='Delete rating' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
       {/if}
     {elseif $mode eq 'create'}

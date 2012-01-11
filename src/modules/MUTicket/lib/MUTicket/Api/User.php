@@ -41,15 +41,17 @@ class MUTicket_Api_User extends MUTicket_Api_Base_User
                              'text' => $this->__('Open Tickets'),
                              'title' => $this->__('List of open tickets'));
         }
-            if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
-            $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 0)),
+        if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
+        	$links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 0)),
                              'text' => $this->__('Closed Tickets'),
                              'title' => $this->__('List of closed tickets'));
         }
-            if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_EDIT)) {
-            $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'edit', array('ot' => 'ticket')),
+        if (MUTicket_Util_View::checkIfSupporters() == true) {
+        	if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_EDIT)) {
+            	$links[] = array('url' => ModUtil::url('MUTicket', 'user', 'edit', array('ot' => 'ticket')),
                              'text' => $this->__('Create Ticket'),
                              'title' => $this->__('Create Ticket'));
+        	}
         }
         /* if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
 		    $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'rating')),

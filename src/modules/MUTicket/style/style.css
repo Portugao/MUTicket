@@ -177,6 +177,12 @@ button.muticketInlineButton {
     position: relative;
 }
 
+.ticket_user_body_left fieldset  {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
 .ticket_user_body_right  {
     float: right;
     width: 60%;
@@ -204,6 +210,10 @@ button.muticketInlineButton {
     clear: both;
 }
 
+.muticket_rating_value {
+    float: left;
+    width: 25px;
+}
 
 #user_footer {
     clear: both;

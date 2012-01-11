@@ -35,8 +35,8 @@ function smarty_block_muticketratingform($params, $content, $view)
         
         $ticket = $params['ticket'];
         
-        if(strpos($action,"func=display")!==false) {
-        	$action = 'index.php?module=muticket&type=user&func=edit&ot=rating&ticket=$ticket';
+        if(strpos($action,"func=display")!==false &&(strpos($action,"ot=ticket"))) {
+        	$action = "index.php?module=muticket&type=user&func=edit&ot=rating&ticket={$ticket}";
         }
 
         $view->postRender();

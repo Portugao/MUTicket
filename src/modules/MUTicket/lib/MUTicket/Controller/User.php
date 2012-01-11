@@ -176,30 +176,8 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         }
         $currentUrlObject = new Zikula_ModUrl('MUTicket', 'user', 'display', ZLanguage::getLanguageCode(), $currentUrlArgs);
         
-        /*
-         * Own code for handling the user for the rating
-         */
-        
-        // get the supporterids
-        
-        $repositorySupporter = MUTicket_Util_View::getSupporterRepository();
-        
-        $supporters = $repositorySupporter->selectWhere();
-        
-        $supporterids = array();
-        
-        foreach ($supporters as $supporter) {
-        	$supporterids[] = $supporter['id'];
-        }
-        
-        // get actual userid
-        $userid = UserUtil::getVar('uid');
-        if (in_array($userid, $supporterids)) {
-        	$kind = 1;
-        }
-        else {
-        	$kind = 0;
-        }
+        // May the user rate
+		$kind = MUTicket_Util_View::userForRating();
 
         // assign output data to view object.
         $this->view->assign($objectType, $objectData)

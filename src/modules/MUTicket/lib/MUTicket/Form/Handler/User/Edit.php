@@ -17,23 +17,5 @@
  */
 class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Edit
 {
-	    /**
-     * Initialize form handler.
-     *
-     * This method takes care of all necessary initialisation of our data and form states.
-     *
-     * @return boolean False in case of initialization errors, otherwise true.
-     */
-    public function initialize(Zikula_Form_View $view)
-    {
-    	return parent::initialize($view);
-    	
-        $funcType = $this->request->getGet()->filter('func', null, FILTER_SANITIZE_STRING);
-        	if($funcType == 'display') {
-        		$this->mode = 'create';
-        		
-        		$this->view->assign('mode', $this->mode);
-        	}
- 		return true;
-    }
+
 }

@@ -17,5 +17,31 @@
  */
 class MUTicket_Form_Handler_User_Rating_Edit extends MUTicket_Form_Handler_User_Rating_Base_Edit
 {
-    // feel free to extend the base handler class here
+    /**
+     * Initialize form handler.
+     *
+     * This method takes care of all necessary initialisation of our data and form states.
+     *
+     * @return boolean False in case of initialization errors, otherwise true.
+     */
+    public function initialize(Zikula_Form_View $view)
+    {
+    	
+		$id = $this->request->getGet()->filter('id', 0);
+		    	
+        parent::initialize($view);
+        
+        // set mode to create when there is a id
+
+		if ($id != 0) {
+		$this->mode = 'create';
+		// we get the id of the meeting
+		
+		// we assign to template
+		$this->view->assign('mode', $this->mode);
+		
+		}
+        // everything okay, no initialization errors occured
+        return true;
+    }
 }

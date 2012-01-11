@@ -38,9 +38,10 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
         $utilArgs = array('controller' => 'admin', 'action' => 'delete');
         if (!in_array($objectType, MUTicket_Util_Controller::getObjectTypes('controllerAction', $utilArgs))) {
             $objectType = MUTicket_Util_Controller::getDefaultObjectType('controllerAction', $utilArgs);
-        }
-        
+        }      
+        // manuell fixing of bug
 		$idFields = ModUtil::apiFunc($this->name, 'selection', 'getIdFields', array('ot' => $objectType));        
+        // end of fixing
         
         // retrieve identifier of the object we wish to delete
         $idValues = MUTicket_Util_Controller::retrieveIdentifier($this->request, $args, $objectType, $idFields);

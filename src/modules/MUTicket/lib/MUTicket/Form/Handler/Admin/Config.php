@@ -16,7 +16,7 @@
 /**
  * Configuration handler implementation class
  */
-class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Base_Admin_Config
+class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Admin_Base_Config
 {
     protected function initializeAdditions()
     {

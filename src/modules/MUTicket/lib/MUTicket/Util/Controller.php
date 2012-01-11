@@ -16,5 +16,28 @@
  */
 class MUTicket_Util_Controller extends MUTicket_Util_Base_Controller
 {
-    // feel free to add your own convenience methods here
+	    /**
+     * Retrieve identifier parameters for a given object type.
+     *
+     * @param Zikula_Request_Http $request    Instance of Zikula_Request_Http.
+     * @param array               $args       List of arguments used as fallback if request does not contain a field.
+     * @param string              $objectType Name of treated entity type.
+     * @param array               $idFields   List of identifier field names.
+     *
+     * @return array List of fetched identifiers.
+     */
+    public static function retrieveIdentifier(Zikula_Request_Http $request, array $args, $objectType = '', array $idFields)
+    {
+        if ($objectType == 'rating') {
+            $idValues = array();
+            $defaultValue = isset($args['id']) && is_numeric($args['id']) ? $args['id'] : 0;
+            $id = (int) $request->getGet()->filter('id', $defaultValue, FILTER_VALIDATE_INT);
+            if ($id > 0) {
+                $idValues['id'] = 0;
+                return $idValues;
+            }
+        }
+
+        return parent::retrieveIdentifier($request, $args, $objectType, $idFields);    	
+    }
 }

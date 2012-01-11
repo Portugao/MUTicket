@@ -85,7 +85,8 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     
     /**
 *
-* This method is for getting an array of supporter uids
+* This method is for getting an array of the original uids
+* for existing supporters
 *
 * @ return array
 */
@@ -98,7 +99,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      $supporternames = array();
     
      foreach ($supporters as $supporter) {
-     $supporterids[] = $supporter['username'];
+     $supporternames[] = $supporter['username'];
      }
     
      $supporteruids = array();
@@ -125,20 +126,28 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      return $repository;
     }
     
-    public static function ratingAllowed() {
+    public static function userForRating() {
+    	
+    // get the supporterids
+    $supporterids = MUTicket_Util_View::getExistingSupporterUids();
+        
+    // get actual userid
+    $userid = UserUtil::getVar('uid');
+    if (in_array($userid, $supporterids)) {
+       $kind = 0;
+    }
+    else {
+       $kind = 1;
+    }
+    return $kind;
+    }
+
     
-     $uid = UserUtil::getVar('uid');
-    
-     // get supporteruids
-     $supporteruids = MUTicket_Util_View::getExistingSupporterUids();
-    
-     if (in_array($uid, $supporteruids)) {
-     $ratingallowed = 0;
-     }
-     else {
-     $ratingallowed = 1;
-     }
-    
-     $this->view->assign('ratingsallowed',$ratingallowed );
+    public static function getTicketClause() {
+    	
+    	$where = 'tbl.parent_id IS \'' . DataUtil::formatForStore(NULL) . '\'';
+    	
+    	return $where;
+    	
     }
 }

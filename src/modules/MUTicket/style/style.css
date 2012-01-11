@@ -172,19 +172,38 @@ button.muticketInlineButton {
 }
 .ticket_user_body_left  {
     float: left;
-    width: 27%;
+    width: 32%;
     padding: 1%;
     position: relative;
 }
 
 .ticket_user_body_right  {
     float: right;
-    width: 65%;
+    width: 60%;
     padding: 2%;
     position: relative;
     background: #eee;
     -moz-border-radius: 0 0 10px 0;
 }
+
+.ticket_user_body_avatar {
+    width: 30%;
+    font-size: 0.8em;
+    float: left;
+
+}
+
+.ticket_user_body_standard {
+    width: 65%;
+    font-size: 0.8em;
+    float: right;
+}
+
+.ticket_user_body_rating {
+    font-size: 0.8em;
+    clear: both;
+}
+
 
 #user_footer {
     clear: both;

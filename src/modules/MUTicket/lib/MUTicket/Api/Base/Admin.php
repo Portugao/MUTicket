@@ -37,11 +37,6 @@ class MUTicket_Api_Base_Admin extends Zikula_AbstractApi
                              'title' => $this->__('Ticket list'));
         }
         if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
-            $links[] = array('url' => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'rating')),
-                             'text' => $this->__('Ratings'),
-                             'title' => $this->__('Rating list'));
-        }
-        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')),
                              'text' => $this->__('Supporters'),
                              'title' => $this->__('Supporter list'));

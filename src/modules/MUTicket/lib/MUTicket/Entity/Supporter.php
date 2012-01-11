@@ -25,7 +25,30 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  */
 class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 {
-    // feel free to add your own methods here
+    /**
+     * Get supportcats.
+     *
+     * @return string
+     */
+    public function getSupportcats()
+    {
+    	$this->supportcats = unserialize($this->supportcats);
+        return $this->supportcats;
+    }	
+	
+    /**
+     * Set supportcats.
+     *
+     * @param string $supportcats.
+     *
+     * @return void
+     */
+    public function setSupportcats($supportcats)
+    {
+        if ($supportcats != $this->supportcats) {
+            $this->supportcats = serialize($supportcats);
+        }
+    }
 
 
 

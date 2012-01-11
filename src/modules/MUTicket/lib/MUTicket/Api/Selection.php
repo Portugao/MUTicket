@@ -16,5 +16,30 @@
  */
 class MUTicket_Api_Selection extends MUTicket_Api_Base_Selection
 {
-    // feel free to extend the selection api here
+	    /**
+     * Select a list of entities by different criteria.
+     * @param string  $args['where']    The where clause to use when retrieving the collection (optional) (default='').
+     * @return Array with retrieved collection and amount of total records affected by this query.
+     */
+  /*  public function getEntities($args)
+    {
+    	$args['where'] = MUTicket_Util_View::getTicketClause();
+    	
+    	return parent::getEntities($args);
+    }
+    
+    
+        /**
+     * Select a list of entities by different criteria.
+     *
+     * @param string  $args['where']          The where clause to use when retrieving the collection (optional) (default='').
+     * @return Array with retrieved collection and amount of total records affected by this query.
+     */
+   /* public function getEntitiesPaginated($args)
+    {
+    	$args['where'] = MUTicket_Util_View::getTicketClause();
+    	
+    	return parent::getEntitiesPaginated($args);    	
+    	
+    }*/
 }

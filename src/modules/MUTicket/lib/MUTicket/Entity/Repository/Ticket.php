@@ -44,6 +44,7 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     }
 		
     $id = (int) FormUtil::getPassedValue('id','' , 'GET', FILTER_VALIDATE_INT);
+    $uid = UserUtil::getVar('uid');
     
     if(isset($id) && $id != '') {	
 		if (!empty($where)) {
@@ -51,7 +52,7 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
 		}
 		
 		if ($id != '') {
-		$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($id) . '\'';
+		$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
 		}
     }
             

@@ -183,7 +183,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     	$messagecontent['subject'] = __('New Ticket');
     	$messagecontent['html'] = true;
     	$messagecontent['body'] = __('Another ticked was created by a customer!') . '<br />'
-    	. $title .'<br />'. $text;
+    	. __('Title:'). '<br />'.  $title .'<br />'. __('Text:'). '<br />' . $text;
     	
     	// if a supporter exists send the mail
     	if ($toaddress != '') {

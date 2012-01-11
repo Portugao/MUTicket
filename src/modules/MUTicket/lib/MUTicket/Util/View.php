@@ -32,6 +32,11 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      // get supporter group
     
      $supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
+     
+     if ($supportergroup == '') {
+     	$url = ModUtil::url('MUticket', 'admin', 'config');
+     	LogUtil::registerError('You have to save a supporter group!',null , $url);
+     }
     
      $where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
     

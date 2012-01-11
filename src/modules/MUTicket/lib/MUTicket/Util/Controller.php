@@ -40,4 +40,19 @@ class MUTicket_Util_Controller extends MUTicket_Util_Base_Controller
 
         return parent::retrieveIdentifier($request, $args, $objectType, $idFields);    	
     }
+    
+    /**
+     * Get list of ratingvalues.
+     */
+    public static function getRatingValues()
+    {
+        $dom = ZLanguage::getModuleDomain('MUTicket');
+        $ratingvalue = array();
+        $ratingvalue[] = array('value' => '1',    'text' => __('1', $dom));
+        $ratingvalue[] = array('value' => '2',    'text' => __('2', $dom));
+        $ratingvalue[] = array('value' => '3',    'text' => __('3', $dom));
+        $ratingvalue[] = array('value' => '4',    'text' => __('4', $dom));        
+        $ratingvalue[] = array('value' => '5',     'text' => __('5', $dom));
+        return $ratingvalue;
+    }
 }

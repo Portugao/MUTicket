@@ -1,4 +1,4 @@
-{* purpose of this template: build the Form to edit an instance of supporter *}
+{zdebug}{* purpose of this template: build the Form to edit an instance of supporter *}
 {include file='admin/header.tpl'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
@@ -22,24 +22,31 @@
 {form cssClass='z-form'}
     {* add validation summary and a <div> element for styling the form *}
     {muticketFormFrame}
-    {formsetinitialfocus inputId='username'}
+    {formsetinitialfocus inputId='userid'}
 
     <fieldset>
         <legend>{gt text='Content'}</legend>
         <div class="z-formrow">
+       {* {if $mode eq 'create'} *}
             {formlabel for='username' __text='Username' mandatorysym='1'}
+            {*formtextinput group='supporter' id='username' mandatory=true readOnly=false __title='Input the username of the supporter' textMode='singleline' maxLength=100 cssClass='required'}
+            {muticketValidationError id='username' class='required'*}
+            {formdropdownlist group='supporter' id='username' mandatory=true __title='Select a user'}
+       {* {else}
             {formtextinput group='supporter' id='username' mandatory=true readOnly=false __title='Input the username of the supporter' textMode='singleline' maxLength=100 cssClass='required'}
-            {muticketValidationError id='username' class='required'}
+            {muticketValidationError id='username' class='required'} 
+        {/if} *}
         </div>
         <div class="z-formrow">
-            {formlabel for='supportcats' __text='Supportcats' mandatorysym='1'}
-            {formtextinput group='supporter' id='supportcats' mandatory=true readOnly=false __title='Input the supportcats of the supporter' textMode='singleline' maxLength=255 cssClass='required'}
+            {formlabel for='supportcats' __text='Categories' mandatorysym='0'}
+            {*formintinput group='supporter' id='supportcats' mandatory=true __title='Input the category of the variety' maxLength=4 cssClass='required validate-digits'}
             {muticketValidationError id='supportcats' class='required'}
+            {muticketValidationError id='supportcats' class='validate-digits'} *}
+            {formcheckboxlist group='supporter' id='supportcats' multiple=true mandatory=true __title='Select a category'}
         </div>
         <div class="z-formrow">
-            {formlabel for='state' __text='State' mandatorysym='1'}
-            {formcheckbox group='supporter' id='state' readOnly=false __title='state ?' cssClass='required'}
-            {muticketValidationError id='state' class='required'}
+            {formlabel for='state' __text='State?' mandatorysym='1'}
+            {formcheckbox group='supporter' id='state' mame='state' readOnly=false __title='state' checked=checked}
         </div>
     </fieldset>
 

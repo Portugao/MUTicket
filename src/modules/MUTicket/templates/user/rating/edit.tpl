@@ -1,31 +1,22 @@
 {* purpose of this template: build the Form to edit an instance of rating *}
-{include file='user/header.tpl'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 
-{if $mode eq 'edit'}
-    {gt text='Edit rating' assign='templateTitle'}
-{elseif $mode eq 'create'}
-    {gt text='Create rating' assign='templateTitle'}
-{else}
-    {gt text='Edit rating' assign='templateTitle'}
-{/if}
 <div class="muticket-rating muticket-edit">
-{pagesetvar name='title' value=$templateTitle}
+
 <div class="z-frontendcontainer">
     <h2>{$templateTitle}</h2>
-{form cssClass='z-form'}
+{muticketratingform cssClass='z-form' ticket=$childTicket.id}
     {* add validation summary and a <div> element for styling the form *}
     {muticketFormFrame}
     {formsetinitialfocus inputId='ratingvalue'}
-
     <fieldset>
-        <legend>{gt text='Content'}</legend>
         <div class="z-formrow">
-            {formlabel for='ratingvalue' __text='Ratingvalue' mandatorysym='1'}
-            {formintinput group='rating' id='ratingvalue' mandatory=true __title='Enter the ratingvalue of the rating' maxLength=2 cssClass='required validate-digits'}
-            {muticketValidationError id='ratingvalue' class='required'}
-            {muticketValidationError id='ratingvalue' class='validate-digits'}
+            <div>{formlabel for='ratingvalue' __text='Vote this support answer'}</div>
+            {foreach from=$rating item=rating}
+            <div class="muticket_rating_value">
+            {formradiobutton groupName='ratingvalue' value=$rating.value id='ratingvalue' mandatory=true __title='Enter the rating of this support answer' maxLength=2 cssClass='required validate-digits'}{$rating.value}</div>
+            {/foreach}
         </div>
     </fieldset>
 
@@ -50,17 +41,6 @@
         </fieldset>
     {/if}
 
-    {* include return control *}
-    {if $mode eq 'create'}
-        <fieldset>
-            <legend>{gt text='Return control'}</legend>
-            <div class="z-formrow">
-                {formlabel for='repeatcreation' __text='Create another item after save'}
-                {formcheckbox group='rating' id='repeatcreation' readOnly=false}
-            </div>
-        </fieldset>
-    {/if}
-
     {* include possible submit actions *}
     <div class="z-buttons z-formbuttons">
     {if $mode eq 'edit'}
@@ -74,14 +54,12 @@
     {else}
         {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
     {/if}
-        {formbutton id='btnCancel' commandName='cancel' __text='Cancel' class='z-bt-cancel'}
     </div>
   {/muticketFormFrame}
-{/form}
+{/muticketratingform}
 
 </div>
 </div>
-{include file='user/footer.tpl'}
 
 {icon type='edit' size='extrasmall' assign='editImageArray'}
 {icon type='delete' size='extrasmall' assign='deleteImageArray'}

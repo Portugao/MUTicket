@@ -16,11 +16,17 @@
         {formsetinitialfocus inputId='supportergroup'}
             <fieldset>
                 <legend>{gt text='Here you can manage all basic settings for this application.'}</legend>
-
                 <div class="z-formrow">
                     {formlabel for='supportergroup' __text='Supportergroup'}
-                    {formtextinput id='supportergroup' group='config' maxLength=255 width=20em __title='Input this setting.'}
+                    {formdropdownlist id='supportergroup' group='config' maxLength=255 width=20em __title='Input this setting.'}
                 </div>
+            </fieldset>
+            <fieldset>
+                <legend>Do you want to delete all existing supporters?</legend>
+                <div class="z-formrow">
+                    {formlabel for='supporters' __text='Delete existing supporters?'}
+                    {formcheckbox id='delete_supporter' name='delete_supporter' group='supporter'}              
+                </div>           
             </fieldset>
 
             <div class="z-buttons z-formbuttons">

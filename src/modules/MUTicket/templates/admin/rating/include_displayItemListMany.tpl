@@ -4,12 +4,14 @@
 <ul class="relatedItemList Rating">
 {foreach name='relLoop' item='item' from=$items}
     <li>
-    <a href="{modurl modname='MUTicket' type='admin' func='display' ot='rating' id=$item.id}">
+   {* We don't need the link *}
+   {* <a href="{modurl modname='MUTicket' type='admin' func='display' ot='rating' id=$item.id}"> *}
         {$item.ratingvalue}
-    </a>
+   {* </a> *}
+   {* We don't need the display of the rating 
     <a id="ratingItem{$item.id}Display" href="{modurl modname='MUTicket' type='admin' func='display' ot='rating' id=$item.id theme='Printer'}" title="{gt text='Open quick view window'}" style="display: none">
         {icon type='view' size='extrasmall' __alt='Quick view'}
-    </a>
+    </a> *}
     <script type="text/javascript" charset="utf-8">
     /* <![CDATA[ */
         document.observe('dom:loaded', function() {

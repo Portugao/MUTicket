@@ -16,17 +16,6 @@
         </a>
     {/checkpermissionblock}
 
-    {if isset($showAllEntries) && $showAllEntries eq 1}
-        {gt text='Back to paginated view' assign='linkTitle'}
-        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='supporter'}" title="{$linkTitle}" class="z-icon-es-view">
-            {$linkTitle}
-        </a>
-    {else}
-        {gt text='Show all entries' assign='linkTitle'}
-        <a href="{modurl modname='MUTicket' type='admin' func='view' ot='supporter' all=1}" title="{$linkTitle}" class="z-icon-es-view">
-            {$linkTitle}
-        </a>
-    {/if}
 
 <table class="z-datatable">
     <colgroup>
@@ -66,6 +55,11 @@
             <a href="{modurl modname='MUTicket' type='admin' func='display' ot='supporter' id=$supporter.id}" title="{$supporter.username|replace:"\"":""}">
                 {icon type='display' size='extrasmall' __alt='Details'}
             </a>
+    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
+            <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket' id=$supporter.id}" title="{gt text='Delete'}">
+                {icon type='display' size='extrasmall' __alt='Ratings'}
+            </a>
+    {/checkpermissionblock}
     {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
             <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='supporter' id=$supporter.id}" title="{gt text='Edit'}">
                 {icon type='edit' size='extrasmall' __alt='Edit'}
@@ -92,9 +86,6 @@
     </tbody>
 </table>
 
-    {if !isset($showAllEntries) || $showAllEntries ne 1}
-        {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
-    {/if}
+    {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
 </div>
 {include file='admin/footer.tpl'}
-

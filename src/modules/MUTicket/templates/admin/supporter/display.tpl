@@ -3,7 +3,7 @@
 <div class="muticket-supporter muticket-display">
 {gt text='Supporter' assign='templateTitle'}
 {assign var='templateTitle' value=$supporter.username|default:$templateTitle}
-{pagesetvar name='title' value=$templateTitle|@html_entity_decode}
+{pagesetvar name='title' value=$templateTitle}
 <div class="z-admin-content-pagetitle">
     {icon type='display' size='small' __alt='Details'}
     <h3>{$templateTitle|notifyfilters:'muticket.filter_hooks.supporters.filter'}</h3>
@@ -13,8 +13,6 @@
 <dl id="MUTicket_body">
     <dt>{gt text='Supportcats'}</dt>
     <dd>{$supporter.supportcats}</dd>
-    <dt>{gt text='State'}</dt>
-    <dd>{$supporter.state|yesno:true}</dd>
 </dl>
     {include file='admin/include_standardfields_display.tpl' obj=$supporter}
 
@@ -49,4 +47,3 @@
 
 </div>
 {include file='admin/footer.tpl'}
-

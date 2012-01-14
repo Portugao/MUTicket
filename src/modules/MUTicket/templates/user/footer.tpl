@@ -1,8 +1,8 @@
 {* purpose of this template: footer for user area *}
-
+<div id="user_footer">
 {if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
 <p style="text-align: center">
-    Powered by <a href="http://modulestudio.de" title="Get the MOST out of Zikula!">ModuleStudio 0.5.3</a>
+    Powered by <a href="http://modulestudio.de" title="Get the MOST out of Zikula!">ModuleStudio 0.5.4</a> and <a href="http://www.webdesign-in-bremen.com" title="Get the most out of your Homepage">MU(t) Beratung Internet</a>
 </p>
 {elseif isset($smarty.get.func) && $smarty.get.func eq 'edit'}
 {pageaddvar name='stylesheet' value='styles/core.css'}
@@ -18,4 +18,4 @@
 {/capture}
 {pageaddvar name='header' value=$pageStyles}
 {/if}
-
+</div>

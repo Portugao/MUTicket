@@ -1,12 +1,16 @@
 {* purpose of this template: build the Form to edit an instance of ticket *}
+{if $func ne 'display'}
 {include file='user/header.tpl'}
+{/if}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 
 {if $mode eq 'edit'}
     {gt text='Edit ticket' assign='templateTitle'}
-{elseif $mode eq 'create'}
+{elseif $mode eq 'create' && $func ne 'display'}
     {gt text='Create ticket' assign='templateTitle'}
+{elseif $mode eq 'create' && $func eq 'display'}
+    {gt text='Answer to ticket' assign='templateTitle'}
 {else}
     {gt text='Edit ticket' assign='templateTitle'}
 {/if}
@@ -14,24 +18,34 @@
 {pagesetvar name='title' value=$templateTitle}
 <div class="z-frontendcontainer">
     <h2>{$templateTitle}</h2>
-{form enctype='multipart/form-data' cssClass='z-form'}
+{muticketform enctype='multipart/form-data' cssClass='z-form'}
     {* add validation summary and a <div> element for styling the form *}
     {muticketFormFrame}
     {formsetinitialfocus inputId='title'}
 
     <fieldset>
         <legend>{gt text='Content'}</legend>
+        {if $func ne 'display'}
         <div class="z-formrow">
             {formlabel for='title' __text='Title'}
+            {if $mode eq 'create'}
+            {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Input the title of the ticket' textMode='singleline' maxLength=255 cssClass='required'}
+            {else}
             {formtextinput group='ticket' id='title' mandatory=false readOnly=false __title='Input the title of the ticket' textMode='singleline' maxLength=255 cssClass=''}
+            {/if}
         </div>
+        {/if}
         <div class="z-formrow">
             {formlabel for='text' __text='Text' mandatorysym='1'}
             {formtextinput group='ticket' id='text' mandatory=true __title='Input the text of the ticket' textMode='multiline' rows='6' cols='50' cssClass='required'}
             {muticketValidationError id='text' class='required'}
         </div>
         <div class="z-formrow">
-            {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
+            {if $mode eq 'create'}
+                {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
+            {else}
+                {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
+            {/if}
             {formuploadinput group='ticket' id='images' mandatory=false readOnly=false cssClass=''}
 
             <div class="z-formnote">{gt text='Allowed file extensions:'} gif, jpeg, jpg, png</div>
@@ -55,7 +69,11 @@
             {/if}
         </div>
         <div class="z-formrow">
-            {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
+            {if $mode eq 'create'}
+                {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
+            {else}
+                {formlabel for='files' __text='Files'}<br />{* break required for Google Chrome *}
+            {/if}
             {formuploadinput group='ticket' id='files' mandatory=false readOnly=false cssClass=''}
 
             <div class="z-formnote">{gt text='Allowed file extensions:'} pdf, doc, odt</div>
@@ -78,29 +96,40 @@
                 {/if}
             {/if}
         </div>
-        <div class="z-formrow">
-            {formlabel for='state' __text='State' mandatorysym='1'}
-            {formcheckbox group='ticket' id='state' readOnly=false __title='state ?' cssClass='required'}
-            {muticketValidationError id='state' class='required'}
+        <div class="z-formrow muticket_form_hidden">
+            {formlabel for='state' __text='State' mandatorysym='0'}
+            {formcheckbox group='ticket' id='state' mandatory=true readOnly=false __title='Input the state of the ticket'}
+            {* muticketValidationError id='state' class='required' *}
         </div>
-        <div class="z-formrow">
-            {formlabel for='t_rating' __text='T_rating' mandatorysym='1'}
-            {formcheckbox group='ticket' id='t_rating' readOnly=false __title='t_rating ?' cssClass='required'}
-            {muticketValidationError id='t_rating' class='required'}
+        <div class="z-formrow muticket_form_hidden">
+            {formlabel for='t_rating' __text='T_rating' mandatorysym='0'}
+            {formcheckbox group='ticket' id='t_rating' mandatory=true __title='Input the t_rating of the ticket'}
+            {* muticketValidationError id='t_rating' class='required'}
+            {muticketValidationError id='t_rating' class='validate-digits' *}
         </div>
-        <div class="z-formrow">
-            {formlabel for='rated' __text='Rated' mandatorysym='1'}
-            {formcheckbox group='ticket' id='rated' readOnly=false __title='rated ?' cssClass='required'}
-            {muticketValidationError id='rated' class='required'}
+        <div class="z-formrow muticket_form_hidden">
+            {formlabel for='rated' __text='Rated' mandatorysym='0'}
+            {formcheckbox group='ticket' id='rated' mandatory=true __title='Input the rated of the ticket'}
+            {* muticketValidationError id='rated' class='required'}
+            {muticketValidationError id='rated' class='validate-digits' *}
         </div>
     </fieldset>
-
+    {if $func eq 'display'}
+    <div class="z-formrow muticket_form_hidden">
     {include file='user/include_categories_edit.tpl' obj=$ticket groupName='ticketObj'}
+    </div>
+    {else}
+    {include file='user/include_categories_edit.tpl' obj=$ticket groupName='ticketObj'}
+    {/if}
     {if $mode ne 'create'}
         {include file='user/include_standardfields_edit.tpl' obj=$ticket}
     {/if}
-    {include file='user/ticket/include_selectOne.tpl' relItem=$ticket aliasName='parent' idPrefix='muticketTicket_Parent'}
-
+    {if $func eq 'display'}
+    <div class="z-formrow muticket_form_hidden">
+    	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="{$ticketid}">
+    </div>
+    {/if}
+    {* {include file='user/ticket/include_selectOne.tpl' relItem=$ticket aliasName='parent' idPrefix='muticketTicket_Parent'} *}
     {* include display hooks *}
     {if $mode eq 'create'}
         {notifydisplayhooks eventname='muticket.ui_hooks.tickets.form_edit' id=null assign='hooks'}
@@ -118,8 +147,9 @@
         </fieldset>
     {/if}
 
+    {* We don't need this *} 
     {* include return control *}
-    {if $mode eq 'create'}
+    {* {if $mode eq 'create'}
         <fieldset>
             <legend>{gt text='Return control'}</legend>
             <div class="z-formrow">
@@ -127,7 +157,7 @@
                 {formcheckbox group='ticket' id='repeatcreation' readOnly=false}
             </div>
         </fieldset>
-    {/if}
+    {/if} *}
 
     {* include possible submit actions *}
     <div class="z-buttons z-formbuttons">
@@ -145,7 +175,7 @@
         {formbutton id='btnCancel' commandName='cancel' __text='Cancel' class='z-bt-cancel'}
     </div>
   {/muticketFormFrame}
-{/form}
+{/muticketform}
 
 </div>
 </div>

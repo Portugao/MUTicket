@@ -133,7 +133,10 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     
     /**
      * 
-     * Enter description here ...
+     * this method is for checking if an user is not
+     * a supporter and may rate for tickets
+     * 
+     * return int.
      */
     public static function userForRating() {
     	
@@ -151,15 +154,29 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     return $kind;
     }
 
-    
+    /**
+     *  this method is for showing only parent tickets
+     *
+     **/              
     public static function getTicketClause() {
     	
-    	$where = 'tbl.parent_id IS \'' . DataUtil::formatForStore(NULL) . '\'';
+    	if ($ot == 'ticket') {
+    	$where = 'tbl.parent_id IS NULL';
+    	}
+    	else {
+    		$where == '';
+    	}
     	
     	return $where;
     	
     }
     
+    /**
+     *
+     * this method checks if there is a supporter saved
+     *
+     **/
+                        
     public static function checkIfSupporters() {
     	
     	$repository = MUTicket_Util_View::getSupporterRepository();

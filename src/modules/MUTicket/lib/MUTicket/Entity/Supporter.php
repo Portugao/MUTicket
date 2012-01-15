@@ -61,6 +61,7 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function postLoadCallback()
     {
+    	
         $this->performPostLoadCallback();
     }
 
@@ -73,6 +74,9 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function prePersistCallback()
     {
+    	$supportcats = serialize($this->supportcats);
+    	$this->setSupportcats($supportcats);
+    	
         $this->performPrePersistCallback();
     }
 

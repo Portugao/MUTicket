@@ -136,7 +136,9 @@
 <div class="ticket_user_body_rating">
 {if $kind eq 1}
 {if $childTicket.rated eq 0}
+{if $pncore.user.uid ne $childTicket.createdUserId}
 {modfunc modname='MUTicket' type='user' func='edit' ot='rating'}
+{/if}
 {/if}
 {/if}
 </div>

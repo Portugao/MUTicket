@@ -44,7 +44,13 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     }
 		
     $id = (int) FormUtil::getPassedValue('id','' , 'GET', FILTER_VALIDATE_INT);
+    if (UserUtil::isLoggedIn() === true) {
     $uid = UserUtil::getVar('uid');
+    }
+    else {
+    	LogUtil::registerError(__('Sorry. No access!'));
+    	System::redirect($redirecturl);
+    }
     
     if(isset($id) && $id != '') {	
 		if (!empty($where)) {

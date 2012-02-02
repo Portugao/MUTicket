@@ -43,7 +43,7 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     	}
     }
 		
-    $id = (int) FormUtil::getPassedValue('id','' , 'GET', FILTER_VALIDATE_INT);
+    $type = (string) FormUtil::getPassedValue('type','' , 'GET', FILTER_SANITIZE_STRING);
     if (UserUtil::isLoggedIn() === true) {
     $uid = UserUtil::getVar('uid');
     }
@@ -52,16 +52,18 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     	System::redirect($redirecturl);
     }
     
-    if(isset($id) && $id != '') {	
+    if($type == 'user') {	
 		if (!empty($where)) {
 			$where .= ' AND ';
 		}
-		
-		if ($id != '') {
-		$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
+		if (!empty($where)) {			
+			$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
 		}
-    }
-            
+		else {
+			$where = 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
+		}
+	}
+	            
     return parent::selectWherePaginated($where, $orderBy, $currentPage, $resultsPerPage,
 	$useJoins = true);
 	

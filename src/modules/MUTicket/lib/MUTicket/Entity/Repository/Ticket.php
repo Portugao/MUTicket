@@ -42,27 +42,38 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
 		$where .= 'tbl.state = \'' . DataUtil::formatForStore($state) . '\'';
     	}
     }
+    
+    // handle the view for users also supporters
+    // users may see their own tickets and answers
+    // supporters may see all
 		
+    // we check if a user is calling
     $type = (string) FormUtil::getPassedValue('type','' , 'GET', FILTER_SANITIZE_STRING);
+    // we check if user is logged in
     if (UserUtil::isLoggedIn() === true) {
     $uid = UserUtil::getVar('uid');
     }
+    // guests get no access
     else {
     	LogUtil::registerError(__('Sorry. No access!'));
     	System::redirect($redirecturl);
     }
     
-    if($type == 'user') {	
-		if (!empty($where)) {
-			$where .= ' AND ';
-		}
-		if (!empty($where)) {			
-			$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
-		}
-		else {
-			$where = 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
+    // we check if the user is a supporter
+    if (in_array($uid, MUTicket_Util_View::getExistingSupporterUids()) === false) {
+    
+    	if($type == 'user') {	
+			if (!empty($where)) {
+				$where .= ' AND ';
+			}
+			if (!empty($where)) {			
+				$where .= 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
+			}
+			else {
+				$where = 'tbl.createdUserId = \'' . DataUtil::formatForStore($uid) . '\'';
 		}
 	}
+    }
 	            
     return parent::selectWherePaginated($where, $orderBy, $currentPage, $resultsPerPage,
 	$useJoins = true);

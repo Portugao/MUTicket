@@ -1,0 +1,48 @@
+
+
+CUSTOMISATIONS
+--------------
+
+MUTicket - Manual additions and amendments
+
+
+Changed Files
+
+*templates/admin/supporter/edit.tpl
+*templates/admin/supporter/view.tpl
+*templates/admin/ticket/view.tpl
+*templates/admin/config.tpl
+*templates/admin/footer.tpl
+*templates/admin/main.tpl
+
+*templates/user/rating/edit.tpl
+*templates/user/ticket/edit.tpl
+*templates/user/rating/display.tpl
+*templates/user/rating/view.tpl
+*templates/user/footer.tpl
+*templates/user/include_standardfields_display.tpl
+
+
+Implemented Classes:
+
+*lib/MUTicket/Api/Selection.php
+*lib/MUTicket/Api/User.php
+*lib/MUticket/Controller/Admin.php
+*lib/MUticket/Controller/User.php
+*lib/MUTicket/Entity/Supporter.php
+*lib/MUTicket/Entity/Ticket.php
+*lib/MUticket/Repository/Ticket.php
+*lib/MUTicket/Form/Handler/Admin/Config.php
+*lib/MUTicket/Form/Handler/Admin/Edit.php
+*lib/MUTicket/Form/Handler/User/Rating/Edit.php
+*lib/MUTicket/Form/Handler/User/Ticket/Edit.php
+*lib/MUTicket/Util/Controller.php
+*lib/MUTicket/Util/View.php
+
+Additional Files:
+
+*templates/plugins/block.muticketform.php
+*templates/plugins/block.muticketratingform.php
+
+
+

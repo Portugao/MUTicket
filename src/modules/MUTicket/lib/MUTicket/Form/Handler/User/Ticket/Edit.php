@@ -29,18 +29,13 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         parent::initialize($view);
 		
         
-        // set mode to create if there is a ticket id
+        // set mode to create
 
-		$id = $this->request->getGet()->filter('id', 0);
-		if ($id != 0) {
 		$this->mode = 'create';
-		// we get the id of the meeting
 		
 		// we assign to template
 		$this->view->assign('mode', $this->mode);
-		$this->view->assign('ticketid', $id);
-		
-		}
+
         // everything okay, no initialization errors occured
         return true;
     }	

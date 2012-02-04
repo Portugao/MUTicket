@@ -7,6 +7,7 @@
         <div id="{$idPrefix}AddFields">
             <label for="{$idPrefix}Selector">{gt text='Find ticket'}</label>
             <br />
+            {icon type='search' size='extrasmall' __alt='Search ticket'}
             <input type="text" name="{$idPrefix}Selector" id="{$idPrefix}Selector" value="" />
             <input type="hidden" name="{$idPrefix}Scope" id="{$idPrefix}Scope" value="0" />
             {img src='indicator_circle.gif' modname='core' set='ajax' alt='' id="`$idPrefix`Indicator" style='display: none'}

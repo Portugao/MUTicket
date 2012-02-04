@@ -1,6 +1,6 @@
 {* purpose of this template: ratings view view in user area *}
-<div class="muticket-rating muticket-view">
 {include file='user/header.tpl'}
+<div class="muticket-rating muticket-view">
 {gt text='Rating list' assign='templateTitle'}
 {pagesetvar name='title' value=$templateTitle}
 <div class="z-frontendcontainer">
@@ -50,13 +50,9 @@
         </td>
         <td headers="hitemactions" class="z-right z-nowrap z-w02">
             {if count($rating._actions) gt 0}
-            {strip}
                 {foreach item='option' from=$rating._actions}
-                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
-                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
-                    </a>
+                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>{icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}</a>
                 {/foreach}
-            {/strip}
             {/if}
         </td>
     </tr>

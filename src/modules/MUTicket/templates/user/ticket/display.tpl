@@ -3,25 +3,11 @@
 <div class="muticket-ticket muticket-display">
 {gt text='Ticket' assign='templateTitle'}
 {assign var='templateTitle' value=$ticket.title|default:$templateTitle}
-{pagesetvar name='title' value=$templateTitle}
+{pagesetvar name='title' value=$templateTitle|@html_entity_decode}
 <div class="z-frontendcontainer">
-{*Editing of template, 3 div container*}
-    
-<div class="ticket_user_body">
-<div class="ticket_user_header"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2><div class="ticket_user_header_menue">
-</div></div>
-<div class="ticket_user_body_left">
-<div class="ticket_user_body_avatar">
-{useravatar uid=$ticket.createdUserId}
-</div>
-<div class="ticket_user_body_standard">
-{include file='user/include_standardfields_display.tpl' obj=$ticket}
-</div>
-<div class="ticket_user_body_rating">&nbsp;
-</div>
-</div>
-<div class="ticket_user_body_right">
-{*{if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
+    <h2>{$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2>
+
+{if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
 <div class="muticketRightBox">
 <h3>{gt text='Ratings'}</h3>
 
@@ -29,7 +15,7 @@
     {include file='user/rating/include_displayItemListMany.tpl' items=$ticket.rating}
 {/if}
 
-{checkpermission component='MUTicket::' instance='.*' level='ACCESS_ADMIN'}
+{checkpermission component='MUTicket::' instance='.*' level='ACCESS_ADMIN' assign='authAdmin'}
 {if $authAdmin || (isset($uid) && isset($ticket.createdUserId) && $ticket.createdUserId eq $uid)}
 <p class="manageLink">
     {gt text='Create rating' assign='createTitle'}
@@ -56,12 +42,15 @@
 {/if}
 {/if}
 </div>
-{/if}*}
-<div>
-<h4>{gt text='Text'}</h4>
-{$ticket.text}
-<h4>{gt text='Image'}</h4>
-{if $ticket.images ne ''}
+{/if}
+
+<dl id="MUTicket_body">
+    <dt>{gt text='Text'}</dt>
+    <dd>{$ticket.text}</dd>
+    <dt>{gt text='Parent_id'}</dt>
+    <dd>{$ticket.parent_id}</dd>
+    <dt>{gt text='Images'}</dt>
+    <dd>{if $ticket.images ne ''}
   <a href="{$ticket.imagesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.imagesMeta.isImage} rel="imageviewer[ticket]"{/if}>
   {if $ticket.imagesMeta.isImage}
       <img src="{$ticket.images|muticketImageThumb:$ticket.imagesFullPath:250:150}" width="250" height="150" alt="{$ticket.title|replace:"\"":""}" />
@@ -69,10 +58,10 @@
       {gt text='Download'} ({$ticket.imagesMeta.size|muticketGetFileSize:$ticket.imagesFullPath:false:false})
   {/if}
   </a>
-{else}
-{gt text='No images uploaded!'}{/if}
-<h4>{gt text='File'}</h4>
-{if $ticket.files ne ''}
+{else}&nbsp;{/if}
+</dd>
+    <dt>{gt text='Files'}</dt>
+    <dd>{if $ticket.files ne ''}
   <a href="{$ticket.filesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.filesMeta.isImage} rel="imageviewer[ticket]"{/if}>
   {if $ticket.filesMeta.isImage}
       <img src="{$ticket.files|muticketImageThumb:$ticket.filesFullPath:250:150}" width="250" height="150" alt="{$ticket.title|replace:"\"":""}" />
@@ -80,14 +69,14 @@
       {gt text='Download'} ({$ticket.filesMeta.size|muticketGetFileSize:$ticket.filesFullPath:false:false})
   {/if}
   </a>
-{else}{gt text='No files uploaded!'}{/if}
-
-    {* <dt>{gt text='State'}</dt>
-    <dd>{$ticket.state}</dd>
+{else}&nbsp;{/if}
+</dd>
+    <dt>{gt text='State'}</dt>
+    <dd>{$ticket.state|yesno:true}</dd>
     <dt>{gt text='T_rating'}</dt>
-    <dd>{$ticket.t_rating}</dd>
+    <dd>{$ticket.t_rating|yesno:true}</dd>
     <dt>{gt text='Rated'}</dt>
-    <dd>{$ticket.rated}</dd>
+    <dd>{$ticket.rated|yesno:true}</dd>
     <dt>{gt text='Parent'}</dt>
     <dd>
     {if isset($ticket.Parent) && $ticket.Parent ne null}
@@ -111,70 +100,30 @@
     {else}
         {gt text='No set.'}
     {/if}
-    </dd> *}
+    </dd>
+</dl>
+    {include file='user/include_categories_display.tpl' obj=$ticket}
+    {include file='user/include_standardfields_display.tpl' obj=$ticket}
+
+{if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
+{if count($ticket._actions) gt 0}
+    <p>
+    {foreach item='option' from=$ticket._actions}
+        <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}" class="z-icon-es-{$option.icon}">{$option.linkText|safetext}</a>
+    {/foreach}
+    </p>
+{/if}
+
+{* include display hooks *}
+{notifydisplayhooks eventname='muticket.ui_hooks.tickets.display_view' id=$ticket.id urlobject=$currentUrlObject assign='hooks'}
+{foreach key='hookname' item='hook' from=$hooks}
+    {$hook}
+{/foreach}
 
 <br style="clear: right" />
+{/if}
 
 </div>
 </div>
-{* <div class="">
-{if isset($ticket.parent) && $ticket.parent ne null}
-    {include file='user/ticket/include_displayItemListOne.tpl' item=$ticket.parent}
-{/if}
-</div> *}
-</div>
-
-{foreach item='childTicket' from=$ticket.children}
-<div class="ticket_user_body">
-<div class="ticket_user_body_left">
-<div class="ticket_user_body_avatar">
-{useravatar uid=$childTicket.createdUserId}
-</div>
-<div class="ticket_user_body_standard">
-{include file='user/include_standardfields_display.tpl' obj=$childTicket}
-</div>
-<div class="ticket_user_body_rating">
-{if $kind eq 1}
-{if $childTicket.rated eq 0}
-{if $pncore.user.uid ne $childTicket.createdUserId}
-{modfunc modname='MUTicket' type='user' func='edit' ot='rating'}
-{/if}
-{/if}
-{/if}
-</div>
-</div>
-<div class="ticket_user_body_right">
-{$childTicket.text}
-    <h4>{gt text='Image'}</h4>
-    {if $childTicket.images ne ''}
-  <a href="{$childTicket.imagesFullPathURL}" title="{$childTicket.title|replace:"\"":""}"{if $childTicket.imagesMeta.isImage} rel="imageviewer[ticket]"{/if}>
-  {if $childTicket.imagesMeta.isImage}
-      <img src="{$childTicket.images|muticketImageThumb:$childTicket.imagesFullPath:250:150}" width="250" height="150" alt="{$childTicket.title|replace:"\"":""}" />
-  {else}
-      {gt text='Download'} ({$childTicket.imagesMeta.size|muticketGetFileSize:$childTicket.imagesFullPath:false:false})
-  {/if}
-    </a>
-  {else}{gt text='No images uploaded!'}{/if}
-  <h4>{gt text='File'}</h4>
-{if $childTicket.files ne ''}
-  <a href="{$childTicket.filesFullPathURL}" title="{$childTicket.title|replace:"\"":""}"{if $childTicket.filesMeta.isImage} rel="imageviewer[ticket]"{/if}>
-  {if $childTicket.filesMeta.isImage}
-      <img src="{$childticket.files|muticketImageThumb:$childticket.filesFullPath:250:150}" width="250" height="150" alt="{$childTicket.title|replace:"\"":""}" />
-  {else}
-      {gt text='Download'} ({$childticket.filesMeta.size|muticketGetFileSize:$childTicket.filesFullPath:false:false})
-  {/if}
-  </a>
-{else}{gt text='No files uploaded!'}{/if}
-</div>
-</div> 
-{/foreach}
-{if $ticket.state eq 1}
-<div id="ticket_inline_use">
-{modfunc modname='MUTicket' type='user' func='edit' ot='ticket'}
-</div>
-{/if}
-</div>
-</div>
-{if $func ne 'display'}}
 {include file='user/footer.tpl'}
-{/if}
+

@@ -14,13 +14,11 @@
 
 {if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
 {if count($rating._actions) gt 0}
-    <p>{strip}
+    <p>
     {foreach item='option' from=$rating._actions}
-        <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}" class="z-icon-es-{$option.icon}">
-            {$option.linkText|safetext}
-        </a>
+        <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}" class="z-icon-es-{$option.icon}">{$option.linkText|safetext}</a>
     {/foreach}
-    {/strip}</p>
+    </p>
 {/if}
 
 {* include display hooks *}

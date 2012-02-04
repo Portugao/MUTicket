@@ -160,6 +160,10 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      **/              
     public static function getTicketClause() {
     	
+    	// check for entity
+    	$request = new Zikula_Request_Http();
+    	$ot = $request->getGet()->filter('ot','', FILTER_SANITIZE_STRING);
+    	
     	if ($ot == 'ticket') {
     	$where = 'tbl.parent_id IS NULL';
     	}

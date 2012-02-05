@@ -18,6 +18,12 @@
  */
 class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_Ticket
 {
+	
+    /**
+     * @var string The default sorting field/expression.
+     */
+    protected $defaultSortingField = 'createdDate';	
+	
     /**
      * Select with a given where clause and pagination parameters.
      *

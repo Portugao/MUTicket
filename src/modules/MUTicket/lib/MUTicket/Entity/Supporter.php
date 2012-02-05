@@ -12,6 +12,7 @@
  */
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
 
@@ -25,7 +26,114 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  */
 class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 {
-    // feel free to add your own methods here
+    /**
+     * Collect available actions for this entity.
+     * TODO links don't work correctly
+     */
+    protected function prepareItemActions()
+    {
+        if (!empty($this->_actions)) {
+            return;
+        }
+
+        $currentType = FormUtil::getPassedValue('type', 'user', 'GETPOST', FILTER_SANITIZE_STRING);
+        $currentFunc = FormUtil::getPassedValue('func', 'main', 'GETPOST', FILTER_SANITIZE_STRING);
+        $dom = ZLanguage::getModuleDomain('MUTicket');
+        if ($currentType == 'admin') {
+            if (in_array($currentFunc, array('main', 'view'))) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'preview',
+                        'linkTitle' => __('Call rated tickets', $dom),
+                        'linkText' => __('Ratings', $dom)
+                    );
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'display', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'display',
+                        'linkTitle' => str_replace('"', '', $this['username']),
+                        'linkText' => __('Details', $dom)
+                    );*/
+            }
+
+            if (in_array($currentFunc, array('main', 'view', 'display'))) {
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
+
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'edit',
+                        'linkTitle' => __('Edit', $dom),
+                        'linkText' => __('Edit', $dom)
+                    );
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'supporter', 'astemplate' => $this['id'])),
+                        'icon' => 'saveas',
+                        'linkTitle' => __('Reuse for new item', $dom),
+                        'linkText' => __('Reuse', $dom)
+                    );*/
+                }
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_DELETE)) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'delete', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'delete',
+                        'linkTitle' => __('Delete', $dom),
+                        'linkText' => __('Delete', $dom)
+                    );
+                }
+            }
+            if ($currentFunc == 'display') {
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'supporter')),
+                        'icon' => 'back',
+                        'linkTitle' => __('Back to overview', $dom),
+                        'linkText' => __('Back to overview', $dom)
+                    );*/
+            }
+        }
+        if ($currentType == 'user') {
+            if (in_array($currentFunc, array('main', 'view'))) {
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'display',
+                        'linkTitle' => str_replace('"', '', $this['username']),
+                        'linkText' => __('Details', $dom)
+                    );*/
+            }
+
+            if (in_array($currentFunc, array('main', 'view', 'display'))) {
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
+
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'edit', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'edit',
+                        'linkTitle' => __('Edit', $dom),
+                        'linkText' => __('Edit', $dom)
+                    );
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'edit', 'arguments' => array('ot' => 'supporter', 'astemplate' => $this['id'])),
+                        'icon' => 'saveas',
+                        'linkTitle' => __('Reuse for new item', $dom),
+                        'linkText' => __('Reuse', $dom)
+                    );*/
+                }
+                if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_DELETE)) {
+                    $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'delete', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'icon' => 'delete',
+                        'linkTitle' => __('Delete', $dom),
+                        'linkText' => __('Delete', $dom)
+                    );
+                }
+            }
+            if ($currentFunc == 'display') {
+                   /* $this->_actions[] = array(
+                        'url' => array('type' => 'user', 'func' => 'view', 'arguments' => array('ot' => 'supporter')),
+                        'icon' => 'back',
+                        'linkTitle' => __('Back to overview', $dom),
+                        'linkText' => __('Back to overview', $dom)
+                    );*/
+            }
+        }
+    }
 
 
 
@@ -38,6 +146,11 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function postLoadCallback()
     {
+    	$this->getSupportcats();
+    	$supportcats = $this->supportcats;
+    	$supportcats = urldecode($supportcats);
+    	$cats = unserialize($supportcats);
+    	$this->setSupportcats($cats);
         $this->performPostLoadCallback();
     }
 
@@ -50,6 +163,10 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function prePersistCallback()
     {
+    	$this->getSupportcats();
+    	$supportercats = $this->supportcats;
+    	$cats = serialize($supportercats);
+    	$this->setSupportcats($cats);
         $this->performPrePersistCallback();
     }
 
@@ -98,6 +215,10 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function preUpdateCallback()
     {
+    	$this->getSupportcats();
+    	$supportercats = $this->supportcats;
+    	$cats = serialize($supportercats);
+    	$this->setSupportcats($cats);
         $this->performPreUpdateCallback();
     }
 

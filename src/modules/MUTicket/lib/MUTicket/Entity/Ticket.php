@@ -41,7 +41,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
         $dom = ZLanguage::getModuleDomain('MUTicket');
         if ($currentType == 'admin') {
             if (in_array($currentFunc, array('main', 'view'))) {
-                    $this->_actions[] = array(
+                  /*  $this->_actions[] = array(
                         'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
                         'icon' => 'preview',
                         'linkTitle' => __('Open preview page', $dom),
@@ -52,7 +52,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                         'icon' => 'display',
                         'linkTitle' => str_replace('"', '', $this['title']),
                         'linkText' => __('Details', $dom)
-                    );
+                    );*/
             }
 
             if (in_array($currentFunc, array('main', 'view', 'display'))) {
@@ -64,12 +64,12 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                         'linkTitle' => __('Edit', $dom),
                         'linkText' => __('Edit', $dom)
                     );
-                    $this->_actions[] = array(
+                   /* $this->_actions[] = array(
                         'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'astemplate' => $this['id'])),
                         'icon' => 'saveas',
                         'linkTitle' => __('Reuse for new item', $dom),
                         'linkText' => __('Reuse', $dom)
-                    );
+                    );*/
                 }
                 if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_DELETE)) {
                     $this->_actions[] = array(
@@ -172,6 +172,8 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
      $title = $this->title;
      $this->getText();
      $text = $this->text;
+     $this->categories;
+     $categories = $this->categories;
     
      $toaddress = MUTicket_Util_View::getSupporterMails();
     

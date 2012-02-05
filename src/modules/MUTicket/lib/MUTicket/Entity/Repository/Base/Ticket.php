@@ -28,7 +28,7 @@ class MUTicket_Entity_Repository_Base_Ticket extends EntityRepository
     /**
      * @var string The default sorting field/expression.
      */
-    protected $defaultSortingField = 'title';
+    protected $defaultSortingField = 'createdDate';
 
     /**
      * Retrieves an array with all fields which can be used for sorting instances.

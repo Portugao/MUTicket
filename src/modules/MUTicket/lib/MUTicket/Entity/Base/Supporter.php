@@ -12,6 +12,7 @@
  */
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
 
@@ -69,7 +70,7 @@ abstract class MUTicket_Entity_Base_Supporter extends Zikula_EntityAccess
 
 
     /**
-     * @ORM\Column(length=255)
+     * @ORM\Column(length=1000)
      * @var string $supportcats.
      */
     protected $supportcats = '';

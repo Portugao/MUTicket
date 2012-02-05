@@ -6,6 +6,11 @@ CUSTOMISATIONS
 MUTicket - Manual additions and amendments
 
 
+Changes by hand on the model to change in MOST
+
+supporter entity
+varchar supportcats now 1000 
+
 Changed Files
 
 *templates/admin/supporter/edit.tpl
@@ -17,8 +22,6 @@ Changed Files
 
 *templates/user/rating/edit.tpl
 *templates/user/ticket/edit.tpl
-*templates/user/rating/display.tpl
-*templates/user/rating/view.tpl
 *templates/user/footer.tpl
 *templates/user/include_standardfields_display.tpl
 
@@ -34,6 +37,7 @@ Implemented Classes:
 *lib/MUticket/Repository/Ticket.php
 *lib/MUTicket/Form/Handler/Admin/Config.php
 *lib/MUTicket/Form/Handler/Admin/Edit.php
+*lib/MUTicket/Form/Handler/Admin/Supporter/Edit.php
 *lib/MUTicket/Form/Handler/User/Rating/Edit.php
 *lib/MUTicket/Form/Handler/User/Ticket/Edit.php
 *lib/MUTicket/Util/Controller.php
@@ -43,6 +47,7 @@ Additional Files:
 
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php
+$templates/plugins/modifier.muticketCatName.php
 
 
 

@@ -12,19 +12,16 @@
  */
 
 /**
- * The muticketImageThumb modifier displays a thumbnail image.
+ * The muticketCatName modifier displays the cat name.
  *
  * @param  int       $id      cat id
- * @param  int       $height     Desired height.
- * @param  array     $thumbArgs  Additional arguments.
  *
- * @return string The thumbnail file path.
+ * @return string the category name
  */
 function smarty_modifier_muticketCatName($id)
 {
     /**
-     * By overriding this plugin or the util method called below you may add further thumbnail arguments
-     * based on custom conditions.
+     * 
      */
     $cat = CategoryUtil::getCategoryByID($id);
     

@@ -1,4 +1,4 @@
-{zdebug}{* purpose of this template: build the Form to edit an instance of ticket *}
+{* purpose of this template: build the Form to edit an instance of ticket *}
 {if $func ne 'display'}
 {include file='user/header.tpl'}
 {/if}
@@ -125,9 +125,8 @@
         {include file='user/include_standardfields_edit.tpl' obj=$ticket}
     {/if}
     {if $func eq 'display'}
-    <div class="z-formrow muticket_form_hidden">
     	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="{$ticket.id}">
-    </div>
+    	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="0">
     {/if}
     {* {include file='user/ticket/include_selectOne.tpl' relItem=$ticket aliasName='parent' idPrefix='muticketTicket_Parent'} *}
     {* include display hooks *}

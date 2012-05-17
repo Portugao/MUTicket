@@ -46,33 +46,27 @@
             {$supporter.username|notifyfilters:'muticket.filterhook.supporters'}
         </td>
         <td headers="hsupportcats" align="left" valign="top">
-            {$supporter.supportcats}
+        {if $supporter.supportcats}
+        <ul>
+        {foreach item='cat' from=$supporter.supportcats}
+            <li>{$cat|muticketCatName:$cat}</li>
+        {/foreach}
+        </ul>
+        {/if}
         </td>
         <td headers="hstate" align="center" valign="top">
             {$supporter.state|yesno:true}
         </td>
-        <td headers="hintactions" align="left" valign="top" style="white-space: nowrap">
-            <a href="{modurl modname='MUTicket' type='admin' func='display' ot='supporter' id=$supporter.id}" title="{$supporter.username|replace:"\"":""}">
-                {icon type='display' size='extrasmall' __alt='Details'}
-            </a>
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
-            <a href="{modurl modname='MUTicket' type='admin' func='view' ot='ticket' id=$supporter.id}" title="{gt text='Delete'}">
-                {icon type='display' size='extrasmall' __alt='Ratings'}
-            </a>
-    {/checkpermissionblock}
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
-            <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='supporter' id=$supporter.id}" title="{gt text='Edit'}">
-                {icon type='edit' size='extrasmall' __alt='Edit'}
-            </a>
-            <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='supporter' astemplate=$supporter.id}" title="{gt text='Reuse for new item'}">
-                {icon type='saveas' size='extrasmall' __alt='Reuse'}
-            </a>
-    {/checkpermissionblock}
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
-            <a href="{modurl modname='MUTicket' type='admin' func='delete' ot='supporter' id=$supporter.id}" title="{gt text='Delete'}">
-                {icon type='delete' size='extrasmall' __alt='Delete'}
-            </a>
-    {/checkpermissionblock}
+        <td headers="hitemactions" class="z-right z-nowrap z-w02">
+            {if count($supporter._actions) gt 0}
+            {strip}
+                {foreach item='option' from=$supporter._actions}
+                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
+                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
+                    </a>
+                {/foreach}
+            {/strip}
+            {/if}
         </td>
     </tr>
     {foreachelse}

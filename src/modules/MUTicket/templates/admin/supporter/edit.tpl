@@ -1,4 +1,4 @@
-{zdebug}{* purpose of this template: build the Form to edit an instance of supporter *}
+{* purpose of this template: build the Form to edit an instance of supporter *}
 {include file='admin/header.tpl'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
@@ -50,9 +50,9 @@
         </div>
     </fieldset>
 
-    {if $mode ne 'create'}
+    {* {if $mode ne 'create'}
         {include file='admin/include_standardfields_edit.tpl' obj=$supporter}
-    {/if}
+    {/if} *}
 
     {* include display hooks *}
     {if $mode eq 'create'}

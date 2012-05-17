@@ -34,7 +34,7 @@ function smarty_block_muticketform($params, $content, $view)
         }
         
         if(strpos($action,"func=display")!==false) {
-        	$action = 'index.php?module=muticket&type=user&func=edit&ot=ticket';
+        	$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
         }
 
         $view->postRender();

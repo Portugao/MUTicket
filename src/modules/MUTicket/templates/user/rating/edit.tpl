@@ -1,4 +1,4 @@
-{* purpose of this template: build the Form to edit an instance of rating *}
+{zdebug}{* purpose of this template: build the Form to edit an instance of rating *}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 
@@ -6,7 +6,7 @@
 
 <div class="z-frontendcontainer">
     <h2>{$templateTitle}</h2>
-{muticketratingform cssClass='z-form' ticket=$childTicket.id}
+    {muticketratingform cssClass='z-form' ticket=$ticket}
     {* add validation summary and a <div> element for styling the form *}
     {muticketFormFrame}
     {formsetinitialfocus inputId='ratingvalue'}
@@ -15,7 +15,7 @@
             <div>{formlabel for='ratingvalue' __text='Vote this support answer'}</div>
             {foreach from=$rating item=rating}
             <div class="muticket_rating_value">
-            {formradiobutton groupName='ratingvalue' value=$rating.value id='ratingvalue' mandatory=true __title='Enter the rating of this support answer' maxLength=2 cssClass='required validate-digits'}{$rating.value}</div>
+            {formradiobutton groupName='ratingvalue' value=$rating.value id='ratingvalue' mandatory=true __title='Enter the rating of this support answer' maxLength=2 cssClass='validate-digits'}{$rating.value}</div>
             {/foreach}
         </div>
     </fieldset>
@@ -50,7 +50,7 @@
         {formbutton id='btnDelete' commandName='delete' __text='Delete rating' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
       {/if}
     {elseif $mode eq 'create'}
-        {formbutton id='btnCreate' commandName='create' __text='Create rating' class='z-bt-ok'}
+        {formbutton id='btnCreate' commandName='create' __text='Vote' class='z-bt-ok'}
     {else}
         {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
     {/if}

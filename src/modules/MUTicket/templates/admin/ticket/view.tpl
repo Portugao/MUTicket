@@ -1,20 +1,12 @@
 {* purpose of this template: tickets view view in admin area *}
-{include file='admin/header.tpl'}
 <div class="muticket-ticket muticket-view">
+{include file='admin/header.tpl'}
 {gt text='Ticket list' assign='templateTitle'}
 {pagesetvar name='title' value=$templateTitle}
 <div class="z-admin-content-pagetitle">
     {icon type='view' size='small' alt=$templateTitle}
     <h3>{$templateTitle}</h3>
 </div>
-
-
-    {checkpermissionblock component='MUTicket::' instance='.*' level="ACCESS_ADD"}
-        {gt text='Create ticket' assign='createTitle'}
-        <a href="{modurl modname='MUTicket' type='admin' func='edit' ot='ticket'}" title="{$createTitle}" class="z-icon-es-add">
-            {$createTitle}
-        </a>
-    {/checkpermissionblock}
 
     {assign var='all' value=0}
     {if isset($showAllEntries) && $showAllEntries eq 1}
@@ -34,13 +26,9 @@
     <colgroup>
         <col id="ctitle" />
         <col id="ctext" />
-        <col id="cparent_id" />
-        <col id="cimages" />
-        <col id="cfiles" />
         <col id="cstate" />
-        <col id="ct_rating" />
         <col id="crated" />
-        <col id="cparent" />
+       {* <col id="cparent" /> *}
         <col id="citemactions" />
     </colgroup>
     <thead>
@@ -51,27 +39,15 @@
         <th id="htext" scope="col" class="z-left">
             {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hparent_id" scope="col" class="z-right">
-            {sortlink __linktext='Parent_id' sort='parent_id' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
-        <th id="himages" scope="col" class="z-left">
-            {sortlink __linktext='Images' sort='images' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
-        <th id="hfiles" scope="col" class="z-left">
-            {sortlink __linktext='Files' sort='files' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
         <th id="hstate" scope="col" class="z-center">
             {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
-        <th id="ht_rating" scope="col" class="z-center">
-            {sortlink __linktext='T_rating' sort='t_rating' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
         <th id="hrated" scope="col" class="z-center">
             {sortlink __linktext='Rated' sort='rated' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="hparent" scope="col" class="z-left">
+       {* <th id="hparent" scope="col" class="z-left">
             {sortlink __linktext='Parent' sort='parent' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
+        </th> *}
         <th id="hitemactions" scope="col" class="z-right z-order-unsorted">{gt text='Actions'}</th>
     </tr>
     </thead>
@@ -83,45 +59,15 @@
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
         <td headers="htext" class="z-left">
-            {$ticket.text}
-        </td>
-        <td headers="hparent_id" class="z-right">
-            {$ticket.parent_id}
-        </td>
-        <td headers="himages" class="z-left">
-            {if $ticket.images ne ''}
-              <a href="{$ticket.imagesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.imagesMeta.isImage} rel="imageviewer[ticket]"{/if}>
-              {if $ticket.imagesMeta.isImage}
-                  <img src="{$ticket.images|muticketImageThumb:$ticket.imagesFullPath:32:20}" width="32" height="20" alt="{$ticket.title|replace:"\"":""}" />
-              {else}
-                  {gt text='Download'} ({$ticket.imagesMeta.size|muticketGetFileSize:$ticket.imagesFullPath:false:false})
-              {/if}
-              </a>
-            {else}&nbsp;{/if}
-
-        </td>
-        <td headers="hfiles" class="z-left">
-            {if $ticket.files ne ''}
-              <a href="{$ticket.filesFullPathURL}" title="{$ticket.title|replace:"\"":""}"{if $ticket.filesMeta.isImage} rel="imageviewer[ticket]"{/if}>
-              {if $ticket.filesMeta.isImage}
-                  <img src="{$ticket.files|muticketImageThumb:$ticket.filesFullPath:32:20}" width="32" height="20" alt="{$ticket.title|replace:"\"":""}" />
-              {else}
-                  {gt text='Download'} ({$ticket.filesMeta.size|muticketGetFileSize:$ticket.filesFullPath:false:false})
-              {/if}
-              </a>
-            {else}&nbsp;{/if}
-
+            {$ticket.text|truncate:200}
         </td>
         <td headers="hstate" class="z-center">
             {$ticket.state|yesno:true}
         </td>
-        <td headers="ht_rating" class="z-center">
-            {$ticket.t_rating|yesno:true}
-        </td>
         <td headers="hrated" class="z-center">
             {$ticket.rated|yesno:true}
         </td>
-        <td headers="hparent" class="z-left">
+       {* <td headers="hparent" class="z-left">
             {if isset($ticket.Parent) && $ticket.Parent ne null}
                 <a href="{modurl modname='MUTicket' type='admin' func='display' ot='ticket' id=$ticket.Parent.id}">
                     {$ticket.Parent.title|default:""}
@@ -139,12 +85,16 @@
             {else}
                 {gt text='Not set.'}
             {/if}
-        </td>
+        </td> *}
         <td headers="hitemactions" class="z-right z-nowrap z-w02">
             {if count($ticket._actions) gt 0}
+            {strip}
                 {foreach item='option' from=$ticket._actions}
-                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>{icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}</a>
+                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
+                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
+                    </a>
                 {/foreach}
+            {/strip}
             {/if}
         </td>
     </tr>

@@ -26,11 +26,9 @@ Changed Files
 *templates/user/include_standardfields_display.tpl
 
 
-Implemented Classes:
+Implemented Classes
 
-*lib/MUTicket/Api/Selection.php
 *lib/MUTicket/Api/User.php
-*lib/MUticket/Controller/Admin.php
 *lib/MUticket/Controller/User.php
 *lib/MUTicket/Entity/Supporter.php
 *lib/MUTicket/Entity/Ticket.php
@@ -43,7 +41,7 @@ Implemented Classes:
 *lib/MUTicket/Util/Controller.php
 *lib/MUTicket/Util/View.php
 
-Additional Files:
+Additional Files
 
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php

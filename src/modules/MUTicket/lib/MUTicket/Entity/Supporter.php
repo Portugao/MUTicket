@@ -42,7 +42,7 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
         if ($currentType == 'admin') {
             if (in_array($currentFunc, array('main', 'view'))) {
                     $this->_actions[] = array(
-                        'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'supporter', 'id' => $this['id'])),
+                        'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket', 'rated' => 1, 'supporter' => $this['id'])),
                         'icon' => 'preview',
                         'linkTitle' => __('Call rated tickets', $dom),
                         'linkText' => __('Ratings', $dom)
@@ -145,12 +145,24 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      * @return void.
      */
     public function postLoadCallback()
-    {
-    	$this->getSupportcats();
-    	$supportcats = $this->supportcats;
-    	$supportcats = urldecode($supportcats);
-    	$cats = unserialize($supportcats);
-    	$this->setSupportcats($cats);
+    {	
+    	$request = new Zikula_Request_Http();
+    	$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
+    	$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
+    	$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+
+    	if ($type == 'admin') {
+    		if ($ot == 'supporter') {
+    			if ($func == 'view' || $func == 'edit') {
+ 	
+    	             $this->getSupportcats();
+    	             $supportcats = $this->supportcats;
+    	             $supportcats = urldecode($supportcats);
+    	             $cats = unserialize($supportcats);
+    	             $this->setSupportcats($cats);
+    	        }
+    		}
+    	}	    
         $this->performPostLoadCallback();
     }
 
@@ -163,10 +175,17 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function prePersistCallback()
     {
+    	$request = new Zikula_Request_Http();
+    	$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
+    	$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
+    	$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+    	
+    	if ($type == 'admin' && $func == 'edit' && $ot == 'supporter') {
     	$this->getSupportcats();
     	$supportercats = $this->supportcats;
     	$cats = serialize($supportercats);
     	$this->setSupportcats($cats);
+    	}
         $this->performPrePersistCallback();
     }
 
@@ -215,10 +234,17 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
      */
     public function preUpdateCallback()
     {
+        $request = new Zikula_Request_Http();
+    	$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
+    	$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
+    	$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+    	
+    	if ($type == 'admin' && $func == 'edit' && $ot == 'supporter') {
     	$this->getSupportcats();
     	$supportercats = $this->supportcats;
     	$cats = serialize($supportercats);
     	$this->setSupportcats($cats);
+    	}
         $this->performPreUpdateCallback();
     }
 

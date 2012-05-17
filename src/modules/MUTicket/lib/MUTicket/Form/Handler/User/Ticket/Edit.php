@@ -30,7 +30,6 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 		
         
         // set mode to create
-
 		$this->mode = 'create';
 		
 		// we assign to template

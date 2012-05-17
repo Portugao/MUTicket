@@ -56,7 +56,7 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
     $where3 = "WHERE $categorycategory_column[parent_id] = '" . DataUtil::formatForStore($categorypath[category_id]) . "'";
     $categories = DBUtil::selectObjectArray('categories_category',$where3);
     foreach ($categories as $category) {
-    $supportcats[] = array('value' => $category['name'], 'text' => $category['name']);
+    $supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
     }
     }
     

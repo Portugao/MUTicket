@@ -17,5 +17,20 @@
  */
 class MUTicket_Form_Handler_Admin_Supporter_Edit extends MUTicket_Form_Handler_Admin_Supporter_Base_Edit
 {
-    // feel free to extend the base handler class here
+    /**
+     * Get the default redirect url. Required if no returnTo parameter has been supplied.
+     * This method is called in handleCommand so we know which command has been performed.
+     */
+    protected function getDefaultReturnUrl($args, $obj)
+    {
+        // redirect to the list of supporters
+        $viewArgs = array('ot' => $this->objectType);
+        $url = ModUtil::url($this->name, 'admin', 'view', $viewArgs);
+
+        if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
+            // redirect to the detail page of treated supporter
+            $url = ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter'));
+        }
+        return $url;
+    }
 }

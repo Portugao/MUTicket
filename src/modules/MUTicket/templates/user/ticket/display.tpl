@@ -172,9 +172,15 @@
 </div>
 </div> 
 {/foreach}
+{if $supporteractive eq 1}
 {if $ticket.state eq 1}
 <div id="ticket_inline_use">
 {modfunc modname='MUTicket' type='user' func='edit' ot='ticket'}
+</div>
+{/if}
+{else}
+<div id="ticket_user_nosupport">
+{gt text='Sorry! At the moment our support is not available!'}
 </div>
 {/if}
 </div>

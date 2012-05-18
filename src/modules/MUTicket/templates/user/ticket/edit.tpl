@@ -135,7 +135,6 @@
     {else}
         {notifydisplayhooks eventname='muticket.ui_hooks.tickets.form_edit' id=$ticket.id assign='hooks'}
     {/if}
-    {if is_array($hooks) && isset($hooks[0])}
         <fieldset>
             <legend>{gt text='Hooks'}</legend>
             {foreach key='hookName' item='hook' from=$hooks}
@@ -144,7 +143,6 @@
             </div>
             {/foreach}
         </fieldset>
-    {/if}
 
     {* We don't need this *} 
     {* include return control *}

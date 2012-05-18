@@ -66,7 +66,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      $repository = MUTicket_Util_View::getSupporterRepository();
     
      $where = 'tbl.state = 1';
-     $supporters = $repository->selectWhere();
+     $supporters = $repository->selectWhere($where);
     
      $supporternames = array();
     
@@ -163,9 +163,13 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     public static function checkIfSupporters() {
     	
     	$repository = MUTicket_Util_View::getSupporterRepository();
-    	$supporters = $repository->selectWhere();
+    	$where = 'tbl.state = 1';
+    	$supporters = $repository->selectWhere($where);
     	if ($supporters) {
-    		return true;
+    		return 1;
+    	}
+    	else {
+    		return 0;
     	}
     }
 }

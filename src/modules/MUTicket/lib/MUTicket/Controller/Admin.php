@@ -17,5 +17,21 @@
  */
 class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 {
-    // feel free
+    /**
+     * This method is the default function, and is called whenever the application's
+     * Admin area is called without defining arguments.
+     *
+     * @return mixed Output.
+     */
+    public function main($args)
+    {
+// DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
+// DEBUG: permission check aspect ends
+
+
+        // return viewtemplate
+        return $this->redirect(ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')));
+
+    }
 }

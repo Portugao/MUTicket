@@ -30,7 +30,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_OVERVIEW));
 // DEBUG: permission check aspect ends
 
-        // return main template
+        // return view template
         return $this->redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
     }	
 	

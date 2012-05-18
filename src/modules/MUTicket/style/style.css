@@ -225,6 +225,17 @@ button.muticketInlineButton {
     width: 100%;
 }
 
+#ticket_user_nosupport {
+    float: left;
+    margin: 20px 0 0 0;
+    width: 96%;
+    padding: 2%;
+    border: 1px solid #333;
+    font-size: 1.2em;
+    color: #f00;
+    background: #eee;
+}
+
 /*--------------FORM------------------*/
 
 .muticket_form_hidden {

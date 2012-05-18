@@ -92,10 +92,12 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         $currentUrlArgs = array('ot' => $objectType);
 
         // We rule the view depends on several parameters
-        // check for entity
+
     	$func = $this->request->getGet()->filter('func','', FILTER_SANITIZE_STRING);    	
     	$ot = $this->request->getGet()->filter('ot','', FILTER_SANITIZE_STRING);
     	$rated = $this->request->getGet()->filter('rated', 0, FILTER_SANITIZE_NUMBER_INT);
+    	    	
+    	// check for entity where parent_id is NULL
     	
     	if ($ot == 'ticket' && $func == 'view') {
     		if (!empty($where)) {
@@ -215,7 +217,14 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
     	// May the user rate
 		$kind = MUTicket_Util_View::userForRating();
 		
-		$this->view->assign('kind', $kind);
+		    	
+    	// We check for supportes that are active
+    	// If there is no supporter active, we show no link for new tickets
+    	// and no edit form for answers
+    	$supporteractive = MUTicket_Util_View::checkIfSupporters();
+		
+		$this->view->assign('kind', $kind)
+		           ->assign('supporteractive', $supporteractive);
 		
 		return parent::display($args);
     }

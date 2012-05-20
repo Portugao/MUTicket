@@ -199,6 +199,13 @@ button.muticketInlineButton {
 
 }
 
+.ticket_user_body_avatar img{
+
+    border: 3px solid #fff;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
 .ticket_user_body_standard {
     width: 65%;
     font-size: 0.8em;

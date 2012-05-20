@@ -137,12 +137,16 @@
 </div>
 <div class="ticket_user_body_rating">
 {if $kind eq 1}
-{if $childTicket.rated eq 0}
+
 {if $pncore.user.uid ne $childTicket.createdUserId}
-{modfunc modname='MUTicket' type='user' func='edit' ot='rating' ticket=$childrenid}
+{if $childTicket.rated eq 0}
+{modfunc modname='MUTicket' type='user' func='edit' ot='rating' ticket=$childTicket.id}
 {/if}
-{else}
-{modfunc modname='MUTicket' type='user' func='display' ot='rating'}
+{if $childTicket.rated eq 1}
+{if isset($childTicket.rating) && $childTicket.rating ne null}
+    {include file='user/rating/include_displayItemListMany.tpl' items=$childTicket.rating}
+{/if}
+{/if}
 {/if}
 {/if}
 </div>

@@ -132,6 +132,21 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     }
     
     /**
+	*
+	 This method is for getting a repository for ratings
+	*
+	*/
+    
+    public static function getRatingRepository() {
+    
+     $serviceManager = ServiceUtil::getManager();
+     $entityManager = $serviceManager->getService('doctrine.entitymanager');
+     $repository = $entityManager->getRepository('MUTicket_Entity_Rating');
+    
+     return $repository;
+    }
+    
+    /**
      * 
      * this method is for checking if an user is not
      * a supporter and may rate for tickets
@@ -172,4 +187,5 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
     		return 0;
     	}
     }
+
 }

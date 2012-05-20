@@ -21,6 +21,7 @@ Changed Files
 *templates/admin/main.tpl
 
 *templates/user/rating/edit.tpl
+*templates/user/rating/include_displayItemListMany.tpl
 *templates/user/ticket/edit.tpl
 *templates/user/footer.tpl
 *templates/user/include_standardfields_display.tpl
@@ -45,7 +46,7 @@ Additional Files
 
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php
-$templates/plugins/modifier.muticketCatName.php
+*$templates/plugins/modifier.muticketCatName.php
 
 
 

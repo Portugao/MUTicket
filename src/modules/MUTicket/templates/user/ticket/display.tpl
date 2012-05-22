@@ -8,7 +8,7 @@
 {*Editing of template, 3 div container*}
     
 <div class="ticket_user_body">
-<div class="ticket_user_header"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2><div class="ticket_user_header_menue">
+<div class="ticket_user_header"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'} {include file='user/include_categories_display.tpl' obj=$ticket}</h2><div class="ticket_user_header_menue">
 </div></div>
 <div class="ticket_user_body_left">
 <div class="ticket_user_body_avatar">

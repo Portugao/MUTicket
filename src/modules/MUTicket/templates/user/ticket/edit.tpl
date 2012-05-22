@@ -27,12 +27,9 @@
         <legend>{gt text='Content'}</legend>
         {if $func ne 'display'}
         <div class="z-formrow">
-            {formlabel for='title' __text='Title'}
-            {if $mode eq 'create'}
+            {formlabel for='title' __text='Title' mandatorysym='1'} 
             {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Input the title of the ticket' textMode='singleline' maxLength=255 cssClass='required'}
-            {else}
-            {formtextinput group='ticket' id='title' mandatory=false readOnly=false __title='Input the title of the ticket' textMode='singleline' maxLength=255 cssClass=''}
-            {/if}
+            {muticketValidationError id='title' class='required'}
         </div>
         {/if}
         <div class="z-formrow">

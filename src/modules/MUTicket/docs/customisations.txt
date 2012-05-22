@@ -39,6 +39,7 @@ Implemented Classes
 *lib/MUTicket/Form/Handler/Admin/Supporter/Edit.php
 *lib/MUTicket/Form/Handler/User/Rating/Edit.php
 *lib/MUTicket/Form/Handler/User/Ticket/Edit.php
+*lib/MUTicket/Util/Base/Settings.php
 *lib/MUTicket/Util/Controller.php
 *lib/MUTicket/Util/View.php
 

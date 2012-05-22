@@ -168,34 +168,12 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
      */
     public function postPersistCallback()
     {
-     $this->getTitle();
-     $title = $this->title;
-     $this->getText();
-     $text = $this->text;
-     $this->categories;
-     $categories = $this->categories;
-    
-     $toaddress = MUTicket_Util_View::getSupporterMails();
-    
-     $messagecontent = array();
-     $messagecontent['toname'] = 'Michael Ueberschaer';
-     $messagecontent['toaddress'] = $toaddress;
-     $messagecontent['subject'] = __('New Ticket');
-     $messagecontent['html'] = true;
-     $messagecontent['body'] = __('Another ticked was created by a customer!') . '<br />'
-     . __('Title:'). '<br />'. $title .'<br />'. __('Text:'). '<br />' . $text;
-    
-     // if a supporter exists send the mail
-     if ($toaddress != '') {
-    
-     if(!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
-     LogUtil::registerError(Zikula_Form_AbstractHandler::__('Unable to send message'));
-     }
-     else {
-     LogUtil::registerStatus(Zikula_Form_AbstractHandler::__('Your ticket was saved and sent to our support'));
-     }
-     }
-     $this->performPostPersistCallback();    	
+        $args['id'] = $this->getId();
+        $args['text'] = $this->getText();
+        $args['parentid'] = $this->parent_id;
+
+        MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);
+        $this->performPostPersistCallback(); 	
 
     }
 

@@ -2,7 +2,7 @@
 
 {if isset($items) && $items ne null}
 <div class="relatedItemList Rating">
-{gt text='The customer voted this support answer with:'}
+{gt text='You have voted this support answer with:'}
 {foreach name='relLoop' item='item' from=$items}
 
         <h2>{$item.ratingvalue} of 5</h2>

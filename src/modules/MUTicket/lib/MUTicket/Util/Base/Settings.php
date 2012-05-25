@@ -65,7 +65,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         }
 
         $host = System::serverGetVar('HTTP_HOST') . '/';
-        $url = 'http://' . $host . ModUtil::url('Eternizer', 'user', 'view');
+        $url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'entry', 'id' => $id));
         $editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
 
         $from = ModUtil::getVar('ZConfig', 'sitename');

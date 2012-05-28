@@ -34,7 +34,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
      $supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
      
      if ($supportergroup == '') {
-     	$url = ModUtil::url('MUticket', 'admin', 'config');
+     	$url = ModUtil::url('MUTicket', 'admin', 'config');
      	LogUtil::registerError('You have to save a supporter group!',null , $url);
      }
     
@@ -95,10 +95,13 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 *
 * @ return array
 */
-    public static function getExistingSupporterUids() {
+    public static function getExistingSupporterUids($categoryid = '') {
     
      $repository = MUTicket_Util_View::getSupporterRepository();
     
+     if ($categoryids != '') {
+     	$where = '$categoryid IN tbl.supportcats';
+     }
      $supporters = $repository->selectWhere();
     
      $supporternames = array();

@@ -16,124 +16,172 @@
  */
 class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 {
-    public function handleModvarsPreSave()
-    {
 
-        $modvar = Eternizer_Util_Base_Settings::getModvars();
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $args
+	 */
+	public function handleModvarsPostPersist($args)
+	{
+		$serviceManager = ServiceUtil::getManager();
+		$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
 
-        if ($modvar['ipsave'] == true) {
-            $ip = System::serverGetVar('REMOTE_ADDR');
-        }
+		$lang = ZLanguage::getLanguageCode();
 
-        $this->setIp($ip);
+		$id = $args['id'];
+		$text = $args['text'];
+		$parentid = $args['parentid'];
+		$categories = $args['categories'];
 
-        if ($modvar['moderate'] == 'guests') {
+		$ticketcategory .= $handler->__('Categories: ');
 
-            if (UserUtil::isLoggedIn() === false) {
-                $this->setObj_status('M');
-            }
-            else {
-                $this->setObj_status('A');
-            }
-        }
-        elseif ($modvar['moderate'] == 'all') {
+		if (count($categories) > 0) {
+			foreach ($categories as $category) {
+				$name = $category->getCategory()->getName();
+				$display_name = $category->getCategory()->getDisplayName();
+				$id = $category->getCategory()->getId();
 
-            $this->setObj_status('M');
-        }
+				if (isset($display_name[$lang]) && !empty($display_name[$lang])) {
+					$ticketcategory .= $display_name[$lang];
+									
+				} else if (isset($name) && !empty($name)) {
+					$ticketcategory .= $name;
+				}
+				$ticketcategory .= ",";
+					
+				$ticketcategory2[] = $id;
+			}
+		}
+		else {
+			$ticketcategory = '';
+			$ticketcategory2 = '';
+		}
 
-        return true;
-    }
+		// Get actual userid
+		$userid = $this->getCreatedUserId();
 
-    public function handleModvarsPostPersist($args)
-    {
-    	$serviceManager = ServiceUtil::getManager();
-    	$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
+		// Get supporter ids
+		$supporteruids = MUTicket_Util_View::getExistingSupporterUids($ticketcategory2);
 
-        //$modvar = Eternizer_Util_Base_Settings::getModvars();
+		// Check if is array
+		if (is_array($supporteruids)) {
+			// Check if user is a supporter
+			if (in_array($userid, $supporteruids)) {
+				$kind = 'Supporter';
+			}
+			else {
+				$kind = 'Customer';
+			}
+		}
+		else {
+			if ($userid == $supporteruids) {
+				$kind ='Supporter';
+			}
+			else {
+				$kind ='Customer';
+			}
+		}
 
-        $userid = $this->getCreatedUserId();
+		if ($parentid == null) {
+			$entry = $handler->__('A new ticket on ');
+		}
+		else {
+			if ($kind == 'Supporter') {
+				$entry = $handler->__('An answer to your ticket on ');
+			}
+			else {
+				$entry = $handler->__('An answer to a ticket on ');
+			}
+		}
 
-        $id = $args['id'];
-        $text = $args['text'];
-        $parentid = $args['parentid'];
-        
-        if ($parentid == NULL) {
-        	$entry = $handler->__('A new ticket ');
-        }
-        else {
-        	$entry = $handler->__('An answer to a ticket ');
-        }
+		$host = System::serverGetVar('HTTP_HOST') . '/';
+		$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
+		$editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
 
-        $host = System::serverGetVar('HTTP_HOST') . '/';
-        $url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'entry', 'id' => $id));
-        $editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
+		$from = ModUtil::getVar('ZConfig', 'sitename') . ' ';
+		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
-        $from = ModUtil::getVar('ZConfig', 'sitename');
-        $fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
-        
-        
-        $toaddress = MUTicket_Util_View::getSupporterMails();
+		if ($kind == 'Customer') {
+			$toaddress = MUTicket_Util_View::getSupporterMails();
+		}
+		else {
+			$toaddress = UserUtil::getVar('email', $userid);
+		}
 
-        $messagecontent = array();
-        $messagecontent['from'] = $from;
-        $messagecontent['fromaddress'] = $fromaddress;
-        $messagecontent['toname'] = 'Webmaster';
-        $messagecontent['toaddress'] = $toaddress;
-        $messagecontent['subject'] = $entry . $from;
-        $messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>' .
-                $handler->__('Text') . '<br />' . $text . '<br /><br />' . $handler->__('Visit our guestbook:') .
-                '<br />' . '<a href="' . $url . '">' . $url . '</a><br />' . $handler->__('Moderate this entry:') .
+		if ($kind == 'Supporter') {
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url);
+		}
+
+		if ($kind == 'Customer') {
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url);
+		}
+
+		// We send a mail if an email address is saved
+		if ($toaddress != '') {
+
+			if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
+				LogUtil::registerError($handler->__('Unable to send message'));
+			}
+		}
+
+		// Formating of status text
+		$message = $handler->__('Your ticket was saved and sent to our support!');
+
+		if ($modvar['moderate'] == 'guests') {
+
+			if ($userid < 2) {
+				$message = $handler->__('Your entry was saved and must be confirmed by our team');
+			}
+		}
+		elseif ($modvar['moderate'] == 'all') {
+
+			$message = $handler->__('Your entry was saved and must be confirmed by our team');
+		}
+
+		LogUtil::registerStatus($message);
+
+		return true;
+
+	}
+
+	/**
+	 *
+	 * this method will handle a moderation on the view template
+	 * Enter description here ...
+	 */
+	public function handleChange()
+	{
+		// TODO
+	}
+
+	/**
+	 * 
+	 * get the mail content for the message to send
+	 * returns array $messagecontent
+	 */
+	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url, $editurl = '') {
+
+		$serviceManager = ServiceUtil::getManager();
+		$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
+
+		$messagecontent = array();
+		$messagecontent['from'] = $from;
+		$messagecontent['fromaddress'] = $fromaddress;
+		$messagecontent['toname'] = 'Webmaster';
+		$messagecontent['toaddress'] = $toaddress;
+		$messagecontent['subject'] = $entry . $from . $ticketcategory;
+		$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
+		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
+		$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
+		if ($editurl != '') {
+			$messagecontent .= $handler->__('Moderate this entry:') .
                 '<br />' . '<a href="' . $editurl . '">' . $editurl . '</a>';
-        $messagecontent['altbody'] = '';
-        $messagecontent['html'] = true;
+		}
+		$messagecontent['altbody'] = '';
+		$messagecontent['html'] = true;
 
-        // We send a mail if an email address is saved
-        if ($toaddress != '') {
-
-            if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
-                LogUtil::registerError($handler->__('Unable to send message'));
-            }
-        }
-
-        // Formating of email text
-        $message = $handler->__('Your ticket was saved and sent to our support!');
-
-        if ($modvar['moderate'] == 'guests') {
-
-            if ($userid < 2) {
-                $message = $handler->__('Your entry was saved and must be confirmed by our team');
-            }
-        }
-        elseif ($modvar['moderate'] == 'all') {
-
-            $message = $handler->__('Your entry was saved and must be confirmed by our team');
-        }
-
-        LogUtil::registerStatus($message);
-
-        return true;
-
-    }
-
-    /**
-     *
-     * this method will handle a moderation on the view template
-     * Enter description here ...
-     */
-    public function handleChange()
-    {
-        // TODO
-    }
-
-    public function getModvars()
-    {
-
-        $modvar['ipsave'] = ModUtil::getVar('Eternizer', 'ipsave');
-        $modvar['moderate'] = ModUtil::getVar('Eternizer', 'moderate');
-        $modvar['mail'] = ModUtil::getVar('Eternizer', 'mail');
-        $modvar['editentries'] = ModUtil::getVar('Eternizer', 'editentries');
-        $modvar['period'] = ModUtil::getVar('Eternizer', 'period');
-
-        return $modvar;
-    }
+		return $messagecontent;
+	}
 }

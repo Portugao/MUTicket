@@ -23,5 +23,49 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
      * @var string The default sorting field/expression.
      */
     protected $defaultSortingField = 'createdDate';	
+    
+    /**
+     * Select object from the database.
+     *
+     * @param mixed   $id       The id (or array of ids) to use to retrieve the object (optional) (default=null).
+     * @param boolean $useJoins Whether to include joining related objects (optional) (default=true).
+     *
+     * @return array|MUTicket_Entity_Ticket retrieved data array or MUTicket_Entity_Ticket instance
+     */
+    public function selectById($id = 0, $useJoins = true)
+    {
+        // check id parameter
+        if ($id == 0) {
+            return LogUtil::registerArgsError();
+        }
+
+        $where = '';
+        if (is_array($id)) {
+            foreach ($id as $fieldName => $fieldValue) {
+                if (!empty($where)) {
+                    $where .= ' AND ';
+                }
+                $where .= 'tbl.' . DataUtil::formatForStore($fieldName) . ' = \'' . DataUtil::formatForStore($fieldValue) . '\'';
+            }
+        } else {
+            $where .= 'tbl.id = ' . DataUtil::formatForStore($id);
+        }
+        
+        // Only display of parent tickets
+        /* TODO We need another solution
+        
+        $where .= ' AND ';         
+        $where .= 'tbl.parent_id IS NULL'; */
+
+        $query = $this->_intBaseQuery($where, '', $useJoins);
+
+        $result = $query->getOneOrNullResult();
+        if ($result) {
+        	return $result;
+        }
+        else {
+        	return LogUtil::registerStatus(__('Sorry! Access denied!'), ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket')));
+        }
+    }
 
 }

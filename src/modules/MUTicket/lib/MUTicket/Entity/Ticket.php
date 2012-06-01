@@ -168,9 +168,11 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 	 */
 	public function postPersistCallback()
 	{
+		$request = new Zikula_Request_Http();
+		$parentid = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
 		// Get relevant datas for mailing
 		$args['id'] = $this->id;
-		$args['parentid'] = $this->parent_id;
+		$args['parentid'] = $parentid;
 		$args['title'] = $this->title;
 		$args['text'] = $this->text;
 		$args['categories'] = $this->categories;

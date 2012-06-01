@@ -77,8 +77,8 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
 
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
-     * @var bigint $parent_id.
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer $parent_id.
      */
     protected $parent_id = 0;
     /**
@@ -451,7 +451,7 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
     /**
      * Get parent_id.
      *
-     * @return bigint
+     * @return integer
      */
     public function getParent_id()
     {
@@ -461,7 +461,7 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
     /**
      * Set parent_id.
      *
-     * @param bigint $parent_id.
+     * @param integer $parent_id.
      *
      * @return void
      */

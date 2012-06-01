@@ -169,11 +169,12 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 	public function postPersistCallback()
 	{
 		// Get relevant datas for mailing
-		$args['id'] = $this->getId();
-		$args['text'] = $this->getText();
-		$args['parentid'] = $this->getParent_id();
-		
-		$args['categories'] = $this->getCategories();
+		$args['id'] = $this->id;
+		$args['parentid'] = $this->parent_id;
+		$args['title'] = $this->title;
+		$args['text'] = $this->text;
+		LogUtil::registerStatus('Parent: ' . $args['parentid']);	
+		$args['categories'] = $this->categories;
 
 		MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);
 		$this->performPostPersistCallback();

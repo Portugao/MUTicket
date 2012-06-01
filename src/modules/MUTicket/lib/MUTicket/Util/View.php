@@ -16,179 +16,196 @@
  */
 class MUTicket_Util_View extends MUTicket_Util_Base_View
 {
-/**
-*
-* This method is for getting an array of userids of users that are
-* in the supporter group
-*
-* @return array
-*/
-    public static function getSupporterIds() {
-    
-     ModUtil::dbInfoLoad('Groups');
-     $tables = DBUtil::getTables();
-     $groups_column = $tables['groups_column'];
-    
-     // get supporter group
-    
-     $supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
-     
-     if ($supportergroup == '') {
-     	$url = ModUtil::url('MUTicket', 'admin', 'config');
-     	LogUtil::registerError('You have to save a supporter group!',null , $url);
-     }
-    
-     $where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
-    
-     // get supporter group id
-    
-     $supportergroupid = UserUtil::getGroupIdList($where);
-    
-     // get user id's of users, which are in the supporter group
-    
-     $supporterusersids = UserUtil::getUsersForGroup($supportergroupid);
-    
-     $userids = implode(',' , $supporterusersids);
-    
-     return $userids;
-    
-    }
-    
-    /**
-*
-* This method is for getting an array of supporter email addresses for
-* supporters that are active
-*
-* @ return array
-*/
-    public static function getSupporterMails() {
-    
-     $repository = MUTicket_Util_View::getSupporterRepository();
-    
-     $where = 'tbl.state = 1';
-     $supporters = $repository->selectWhere($where);
-    
-     $supporternames = array();
-    
-     foreach ($supporters as $supporter) {
-     $supporternames[] = $supporter['username'];
-     }
-    
-     $supporteruids = array();
-    
-     foreach ($supporternames as $supportername) {
-     $supporteruids[] = UserUtil::getIdFromName($supportername);
-     }
-     $supportermailadresses = array();
-    
-     foreach ($supporteruids as $supporteruid) {
-     $supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
-        }
-        
-        return $supportermailadresses;
-    }
-    
-    /**
-*
-* This method is for getting an array of the original uids
-* for existing supporters
-*
-* @ return array
-*/
-    public static function getExistingSupporterUids($categoryid = '') {
-    
-     $repository = MUTicket_Util_View::getSupporterRepository();
-    
-     if ($categoryids != '') {
-     	$where = '$categoryid IN tbl.supportcats';
-     }
-     $supporters = $repository->selectWhere();
-    
-     $supporternames = array();
-    
-     foreach ($supporters as $supporter) {
-     $supporternames[] = $supporter['username'];
-     }
-    
-     $supporteruids = array();
-    
-     foreach ($supporternames as $supportername) {
-     $supporteruids[] = UserUtil::getIdFromName($supportername);
-     }
-        
-        return $supporteruids;
-    }
-    
-    /**
-	*
-	 This method is for getting a repository for supporters
-	*
-	*/
-    
-    public static function getSupporterRepository() {
-    
-     $serviceManager = ServiceUtil::getManager();
-     $entityManager = $serviceManager->getService('doctrine.entitymanager');
-     $repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
-    
-     return $repository;
-    }
-    
-    /**
-	*
-	 This method is for getting a repository for ratings
-	*
-	*/
-    
-    public static function getRatingRepository() {
-    
-     $serviceManager = ServiceUtil::getManager();
-     $entityManager = $serviceManager->getService('doctrine.entitymanager');
-     $repository = $entityManager->getRepository('MUTicket_Entity_Rating');
-    
-     return $repository;
-    }
-    
-    /**
-     * 
-     * this method is for checking if an user is not
-     * a supporter and may rate for tickets
-     * 
-     * return int.
-     */
-    public static function userForRating() {
-    	
-    // get the supporterids
-    $supporterids = MUTicket_Util_View::getExistingSupporterUids();
-        
-    // get actual userid
-    $userid = UserUtil::getVar('uid');
-    if (in_array($userid, $supporterids)) {
-       $kind = 0;
-    }
-    else {
-       $kind = 1;
-    }
-    return $kind;
-    }
-    
-    /**
-     *
-     * this method checks if there is a supporter saved
-     *
-     **/
-                        
-    public static function checkIfSupporters() {
-    	
-    	$repository = MUTicket_Util_View::getSupporterRepository();
-    	$where = 'tbl.state = 1';
-    	$supporters = $repository->selectWhere($where);
-    	if ($supporters) {
-    		return 1;
-    	}
-    	else {
-    		return 0;
-    	}
-    }
+	/**
+	 *
+	 * This method is for getting an array of userids of users that are
+	 * in the supporter group
+	 *
+	 * @return array
+	 */
+	public static function getSupporterIds() {
 
-}
+		ModUtil::dbInfoLoad('Groups');
+		$tables = DBUtil::getTables();
+		$groups_column = $tables['groups_column'];
+
+		// get supporter group
+
+		$supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
+			
+		if ($supportergroup == '') {
+			$url = ModUtil::url('MUTicket', 'admin', 'config');
+			LogUtil::registerError('You have to save a supporter group!',null , $url);
+		}
+
+		$where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
+
+		// get supporter group id
+
+		$supportergroupid = UserUtil::getGroupIdList($where);
+
+		// get user id's of users, which are in the supporter group
+
+		$supporterusersids = UserUtil::getUsersForGroup($supportergroupid);
+
+		$userids = implode(',' , $supporterusersids);
+
+		return $userids;
+
+	}
+
+	/**
+	 *
+	 * This method is for getting an array of supporter email addresses for
+	 * supporters that are active
+	 *
+	 * @ return array
+	 */
+	public static function getSupporterMails() {
+
+		$repository = MUTicket_Util_View::getSupporterRepository();
+
+		$where = 'tbl.state = 1';
+		$supporters = $repository->selectWhere($where);
+
+		$supporternames = array();
+
+		foreach ($supporters as $supporter) {
+			$supporternames[] = $supporter['username'];
+		}
+
+		$supporteruids = array();
+
+		foreach ($supporternames as $supportername) {
+			$supporteruids[] = UserUtil::getIdFromName($supportername);
+		}
+		$supportermailadresses = array();
+
+		foreach ($supporteruids as $supporteruid) {
+			$supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
+		}
+
+		return $supportermailadresses;
+	}
+
+	/**
+	 *
+	 * This method is for getting an array of the original uids
+	 * for existing supporters
+	 *
+	 * @ return array
+	 */
+	public static function getExistingSupporterUids() {
+
+		$repository = MUTicket_Util_View::getSupporterRepository();
+
+		$supporters = $repository->selectWhere();
+
+		$supporternames = array();
+
+		foreach ($supporters as $supporter) {
+			$supporternames[] = $supporter['username'];
+		}
+
+		$supporteruids = array();
+
+		foreach ($supporternames as $supportername) {
+			$supporteruids[] = UserUtil::getIdFromName($supportername);
+		}
+
+		return $supporteruids;
+	}
+
+	/**
+	 *
+	 *@return array $catsupporter
+	 */
+
+	public static function getExistingSupporterForCategories($categoryid) {
+
+		// Get uids of existing supporters
+		$supporteruids = MUTicket_Util_View::getExistingSupporterUids();
+
+		foreach ($supporteruids as $supporteruid) {
+				
+			if(in_array($supporteruid, $categoryid)) {
+				$catsupporter[] = $supporteruid;
+			}
+		}
+		
+		return $catsupporter;
+	}
+
+		/**
+		 *
+		 This method is for getting a repository for supporters
+		 *
+		 */
+
+		public static function getSupporterRepository() {
+
+			$serviceManager = ServiceUtil::getManager();
+			$entityManager = $serviceManager->getService('doctrine.entitymanager');
+			$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+
+			return $repository;
+		}
+
+		/**
+		 *
+		 This method is for getting a repository for ratings
+		 *
+		 */
+
+		public static function getRatingRepository() {
+
+			$serviceManager = ServiceUtil::getManager();
+			$entityManager = $serviceManager->getService('doctrine.entitymanager');
+			$repository = $entityManager->getRepository('MUTicket_Entity_Rating');
+
+			return $repository;
+		}
+
+		/**
+		 *
+		 * this method is for checking if an user is not
+		 * a supporter and may rate for tickets
+		 *
+		 * return int.
+		 */
+		public static function userForRating() {
+				
+			// get the supporterids
+			$supporterids = MUTicket_Util_View::getExistingSupporterUids();
+
+			// get actual userid
+			$userid = UserUtil::getVar('uid');
+			if (in_array($userid, $supporterids)) {
+				$kind = 0;
+			}
+			else {
+				$kind = 1;
+			}
+			return $kind;
+		}
+
+		/**
+		 *
+		 * this method checks if there is a supporter saved
+		 *
+		 **/
+
+		public static function checkIfSupporters() {
+				
+			$repository = MUTicket_Util_View::getSupporterRepository();
+			$where = 'tbl.state = 1';
+			$supporters = $repository->selectWhere($where);
+			if ($supporters) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+
+	}

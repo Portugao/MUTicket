@@ -18,7 +18,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 {
 
 	/**
-	 * 
+	 *
 	 * Enter description here ...
 	 * @param unknown_type $args
 	 */
@@ -30,7 +30,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$lang = ZLanguage::getLanguageCode();
 
 		$id = $args['id'];
-		$text = $args['text'];
+        $title = $args['title'];
+		if ($title == '') {
+			$title = $handler->__('No title');
+		}
+		$text = $args['text'];	
 		$parentid = $args['parentid'];
 		$categories = $args['categories'];
 
@@ -44,7 +48,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 				if (isset($display_name[$lang]) && !empty($display_name[$lang])) {
 					$ticketcategory .= $display_name[$lang];
-									
+						
 				} else if (isset($name) && !empty($name)) {
 					$ticketcategory .= $name;
 				}
@@ -62,7 +66,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$userid = $this->getCreatedUserId();
 
 		// Get supporter ids
-		$supporteruids = MUTicket_Util_View::getExistingSupporterUids($ticketcategory2);
+		$supporteruids = MUTicket_Util_View::getExistingSupporterUids();
 
 		// Check if is array
 		if (is_array($supporteruids)) {
@@ -83,7 +87,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			}
 		}
 
-		if ($parentid == null) {
+		if ($parentid === NULL) {
 			$entry = $handler->__('A new ticket on ');
 		}
 		else {
@@ -103,18 +107,12 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
 		if ($kind == 'Customer') {
-			$toaddress = MUTicket_Util_View::getSupporterMails();
+			$toaddress = MUTicket_Util_View::getSupporterMails();			
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
-		else {
-			$toaddress = UserUtil::getVar('email', $userid);
-		}
-
 		if ($kind == 'Supporter') {
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url);
-		}
-
-		if ($kind == 'Customer') {
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url);
+			$toaddress = UserUtil::getVar('email', $userid);			
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
 
 		// We send a mail if an email address is saved
@@ -126,17 +124,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		}
 
 		// Formating of status text
-		$message = $handler->__('Your ticket was saved and sent to our support!');
-
-		if ($modvar['moderate'] == 'guests') {
-
-			if ($userid < 2) {
-				$message = $handler->__('Your entry was saved and must be confirmed by our team');
-			}
+		if ($kind == 'Customer') {
+			$message = $handler->__('Your ticket was saved and an email sent to our support!');
 		}
-		elseif ($modvar['moderate'] == 'all') {
-
-			$message = $handler->__('Your entry was saved and must be confirmed by our team');
+		else {
+			$message = $handler->__('Your support answer was saved and an email sent to the customer!');	
 		}
 
 		LogUtil::registerStatus($message);
@@ -156,11 +148,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	}
 
 	/**
-	 * 
+	 *
 	 * get the mail content for the message to send
 	 * returns array $messagecontent
 	 */
-	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $text, $url, $editurl = '') {
+	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $editurl = '') {
 
 		$serviceManager = ServiceUtil::getManager();
 		$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
@@ -168,10 +160,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$messagecontent = array();
 		$messagecontent['from'] = $from;
 		$messagecontent['fromaddress'] = $fromaddress;
-		$messagecontent['toname'] = 'Webmaster';
+		/*$messagecontent['toname'] = 'Webmaster';*/
 		$messagecontent['toaddress'] = $toaddress;
 		$messagecontent['subject'] = $entry . $from . $ticketcategory;
 		$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+		$messagecontent['body'] .= $handler->__('Title') . '<br />' . $title . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
 		$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';

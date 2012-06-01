@@ -20,12 +20,19 @@
  */
 function smarty_modifier_muticketCatName($id)
 {
-    /**
-     * 
-     */
+
     $cat = CategoryUtil::getCategoryByID($id);
     
-    $name = $cat['name'];
+    $lang = ZLanguage::getLanguageCode();
+    
+    $displayname = $cat['display_name'];
+    
+    if ($displayname != '') {
+    $name = $displayname[$lang];
+    }
+    else {
+    	$name = $name['name'];
+    }
     
     return $name;
 }

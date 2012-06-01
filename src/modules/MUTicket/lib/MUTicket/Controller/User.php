@@ -229,4 +229,38 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		return parent::display($args);
     }
     
+    /**
+     * This method provides a generic handling of all edit requests.
+     *
+     * @param string  $ot           Treated object type.
+     * @param string  $tpl          Name of alternative template (for alternative display options, feeds and xml output)
+     * @param boolean $raw          Optional way to display a template instead of fetching it (needed for standalone output)
+     * @return mixed Output.
+     */
+    public function edit($args)
+    {
+// DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_EDIT));
+// DEBUG: permission check aspect ends
+
+        // parameter specifying which type of objects we are treating
+        $objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+        $utilArgs = array('controller' => 'user', 'action' => 'edit');
+        if (!in_array($objectType, MUTicket_Util_Controller::getObjectTypes('controllerAction', $utilArgs))) {
+            $objectType = MUTicket_Util_Controller::getDefaultObjectType('controllerAction', $utilArgs);
+        }
+        
+        $ticketId = (isset($args['ticket']) && is_numeric($args['ticket'])) ? $args['ticket'] : 0;
+        System::queryStringSetVar('ticket', $ticketId);
+
+        // create new Form reference
+        $view = FormUtil::newForm($this->name, $this);
+
+        // build form handler class name
+        $handlerClass = 'MUTicket_Form_Handler_User_' . ucfirst($objectType) . '_Edit';
+
+        // execute form using supplied template and page event handler
+        return $view->execute('user/' . $objectType . '/edit.tpl', new $handlerClass());
+    }    
+    
 }

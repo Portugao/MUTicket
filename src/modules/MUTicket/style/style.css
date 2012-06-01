@@ -263,6 +263,14 @@ button.muticketInlineButton {
     display: none;
 }
 
+.muticket_rating_form {
+    cursor: pointer;
+}
+
+.muticket_rating_form_class {
+    display: none;
+}
+
 
 
 

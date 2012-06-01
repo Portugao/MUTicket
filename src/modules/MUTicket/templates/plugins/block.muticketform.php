@@ -33,8 +33,12 @@ function smarty_block_muticketform($params, $content, $view)
             $classString = "class=\"$params[cssClass]\" ";
         }
         
+        $request = new Zikula_Request_Http();
+        
+        $parentid = $request->getGet()->filter('id', NULL, FILTER_SANITIZE_NUMBER_INT);
+
         if(strpos($action,"func=display")!==false) {
-        	$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
+        	$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket&amp;parent=' . $parentid;
         }
 
         $view->postRender();

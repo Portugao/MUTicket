@@ -46,13 +46,21 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     protected function getDefaultReturnUrl($args, $obj)
     {
+    	//  build request object
+    	$request = new Zikula_Request_Http();
+    	// get id of parent ticket
+    	$parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
+    	
         // redirect to the list of tickets
         $viewArgs = array('ot' => $this->objectType);
         $url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
 
         if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
             // redirect to the detail page of treated ticket
-            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
+            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parent ));
+        }
+        else {
+        	$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues ));
         }
         return $url;
     }

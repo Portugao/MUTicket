@@ -173,7 +173,6 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 		$args['parentid'] = $this->parent_id;
 		$args['title'] = $this->title;
 		$args['text'] = $this->text;
-		LogUtil::registerStatus('Parent: ' . $args['parentid']);	
 		$args['categories'] = $this->categories;
 
 		MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);

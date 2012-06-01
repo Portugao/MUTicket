@@ -62,7 +62,7 @@ class MUTicket_Form_Handler_User_Rating_Base_Edit extends MUTicket_Form_Handler_
 
 
         // save parent identifiers of unidirectional incoming relationships
-        $this->incomingIds['ticket'] = FormUtil::getPassedValue('ticket', '', 'GET');
+        $this->incomingIds['ticket'] = $this->request->query->filter('ticket', 0, FILTER_VALIDATE_INT);
 
         // save entity reference for later reuse
         $this->entityRef = $entity;

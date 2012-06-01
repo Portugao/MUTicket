@@ -110,6 +110,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			$toaddress = MUTicket_Util_View::getSupporterMails();			
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
+		// TODO get mail of parent ticket creater
 		if ($kind == 'Supporter') {
 			$toaddress = UserUtil::getVar('email', $userid);			
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);

@@ -17,5 +17,72 @@
  */
 class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Edit
 {
-    // feel free to extend the base handler class here
+    /**
+     * Initialize form handler.
+     *
+     * This method takes care of all necessary initialisation of our data and form states.
+     *
+     * @return boolean False in case of initialization errors, otherwise true.
+     */
+    public function initialize(Zikula_Form_View $view)
+    {
+    	$ticketId = $this->request->query->filter('ticket', 0, FILTER_VALIDATE_INT);
+    	
+        $this->inlineUsage = ((UserUtil::getTheme() == 'Printer') ? true : false);
+        $this->idPrefix = $this->request->getGet()->filter('idp', '', FILTER_SANITIZE_STRING);
+
+        // initialise redirect goal
+        $this->returnTo = $this->request->getGet()->filter('returnTo', null, FILTER_SANITIZE_STRING);
+        // store current uri for repeated creations
+        $this->repeatReturnUrl = System::getCurrentURI();
+
+        $this->permissionComponent = $this->name . ':' . $this->objectTypeCapital . ':';
+
+        $entityClass = $this->name . '_Entity_' . ucfirst($this->objectType);
+        $objectTemp = new $entityClass();
+        $this->idFields = $objectTemp->get_idFields();
+
+        // retrieve identifier of the object we wish to view
+        $this->idValues = MUTicket_Util_Controller::retrieveIdentifier($this->request, array(), $this->objectType, $this->idFields);
+        $hasIdentifier = MUTicket_Util_Controller::isValidIdentifier($this->idValues);
+
+        $entity = null;
+        $this->mode = ($hasIdentifier) ? 'edit' : 'create';
+
+        if ($this->mode == 'edit') {
+            if (!SecurityUtil::checkPermission($this->permissionComponent, '::', ACCESS_EDIT)) {
+                // set an error message and return false
+                return LogUtil::registerPermissionError();
+            }
+
+            $entity = $this->initEntityForEdit();
+
+            if ($this->hasPageLockSupport === true && ModUtil::available('PageLock')) {
+                // try to guarantee that only one person at a time can be editing this entity
+                ModUtil::apiFunc('PageLock', 'user', 'pageLock',
+                                         array('lockName' => $this->name . $this->objectTypeCapital . $this->createCompositeIdentifier(),
+                                               'returnUrl' => $this->getRedirectUrl(null, $entity)));
+            }
+        }
+        else {
+            if (!SecurityUtil::checkPermission($this->permissionComponent, '::', ACCESS_ADD)) {
+                return LogUtil::registerPermissionError();
+            }
+
+            $entity = $this->initEntityForCreation($entityClass);
+        }
+
+        $this->view->assign('mode', $this->mode)
+                   ->assign('inlineUsage', $this->inlineUsage);
+
+        if ($this->hasCategories === true) {
+            $this->initCategoriesForEdit($entity);
+        }
+
+        // save entity reference for later reuse
+        $this->entityRef = $entity;
+
+        // everything okay, no initialization errors occured
+        return true;
+    }
 }

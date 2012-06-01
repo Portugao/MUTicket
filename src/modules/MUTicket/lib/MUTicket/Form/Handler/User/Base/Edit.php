@@ -162,6 +162,8 @@ class MUTicket_Form_Handler_User_Base_Edit extends Zikula_Form_AbstractHandler
      */
     public function initialize(Zikula_Form_View $view)
     {
+    	//$ticketId = $this->request->query->filter('ticket', 0, FILTER_VALIDATE_INT);
+    	
         $this->inlineUsage = ((UserUtil::getTheme() == 'Printer') ? true : false);
         $this->idPrefix = $this->request->getGet()->filter('idp', '', FILTER_SANITIZE_STRING);
 

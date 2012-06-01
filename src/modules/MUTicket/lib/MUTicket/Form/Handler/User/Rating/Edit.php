@@ -22,13 +22,13 @@ class MUTicket_Form_Handler_User_Rating_Edit extends MUTicket_Form_Handler_User_
 	 * @see MUTicket_Form_Handler_User_Base_Edit::initializeAdditions()
 	 */
     protected function initializeAdditions()
-    { 
-    	$ticket = $this->request->getGet()->filter('ticket', '', FILTER_SANITIZE_STRING);	
+    { 	
+    	// We get the input for the form radionbutton
     	$ratingvalue = MUTicket_Util_Controller::getRatingValues();
     	
     	$rating = $this->view->get_template_vars('rating');
-     	//$rating['ratingvalueItems'] = $ratingvalue;
-     	$this->view->assign('rating', $ratingvalue);
-     	$this->view->assign('ticket', $ticket);    	
+    	$rating = $ratingvalue;
+     	$this->view->assign('rating', $rating);
+  	
     }
 }

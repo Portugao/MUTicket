@@ -14,7 +14,37 @@
 /**
  * Utility implementation class for model helper methods.
  */
-class MUTicket_Util_Model extends MUTicket_Util_Base_Model
+class MUTicket_Util_Model extends Zikula_AbstractBase
 {
-    // feel free to add your own convenience methods here
+	public function updateTicket($args) {
+
+		$entity = $args['entity'];
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+
+		if ($entity == null) {
+			System::redirect($redirecturl);
+		}
+		$entity->setRated(1);
+
+		$entityManager->flush();
+
+		return true;
+	}
+
+	/**
+	 *
+	 This method is for getting a repository for tickets
+	 *
+	 */
+
+	public static function getTicketRepository() {
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		$repository = $entityManager->getRepository('MUTicket_Entity_Ticket');
+
+		return $repository;
+	}
 }

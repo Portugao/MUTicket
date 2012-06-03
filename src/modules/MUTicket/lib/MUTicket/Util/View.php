@@ -134,8 +134,8 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 		}
 		
 		return $catsupporter;
-	}
-
+	}	
+	
 		/**
 		 *
 		 This method is for getting a repository for supporters

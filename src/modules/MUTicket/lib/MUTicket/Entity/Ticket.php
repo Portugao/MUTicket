@@ -171,7 +171,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 		$request = new Zikula_Request_Http();
 		$parentid = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
 		// Get relevant datas for mailing
-		$args['id'] = $this->id;
+		$args['id'] = $this->id; // TODO bug in MOST
 		$args['parentid'] = $parentid;
 		$args['title'] = $this->title;
 		$args['text'] = $this->text;

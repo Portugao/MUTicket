@@ -38,7 +38,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$parentid = $args['parentid'];
 		$categories = $args['categories'];
 
-		$ticketcategory .= $handler->__('Categories: ');
+		$ticketcategory .= $handler->__('Category: ');
 
 		if (count($categories) > 0) {
 			foreach ($categories as $category) {
@@ -112,7 +112,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		}
 		// TODO get mail of parent ticket creater
 		if ($kind == 'Supporter') {
-			$toaddress = UserUtil::getVar('email', $userid);			
+			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);		
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
 
@@ -177,5 +177,24 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$messagecontent['html'] = true;
 
 		return $messagecontent;
+	}
+	
+	/**
+	 * get the email address of the user that
+	 * created parent ticket
+	 * @parentid id of the parent ticket
+	 * @returns $email string
+	 */
+	
+	public function getMailAddressOfUser($parentid) {
+		
+		// get entity with id is parentid
+		$entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $parentid));
+		// get userid created the parent ticket
+		$userid = $entity['createdUserId'];
+		$email = UserUtil::getVar('email', $userid);
+		
+		return $email;
+		
 	}
 }

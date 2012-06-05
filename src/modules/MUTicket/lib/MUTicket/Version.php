@@ -16,5 +16,14 @@
  */
 class MUTicket_Version extends MUTicket_Base_Version
 {
-    // custom enhancements can go here
+	public function getMetaData()
+	{
+		$meta = parent::getMetaData();
+		 
+		// the module description
+        $meta['description']  = $this->__('MUTicket - Handling support tickets of your customers');
+        
+        return $meta;
+        
+	}
 }

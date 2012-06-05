@@ -62,15 +62,6 @@ class MUTicket_Entity_Rating extends MUTicket_Entity_Base_Rating
      */
     public function postPersistCallback()
     {
-    	$request = new Zikula_Request_Http();
-		$ticketid = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
-		
-		$repository = MUTicket_Util_Model::getTicketRepository();
-		
-		$args['entity'] = $repository->selectById($ticketid);
-	
-		MUTicket_Util_Model::updateTicket($args);
-
         $this->performPostPersistCallback();
     }
 

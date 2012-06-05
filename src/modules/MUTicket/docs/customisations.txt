@@ -30,6 +30,7 @@ Changed Files
 Implemented Classes
 
 *lib/MUTicket/Api/User.php
+*lib/MUticket/Controller/Ajax.php
 *lib/MUticket/Controller/User.php
 *lib/MUTicket/Entity/Supporter.php
 *lib/MUTicket/Entity/Ticket.php
@@ -43,6 +44,7 @@ Implemented Classes
 *lib/MUTicket/Util/Controller.php
 *lib/MUTicket/Util/Model.php
 *lib/MUTicket/Util/View.php
+*lib/MUTicket/Version.php
 
 Additional Files
 

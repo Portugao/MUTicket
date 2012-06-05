@@ -1,5 +1,5 @@
-{zdebug}{* purpose of this template: build the Form to edit an instance of rating *}
-{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
+{* purpose of this template: build the Form to edit an instance of rating *}
+{* {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'} *}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 
 <div class="muticket-rating muticket-edit">
@@ -12,10 +12,10 @@
     {formsetinitialfocus inputId='ratingvalue'}
     <fieldset>
         <div class="z-formrow">
-            <div>{formlabel for='ratingvalue' __text='Vote this support answer'}</div>
-            {foreach from=$rating item=rating}
+            {foreach from=$rating item=item}
             <div class="muticket_rating_value">
-            {formradiobutton groupName='ratingvalue' value=$rating.value id='ratingvalue' mandatory=true __title='Enter the rating of this support answer' maxLength=2 cssClass='validate-digits'}{$rating.value}</div>
+            {formradiobutton group='rating' id='ratingvalue' value=$item.value dataField='ratingvalue' mandatory=true} {formlabel text=$item.text for=$item.name}
+            </div>
             {/foreach}
         </div>
     </fieldset>

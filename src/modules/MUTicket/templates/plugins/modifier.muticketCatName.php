@@ -20,7 +20,9 @@
  */
 function smarty_modifier_muticketCatName($id)
 {
-
+    /**
+     * 
+     */
     $cat = CategoryUtil::getCategoryByID($id);
     
     $lang = ZLanguage::getLanguageCode();
@@ -31,7 +33,7 @@ function smarty_modifier_muticketCatName($id)
     $name = $displayname[$lang];
     }
     else {
-    	$name = $name['name'];
+     $name = $name['name'];
     }
     
     return $name;

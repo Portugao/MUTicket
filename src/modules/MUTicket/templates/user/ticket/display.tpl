@@ -1,5 +1,8 @@
 {* purpose of this template: tickets display view in user area *}
 {include file='user/header.tpl'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-1.7.2.min.js'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-ui-1.8.20.custom.min.js'}
 <div class="muticket-ticket muticket-display">
 {gt text='Ticket' assign='templateTitle'}
 {assign var='templateTitle' value=$ticket.title|default:$templateTitle}
@@ -8,8 +11,11 @@
 {*Editing of template, 3 div container*}
     
 <div class="ticket_user_body">
-<div class="ticket_user_header"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'} {include file='user/include_categories_display.tpl' obj=$ticket}</h2><div class="ticket_user_header_menue">
-</div></div>
+<div class="ticket_user_header">
+<div class="ticket_user_header_left"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2></div>
+<div class="ticket_user_header_right">{include file='user/include_categories_display.tpl' obj=$ticket}</div>
+<div class="ticket_user_header_menue"></div>
+</div>
 <div class="ticket_user_body_left">
 <div class="ticket_user_body_avatar">
 {useravatar uid=$ticket.createdUserId}
@@ -95,13 +101,13 @@
         <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.Parent.id}">
             {$ticket.Parent.title|default:""}
         </a>
-        <a id="ticketItem{$ticket.Parent.id}Display" href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.Parent.id theme='Printer' forcelongurl=true}" title="{gt text='Open quick view window'}" style="display: none">
+        <a id="ticketItem{$childTicket.id}Display" href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$childTicket.id theme='Printer' forcelongurl=true}" title="{gt text='Open quick view window'}" style="display: none">
             {icon type='view' size='extrasmall' __alt='Quick view'}
         </a>
         <script type="text/javascript" charset="utf-8">
         /* <![CDATA[ */
             document.observe('dom:loaded', function() {
-                muticketInitInlineWindow($('ticketItem{{$ticket.Parent.id}}Display'), '{{$ticket.Parent.title|replace:"'":""}}');
+                muticketInitInlineWindow($('ticketItem{{$childTicket.id}}Display'), '{{$childTicket.title|replace:"'":""}}');
             });
         /* ]]> */
         </script>
@@ -140,7 +146,14 @@
 
 {if $pncore.user.uid ne $childTicket.createdUserId}
 {if $childTicket.rated eq 0}
-{modfunc modname='MUTicket' type='user' func='edit' ot='rating' ticket=$childTicket.id}
+
+<div class="muticket_rating_form">
+
+<div class="voteanswer"><a href="index.php?module=muticket&amp;type=ajax&amp;func=voteform&amp;ticket={$childTicket.id}&amp;theme=printer&amp;returnTo=userDisplayTicket">VOTE NOW THIS SUPPORT ANSWER!</a>
+<div class="answerform"></div>
+</div>
+
+</div>
 {/if}
 {if $childTicket.rated eq 1}
 {if isset($childTicket.rating) && $childTicket.rating ne null}
@@ -192,3 +205,38 @@
 {if $func ne 'display'}}
 {include file='user/footer.tpl'}
 {/if}
+
+        <script type="text/javascript" charset="utf-8">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+        $(".votebutton").click( function() {
+        $(this).next().slideToggle(1500, 'easeInCirc');         
+        });   
+        });    
+        /* ]]> */
+        </script>   
+        
+        <script type="text/javascript" charset="utf-8">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+        $(".voteanswer > a").click( function(e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+            $(this).css({"color":"red"});
+            /*$(this).next().load(url, function() {*/
+            var form = $(this).next();
+            $.get(url, function(ergebnis) {
+            if (ergebnis) {
+                form.html(ergebnis);
+                form.slideToggle(2000);        
+        }  
+        });      
+        });   
+        });    
+
+        function hideButton() {
+            $(".muticketForm .z-buttons #btnCreate").css({"display":"none"});
+
+        }
+        /* ]]> */
+        </script>   

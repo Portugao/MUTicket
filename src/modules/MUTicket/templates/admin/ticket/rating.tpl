@@ -3,11 +3,12 @@
 {pageaddvar name='javascript' value='jquery-ui'}
 <div class="muticket-ticket muticket-view">
 {include file='admin/header.tpl'}
-{gt text='Rated Tickets and statistics of the supporter ' assign='templateTitle'}
+{gt text='Rated Tickets and statistics of the supporter:' assign='templateTitle'}
 {pagesetvar name='title' value=$templateTitle}
 <div class="z-admin-content-pagetitle">
     {icon type='view' size='small' alt=$templateTitle}
-    <h3>{$templateTitle}{$supporter}</h3>
+    <h3>{$templateTitle}</h3>
+    <h2>{$supporter}</h2>
 </div>
 
    {* {assign var='all' value=0}
@@ -25,14 +26,19 @@
     {/if} *}
     
 <div id="statistic_tickets">
+<div id="statistic_tickets_left">
 <div id="ticketsnumber"><h3>{gt text='Number of tickets'}</h3>
 {gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answers for customers'}</div>
 
 <div id="ticketsrated"><h3>{gt text='Number of rated tickets'}</h3>
-{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='tickets of this supporter'}<br />
-{gt text='That are '} {$percent} {gt text='% of the total answers'}</div>
-</div> 
-
+{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answers of this supporter'}<br />
+{gt text='That are '} <span>{$percent}{gt text='%'}</span>{gt text=' of the total answers'}</div>
+</div>
+<div id="statistic_tickets_right">
+<div id="ticketpercent"><h3>{gt text='Average of the customer rating for this supporter'}</h3>
+{gt text='Customers have given'} <span>{$total}</span> {gt text='points by rating the answers of this supporter'}<br />
+{gt text='That is an average of '} <span>{$average}</span> {gt text='points for the rating of customers'}</div></div> 
+</div>
     
 <div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated tickets of this supporter!'}</p>
 <table style="display: none;" class="z-datatable">

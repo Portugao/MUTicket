@@ -258,10 +258,31 @@ button.muticketInlineButton {
 
 /*----------STATISTICS--------------*/
 
+#statistic_tickets_left {
+    float: left;
+    width: 47%;
+    line-height: 2em;
+}
+
+#statistic_tickets_right {
+    float: right;
+    width: 47%;
+    line-height: 2em;
+}
+
 #ticketsnumber {
     border: 1px solid #333;
     margin: 0 0 10px 0;
     padding: 10px;
+}
+
+#ticketsnumber span {
+    border: 1px solid #333;
+    margin: 0 0 10px 0;
+    padding: 3px;
+    color: white;
+    background: #f00;
+    font-weight: bolder;
 }
 
 #ticketsrated {
@@ -269,8 +290,33 @@ button.muticketInlineButton {
     padding: 10px;
 }
 
+#ticketsrated span {
+    border: 1px solid #333;
+    margin: 0 0 10px 0;
+    padding: 3px;
+    color: white;
+    background: #00f;
+    font-weight: bolder;
+}
+
+#ticketpercent {
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+#ticketpercent span {
+    border: 1px solid #333;
+    margin: 0 0 10px 0;
+    padding: 3px;
+    color: white;
+    background: #f90;
+    font-weight: bolder;
+}
+
 #ticket_table {
     margin: 20px 0 0 0;
+    position: relative;
+    clear: both;
 }
 
 /*--------------FORM------------------*/

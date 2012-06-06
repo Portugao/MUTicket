@@ -21,7 +21,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     	
     	$request = new Zikula_Request_Http();
     	$ticket = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
-    	$result = ModUtil::func($this->name, 'user', 'edit', array('ot' => 'rating', 'ticket' => $ticket));	
+    	$parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
+    	$result = ModUtil::func($this->name, 'user', 'edit', array('ot' => 'rating', 'ticket' => $ticket, 'parent' => $parent));	
     	
     	return $result;
     } 

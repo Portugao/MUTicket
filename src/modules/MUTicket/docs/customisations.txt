@@ -19,6 +19,7 @@ Changed Files
 *templates/admin/config.tpl
 *templates/admin/footer.tpl
 *templates/admin/main.tpl
+*templates/admin/ticket/rating.tpl
 
 *templates/user/rating/edit.tpl
 *templates/user/rating/include_displayItemListMany.tpl
@@ -50,7 +51,7 @@ Additional Files
 
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php
-*$templates/plugins/modifier.muticketCatName.php
+*templates/plugins/modifier.muticketCatName.php
 
 
 

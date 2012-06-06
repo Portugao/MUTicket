@@ -2,10 +2,11 @@
 
 {if isset($items) && $items ne null}
 <div class="relatedItemList Rating">
-{gt text='You have rated this support answer:'}
+{gt text='You have rated this support answer:'}<br />
 {foreach name='relLoop' item='item' from=$items}
-
-        <h2>{$item.ratingvalue} of 6</h2>
+        {section name=stern start=0 loop=$item.ratingvalue step=1}
+        <img src="images/icons/small/favorites.png" />
+        {/section}
 
    {* <script type="text/javascript" charset="utf-8">
     <![CDATA[

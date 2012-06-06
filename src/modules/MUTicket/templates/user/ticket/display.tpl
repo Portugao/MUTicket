@@ -144,6 +144,7 @@
 {include file='user/include_standardfields_display.tpl' obj=$childTicket}
 </div>
 <div class="ticket_user_body_rating">
+{if $rating eq 1}
 {if $kind eq 1}
 
 {if $pncore.user.uid ne $childTicket.createdUserId}
@@ -160,6 +161,7 @@
 {if $childTicket.rated eq 1}
 {if isset($childTicket.rating) && $childTicket.rating ne null}
     {include file='user/rating/include_displayItemListMany.tpl' items=$childTicket.rating}
+{/if}
 {/if}
 {/if}
 {/if}

@@ -20,6 +20,10 @@
                     {formlabel for='supportergroup' __text='Supportergroup'}
                     {formdropdownlist id='supportergroup' group='config' maxLength=255 width=20em __title='Input this setting.'}
                 </div>
+                <div class="z-formrow">
+                    {formlabel for='rating' __text='Allow rating?'}
+                    {formdropdownlist id='rating' group='config' maxLength=255 width=20em __title='Input this setting.'}
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Do you want to delete all existing supporters?</legend>

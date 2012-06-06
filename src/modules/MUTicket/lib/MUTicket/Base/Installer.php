@@ -50,6 +50,7 @@ class MUTicket_Base_Installer extends Zikula_AbstractInstaller
 
         // set up all our vars with initial values
         $this->setVar('supportergroup', '');
+        $this->setVar('rating', 1);
 
         // create the default data for MUTicket
         $this->createDefaultData();

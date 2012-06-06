@@ -214,16 +214,19 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
      */
     public function display($args)
     {
-    	// May the user rate
+    	// Is it allowed to rate
+    	$rating = ModUtil::getVar($this->name, 'rating');
+    	
+    	// May this user rate
 		$kind = MUTicket_Util_View::userForRating();
-		
-		    	
+				    	
     	// We check for supportes that are active
     	// If there is no supporter active, we show no link for new tickets
     	// and no edit form for answers
     	$supporteractive = MUTicket_Util_View::checkIfSupporters();
 		
 		$this->view->assign('kind', $kind)
+		           ->assign('rating', $rating)
 		           ->assign('supporteractive', $supporteractive);
 		
 		return parent::display($args);

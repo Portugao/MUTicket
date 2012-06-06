@@ -69,7 +69,7 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		);
 
 		// itemcount of tickets of supporter without pagination
-		$counttickets = $repository->selectCount($where = '', $useJoins = true);
+		$counttickets = $repository->selectCount($where, $useJoins = true);
 
 		// where clause for getting rated answers of this supporter
 		$where2 = 'tbl.rated = 1';
@@ -84,20 +84,29 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 
 		// item list of rated tickets of supporter without pagination
 		$entities = $repository->selectWhere($where2, $orderBy = '', $useJoins = true);
+		
+		$total = 0;
+		
+		foreach ($entities as $entity) {
+			$total = $total + $entity['rating'][0]['ratingvalue'];
+		}
 
 		$objectCount = count($entities);
-		
+
+		$average = $total / $objectCount;
+		$average = round($average, 1);
 				
 		// percent of rated tickets
 		$percent = $objectCount / $counttickets * 100;
 		$percent = round($percent, 2);
 		
-
 		// assign all to template
 		$this->view->assign('items', $entities )
 		->assign('counttickets', $counttickets)
 		->assign('objectcount', $objectCount)
-		->assign('percent', $percent)		
+		->assign('percent', $percent)
+		->assign('total', $total)		
+		->assign('average', $average)		
 		->assign('supporter', $supportername );
 
 		// fetch and return the appropriate template

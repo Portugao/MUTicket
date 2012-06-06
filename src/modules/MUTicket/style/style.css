@@ -256,6 +256,23 @@ button.muticketInlineButton {
     background: #eee;
 }
 
+/*----------STATISTICS--------------*/
+
+#ticketsnumber {
+    border: 1px solid #333;
+    margin: 0 0 10px 0;
+    padding: 10px;
+}
+
+#ticketsrated {
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+#ticket_table {
+    margin: 20px 0 0 0;
+}
+
 /*--------------FORM------------------*/
 
 .muticket_form_hidden {

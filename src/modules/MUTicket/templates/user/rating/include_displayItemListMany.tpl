@@ -2,18 +2,18 @@
 
 {if isset($items) && $items ne null}
 <div class="relatedItemList Rating">
-{gt text='You have voted this support answer with:'}
+{gt text='You have rated this support answer:'}
 {foreach name='relLoop' item='item' from=$items}
 
-        <h2>{$item.ratingvalue} of 5</h2>
+        <h2>{$item.ratingvalue} of 6</h2>
 
-    <script type="text/javascript" charset="utf-8">
+   {* <script type="text/javascript" charset="utf-8">
     <![CDATA[
         document.observe('dom:loaded', function() {
             muticketInitInlineWindow($('ratingItem{{$item.id}}Display'), '{{$item.ratingvalue|replace:"'":""}}');
         });
      ]]>
-    </script>
+    </script> *}
 {/foreach}
 </div>
 {/if}

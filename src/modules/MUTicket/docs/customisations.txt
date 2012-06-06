@@ -11,6 +11,9 @@ Changes by hand on the model to change in MOST
 supporter entity
 varchar supportcats now 1000 
 
+config with new input rating yes or not
+rating bool
+
 Changed Files
 
 *templates/admin/supporter/edit.tpl

@@ -35,6 +35,21 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 
 	/**
 	 *
+	 This method is for getting a repository for ratings
+	 *
+	 */
+
+	public static function getRatingRepository() {
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		$repository = $entityManager->getRepository('MUTicket_Entity_Rating');
+
+		return $repository;
+	}
+
+	/**
+	 *
 	 This method is for getting a repository for tickets
 	 *
 	 */
@@ -44,6 +59,21 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 		$serviceManager = ServiceUtil::getManager();
 		$entityManager = $serviceManager->getService('doctrine.entitymanager');
 		$repository = $entityManager->getRepository('MUTicket_Entity_Ticket');
+
+		return $repository;
+	}
+
+	/**
+	 *
+	 This method is for getting a repository for supporters
+	 *
+	 */
+
+	public static function getSupporterRepository() {
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
 
 		return $repository;
 	}

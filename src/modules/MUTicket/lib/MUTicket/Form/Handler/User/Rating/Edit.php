@@ -17,18 +17,31 @@
  */
 class MUTicket_Form_Handler_User_Rating_Edit extends MUTicket_Form_Handler_User_Rating_Base_Edit
 {
+
+	/**
+	 * Get url to redirect to.
+	 */
+	protected function getRedirectUrl($args, $obj)
+	{
+		$this->ticket = $this->request->query->filter('parent', 0, FILTER_SANITIZE_NUMBER_INT);
+        $this->returnTo = 'userDisplayTicket';
+		$this->inlineUsage = false;
+		
+		return parent::getRedirectUrl($args, $obj);
+	}
 	/**
 	 * (non-PHPdoc)
 	 * @see MUTicket_Form_Handler_User_Base_Edit::initializeAdditions()
 	 */
-    protected function initializeAdditions()
-    { 	
-    	// We get the input for the form radionbutton
-    	$ratingvalue = MUTicket_Util_Controller::getRatingValues();
-    	
-    	$rating = $this->view->get_template_vars('rating');
-    	$rating = $ratingvalue;
-     	$this->view->assign('rating', $rating);
-  	
-    }
+	protected function initializeAdditions()
+	{
+		
+		// We get the input for the form radiobutton
+		$ratingvalue = MUTicket_Util_Controller::getRatingValues();
+		 
+		$rating = $this->view->get_template_vars('rating');
+		$rating = $ratingvalue;
+		$this->view->assign('rating', $rating);
+		 
+	}
 }

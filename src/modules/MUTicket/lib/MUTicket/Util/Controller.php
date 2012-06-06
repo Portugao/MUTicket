@@ -48,12 +48,12 @@ class MUTicket_Util_Controller extends MUTicket_Util_Base_Controller
     {
         $dom = ZLanguage::getModuleDomain('MUTicket');
         $ratingvalue = array();
-        $ratingvalue[] = array('value' => '0',    'text' => __('0', $dom));
         $ratingvalue[] = array('value' => '1',    'text' => __('1', $dom));
         $ratingvalue[] = array('value' => '2',    'text' => __('2', $dom));
         $ratingvalue[] = array('value' => '3',    'text' => __('3', $dom));
         $ratingvalue[] = array('value' => '4',    'text' => __('4', $dom));        
-        $ratingvalue[] = array('value' => '5',     'text' => __('5', $dom));
+        $ratingvalue[] = array('value' => '5',    'text' => __('5', $dom));
+        $ratingvalue[] = array('value' => '6',    'text' => __('6', $dom));
         return $ratingvalue;
     }
 }

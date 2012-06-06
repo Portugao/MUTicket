@@ -42,9 +42,9 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
         if ($currentType == 'admin') {
             if (in_array($currentFunc, array('main', 'view'))) {
                     $this->_actions[] = array(
-                        'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket', 'rated' => 1, 'supporter' => $this['id'])),
+                        'url' => array('type' => 'admin', 'func' => 'rating', 'arguments' => array('ot' => 'ticket', 'rated' => 1, 'supporter' => $this['id'])),
                         'icon' => 'preview',
-                        'linkTitle' => __('Call rated tickets', $dom),
+                        'linkTitle' => __('Call statistic and rated tickets of this supporter', $dom),
                         'linkText' => __('Ratings', $dom)
                     );
                    /* $this->_actions[] = array(

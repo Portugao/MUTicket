@@ -140,7 +140,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
     }
     
     // we check if the user is a supporter
-    if (in_array($uid, MUTicket_Util_View::getExistingSupporterUids()) === false) {
+    if (in_array($uid, MUTicket_Util_View::getExistingSupporterUids($id = '')) === false) {
     
     	if($type == 'user') {	
 			if (!empty($where)) {
@@ -249,9 +249,6 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         if (!in_array($objectType, MUTicket_Util_Controller::getObjectTypes('controllerAction', $utilArgs))) {
             $objectType = MUTicket_Util_Controller::getDefaultObjectType('controllerAction', $utilArgs);
         }
-        
-        $ticketId = (isset($args['ticket']) && is_numeric($args['ticket'])) ? $args['ticket'] : 0;
-        System::queryStringSetVar('ticket', $ticketId);
 
         // create new Form reference
         $view = FormUtil::newForm($this->name, $this);

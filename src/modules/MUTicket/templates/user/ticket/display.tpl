@@ -1,8 +1,10 @@
 {* purpose of this template: tickets display view in user area *}
 {include file='user/header.tpl'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
-{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-1.7.2.min.js'}
-{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-ui-1.8.20.custom.min.js'}
+{* {pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-1.7.2.min.js'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-ui-1.8.20.custom.min.js'} *}
+{pageaddvar name='javascript' value='jquery'}
+{pageaddvar name='javascript' value='jquery-ui'}
 <div class="muticket-ticket muticket-display">
 {gt text='Ticket' assign='templateTitle'}
 {assign var='templateTitle' value=$ticket.title|default:$templateTitle}
@@ -149,8 +151,8 @@
 
 <div class="muticket_rating_form">
 
-<div class="voteanswer"><a href="index.php?module=muticket&amp;type=ajax&amp;func=voteform&amp;ticket={$childTicket.id}&amp;theme=printer&amp;returnTo=userDisplayTicket">VOTE NOW THIS SUPPORT ANSWER!</a>
-<div class="answerform"></div>
+<div class="voteanswer"><a href="index.php?module=muticket&amp;type=ajax&amp;func=voteform&amp;ticket={$childTicket.id}&amp;parent={$ticket.id}&amp;theme=printer&amp;returnTo=userDisplayTicket" title="">RATE NOW THIS SUPPORT ANSWER!</a>
+<div style="display: none;" class="answerform"></div>
 </div>
 
 </div>
@@ -208,34 +210,32 @@
 
         <script type="text/javascript" charset="utf-8">
         /* <![CDATA[ */
-        $(document).ready(function() {
-        $(".votebutton").click( function() {
-        $(this).next().slideToggle(1500, 'easeInCirc');         
-        });   
-        });    
-        /* ]]> */
-        </script>   
-        
-        <script type="text/javascript" charset="utf-8">
-        /* <![CDATA[ */
-        $(document).ready(function() {
-        $(".voteanswer > a").click( function(e) {
+        var MU = jQuery.noConflict();
+        var zaehler = 0;
+        MU(document).ready(function() {
+        	MU(".voteanswer > a").click( function(e) {
             e.preventDefault();
-            var url = $(this).attr("href");
-            $(this).css({"color":"red"});
-            /*$(this).next().load(url, function() {*/
-            var form = $(this).next();
-            $.get(url, function(ergebnis) {
+            
+            var url = MU(this).attr("href");
+            MU(this).css({"color":"red"});
+            if (zaehler == 0) {
+            MU(this).append("<div id='work'><img src='images/ajax/indicator.white.gif' /></div>");
+
+            }
+            var form = MU(this).next();
+            MU.get(url, function(ergebnis) {
             if (ergebnis) {
-                form.html(ergebnis);
-                form.slideToggle(2000);        
+                form.html(ergebnis).slideToggle(1000, 'easeInCirc');
+                MU("#work").remove();
+
+                zaehler++;                                      
         }  
         });      
         });   
         });    
 
         function hideButton() {
-            $(".muticketForm .z-buttons #btnCreate").css({"display":"none"});
+            MU(".muticketForm .z-buttons #btnCreate").css({"display":"none"});
 
         }
         /* ]]> */

@@ -1,10 +1,8 @@
 {* purpose of this template: tickets display view in user area *}
 {include file='user/header.tpl'}
-{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
-{* {pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-1.7.2.min.js'}
-{pageaddvar name='javascript' value='modules/MUTicket/javascript/jquery-ui-1.8.20.custom.min.js'} *}
 {pageaddvar name='javascript' value='jquery'}
 {pageaddvar name='javascript' value='jquery-ui'}
+{pageaddvar name='stylesheet' value='modules/MUTicket/style/jquery-ui-1.8.21.custom.css'}
 <div class="muticket-ticket muticket-display">
 {gt text='Ticket' assign='templateTitle'}
 {assign var='templateTitle' value=$ticket.title|default:$templateTitle}
@@ -16,7 +14,7 @@
 <div class="ticket_user_header">
 <div class="ticket_user_header_left"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2></div>
 <div class="ticket_user_header_right">{include file='user/include_categories_display.tpl' obj=$ticket}</div>
-<div class="ticket_user_header_menue"></div>
+<div class="ticket_user_header_menue"><a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">Close ticket</a><div title="Wollen Sie das Ticket schliessen?" id="dialog">{gt text='You can now close this ticket, if your customer has said, his ticket is answered!'}</div></div>
 </div>
 <div class="ticket_user_body_left">
 <div class="ticket_user_body_avatar">
@@ -233,12 +231,26 @@
                 zaehler++;                                      
         }  
         });      
-        });   
+        });
+            MU('#dialog').dialog({
+                autoOpen: false,
+                width: 400,
+                modal: true,
+                buttons: {
+                    "Close ticket": function() {
+                    location.href = "index.php?module=muticket&amp;type=ajax&amp;func=close;ticket={$childTicket.id}&amp;parent={$ticket.id}&amp;theme=printer&amp;returnTo=userDisplayTicket";
+                    },
+                    "Cancel": function() {
+                        MU(this).dialog("close");
+                    }           	    
+                }
+            });
+
+            MU('#ticket_user_header_close').click( function(e){
+                e.preventDefault();
+                MU('#dialog').dialog('open');
+            });   
         });    
 
-        function hideButton() {
-            MU(".muticketForm .z-buttons #btnCreate").css({"display":"none"});
-
-        }
         /* ]]> */
         </script>   

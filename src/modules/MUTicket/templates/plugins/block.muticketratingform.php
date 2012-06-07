@@ -35,9 +35,10 @@ function smarty_block_muticketratingform($params, $content, $view)
         
         $request = new Zikula_Request_Http();
         $ticket = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $parent = $request->getGet()->filter('parent', 0, FILTER_SANITIZE_NUMBER_INT);
         
         if(strpos($action,"func=voteform")!==false) {
-        	$action = "index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=rating&amp;ticket=$ticket&amp;returnTo=userDisplayTicket";
+        	$action = "index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=rating&amp;ticket=$ticket&amp;parent=$parent&amp;returnTo=userDisplayTicket";
         }
 
         $view->postRender();

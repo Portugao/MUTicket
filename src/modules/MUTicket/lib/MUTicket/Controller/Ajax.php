@@ -17,6 +17,10 @@
  */
 class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
 {
+	/**
+	 *
+	 * This function returns the edit form for rating
+	 */
     public function voteform() {
     	
     	$request = new Zikula_Request_Http();

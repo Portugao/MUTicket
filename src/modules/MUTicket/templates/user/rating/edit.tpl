@@ -1,5 +1,5 @@
 {* purpose of this template: build the Form to edit an instance of rating *}
-{* {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'} *}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
 {pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 
 <div class="muticket-rating muticket-edit">

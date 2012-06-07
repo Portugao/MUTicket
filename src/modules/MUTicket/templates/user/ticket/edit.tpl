@@ -196,7 +196,7 @@
     relationHandler.push(newItem);
 
     document.observe('dom:loaded', function() {
-        muticketInitRelationItemsForm('ticket', 'muticketTicket_Parent', false);
+       // muticketInitRelationItemsForm('ticket', 'muticketTicket_Parent', false);
 
         muticketAddCommonValidationRules('ticket', '{{if $mode eq 'create'}}{{else}}{{$ticket.id}}{{/if}}');
 

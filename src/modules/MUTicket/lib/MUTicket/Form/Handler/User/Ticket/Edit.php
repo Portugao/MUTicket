@@ -56,11 +56,12 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         $url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
 
         if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
-            // redirect to the detail page of treated ticket
+            // redirect to the detail page of parent ticket
             $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parent ));
         }
-        else {
-        	$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues ));
+        if ($args['commandName'] == 'create' && $this->mode == 'create' && $parent == NULL) {
+        	// redirect to just created parent ticket
+        	$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id'] ));
         }
         return $url;
     }

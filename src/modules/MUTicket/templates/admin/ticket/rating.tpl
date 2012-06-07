@@ -25,26 +25,11 @@
         </a>
     {/if} *}
     
-<div id="statistic_tickets">
-<div id="statistic_tickets_left">
-<div id="ticketsnumber"><h3>{gt text='Number of tickets'}</h3>
-{gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answers for customers'}</div>
-
-<div id="ticketsrated"><h3>{gt text='Number of rated tickets'}</h3>
-{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answers of this supporter'}<br />
-{gt text='That are '} <span>{$percent}{gt text='%'}</span>{gt text=' of the total answers'}</div>
-</div>
-<div id="statistic_tickets_right">
-<div id="ticketpercent"><h3>{gt text='Average of the customer rating for this supporter'}</h3>
-{gt text='Customers have given'} <span>{$total}</span> {gt text='points by rating the answers of this supporter'}<br />
-{gt text='That is an average of '} <span>{$average}</span> {gt text='points for the rating of customers'}</div></div> 
-</div>
-    
 <div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated tickets of this supporter!'}</p>
-<table style="display: none;" class="z-datatable">
+<div style="display: none;"><table class="z-datatable">
     <colgroup>
         <col id="crating" />
-        <col id="ctitle" />
+       {* <col id="ctitle" /> *}
         <col id="ctext" />
        {* <col id="cstate" />
         <col id="crated" />
@@ -56,9 +41,9 @@
         <th id="hrating" scope="col" class="z-left">
             {sortlink __linktext='Rating' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-        <th id="htitle" scope="col" class="z-left">
+       {* <th id="htitle" scope="col" class="z-left">
             {sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
-        </th>
+        </th> *}
         <th id="htext" scope="col" class="z-left">
             {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
@@ -81,9 +66,9 @@
         <td headers="hrating" class="z-left">
             {include file='admin/rating/include_displayItemListMany.tpl' items=$ticket.rating}
         </td>
-        <td headers="htitle" class="z-left">
+       {* <td headers="htitle" class="z-left">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
-        </td>
+        </td> *}
         <td headers="htext" class="z-left">
             {$ticket.text|truncate:200}
         </td>
@@ -135,24 +120,32 @@
     </tbody>
 </table>
 </div>
+</div>
+
+<div id="statistic_tickets">
+<div id="statistic_tickets_left">
+<div id="ticketsnumber"><h3>{gt text='Number of tickets'}</h3>
+{gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answers for customers'}</div>
+
+<div id="ticketsrated"><h3>{gt text='Number of rated tickets'}</h3>
+{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answers of this supporter'}<br />
+{gt text='That are '} <span>{$percent}{gt text='%'}</span>{gt text=' of the total answers'}</div>
+</div>
+<div id="statistic_tickets_right">
+<div id="ticketpercent"><h3>{gt text='Average of the customer rating for this supporter'}</h3>
+{gt text='Customers have given'} <span>{$total}</span> {gt text='points by rating the answers of this supporter'}<br />
+{gt text='That is an average of '} <span>{$average}</span> {gt text='points for the rating of customers'}</div></div> 
+</div>
 
         <script type="text/javascript" charset="utf-8">
         /* <![CDATA[ */
         var MU = jQuery.noConflict();
-        var status = 0;
         MU(document).ready(function() {
         	MU("#rated_tickets").click( function(e) {
             e.preventDefault();
+            MU(this).css({"color":"red"});
             var tickets = MU(this).next();
-             
-            if (status == 0) {
-                MU(this).css({"color":"red"});
-            }
-            else {
-                MU(this).css({"color":"blue"});
-            }
-            
-            tickets.slideToggle(1000, 'easeInCirc');
+            tickets.slideToggle(1500, 'easeInCirc');
             status++; 
         });   
         });

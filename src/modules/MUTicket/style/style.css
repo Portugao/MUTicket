@@ -170,9 +170,17 @@ button.muticketInlineButton {
 }
 
 #ticket_user_header_close {
-    background: url(images/icons/extrasmall/fileclose.png)no-repeat;
-    padding: 0px 0 10px 20px; 
-    line-height: 1.0em;	
+    background: #ccc url('/images/icons/extrasmall/fileclose.png') 0 5px no-repeat;
+    padding: 5px 0 10px 20px; 
+    line-height: 1.0em;
+    border: 1px solid #999;	
+}
+
+#ticket_closed {
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 2px 2px 2px 25px;
+    background:  #ddd url('/images/icons/extrasmall/bell.png') 5px 5px no-repeat;
 }
 
 .ticket_user_table {

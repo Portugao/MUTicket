@@ -14,7 +14,13 @@
 <div class="ticket_user_header">
 <div class="ticket_user_header_left"><h2>{gt text="Ticket"}: {$templateTitle|notifyfilters:'muticket.filter_hooks.tickets.filter'}</h2></div>
 <div class="ticket_user_header_right">{include file='user/include_categories_display.tpl' obj=$ticket}</div>
-<div class="ticket_user_header_menue"><a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">Close ticket</a><div title="Wollen Sie das Ticket schliessen?" id="dialog">{gt text='You can now close this ticket, if your customer has said, his ticket is answered!'}</div></div>
+<div class="ticket_user_header_menue">
+{if $ticket.state eq 1}
+<a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">Close ticket</a><div title="Wollen Sie das Ticket schliessen?" id="dialog">{gt text='You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!'}</div>
+{else}
+<div id="ticket_closed">{gt text='Hi, this ticket is closed. If you have questions again, please open a new ticket!'}</div>
+{/if}
+</div>
 </div>
 <div class="ticket_user_body_left">
 <div class="ticket_user_body_avatar">
@@ -238,7 +244,7 @@
                 modal: true,
                 buttons: {
                     "Close ticket": function() {
-                    location.href = "index.php?module=muticket&amp;type=ajax&amp;func=close;ticket={$childTicket.id}&amp;parent={$ticket.id}&amp;theme=printer&amp;returnTo=userDisplayTicket";
+                    location.href = "index.php?module=muticket&type=ajax&func=close&ticket={{$ticket.id}}";
                     },
                     "Cancel": function() {
                         MU(this).dialog("close");

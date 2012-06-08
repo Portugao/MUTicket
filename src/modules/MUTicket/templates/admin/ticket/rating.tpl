@@ -26,11 +26,12 @@
     {/if} *}
     
 <div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated tickets of this supporter!'}</p>
-<div style="display: none;"><table class="z-datatable">
+<div style="display: none; height: 200px; overflow: auto;"><table class="z-datatable">
     <colgroup>
         <col id="crating" />
        {* <col id="ctitle" /> *}
         <col id="ctext" />
+        <col id="cdate" />
        {* <col id="cstate" />
         <col id="crated" />
         <col id="cparent" /> *}
@@ -39,13 +40,19 @@
     <thead>
     <tr>
         <th id="hrating" scope="col" class="z-left">
-            {sortlink __linktext='Rating' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
+            {* {sortlink __linktext='Rating' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'} *}
+            {gt text='Rating'}
         </th>
        {* <th id="htitle" scope="col" class="z-left">
             {sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th> *}
         <th id="htext" scope="col" class="z-left">
-            {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
+           {* {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'} *}
+           {gt text='Text'}
+        </th>
+        <th id="hcreateddate" scope="col" class="z-left">
+           {* {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'} *}
+           {gt text='Created Date'}
         </th>
       {*  <th id="hstate" scope="col" class="z-center">
             {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
@@ -70,7 +77,10 @@
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td> *}
         <td headers="htext" class="z-left">
-            {$ticket.text|truncate:200}
+            {$ticket.text}
+        </td>
+        <td headers="hcreated" class="z-left">
+            {$ticket.createdDate|dateformat:datetimelong}
         </td>
       {*  <td headers="hstate" class="z-center">
             {$ticket.state|yesno:true}

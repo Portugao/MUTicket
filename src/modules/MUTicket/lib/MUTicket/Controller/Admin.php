@@ -34,124 +34,32 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		return $this->redirect(ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')));
 
 	}
-	
-    /**
-     * This method provides a generic item list overview.
-     *
-     * @param string  $ot           Treated object type.
-     * @param string  $sort         Sorting field.
-     * @param string  $sortdir      Sorting direction.
-     * @param int     $pos          Current pager position.
-     * @param int     $num          Amount of entries to display.
-     * @param string  $tpl          Name of alternative template (for alternative display options, feeds and xml output)
-     * @param boolean $raw          Optional way to display a template instead of fetching it (needed for standalone output)
-     * @return mixed Output.
-     */
-    public function view($args)
-    {
-// DEBUG: permission check aspect starts
-        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
-// DEBUG: permission check aspect ends
 
-        // parameter specifying which type of objects we are treating
-        $objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
-        $utilArgs = array('controller' => 'admin', 'action' => 'view');
-        if (!in_array($objectType, MUTicket_Util_Controller::getObjectTypes('controllerAction', $utilArgs))) {
-            $objectType = MUTicket_Util_Controller::getDefaultObjectType('controllerAction', $utilArgs);
-        }
-        $repository = $this->entityManager->getRepository('MUTicket_Entity_' . ucfirst($objectType));
+	/**
+	 * This method provides a generic item list overview. We redirect to user area
+	 * if the admin is calling the ticket view
+	 *
+	 * @return redirect
+	 */
+	public function view($args)
+	{
+		// DEBUG: permission check aspect starts
+		$this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
+		// DEBUG: permission check aspect ends
 
-        $tpl = (isset($args['tpl']) && !empty($args['tpl'])) ? $args['tpl'] : $this->request->getGet()->filter('tpl', '', FILTER_SANITIZE_STRING);
-        if ($tpl == 'tree') {
-            $trees = ModUtil::apiFunc($this->name, 'selection', 'getAllTrees', array('ot' => $objectType));
-            $this->view->assign('trees', $trees)
-                       ->assign($repository->getAdditionalTemplateParameters('controllerAction', $utilArgs));
-            // fetch and return the appropriate template
-            return MUTicket_Util_View::processTemplate($this->view, 'admin', $objectType, 'view', $args);
-        }
+		if ($args['ot' == 'ticket']) {
+			return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+		}
+		else {
+			return parent::view($args);	
+		}
 
-        // parameter for used sorting field
-        $sort = (isset($args['sort']) && !empty($args['sort'])) ? $args['sort'] : $this->request->getGet()->filter('sort', '', FILTER_SANITIZE_STRING);
-        if (empty($sort) || !in_array($sort, $repository->getAllowedSortingFields())) {
-            $sort = $repository->getDefaultSortingField();
-        }
-
-        // parameter for used sort order
-        $sdir = (isset($args['sortdir']) && !empty($args['sortdir'])) ? $args['sortdir'] : $this->request->getGet()->filter('sortdir', '', FILTER_SANITIZE_STRING);
-        $sdir = strtolower($sdir);
-        if ($sdir != 'asc' && $sdir != 'desc') {
-            $sdir = 'asc';
-        }
-
-        // convenience vars to make code clearer
-        $currentUrlArgs = array('ot' => $objectType);
-        
-        	// check for entity where parent_id is NULL
-    	
-    	if ($ot == 'ticket' && $func == 'view') {
-    		if (!empty($where)) {
-    	        $where .= 'AND tbl.parent_id IS NULL';
-    		}
-    		else {
-    			$where = 'tbl.parent_id IS NULL';
-    		}
-    	}
-    	else {
-    		$where = $where;
-    	}
-
-        $selectionArgs = array(
-            'ot' => $objectType,
-            'where' => $where,
-            'orderBy' => $sort . ' ' . $sdir
-        );
-
-        $showAllEntries = (int) (isset($args['all']) && !empty($args['all'])) ? $args['all'] : $this->request->getGet()->filter('all', 0, FILTER_VALIDATE_INT);
-        $this->view->assign('showAllEntries', $showAllEntries);
-        if ($showAllEntries == 1) {
-            // item list without pagination
-            $entities = ModUtil::apiFunc($this->name, 'selection', 'getEntities', $selectionArgs);
-            $objectCount = count($entities);
-            $currentUrlArgs['all'] = 1;
-        } else {
-            // item list with pagination
-
-            // the current offset which is used to calculate the pagination
-            $currentPage = (int) (isset($args['pos']) && !empty($args['pos'])) ? $args['pos'] : $this->request->getGet()->filter('pos', 1, FILTER_VALIDATE_INT);
-
-            // the number of items displayed on a page for pagination
-            $resultsPerPage = (int) (isset($args['num']) && !empty($args['num'])) ? $args['num'] : $this->request->getGet()->filter('num', 0, FILTER_VALIDATE_INT);
-            if ($resultsPerPage == 0) {
-                $csv = (int) (isset($args['usecsv']) && !empty($args['usecsv'])) ? $args['usecsv'] : $this->request->getGet()->filter('usecsvext', 0, FILTER_VALIDATE_INT);
-                $resultsPerPage = ($csv == 1) ? 999999 : $this->getVar('pagesize', 10);
-            }
-
-            $selectionArgs['currentPage'] = $currentPage;
-            $selectionArgs['resultsPerPage'] = $resultsPerPage;
-            list($entities, $objectCount) = ModUtil::apiFunc($this->name, 'selection', 'getEntitiesPaginated', $selectionArgs);
-
-            $this->view->assign('currentPage', $currentPage)
-                       ->assign('pager', array('numitems'     => $objectCount,
-                                               'itemsperpage' => $resultsPerPage));
-        }
-
-        // build ModUrl instance for display hooks
-        $currentUrlObject = new Zikula_ModUrl($this->name, 'admin', 'view', ZLanguage::getLanguageCode(), $currentUrlArgs);
-
-        // assign the object data, sorting information and details for creating the pager
-        $this->view->assign('items', $entities)
-                   ->assign('sort', $sort)
-                   ->assign('sdir', $sdir)
-                   ->assign('currentUrlObject', $currentUrlObject)
-                   ->assign($repository->getAdditionalTemplateParameters('controllerAction', $utilArgs));
-
-        // fetch and return the appropriate template
-        return MUTicket_Util_View::processTemplate($this->view, 'admin', $objectType, 'view', $args);
-    }
+	}
 
 	/**
 	 * This method is the function for showing rating statistics of a supporter
 	 *
+	 *@param string  $ot           Treated object type.
 	 */
 
 	public function rating($args)
@@ -190,6 +98,8 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		$where2 .= ' AND ';
 		$where2 .= 'tbl.createdUserId = ' . DataUtil::formatForStore($supporteruid);
 
+		$orderBy = 'createdDate desc';
+
 		$selectionArgs = array(
             'ot' => $objectType,
             'where' => $where,
@@ -197,10 +107,10 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		);
 
 		// item list of rated tickets of supporter without pagination
-		$entities = $repository->selectWhere($where2, $orderBy = '', $useJoins = true);
-		
+		$entities = $repository->selectWhere($where2, $orderBy, $useJoins = true);
+
 		$total = 0;
-		
+
 		foreach ($entities as $entity) {
 			$total = $total + $entity['rating'][0]['ratingvalue'];
 		}
@@ -209,18 +119,18 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 
 		$average = $total / $objectCount;
 		$average = round($average, 1);
-				
+
 		// percent of rated tickets
 		$percent = $objectCount / $counttickets * 100;
 		$percent = round($percent, 2);
-		
+
 		// assign all to template
 		$this->view->assign('items', $entities )
 		->assign('counttickets', $counttickets)
 		->assign('objectcount', $objectCount)
 		->assign('percent', $percent)
-		->assign('total', $total)		
-		->assign('average', $average)		
+		->assign('total', $total)
+		->assign('average', $average)
 		->assign('supporter', $supportername );
 
 		// fetch and return the appropriate template

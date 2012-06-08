@@ -32,6 +32,31 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 
 		return true;
 	}
+	
+    /**
+     * This function closes a ticket called by dual window
+     * @param id   id of the ticket to close
+     */
+	
+	public function closeTicket($id) {		
+	
+		// build ticket repository
+		$repository = MUTicket_Util_Model::getTicketRepository();
+		
+		$entity = $repository->selectById($id);
+		
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		
+		$entity->setState(0);
+		
+		$entityManager->flush();
+		
+		LogUtil::registerStatus(__('Done! The ticket is closed!'));
+		
+		return true;
+		
+	}
 
 	/**
 	 *

@@ -16,7 +16,8 @@
 <div class="ticket_user_header_right">{include file='user/include_categories_display.tpl' obj=$ticket}</div>
 <div class="ticket_user_header_menue">
 {if $ticket.state eq 1}
-<a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">Close ticket</a><div title="Wollen Sie das Ticket schliessen?" id="dialog">{gt text='You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!'}</div>
+{gt text='Do you want to close this ticket?' assign='closeTicket'}
+<a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">Close ticket</a><div title="{$closeTicket}" id="dialog">{gt text='You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!'}</div>
 {else}
 <div id="ticket_closed">{gt text='Hi, this ticket is closed. If you have questions again, please open a new ticket!'}</div>
 {/if}

@@ -25,7 +25,7 @@
         </a>
     {/if} *}
     
-<div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated tickets of this supporter!'}</p>
+<div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated answers of this supporter!'}</p>
 <div style="display: none; height: 200px; overflow: auto;"><table class="z-datatable">
     <colgroup>
         <col id="crating" />
@@ -134,10 +134,10 @@
 
 <div id="statistic_tickets">
 <div id="statistic_tickets_left">
-<div id="ticketsnumber"><h3>{gt text='Number of tickets'}</h3>
+<div id="ticketsnumber"><h3>{gt text='Number of answers'}</h3>
 {gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answers for customers'}</div>
 
-<div id="ticketsrated"><h3>{gt text='Number of rated tickets'}</h3>
+<div id="ticketsrated"><h3>{gt text='Number of rated answers'}</h3>
 {gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answers of this supporter'}<br />
 {gt text='That are '} <span>{$percent}{gt text='%'}</span>{gt text=' of the total answers'}</div>
 </div>

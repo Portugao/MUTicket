@@ -140,7 +140,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
     }
     
     // we check if the user is a supporter
-    if (in_array($uid, MUTicket_Util_View::getExistingSupporterUids($id = '')) === false) {
+    if (in_array($uid, MUTicket_Util_Model::getExistingSupporterUids($id = '')) === false) {
     
     	if($type == 'user') {	
 			if (!empty($where)) {

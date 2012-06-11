@@ -170,8 +170,8 @@ button.muticketInlineButton {
 }
 
 #ticket_user_header_close {
-    background: #ccc url('/images/icons/extrasmall/fileclose.png') 0 5px no-repeat;
-    padding: 5px 0 10px 20px; 
+    background: #eee url('/images/icons/extrasmall/fileclose.png') 0 5px no-repeat;
+    padding: 5px 5px 10px 20px; 
     line-height: 1.0em;
     border: 1px solid #999;	
 }

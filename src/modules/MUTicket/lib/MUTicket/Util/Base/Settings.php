@@ -52,9 +52,8 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 				} else if (isset($name) && !empty($name)) {
 					$ticketcategory .= $name;
 				}
-				$ticketcategory .= ",";
 					
-				$ticketcategory2[] = $id;
+				$ticketcategory2 = $id;
 			}
 		}
 		else {
@@ -66,7 +65,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$userid = $this->getCreatedUserId();
 
 		// Get supporter ids
-		$supporteruids = MUTicket_Util_View::getExistingSupporterUids();
+		$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
 
 		// Check if is array
 		if (is_array($supporteruids)) {
@@ -107,7 +106,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
 		if ($kind == 'Customer') {
-			$toaddress = MUTicket_Util_View::getSupporterMails();			
+			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);			
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
 		// TODO get mail of parent ticket creater

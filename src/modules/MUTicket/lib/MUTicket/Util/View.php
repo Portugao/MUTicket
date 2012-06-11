@@ -56,82 +56,16 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 
 	/**
 	 *
-	 * This method is for getting an array of supporter email addresses for
-	 * supporters that are active
-	 *
-	 * @ return array
-	 */
-	public static function getSupporterMails() {
-
-		$repository = MUTicket_Util_Model::getSupporterRepository();
-
-		$where = 'tbl.state = 1';
-		$supporters = $repository->selectWhere($where);
-
-		$supporternames = array();
-
-		foreach ($supporters as $supporter) {
-			$supporternames[] = $supporter['username'];
-		}
-
-		$supporteruids = array();
-
-		foreach ($supporternames as $supportername) {
-			$supporteruids[] = UserUtil::getIdFromName($supportername);
-		}
-		$supportermailadresses = array();
-
-		foreach ($supporteruids as $supporteruid) {
-			$supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
-		}
-
-		return $supportermailadresses;
-	}
-
-	/**
-	 *
-	 * This method is for getting an array of the original uids
-	 * for existing supporters or a single uid, if $id is set
-	 *
-	 * @ return array or int
-	 */
-	public static function getExistingSupporterUids($id = 0) {
-
-		$repository = MUTicket_Util_Model::getSupporterRepository();
-
-		if ($id == 0) {
-			$supporters = $repository->selectWhere();
-			
-			$supporternames = array();
-
-			foreach ($supporters as $supporter) {
-				$supporternames[] = $supporter['username'];
-			}
-
-			$supporteruids = array();
-
-			foreach ($supporternames as $supportername) {
-				$supporteruids[] = UserUtil::getIdFromName($supportername);
-			}
-		}
-		else {
-			$supporter = $repository->selectById($id);
-			$supportername = $supporter['username'];
-			$supporteruids = UserUtil::getIdFromName($supportername);
-		}
-
-		return $supporteruids;
-	}
-
-	/**
-	 *
 	 *@return array $catsupporter
 	 */
 
 	public static function getExistingSupporterForCategories($categoryid) {
 
 		// Get uids of existing supporters
-		$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+		//$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+		
+		$repository = MUTicket_Util_Model::getSupporterRepository();
+		$supporter = $repository->selectWhere();
 
 		foreach ($supporteruids as $supporteruid) {
 
@@ -154,7 +88,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 	public static function userForRating() {
 
 		// get the supporterids
-		$supporterids = MUTicket_Util_View::getExistingSupporterUids();
+		$supporterids = MUTicket_Util_Model::getExistingSupporterUids();
 
 		// get actual userid
 		$userid = UserUtil::getVar('uid');

@@ -31,7 +31,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 // DEBUG: permission check aspect ends
 
         // return view template
-        return $this->redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+        return $this->redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1)));
     }	
 	
     /**
@@ -85,7 +85,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
         $sdir = (isset($args['sortdir']) && !empty($args['sortdir'])) ? $args['sortdir'] : $this->request->getGet()->filter('sortdir', '', FILTER_SANITIZE_STRING);
         $sdir = strtolower($sdir);
         if ($sdir != 'asc' && $sdir != 'desc') {
-            $sdir = 'asc';
+            $sdir = 'desc';
         }
 
         // convenience vars to make code clearer

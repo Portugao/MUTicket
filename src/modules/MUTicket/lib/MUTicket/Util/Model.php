@@ -114,11 +114,12 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 		foreach ($supporters as $supporter) {
 			if ($catid != '') {
 				$supportercats = $supporter['supportcats'];
-				$supportercats = unserialize($supportercats);
-				foreach ($supportercats as $supportercat) {
-					if ($supportercat[0] == $catid) {
-						break;
+				$cats = unserialize($supportercats);
+				foreach ($cats as $cat) {
+					if ($cat == $catid) {
 						$status = true;
+						break;
+						
 
 					}
 					else {

@@ -20,7 +20,8 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	/**
 	 *
 	 * Enter description here ...
-	 * @param unknown_type $args
+	 * @param int $args['id']			id of the just created answer or ticket
+	 * @param string $args['title]      title of an parent ticket 
 	 */
 	public function handleModvarsPostPersist($args)
 	{
@@ -98,18 +99,21 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			}
 		}
 
+        // We build the url for the email message
 		$host = System::serverGetVar('HTTP_HOST') . '/';
 		$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
 		$editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
 
+		// We get the name of the site
 		$from = ModUtil::getVar('ZConfig', 'sitename') . ' ';
+		// We get the adminmail
 		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
 		if ($kind == 'Customer') {
 			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);			
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
-		// TODO get mail of parent ticket creater
+		// get mail of parent ticket creater
 		if ($kind == 'Supporter') {
 			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);		
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);

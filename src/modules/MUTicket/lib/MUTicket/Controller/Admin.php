@@ -72,7 +72,7 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		$rated = (isset($args['rated']) && !empty($args['rated'])) ? $args['rated'] : $this->request->getGet()->filter('rated', 0, FILTER_SANITIZE_STRING);
 		$uid = (isset($args['supporter']) && !empty($args['supporter'])) ? $args['supporter'] : $this->request->getGet()->filter('supporter', 0, FILTER_SANITIZE_STRING);
 
-		$supporteruid = MUTicket_Util_View::getExistingSupporterUids($uid);
+		$supporteruid = MUTicket_Util_Model::getExistingSupporterUids($uid);
 
 		$supporterrepository = MUTicket_Util_Model::getSupporterRepository();
 

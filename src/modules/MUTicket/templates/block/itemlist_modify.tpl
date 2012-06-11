@@ -31,8 +31,8 @@
     </select>
 </div>
 
-<div class="z-formrow">
+{* <div class="z-formrow">
     <label for="MUTicket_filter">{gt text='Filter (expert option)'}:</label>
     <input type="text" id="MUTicket_filter" name="filter" size="40" value="{$filterValue|default:""}" />
     <div class="z-formnote">({gt text='Syntax examples'}: <kbd>name:like:foobar</kbd> {gt text='or'} <kbd>status:ne:3</kbd>)</div>
-</div>
+</div> *}

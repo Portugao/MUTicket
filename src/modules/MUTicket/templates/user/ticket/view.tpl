@@ -1,10 +1,20 @@
 {* purpose of this template: tickets view view in user area *}
 <div class="muticket-ticket muticket-view">
 {include file='user/header.tpl'}
-{gt text='Ticket list' assign='templateTitle'}
+{if $state eq 0 || $state eq 1}
+{if $state eq 1}
+{gt text='Open Tickets Overview' assign='templateTitle'}
+{/if}
+{if $state eq 0}
+{gt text='Closed Tickets Overview' assign='templateTitle'}
+{/if}
+{else}
+{gt text='Ticket Overview' assign='templateTitle'}
+{/if}
+
 {pagesetvar name='title' value=$templateTitle}
 <div class="z-frontendcontainer">
-    <div class="ticket_user_header"><h2>{gt text="Ticket Overview"}</h2><div class="ticket_user_header_menue"></div></div>
+    <div class="ticket_user_header"><h2>{$templateTitle}</h2><div class="ticket_user_header_menue"></div></div>
 
 
    {* {checkpermissionblock component='MUTicket::' instance='.*' level="ACCESS_ADD"}

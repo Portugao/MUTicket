@@ -16,5 +16,157 @@
  */
 class MUTicket_Block_ItemList extends MUTicket_Block_Base_ItemList
 {
-    // feel free to extend the item list block here
+
+	/**
+	 * Get information on the block
+	 *
+	 * @return       array       The block information
+	 */
+	public function info()
+	{
+		$requirementMessage = '';
+		// check if the module is available at all
+		if (!ModUtil::available('MUTicket')) {
+			$requirementMessage .= $this->__('Notice: This block will not be displayed until you activate the MUTicket module.');
+		}
+
+		return array('module'           => 'MUTicket',
+                     'text_type'        => $this->__('Open tickets'),
+                     'text_type_long'   => $this->__('Show a list of open tickets based on different criteria.'),
+                     'allow_multiple'   => true,
+                     'form_content'     => false,
+                     'form_refresh'     => false,
+                     'show_preview'     => true,
+                     'admin_tableless'  => true,
+                     'requirement'      => $requirementMessage);
+	}
+
+	/**
+	 * Display the block
+	 *
+	 * @param        array       $blockinfo a blockinfo structure
+	 * @return       output      the rendered block
+	 */
+	public function display($blockinfo)
+	{
+		// only show block content if the user has the required permissions
+		if (!SecurityUtil::checkPermission('MUTicket:ItemListBlock:', "$blockinfo[title]::", ACCESS_OVERVIEW)) {
+			return false;
+		}
+
+		if (UserUtil::isLoggedIn() === false) {
+			return false;
+		}
+		else {
+			$uid = UserUtil::getVar('uid');
+		}
+
+		// we check if user is supporter
+		if (in_array($uid, MUTicket_Util_Model::getExistingSupporterUids(0)) === false) {
+			return false;
+		}
+
+		// check if the module is available at all
+		if (!ModUtil::available('MUTicket')) {
+			return false;
+		}
+
+		// get current block content
+		$vars = BlockUtil::varsFromContent($blockinfo['content']);
+		$vars['bid'] = $blockinfo['bid'];
+
+		// set default values for all params which are not properly set
+		if (!isset($vars['objectType']) || empty($vars['objectType'])) {
+			$vars['objectType'] = 'ticket';
+		}
+		if (!isset($vars['sorting']) || empty($vars['sorting'])) {
+			$vars['sorting'] = 'default';
+		}
+		if (!isset($vars['amount']) || !is_numeric($vars['amount'])) {
+			$vars['amount'] = 5;
+		}
+		if (!isset($vars['template'])) {
+			$vars['template'] = 'itemlist_' . ucwords($vars['objectType']) . '_display.tpl';
+		}
+		if (!isset($vars['filter'])) {
+			$vars['filter'] = '';
+		}
+
+		ModUtil::initOOModule('MUTicket');
+
+		if (!isset($vars['objectType']) || !in_array($vars['objectType'], MUTicket_Util_Controller::getObjectTypes('block'))) {
+			$vars['objectType'] = MUTicket_Util_Controller::getDefaultObjectType('block');
+		}
+
+		$objectType = $vars['objectType'];
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		$repository = $entityManager->getRepository('MUTicket_Entity_' . ucfirst($objectType));
+
+		$idFields = ModUtil::apiFunc('MUTicket', 'selection', 'getIdFields', array('ot' => $objectType));
+
+		$sortParam = '';
+		if ($vars['sorting'] == 'random') {
+			$sortParam = 'RAND()';
+		} elseif ($vars['sorting'] == 'newest') {
+			if (count($idFields) == 1) {
+				$sortParam = $idFields[0] . ' DESC';
+			}
+			else {
+				foreach ($idFields as $idField) {
+					if (!empty($sortParam)) {
+						$sortParam .= ', ';
+					}
+					$sortParam .= $idField . ' ASC';
+				}
+			}
+		} elseif ($vars['sorting'] == 'default') {
+			$sortParam = $repository->getDefaultSortingField() . ' ASC';
+		}
+
+		$where = 'tbl.state = 1 AND tbl.parent_id IS NULL';
+
+		// get objects from database
+		$selectionArgs = array(
+            'ot' => $objectType,
+            'where' => $where,
+            'orderBy' => $sortParam,
+            'currentPage' => 1,
+            'resultsPerPage' => $vars['amount']
+		);
+		list($entities, $objectCount) = ModUtil::apiFunc('MUTicket', 'selection', 'getEntitiesPaginated', $selectionArgs);
+
+		//$this->view->setCaching(true);
+
+		// assign block vars and fetched data
+		$this->view->assign('vars', $vars)
+		->assign('objectType', $objectType)
+		->assign('items', $entities)
+		->assign($repository->getAdditionalTemplateParameters('block'));
+
+		// set a block title
+		if (empty($blockinfo['title'])) {
+			$blockinfo['title'] = $this->__('MUTicket items');
+		}
+
+		$output = '';
+		$templateForObjectType = str_replace('itemlist_', 'itemlist_' . ucwords($objectType) . '_', $vars['template']);
+		if ($this->view->template_exists('contenttype/' . $templateForObjectType)) {
+			$output = $this->view->fetch('contenttype/' . $templateForObjectType);
+		} elseif ($this->view->template_exists('contenttype/' . $vars['template'])) {
+			$output = $this->view->fetch('contenttype/' . $vars['template']);
+		} elseif ($this->view->template_exists('block/' . $templateForObjectType)) {
+			$output = $this->view->fetch('block/' . $templateForObjectType);
+		} elseif ($this->view->template_exists('block/' . $vars['template'])) {
+			$output = $this->view->fetch('block/' . $vars['template']);
+		} else {
+			$output = $this->view->fetch('block/itemlist.tpl');
+		}
+
+		$blockinfo['content'] = $output;
+
+		// return the block to the theme
+		return BlockUtil::themeBlock($blockinfo);
+	}
 }

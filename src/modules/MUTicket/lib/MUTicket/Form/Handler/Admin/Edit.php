@@ -59,12 +59,13 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 			$categories = DBUtil::selectObjectArray('categories_category',$where3);
 			foreach ($categories as $category) {
 				if (isset($category['display_name'][$lang]) && !empty($category['display_name'][$lang])) {
-					LogUtil::registerStatus($category['display_name']);
-					$supportcats[] = array('value' => $category['id'], 'text' => $category['display_name'][$lang]);
+					$displayname = unserialize($category['display_name']);
+					// showing category name depending on running language
+					$supportcats[] = array('value' => $category['id'], 'text' => $displayname[$lang]);
 				} else if (isset($category['name']) && !empty($category['name'])) {
+					// showing category standard name
 					$supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
 				}
-				//$supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
 			}
 		}
 

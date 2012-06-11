@@ -21,7 +21,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	 *
 	 * Enter description here ...
 	 * @param int $args['id']			id of the just created answer or ticket
-	 * @param string $args['title]      title of an parent ticket 
+	 * @param string $args['title]      title of an parent ticket
 	 */
 	public function handleModvarsPostPersist($args)
 	{
@@ -31,12 +31,16 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$lang = ZLanguage::getLanguageCode();
 
 		$id = $args['id'];
-        $title = $args['title'];
-		if ($title == '') {
-			$title = $handler->__('No title');
-		}
-		$text = $args['text'];	
+		$title = $args['title'];
+		$text = $args['text'];
 		$parentid = $args['parentid'];
+		if ($title == '') {
+			
+			$repository = MUTicket_Util_Model::getTicketRepository();
+			
+			$entity = $repository->selectById($parentid);
+			$title = $entity['title'];
+		}
 		$categories = $args['categories'];
 
 		$ticketcategory .= $handler->__('Category: ');
@@ -49,7 +53,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 				if (isset($display_name[$lang]) && !empty($display_name[$lang])) {
 					$ticketcategory .= $display_name[$lang];
-						
+
 				} else if (isset($name) && !empty($name)) {
 					$ticketcategory .= $name;
 				}
@@ -99,7 +103,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			}
 		}
 
-        // We build the url for the email message
+		// We build the url for the email message
 		$host = System::serverGetVar('HTTP_HOST') . '/';
 		$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
 		$editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
@@ -110,12 +114,12 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
 		if ($kind == 'Customer') {
-			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);			
+			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
 		// get mail of parent ticket creater
 		if ($kind == 'Supporter') {
-			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);		
+			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);
 			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
 		}
 
@@ -132,7 +136,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			$message = $handler->__('Your ticket was saved and an email sent to our support!');
 		}
 		else {
-			$message = $handler->__('Your support answer was saved and an email sent to the customer!');	
+			$message = $handler->__('Your support answer was saved and an email sent to the customer!');
 		}
 
 		LogUtil::registerStatus($message);
@@ -168,7 +172,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$messagecontent['toaddress'] = $toaddress;
 		$messagecontent['subject'] = $entry . $from . $ticketcategory;
 		$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
-		$messagecontent['body'] .= $handler->__('Title') . '<br />' . $title . '<br /><br />';
+		$messagecontent['body'] .= $handler->__('Title of ticket') . '<br />' . $title . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
 		$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
@@ -181,23 +185,23 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 		return $messagecontent;
 	}
-	
+
 	/**
 	 * get the email address of the user that
 	 * created parent ticket
 	 * @parentid id of the parent ticket
 	 * @returns $email string
 	 */
-	
+
 	public function getMailAddressOfUser($parentid) {
-		
+
 		// get entity with id is parentid
 		$entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $parentid));
 		// get userid created the parent ticket
 		$userid = $entity['createdUserId'];
 		$email = UserUtil::getVar('email', $userid);
-		
+
 		return $email;
-		
+
 	}
 }

@@ -20,8 +20,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	/**
 	 *
 	 * Enter description here ...
-	 * @param int $args['id']			id of the just created answer or ticket
-	 * @param string $args['title]      title of an parent ticket
+	 * @param int    $args['id']	    	id of the just created answer or ticket
+	 * @param string $args['title]      	title of an parent ticket or an answer
+	 * @param string $args['text']      	text of an parent ticket or an answer
+	 * @param int    $args['parentid']  	id of the parent ticket
+	 * @param array  $args['categories']	array of categories of the ticket or answer    
 	 */
 	public function handleModvarsPostPersist($args)
 	{
@@ -91,7 +94,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			}
 		}
 
-		if ($parentid === NULL) {
+		if (!$parentid ) {
 			$entry = $handler->__('A new ticket on ');
 		}
 		else {

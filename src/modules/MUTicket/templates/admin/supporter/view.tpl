@@ -33,7 +33,7 @@
             {sortlink __linktext='Supportcats' sort='supportcats' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='supporter'}
         </th>
         <th id="hstate" scope="col" align="center" valign="middle">
-            {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='supporter'}
+            {sortlink __linktext='Present?' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='supporter'}
         </th>
         <th id="hintactions" scope="col" align="left" valign="middle" class="z-wrap z-order-unsorted">{gt text='Actions'}</th>
     </tr>

@@ -214,6 +214,16 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
      */
     public function display($args)
     {
+    	// We check if ticket is a parent ticket
+    	// If the ticket is not a parent ticket but an answer
+    	// we redirect to view of open parent tickets    	
+    	$id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
+    	$repository = MUTicket_Util_Model::getTicketRepository();
+    	$entity = $repository->selectById($id);
+    	if ($entity['parent_id'] > 0) {
+    		LogUtil::registerPermissionError(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1)));
+    	}
+    	
     	// Is it allowed to rate
     	$rating = ModUtil::getVar($this->name, 'rating');
     	

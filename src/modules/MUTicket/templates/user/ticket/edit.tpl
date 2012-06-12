@@ -46,6 +46,7 @@
             {formuploadinput group='ticket' id='images' mandatory=false readOnly=false cssClass=''}
 
             <div class="z-formnote">{gt text='Allowed file extensions:'} gif, jpeg, jpg, png</div>
+            <div class="z-formnote">{gt text='Allowed file size:'} {$fileSize} </div>
             {if $mode ne 'create'}
                 {if $ticket.images ne ''}
                   <div class="z-formnote">

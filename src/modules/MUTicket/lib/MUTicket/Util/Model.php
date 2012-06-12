@@ -110,7 +110,6 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 
 		$supporternames = array();
 
-
 		foreach ($supporters as $supporter) {
 			if ($catid != '') {
 				$supportercats = $supporter['supportcats'];
@@ -118,8 +117,7 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 				foreach ($cats as $cat) {
 					if ($cat == $catid) {
 						$status = true;
-						break;
-						
+						break;					
 
 					}
 					else {
@@ -132,6 +130,14 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 			}
 			else {
 				$supporternames[] = $supporter['username'];
+			}
+		}
+		
+		// if no supporter is available with the relevant category
+		// we take all supporters to send an email to
+		if (empty($supporternames)) {
+			foreach ($supporters as $supporter) {
+				$supporternames[] = $supporter['username'];;
 			}
 		}
 

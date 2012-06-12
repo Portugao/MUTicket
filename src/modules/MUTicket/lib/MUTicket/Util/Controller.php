@@ -56,4 +56,41 @@ class MUTicket_Util_Controller extends MUTicket_Util_Base_Controller
         $ratingvalue[] = array('value' => '6',    'text' => __('6', $dom));
         return $ratingvalue;
     }
+    
+    /**
+     * Get allowed filesize
+     */
+    
+    public static function maxSize() 
+    {
+
+    	$maxSize = ModUtil::getVar('MUTicket', 'fileSize');
+    	
+    	$dom = ZLanguage::getModuleDomain('MUTicket');
+
+		if ($maxSize > 0) {
+
+				$maxSizeKB = $maxSize / 1024;
+
+				if ($maxSizeKB < 1024) {
+					$maxSizeKB = DataUtil::formatNumber($maxSizeKB);
+
+					$allowedSize = $maxSizeKB . ' KB';
+					return $allowedSize;
+
+				}
+
+				$maxSizeMB = $maxSizeKB / 1024;
+				$maxSizeMB = DataUtil::formatNumber($maxSizeMB);
+
+				$allowedSize = $maxSizeMB . ' MB';
+				return $allowedSize;
+
+		}
+		else {
+			$allowedSize = __('No limit');
+		}
+		
+		return $allowedSize;
+    }
 }

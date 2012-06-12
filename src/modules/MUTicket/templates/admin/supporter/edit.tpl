@@ -45,7 +45,7 @@
             {formcheckboxlist group='supporter' id='supportcats' multiple=true mandatory=true __title='Select a category'}
         </div>
         <div class="z-formrow">
-            {formlabel for='state' __text='State?' mandatorysym='1'}
+            {formlabel for='state' __text='Is this supporter present?' mandatorysym='0'}
             {formcheckbox group='supporter' id='state' mame='state' readOnly=false __title='state' checked=checked}
         </div>
     </fieldset>

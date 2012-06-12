@@ -26,7 +26,6 @@ class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Ed
      */
     public function initialize(Zikula_Form_View $view)
     {
-    	$ticketId = $this->request->query->filter('ticket', 0, FILTER_VALIDATE_INT);
     	
         $this->inlineUsage = ((UserUtil::getTheme() == 'Printer') ? true : false);
         $this->idPrefix = $this->request->getGet()->filter('idp', '', FILTER_SANITIZE_STRING);
@@ -77,6 +76,11 @@ class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Ed
 
         if ($this->hasCategories === true) {
             $this->initCategoriesForEdit($entity);
+        }
+        
+        // We set text field to empty if entity class is ticket
+        if ($entityClass == 'MUTicket_Entity_Ticket') {
+        $entity['text'] = '';
         }
 
         // save entity reference for later reuse

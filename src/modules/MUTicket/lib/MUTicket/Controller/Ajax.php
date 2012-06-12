@@ -33,6 +33,12 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
 
     public function close() {
     	
+    	// may the user close the ticket?
+    	$kind = MUTicket_Util_View::userForRating();
+    	if ($kind == 1) {
+    		return false;
+    	}
+    	
     	$request = new Zikula_Request_Http();
     	$id = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
     	

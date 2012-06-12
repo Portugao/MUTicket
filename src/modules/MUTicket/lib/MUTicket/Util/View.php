@@ -80,8 +80,8 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 
 	/**
 	 *
-	 * this method is for checking if an user is not
-	 * a supporter and may rate for tickets
+	 * this method is for checking if an user is
+	 * a supporter or not, if supporter return 0 else 1
 	 *
 	 * return int.
 	 */

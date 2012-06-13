@@ -130,8 +130,8 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
     }
     // guests get no access
     else {
-    	LogUtil::registerError(__('Sorry. No access!'));
-    	System::redirect($redirecturl);
+    	return LogUtil::registerPermissionError();
+    	//System::redirect($redirecturl);
     }
     
     // we check if the user is a supporter

@@ -1,5 +1,10 @@
 {* purpose of this template: tickets display view in user area *}
 {include file='user/header.tpl'}
+{if $supporteractive eq 0}
+<div id="ticket_user_nosupport">
+{gt text='Sorry! At the moment our support is not available!'}
+</div>
+{/if}
 {pageaddvar name='javascript' value='jquery'}
 {pageaddvar name='javascript' value='jquery-ui'}
 {pageaddvar name='stylesheet' value='modules/MUTicket/style/jquery-ui-1.8.21.custom.css'}
@@ -205,10 +210,6 @@
 {modfunc modname='MUTicket' type='user' func='edit' ot='ticket'}
 </div>
 {/if}
-{else}
-<div id="ticket_user_nosupport">
-{gt text='Sorry! At the moment our support is not available!'}
-</div>
 {/if}
 </div>
 </div>

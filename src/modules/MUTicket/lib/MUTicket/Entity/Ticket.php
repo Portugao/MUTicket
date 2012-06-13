@@ -95,7 +95,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                         'url' => array('type' => 'user', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
                         'icon' => 'display',
                         'linkTitle' => str_replace('"', '', $this['title']),
-                        'linkText' => __('Details', $dom)
+                        'linkText' => __('See details and save an answer!', $dom)
 				);
 			}
 

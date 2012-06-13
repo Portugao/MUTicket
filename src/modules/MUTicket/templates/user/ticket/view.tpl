@@ -1,6 +1,11 @@
 {* purpose of this template: tickets view view in user area *}
 <div class="muticket-ticket muticket-view">
 {include file='user/header.tpl'}
+{if $supporteractive eq 0}
+<div id="ticket_user_nosupport">
+{gt text='Sorry. At the moment our support is not available!'}
+</div>
+{/if}
 {if $state eq 0 || $state eq 1}
 {if $state eq 1}
 {gt text='Open Tickets Overview' assign='templateTitle'}

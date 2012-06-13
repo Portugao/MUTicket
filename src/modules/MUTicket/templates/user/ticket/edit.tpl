@@ -167,7 +167,11 @@
         {formbutton id='btnDelete' commandName='delete' __text='Delete ticket' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
       {/if}
     {elseif $mode eq 'create'}
+        {if $func eq 'edit'}
         {formbutton id='btnCreate' commandName='create' __text='Create ticket' class='z-bt-ok'}
+        {else}
+        {formbutton id='btnCreate' commandName='create' __text='Save answer' class='z-bt-ok'}
+        {/if}
     {else}
         {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
     {/if}

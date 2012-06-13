@@ -27,13 +27,19 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
     public function initialize(Zikula_Form_View $view)
     {
         parent::initialize($view);
+        
+        // we rule the text for the button to create tickets or answers
+        $func = $this->request->query->filter('func', 'display', FILTER_SANITIZE_STRING);
 		
+        $fileSize = MUTicket_Util_Controller::maxSize();
         
         // set mode to create
 		$this->mode = 'create';
 		
 		// we assign to template
-		$this->view->assign('mode', $this->mode);
+		$this->view->assign('mode', $this->mode)
+		           ->assign('func', $func)
+		           ->assign('fileSize', $fileSize);
 
         // everything okay, no initialization errors occured
         return true;

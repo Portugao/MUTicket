@@ -48,11 +48,6 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
      */
     public function view($args)
     {
-
-        // get state of the link
-        $state = $this->request->getGet()->filter('state','', FILTER_SANITIZE_STRING);
-        
-        $this->view->assign('state', $state);
         
 // DEBUG: permission check aspect starts
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ));
@@ -154,6 +149,11 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		}
 	}
     }
+    
+    	// We check for supportes that are active
+    	// If there is no supporter active, we show no link for new tickets
+    	// and no edit form for answers
+    	$supporteractive = MUTicket_Util_View::checkIfSupporters();
 
         $selectionArgs = array(
             'ot' => $objectType,
@@ -198,6 +198,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
                    ->assign('sort', $sort)
                    ->assign('sdir', $sdir)
                    ->assign('state', $state)
+                   ->assign('supporteractive', $supporteractive)
                    ->assign('currentUrlObject', $currentUrlObject)
                    ->assign($repository->getAdditionalTemplateParameters('controllerAction', $utilArgs));
 

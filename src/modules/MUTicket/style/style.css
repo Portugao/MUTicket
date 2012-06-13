@@ -261,7 +261,7 @@ button.muticketInlineButton {
 
 #ticket_user_nosupport {
     float: left;
-    margin: 20px 0 0 0;
+    margin: 10px 0;
     width: 96%;
     padding: 2%;
     border: 1px solid #333;

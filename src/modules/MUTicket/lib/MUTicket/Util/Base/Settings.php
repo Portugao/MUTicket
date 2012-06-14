@@ -24,7 +24,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	 * @param string $args['title]      	title of an parent ticket or an answer
 	 * @param string $args['text']      	text of an parent ticket or an answer
 	 * @param int    $args['parentid']  	id of the parent ticket
-	 * @param array  $args['categories']	array of categories of the ticket or answer    
+	 * @param array  $args['categories']	array of categories of the ticket or answer
 	 */
 	public function handleModvarsPostPersist($args)
 	{
@@ -38,9 +38,9 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$text = $args['text'];
 		$parentid = $args['parentid'];
 		if ($title == '') {
-			
+
 			$repository = MUTicket_Util_Model::getTicketRepository();
-			
+
 			$entity = $repository->selectById($parentid);
 			$title = $entity['title'];
 		}
@@ -108,8 +108,13 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 		// We build the url for the email message
 		$host = System::serverGetVar('HTTP_HOST') . '/';
-		$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
-		$editurl = 'http://' . $host . ModUtil::url('Eternizer', 'admin', 'edit', array('ot' => 'entry', 'id' => $id));
+		// workaround because of bug in MOST or doctrine2 TODO
+		if (!$parentid) {
+			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket'));
+		}
+		else {
+			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
+		}
 
 		// We get the name of the site
 		$from = ModUtil::getVar('ZConfig', 'sitename') . ' ';
@@ -163,7 +168,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 	 * get the mail content for the message to send
 	 * returns array $messagecontent
 	 */
-	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $editurl = '') {
+	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind) {
 
 		$serviceManager = ServiceUtil::getManager();
 		$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
@@ -174,7 +179,12 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		/*$messagecontent['toname'] = 'Webmaster';*/
 		$messagecontent['toaddress'] = $toaddress;
 		$messagecontent['subject'] = $entry . $from . $ticketcategory;
-		$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+		if ($kind == 'Customer') {
+			$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+		}
+		else {
+			$messagecontent['body'] = $handler->__('There is an answer to your ticket of the support on '). '<h2>' . $from . '</h2>';
+		}
 		$messagecontent['body'] .= $handler->__('Title of ticket') . '<br />' . $title . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';

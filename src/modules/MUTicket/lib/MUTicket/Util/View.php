@@ -30,7 +30,6 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 		$groups_column = $tables['groups_column'];
 
 		// get supporter group
-
 		$supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
 			
 		if ($supportergroup == '') {
@@ -41,11 +40,9 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 		$where = "WHERE $groups_column[name] = '" . DataUtil::formatForStore($supportergroup) . "'";
 
 		// get supporter group id
-
 		$supportergroupid = UserUtil::getGroupIdList($where);
 
 		// get user id's of users, which are in the supporter group
-
 		$supporterusersids = UserUtil::getUsersForGroup($supportergroupid);
 
 		$userids = implode(',' , $supporterusersids);
@@ -62,8 +59,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 	public static function getExistingSupporterForCategories($categoryid) {
 
 		// Get uids of existing supporters
-		//$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-		
+		//$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();	
 		$repository = MUTicket_Util_Model::getSupporterRepository();
 		$supporter = $repository->selectWhere();
 
@@ -119,5 +115,4 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 			return 0;
 		}
 	}
-
 }

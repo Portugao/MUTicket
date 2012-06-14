@@ -154,6 +154,9 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
     	// If there is no supporter active, we show no link for new tickets
     	// and no edit form for answers
     	$supporteractive = MUTicket_Util_View::checkIfSupporters();
+    	
+    	// We check if user is supporter
+    	$kind = MUTicket_Util_View::userForRating();
 
         $selectionArgs = array(
             'ot' => $objectType,
@@ -184,6 +187,8 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
             $selectionArgs['currentPage'] = $currentPage;
             $selectionArgs['resultsPerPage'] = $resultsPerPage;
             list($entities, $objectCount) = ModUtil::apiFunc($this->name, 'selection', 'getEntitiesPaginated', $selectionArgs);
+            
+  
 
             $this->view->assign('currentPage', $currentPage)
                        ->assign('pager', array('numitems'     => $objectCount,
@@ -198,6 +203,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
                    ->assign('sort', $sort)
                    ->assign('sdir', $sdir)
                    ->assign('state', $state)
+                   ->assign('kind', $kind)
                    ->assign('supporteractive', $supporteractive)
                    ->assign('currentUrlObject', $currentUrlObject)
                    ->assign($repository->getAdditionalTemplateParameters('controllerAction', $utilArgs));

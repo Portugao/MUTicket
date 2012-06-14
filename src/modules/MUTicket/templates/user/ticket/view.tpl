@@ -1,6 +1,9 @@
 {* purpose of this template: tickets view view in user area *}
 <div class="muticket-ticket muticket-view">
 {include file='user/header.tpl'}
+{if $kind eq 0}
+<div class="z-informationmsg z-formnote"><div style="line-height: 1.2em; padding: 0 10px;"><img src='modules/MUTicket/images/New.png' /> {gt text='New ticket'} <img src='modules/MUTicket/images/Supporter.png' /> {gt text='Waiting for supporter feedback'} <img src='modules/MUTicket/images/Customer.png' /> {gt text='Waiting for customer feedback'}</div></div>
+{/if}
 {if $supporteractive eq 0}
 <div id="ticket_user_nosupport">
 {gt text='Sorry. At the moment our support is not available!'}
@@ -32,15 +35,23 @@
 
 <table class="z-datatable ticket_user_table">
     <colgroup>
-        <col id="cupdated" />
-        <col id="ctitle" />
+        {if $kind eq 0 && $state ne 0}
         <col id="cstate" />
+        {/if}
+        <col id="ccreated" />
+        <col id="ctitle" />
+        <col id="copen" />
         <col id="cintactions" />
     </colgroup>
     <thead>
     <tr>
+        {if $kind eq 0 && $state ne 0}
+        <th id="hstate" scope="col" align="center" valign="middle">
+        {gt text='State'}
+        </th>
+        {/if}
         <th id="hstate" scope="col" align="left" valign="middle">
-        {gt text='Updated'}
+        {gt text='Created'}
         </th>
         <th id="htitle" scope="col" align="left" valign="middle">
         {if $state}
@@ -65,16 +76,21 @@
 
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
-        <td headers="hupdated" align="left" valign="top">
-            {$ticket.updatedDate|dateformat:datetimelong}
+        {if $kind eq 0 && $state ne 0}
+        <td headers="hstate" align="center" valign="middle">
+            {$ticket.id|muticketGetTicketState:$ticket.id}
+        </td>
+        {/if}   
+        <td headers="hupdated" align="left" valign="middle">
+            {$ticket.createdDate|dateformat:datetimelong}
         </td>    
-        <td headers="htitle" align="left" valign="top">
+        <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
-        <td headers="hstate" align="left" valign="top">
+        <td headers="hstate" align="left" valign="middle">
             {$ticket.state|yesno:true}
         </td>
-        <td headers="hintactions" align="left" valign="top" style="white-space: nowrap">
+        <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
                 {icon type='display' size='extrasmall' __alt='Details'}
             </a>

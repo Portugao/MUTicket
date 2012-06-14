@@ -12,7 +12,7 @@
  */
 
 /**
- * The muticketGetTicketState modifier displays the cat name.
+ * The muticketGetTicketState modifier return the state of a ticket with an image.
  *
  * @param  int       $id      cat id
  *

@@ -11,4 +11,4 @@
 {if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
 {adminheader}
 {/if}
-<div class="z-informationmsg z-formnote">{gt text="Notice: If there is no supporter present, the support  in the frontend is disabled for costumers!"}</div>
+<div class="z-informationmsg z-formnote">{gt text="Notice: If there is no supporter present, the support in the frontend is disabled for costumers!"}</div>

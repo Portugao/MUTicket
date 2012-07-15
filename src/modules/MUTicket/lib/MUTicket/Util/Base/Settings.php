@@ -123,12 +123,12 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 		if ($kind == 'Customer') {
 			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url , $kind);
 		}
 		// get mail of parent ticket creater
 		if ($kind == 'Supporter') {
 			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url);
+			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind);
 		}
 
 		// We send a mail if an email address is saved

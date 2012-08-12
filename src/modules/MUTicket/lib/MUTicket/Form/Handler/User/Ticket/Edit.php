@@ -62,17 +62,25 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
     {
     	//  build request object
     	$request = new Zikula_Request_Http();
+    	
     	// get id of parent ticket
         // We check if ticket is a parent ticket
     	// If the ticket is not a parent ticket but an answer
     	// we redirect to view of open parent tickets    	
- 
     	$repository = MUTicket_Util_Model::getTicketRepository();
     	$entity = $repository->selectById($this->idValues['id'] );
     	if ($entity['parent_id'] > 0) {
     		$parent = $entity['parent_id'];
     	}
-    	//$parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
+    	
+    	// Get relevant datas for mailing
+		$args['id'] = $entity['id']; // TODO bug in MOST ??
+		$args['parentid'] = $entity['parent_id'];
+		$args['title'] = $entity['title'];
+		$args['text'] = $entity['text'];
+		$args['categories'] = $entity['categories'];
+    	
+        MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);
     	
         // redirect to the list of tickets
         $viewArgs = array('ot' => $this->objectType);

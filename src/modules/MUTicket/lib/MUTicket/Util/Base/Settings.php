@@ -37,13 +37,14 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$title = $args['title'];
 		$text = $args['text'];
 		$parentid = $args['parentid'];
-		if ($title == '') {
+		
+		/*if ($title == '') {
 
 			$repository = MUTicket_Util_Model::getTicketRepository();
 
 			$entity = $repository->selectById($parentid);
 			$title = $entity['title'];
-		}
+		}*/
 		$categories = $args['categories'];
 
 		$ticketcategory .= $handler->__('Category: ');
@@ -70,7 +71,8 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		}
 
 		// Get actual userid
-		$userid = $this->getCreatedUserId();
+		$userid = UserUtil::getVar('uid');
+		//$userid = $this->getCreatedUserId();
 
 		// Get supporter ids
 		$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();

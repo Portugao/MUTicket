@@ -26,6 +26,19 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  */
 class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 {
+	
+    /**
+     * Bidirectional - One parent [ticket] has many children [tickets] (INVERSE SIDE).
+     *
+     * @ORM\OneToMany(targetEntity="MUTicket_Entity_Ticket", mappedBy="parent", cascade={"all"})
+     * @ORM\JoinTable(name="muticket_parentchildren",
+     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id" )},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id" )}
+     * )
+     * @ORM\OrderBy({"createdDate" = "ASC"})
+     * @var MUTicket_Entity_Ticket[] $children.
+     */
+    protected $children = null;
 
 	/**
 	 * Collect available actions for this entity.
@@ -179,7 +192,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 		$args['text'] = $this->text;
 		$args['categories'] = $this->categories;
 
-		MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);
+		//MUTicket_Util_Base_Settings::handleModvarsPostPersist($args);
 		$this->performPostPersistCallback();
 
 	}

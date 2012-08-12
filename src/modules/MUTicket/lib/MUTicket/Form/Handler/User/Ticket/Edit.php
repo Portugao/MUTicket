@@ -26,6 +26,14 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     public function initialize(Zikula_Form_View $view)
     {
+    	// We check for supportes that are active
+    	// If there is no supporter active, we break the input process
+    	$supporteractive = MUTicket_Util_View::checkIfSupporters();
+    	if ($supporteractive == 0) {
+            $url = ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1));
+    		return LogUtil::registerError(__('Sorry. Our support is not available at the moment!'),0 , $url);
+    	}
+    	
         parent::initialize($view);
         
         // we rule the text for the button to create tickets or answers
@@ -55,7 +63,16 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
     	//  build request object
     	$request = new Zikula_Request_Http();
     	// get id of parent ticket
-    	$parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
+        // We check if ticket is a parent ticket
+    	// If the ticket is not a parent ticket but an answer
+    	// we redirect to view of open parent tickets    	
+ 
+    	$repository = MUTicket_Util_Model::getTicketRepository();
+    	$entity = $repository->selectById($this->idValues['id'] );
+    	if ($entity['parent_id'] > 0) {
+    		$parent = $entity['parent_id'];
+    	}
+    	//$parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
     	
         // redirect to the list of tickets
         $viewArgs = array('ot' => $this->objectType);
@@ -63,7 +80,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 
         if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
             // redirect to the detail page of parent ticket
-            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parent ));
+            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parent, 'edit' => 1 ));
         }
         if ($args['commandName'] == 'create' && $this->mode == 'create' && $parent == NULL) {
         	// redirect to just created parent ticket

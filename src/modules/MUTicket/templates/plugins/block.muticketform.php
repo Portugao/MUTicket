@@ -24,30 +24,42 @@
  */
 function smarty_block_muticketform($params, $content, $view)
 {
-    if ($content) {
-        PageUtil::addVar('stylesheet', 'system/Theme/style/form/style.css');
-        $encodingHtml = (array_key_exists('enctype', $params) ? " enctype=\"$params[enctype]\"" : '');
-        $action = htmlspecialchars(System::getCurrentUri());
-        $classString = '';
-        if (isset($params['cssClass'])) {
-            $classString = "class=\"$params[cssClass]\" ";
-        }
-        
-        if(strpos($action,"func=display")!==false) {
-        	$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
-        }
+	if ($content) {
+		PageUtil::addVar('stylesheet', 'system/Theme/style/form/style.css');
+		$encodingHtml = (array_key_exists('enctype', $params) ? " enctype=\"$params[enctype]\"" : '');
+		$action = htmlspecialchars(System::getCurrentUri());
+		$classString = '';
+		if (isset($params['cssClass'])) {
+			$classString = "class=\"$params[cssClass]\" ";
+		}
 
-        $view->postRender();
+		// we check if the entryppoint is part of the url
+		$stripentrypoint = ModUtil::getVar('ZConfig', 'shorturlsstripentrypoint');
 
-        $formId = $view->getFormId();
-        $out = "
+		if(strpos($action,"func=display")!==false) {
+			$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
+		}
+
+		if(strpos($action,"/ticket/")!==false) {
+			if ($stripentrypoint == 1) {
+				$action = 'muticket/edit/ot/ticket';
+			}
+			elseif ($stripentrypoint == 0) {
+				$action = 'index.php/muticket/edit/ot/ticket';
+			}
+		}
+
+		$view->postRender();
+
+		$formId = $view->getFormId();
+		$out = "
 <form id=\"{$formId}\" {$classString}action=\"$action\" method=\"post\"{$encodingHtml}>
-    $content
+		$content
     <div>
-        {$view->getStateHTML()}
-        {$view->getStateDataHTML()}
-        {$view->getIncludesHTML()}
-        {$view->getCsrfTokenHtml()}
+    {$view->getStateHTML()}
+    {$view->getStateDataHTML()}
+    {$view->getIncludesHTML()}
+    {$view->getCsrfTokenHtml()}
         <input type=\"hidden\" name=\"__formid\" id=\"form__id\" value=\"{$formId}\" />
         <input type=\"hidden\" name=\"FormEventTarget\" id=\"FormEventTarget\" value=\"\" />
         <input type=\"hidden\" name=\"FormEventArgument\" id=\"FormEventArgument\" value=\"\" />
@@ -68,6 +80,6 @@ function smarty_block_muticketform($params, $content, $view)
     </div>
 </form>
 ";
-        return $out;
-    }
+    return $out;
+	}
 }

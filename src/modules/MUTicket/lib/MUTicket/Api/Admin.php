@@ -31,11 +31,11 @@ class MUTicket_Api_Admin extends MUTicket_Api_Base_Admin
                              'title' => $this->__('Switch to user area.'),
                              'class' => 'z-icon-es-home');
         }
-       /* if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'ticket')),
                              'text' => $this->__('Tickets'),
                              'title' => $this->__('Ticket list'));
-        } */
+        }
         if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')),
                              'text' => $this->__('Supporters'),

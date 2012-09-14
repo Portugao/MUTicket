@@ -33,18 +33,18 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 		$lang = ZLanguage::getLanguageCode();
 
-		$id = $args['id'];
+		$ticketid = $args['id'];
 		$title = $args['title'];
 		$text = $args['text'];
 		$parentid = $args['parentid'];
-		
-		/*if ($title == '') {
+
+		if ($title == '') {
 
 			$repository = MUTicket_Util_Model::getTicketRepository();
 
 			$entity = $repository->selectById($parentid);
 			$title = $entity['title'];
-		}*/
+		}
 		$categories = $args['categories'];
 
 		$ticketcategory .= $handler->__('Category: ');
@@ -112,7 +112,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$host = System::serverGetVar('HTTP_HOST') . '/';
 		// workaround because of bug in MOST or doctrine2 TODO
 		if (!$parentid) {
-			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket'));
+			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $ticketid));
 		}
 		else {
 			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
@@ -123,46 +123,38 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		// We get the adminmail
 		$fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
 
+		$toaddress = '';
+
 		if ($kind == 'Customer') {
 			$toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url , $kind);
 		}
 		// get mail of parent ticket creater
 		if ($kind == 'Supporter') {
 			$toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);
-			$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind);
 		}
 
 		// We send a mail if an email address is saved
 		if ($toaddress != '') {
+			foreach ($toaddress as $address) {
+				$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $address, $entry, $ticketcategory, $title, $text, $url, $kind);
+				if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
+					LogUtil::registerError($handler->__('Unable to send message'));
+				}
+				else {
+					// Formating of status text
+					if ($kind == 'Customer') {
 
-			if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
-				LogUtil::registerError($handler->__('Unable to send message'));
+						$message = $handler->__('Your ticket was saved and an email sent to our support!');
+					}
+					else {
+						$message = $handler->__('Your support answer was saved and an email sent to the customer!');
+					}
+				}
 			}
-		}
-
-		// Formating of status text
-		if ($kind == 'Customer') {
-			$message = $handler->__('Your ticket was saved and an email sent to our support!');
-		}
-		else {
-			$message = $handler->__('Your support answer was saved and an email sent to the customer!');
 		}
 
 		LogUtil::registerStatus($message);
 
-		return true;
-
-	}
-
-	/**
-	 *
-	 * this method will handle a moderation on the view template
-	 * Enter description here ...
-	 */
-	public function handleChange()
-	{
-		// TODO
 	}
 
 	/**
@@ -191,10 +183,6 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
 		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
 		$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
-		if ($editurl != '') {
-			$messagecontent .= $handler->__('Moderate this entry:') .
-                '<br />' . '<a href="' . $editurl . '">' . $editurl . '</a>';
-		}
 		$messagecontent['altbody'] = '';
 		$messagecontent['html'] = true;
 

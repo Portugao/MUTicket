@@ -21,7 +21,7 @@ class MUTicket_Version extends MUTicket_Base_Version
 		$meta = parent::getMetaData();
 		 
 		// the module description
-        $meta['description']  = $this->__('MUTicket - Handling support tickets of your customers');
+        $meta['description']  = $this->__('MUTicket - Handling of support tickets for your customers');
         
         return $meta;
         

@@ -32,8 +32,8 @@ function smarty_block_muticketform($params, $content, $view)
 		if (isset($params['cssClass'])) {
 			$classString = "class=\"$params[cssClass]\" ";
 		}
-
-		// we check if the entryppoint is part of the url
+		
+		// we check if the entrypoint is part of the url
 		$stripentrypoint = ModUtil::getVar('ZConfig', 'shorturlsstripentrypoint');
 
 		if(strpos($action,"func=display")!==false) {

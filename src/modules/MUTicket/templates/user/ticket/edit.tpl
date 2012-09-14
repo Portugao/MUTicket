@@ -123,7 +123,7 @@
         {include file='user/include_standardfields_edit.tpl' obj=$ticket}
     {/if}
     {if $func eq 'edit'}
-    	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="1000">
+    	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="0">
     	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="0">    
     {/if}
     {if $func eq 'display'}

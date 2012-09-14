@@ -135,8 +135,6 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 		}
 	}
 
-
-
 	/**
 	 * Post-Process the data after the entity has been constructed by the entity manager.
 	 *
@@ -154,17 +152,11 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 		if ($type == 'admin') {
 			if ($ot == 'supporter') {
 				 
-				$this->getSupportcats();
-				$supportcats = $this->supportcats;
+				$supportcats = $this->getSupportcats();
 				 
 				if ($func == 'view') {					 
 					$supportcats = urldecode($supportcats);
 					$cats = unserialize($supportcats);
-					$this->setSupportcats($cats);
-				}
-				if ($func == 'edit') {
-					$cats = unserialize($supportcats);
-					$supportcats = urldecode($supportcats);
 					$this->setSupportcats($cats);
 				}
 			}
@@ -188,8 +180,8 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 		 
 		if ($type == 'admin' && $func == 'edit' && $ot == 'supporter') {
 			$this->getSupportcats();
-			$supportercats = $this->supportcats;
-			$cats = serialize($supportercats);
+			$supportcats = $this->supportcats;
+			$cats = serialize($supportcats);
 			$this->setSupportcats($cats);
 		}
 		$this->performPrePersistCallback();

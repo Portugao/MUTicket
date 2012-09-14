@@ -17,6 +17,19 @@
  */
 class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 {
+	
+    /**
+     * Post initialise.
+     *
+     * Run after construction.
+     *
+     * @return void
+     */
+    protected function postInitialize()
+    {
+        // Set caching to true by default.
+        $this->view->setCaching(Zikula_View::CACHE_DISABLED);
+    }
 
 	/**
 	 * This method is the default function, and is called whenever the application's
@@ -228,12 +241,9 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		$repository = MUTicket_Util_Model::getTicketRepository();
 		$entity = $repository->selectById($id);
 		if ($entity['parent_id'] > 0) {
-			if ($args['edit'] == 1) {
-			    ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $entity['parent_id']));	 
-			}
-			else {
-				LogUtil::registerPermissionError(ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $entity['parent_id'])));
-			}
+	        $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $entity['parent_id']));
+	        LogUtil::registerStatus(__('Sorry! Only parent tickets are directly available in display!'));
+	        $this->redirect($url);
 		}
 		 
 		// Is it allowed to rate

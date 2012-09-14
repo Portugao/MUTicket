@@ -17,6 +17,20 @@
  */
 class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 {
+	
+    /**
+     * Post initialise.
+     *
+     * Run after construction.
+     *
+     * @return void
+     */
+    protected function postInitialize()
+    {
+        // Set caching to true by default.
+        $this->view->setCaching(Zikula_View::CACHE_DISABLED);
+    }
+    
 	/**
 	 * This method is the default function, and is called whenever the application's
 	 * Admin area is called without defining arguments.

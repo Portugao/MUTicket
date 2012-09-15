@@ -71,13 +71,13 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 			if (in_array($currentFunc, array('main', 'view', 'display'))) {
 				if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
 
-					$this->_actions[] = array(
+					/*$this->_actions[] = array(
                         'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
                         'icon' => 'edit',
                         'linkTitle' => __('Edit', $dom),
                         'linkText' => __('Edit', $dom)
 					);
-					/* $this->_actions[] = array(
+					 $this->_actions[] = array(
 					 'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'astemplate' => $this['id'])),
 					 'icon' => 'saveas',
 					 'linkTitle' => __('Reuse for new item', $dom),

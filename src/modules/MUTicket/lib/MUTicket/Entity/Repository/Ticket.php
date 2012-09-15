@@ -18,54 +18,108 @@
  */
 class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_Ticket
 {
-	
-    /**
-     * @var string The default sorting field/expression.
-     */
-    protected $defaultSortingField = 'createdDate';	
-    
-    /**
-     * Select object from the database.
-     *
-     * @param mixed   $id       The id (or array of ids) to use to retrieve the object (optional) (default=null).
-     * @param boolean $useJoins Whether to include joining related objects (optional) (default=true).
-     *
-     * @return array|MUTicket_Entity_Ticket retrieved data array or MUTicket_Entity_Ticket instance
-     */
-    public function selectById($id = 0, $useJoins = true)
-    {
-        // check id parameter
-        if ($id == 0) {
-            return LogUtil::registerArgsError();
-        }
 
-        $where = '';
-        if (is_array($id)) {
-            foreach ($id as $fieldName => $fieldValue) {
-                if (!empty($where)) {
-                    $where .= ' AND ';
-                }
-                $where .= 'tbl.' . DataUtil::formatForStore($fieldName) . ' = \'' . DataUtil::formatForStore($fieldValue) . '\'';
-            }
-        } else {
-            $where .= 'tbl.id = ' . DataUtil::formatForStore($id);
-        }
-        
-        // Only display of parent tickets
-        /* TODO We need another solution
-        
-        $where .= ' AND ';         
-        $where .= 'tbl.parent_id IS NULL'; */
+	/**
+	 * @var string The default sorting field/expression.
+	 */
+	protected $defaultSortingField = 'createdDate';
 
-        $query = $this->_intBaseQuery($where, '', $useJoins);
+	/**
+	 * Select object from the database.
+	 *
+	 * @param mixed   $id       The id (or array of ids) to use to retrieve the object (optional) (default=null).
+	 * @param boolean $useJoins Whether to include joining related objects (optional) (default=true).
+	 *
+	 * @return array|MUTicket_Entity_Ticket retrieved data array or MUTicket_Entity_Ticket instance
+	 */
+	public function selectById($id = 0, $useJoins = true)
+	{
+		// check id parameter
+		if ($id == 0) {
+			return LogUtil::registerArgsError();
+		}
 
-        $result = $query->getOneOrNullResult();
-        if ($result) {
-        	return $result;
-        }
-        else {
-        	return LogUtil::registerStatus(__('Sorry! Access denied!'), ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket')));
-        }
-    }
+		$where = '';
+		if (is_array($id)) {
+			foreach ($id as $fieldName => $fieldValue) {
+				if (!empty($where)) {
+					$where .= ' AND ';
+				}
+				$where .= 'tbl.' . DataUtil::formatForStore($fieldName) . ' = \'' . DataUtil::formatForStore($fieldValue) . '\'';
+			}
+		} else {
+			$where .= 'tbl.id = ' . DataUtil::formatForStore($id);
+		}
+
+		// Only display of parent tickets
+		/* TODO We need another solution
+
+		$where .= ' AND ';
+		$where .= 'tbl.parent_id IS NULL'; */
+
+		$query = $this->_intBaseQuery($where, '', $useJoins);
+
+		$result = $query->getOneOrNullResult();
+		if ($result) {
+			return $result;
+		}
+		else {
+			return LogUtil::registerStatus(__('Sorry! Access denied!'), ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket')));
+		}
+	}
+
+	/**
+	 * Build a generic Doctrine query supporting WHERE and ORDER BY
+	 *
+	 * @param string  $where    The where clause to use when retrieving the collection (optional) (default='').
+	 * @param string  $orderBy  The order-by clause to use when retrieving the collection (optional) (default='').
+	 * @param boolean $useJoins Whether to include joining related objects (optional) (default=true).
+	 *
+	 * @return Doctrine\ORM\Query query instance to be further processed
+	 */
+	protected function _intBaseQuery($where = '', $orderBy = '', $useJoins = true)
+	{
+		$request = new Zikula_Request_Http();
+		$func = $request->getGet()->filter('func', 'main', FILTER_SANITIZE_STRING);
+		$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
+		
+		$selection = 'tbl';
+		if ($useJoins === true) {
+			$selection .= $this->addJoinsToSelection();
+		}
+
+		$qb = $this->getEntityManager()->createQueryBuilder();
+		$qb->select($selection)
+		->from('MUTicket_Entity_Ticket', 'tbl');
+
+		if ($useJoins === true) {
+			$this->addJoinsToFrom($qb);
+		}
+
+		if ($func == 'view' && $type == 'admin') {
+			if (!empty($where)) {
+				$where .= 'AND tbl.parent_id IS NULL';
+			}
+			else {
+				$where = 'tbl.parent_id IS NULL';
+			}
+		}
+		else {
+			$where = $where;
+		}
+
+		if (!empty($where)) {
+			$qb->where($where);
+		}
+
+		// add order by clause
+		if (!empty($orderBy)) {
+			$qb->add('orderBy', 'tbl.' . $orderBy);
+		}
+
+		$query = $qb->getQuery();
+
+		return $query;
+	}
 
 }

@@ -17,19 +17,19 @@
  */
 class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 {
-	
-    /**
-     * Post initialise.
-     *
-     * Run after construction.
-     *
-     * @return void
-     */
-    protected function postInitialize()
-    {
-        // Set caching to true by default.
-        $this->view->setCaching(Zikula_View::CACHE_DISABLED);
-    }
+
+	/**
+	 * Post initialise.
+	 *
+	 * Run after construction.
+	 *
+	 * @return void
+	 */
+	protected function postInitialize()
+	{
+		// Set caching to true by default.
+		$this->view->setCaching(Zikula_View::CACHE_DISABLED);
+	}
 
 	/**
 	 * This method is the default function, and is called whenever the application's
@@ -104,9 +104,10 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		$func = $this->request->getGet()->filter('func','', FILTER_SANITIZE_STRING);
 		$ot = $this->request->getGet()->filter('ot','', FILTER_SANITIZE_STRING);
 		$rated = $this->request->getGet()->filter('rated', 0, FILTER_SANITIZE_NUMBER_INT);
+		// We look for state - 2 is open, 3 is closed, if no state, state will get 1 for all
+		$ticketstate = (int) $this->request->getGet()->filter('state', 1 , FILTER_SANITIZE_NUMBER_INT);
 
 		// check for entity where parent_id is NULL
-		 
 		if ($ot == 'ticket' && $func == 'view') {
 			if (!empty($where)) {
 				$where .= 'AND tbl.parent_id IS NULL';
@@ -118,16 +119,19 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		else {
 			$where = $where;
 		}
-		 
-		// We look for state - 1 is open, 0 is closed, if no state, state will get 2 for all
-		$state = (int) $this->request->getGet()->filter('state',2 , FILTER_VALIDATE_INT);
+			
 
-		if(isset($state)) {
-			if (!empty($where) && $state != 2) {
+		if(isset($ticketstate)) {
+			if (!empty($where) && $ticketstate != 1) {
 				$where .= ' AND ';
 			}
-			if($state != 2) {
-				$where .= 'tbl.state = \'' . DataUtil::formatForStore($state) . '\'';
+			if($ticketstate != 1) {
+				if ($ticketstate == 2) {
+					$where .= 'tbl.state = 1';
+				}
+				if ($ticketstate == 3) {
+					$where .= 'tbl.state = 0';
+				}
 			}
 		}
 
@@ -167,7 +171,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		// If there is no supporter active, we show no link for new tickets
 		// and no edit form for answers
 		$supporteractive = MUTicket_Util_View::checkIfSupporters();
-		 
+			
 		// We check if user is supporter
 		$kind = MUTicket_Util_View::userForRating();
 
@@ -201,8 +205,6 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 			$selectionArgs['resultsPerPage'] = $resultsPerPage;
 			list($entities, $objectCount) = ModUtil::apiFunc($this->name, 'selection', 'getEntitiesPaginated', $selectionArgs);
 
-
-
 			$this->view->assign('currentPage', $currentPage)
 			->assign('pager', array('numitems'     => $objectCount,
                                                'itemsperpage' => $resultsPerPage));
@@ -215,7 +217,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		$this->view->assign('items', $entities)
 		->assign('sort', $sort)
 		->assign('sdir', $sdir)
-		->assign('state', $state)
+		->assign('state', $ticketstate)
 		->assign('kind', $kind)
 		->assign('supporteractive', $supporteractive)
 		->assign('currentUrlObject', $currentUrlObject)
@@ -241,17 +243,17 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		$repository = MUTicket_Util_Model::getTicketRepository();
 		$entity = $repository->selectById($id);
 		if ($entity['parent_id'] > 0) {
-	        $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $entity['parent_id']));
-	        LogUtil::registerStatus(__('Sorry! Only parent tickets are directly available in display!'));
-	        $this->redirect($url);
+			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $entity['parent_id']));
+			LogUtil::registerStatus(__('Sorry! Only parent tickets are directly available in display!'));
+			$this->redirect($url);
 		}
-		 
+			
 		// Is it allowed to rate
 		$rating = ModUtil::getVar($this->name, 'rating');
-		 
+			
 		// May this user rate
 		$kind = MUTicket_Util_View::userForRating();
-		 
+			
 		// We check for supportes that are active
 		// If there is no supporter active, we show no link for new tickets
 		// and no edit form for answers

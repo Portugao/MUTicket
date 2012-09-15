@@ -44,7 +44,7 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     	
     	MUTicket_Util_Model::closeTicket($id);
     	
-    	return System::redirect(ModUtil::url($this->name, 'user', 'view' , array('ot' => 'ticket', 'state' => 0)));
+    	return System::redirect(ModUtil::url($this->name, 'user', 'view' , array('ot' => 'ticket', 'state' => 3)));
     }
      
 }

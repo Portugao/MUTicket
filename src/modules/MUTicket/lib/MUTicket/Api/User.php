@@ -37,12 +37,12 @@ class MUTicket_Api_User extends MUTicket_Api_Base_User
                              'title' => $this->__('List of all tickets'));
         }
         if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
-            $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 1)),
+            $links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 2)),
                              'text' => $this->__('Open Tickets'),
                              'title' => $this->__('List of open tickets'));
         }
         if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_READ)) {
-        	$links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 0)),
+        	$links[] = array('url' => ModUtil::url('MUTicket', 'user', 'view', array('ot' => 'ticket','state' => 3)),
                              'text' => $this->__('Closed Tickets'),
                              'title' => $this->__('List of closed tickets'));
         }

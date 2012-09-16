@@ -19,6 +19,9 @@
             {/foreach}
         </div>
     </fieldset>
+    
+    <input id="muticketTicket_TicketItemList" name="muticketTicket_TicketItemList" value="{$ticketid}" type="hidden">
+    <input id="muticketTicket_TicketMode" name="muticketTicket_TicketMode" value="1" type="hidden">
 
     {if $mode ne 'create'}
         {include file='user/include_standardfields_edit.tpl' obj=$rating}

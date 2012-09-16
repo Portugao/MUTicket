@@ -94,24 +94,20 @@
                 {/if}
             {/if}
         </div>
-        <div class="z-formrow muticket_form_hidden">
+       {* <div class="z-formrow muticket_form_hidden">
             {formlabel for='state' __text='State' mandatorysym='0'}
-            {formcheckbox group='ticket' id='state' mandatory=true readOnly=false __title='Input the state of the ticket'}
-            {* muticketValidationError id='state' class='required' *}
-        </div>
-        <div class="z-formrow muticket_form_hidden">
-            {formlabel for='t_rating' __text='T_rating' mandatorysym='0'}
-            {formcheckbox group='ticket' id='t_rating' mandatory=true __title='Input the t_rating of the ticket'}
-            {* muticketValidationError id='t_rating' class='required'}
-            {muticketValidationError id='t_rating' class='validate-digits' *}
+            {formcheckbox group='ticket' id='state' mandatory=false readOnly=false __title='Input the state of the ticket'}
+             {muticketValidationError id='state' class='required'}
         </div>
         <div class="z-formrow muticket_form_hidden">
             {formlabel for='rated' __text='Rated' mandatorysym='0'}
-            {formcheckbox group='ticket' id='rated' mandatory=true __title='Input the rated of the ticket'}
-            {* muticketValidationError id='rated' class='required'}
-            {muticketValidationError id='rated' class='validate-digits' *}
-        </div>
+            {formcheckbox group='ticket' id='rated' mandatory=false __title='Input the rated of the ticket'}
+            {muticketValidationError id='rated' class='required'}
+            {muticketValidationError id='rated' class='validate-digits'} 
+        </div> *}
     </fieldset>
+    <input type="hidden" id="state" name="state" value="1">
+    <input type="hidden" id="rated" name="rated" value="0">
     {if $func eq 'display'}
     <div class="z-formrow muticket_form_hidden">
     {include file='user/include_categories_edit.tpl' obj=$ticket groupName='ticketObj'}
@@ -127,7 +123,7 @@
     	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="0">    
     {/if}
     {if $func eq 'display'}
-    	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="{$ticket.id}">
+    	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="{$ticketid}">
     	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="0">
     {/if}
     {* {include file='user/ticket/include_selectOne.tpl' relItem=$ticket aliasName='parent' idPrefix='muticketTicket_Parent'} *}

@@ -9,11 +9,11 @@
 {gt text='Sorry. At the moment our support is not available!'}
 </div>
 {/if}
-{if $state eq 0 || $state eq 1}
-{if $state eq 1}
+{if $state eq 2 || $state eq 3}
+{if $state eq 2}
 {gt text='Open Tickets Overview' assign='templateTitle'}
 {/if}
-{if $state eq 0}
+{if $state eq 3}
 {gt text='Closed Tickets Overview' assign='templateTitle'}
 {/if}
 {else}
@@ -51,17 +51,27 @@
         </th>
         {/if}
         <th id="hstate" scope="col" align="left" valign="middle">
-        {gt text='Created'}
+        {if $state}
+            {if $state == 2}
+                {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=2}
+            {/if}
+            {if $state == 3}
+                {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=3}
+            {/if}
+            {if $state == 1}
+                {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'}
+            {/if}        
+        {/if}   
         </th>
         <th id="htitle" scope="col" align="left" valign="middle">
         {if $state}
-            {if $state == 1}
-            	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=1}
-            {/if}
-            {if $state == 0}
-            	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=0}
-            {/if}
             {if $state == 2}
+            	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=2}
+            {/if}
+            {if $state == 3}
+            	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=3}
+            {/if}
+            {if $state == 1}
             	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'}
             {/if}
         {/if}

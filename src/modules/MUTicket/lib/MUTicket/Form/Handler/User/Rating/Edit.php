@@ -29,19 +29,24 @@ class MUTicket_Form_Handler_User_Rating_Edit extends MUTicket_Form_Handler_User_
 		
 		return parent::getRedirectUrl($args, $obj);
 	}
-	/**
-	 * (non-PHPdoc)
-	 * @see MUTicket_Form_Handler_User_Base_Edit::initializeAdditions()
-	 */
-	protected function initializeAdditions()
-	{
-		
+    /**
+     * Post-initialise hook.
+     *
+     * @return void
+     */
+    public function postInitialize()
+    {
+        parent::postInitialize();
+        
+        $ticket = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+   		
 		// We get the input for the form radiobutton
 		$ratingvalue = MUTicket_Util_Controller::getRatingValues();
 		 
 		$rating = $this->view->get_template_vars('rating');
 		$rating = $ratingvalue;
-		$this->view->assign('rating', $rating);
+		$this->view->assign('rating', $rating)
+		           ->assign('ticketid', $ticket);
 		 
 	}
 }

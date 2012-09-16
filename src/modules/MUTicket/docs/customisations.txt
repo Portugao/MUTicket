@@ -38,6 +38,7 @@ Implemented Classes
 *lib/MUticket/Controller/Ajax.php
 *lib/MUticket/Controller/User.php
 *lib/MUticket/Controller/User.php
+*lib/MUTicket/Entity/Rating.php
 *lib/MUTicket/Entity/Supporter.php
 *lib/MUTicket/Entity/Ticket.php
 *lib/MUticket/Entity/Repository/Ticket.php

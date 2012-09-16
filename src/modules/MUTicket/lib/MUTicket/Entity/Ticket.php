@@ -26,19 +26,19 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  */
 class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 {
-	
-    /**
-     * Bidirectional - One parent [ticket] has many children [tickets] (INVERSE SIDE).
-     *
-     * @ORM\OneToMany(targetEntity="MUTicket_Entity_Ticket", mappedBy="parent", cascade={"all"})
-     * @ORM\JoinTable(name="muticket_parentchildren",
-     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id" )},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id" )}
-     * )
-     * @ORM\OrderBy({"createdDate" = "ASC"})
-     * @var MUTicket_Entity_Ticket[] $children.
-     */
-    protected $children = null;
+
+	/**
+	 * Bidirectional - One parent [ticket] has many children [tickets] (INVERSE SIDE).
+	 *
+	 * @ORM\OneToMany(targetEntity="MUTicket_Entity_Ticket", mappedBy="parent", cascade={"all"})
+	 * @ORM\JoinTable(name="muticket_parentchildren",
+	 *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id" )},
+	 *      inverseJoinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id" )}
+	 * )
+	 * @ORM\OrderBy({"createdDate" = "ASC"})
+	 * @var MUTicket_Entity_Ticket[] $children.
+	 */
+	protected $children = null;
 
 	/**
 	 * Collect available actions for this entity.
@@ -72,11 +72,11 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 				if (SecurityUtil::checkPermission('MUTicket::', '.*', ACCESS_EDIT)) {
 
 					/*$this->_actions[] = array(
-                        'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
-                        'icon' => 'edit',
-                        'linkTitle' => __('Edit', $dom),
-                        'linkText' => __('Edit', $dom)
-					);
+					 'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+					 'icon' => 'edit',
+					 'linkTitle' => __('Edit', $dom),
+					 'linkText' => __('Edit', $dom)
+					 );
 					 $this->_actions[] = array(
 					 'url' => array('type' => 'admin', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'astemplate' => $this['id'])),
 					 'icon' => 'saveas',
@@ -193,6 +193,20 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 	 */
 	public function preRemoveCallback()
 	{
+
+		$serviceManager = ServiceUtil::getManager();
+		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+		$recovery = MUTicket_Util_Model::getTicketRepository();	
+			
+		$id = $this->getId();
+		$children = $this->getChildren();
+
+		/*foreach ($children as $child) {
+			$entity = $recovery->selectById($children['id']);
+			$entityManager->remove($enti)
+				
+		}*/
+
 		$this->performPreRemoveCallback();
 	}
 

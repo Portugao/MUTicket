@@ -49,7 +49,7 @@ class MUTicket_Entity_Rating extends MUTicket_Entity_Base_Rating
      * @return void.
      */
     public function prePersistCallback()
-    {
+    {    	
         $this->performPrePersistCallback();
     }
 
@@ -62,6 +62,8 @@ class MUTicket_Entity_Rating extends MUTicket_Entity_Base_Rating
      */
     public function postPersistCallback()
     {
+    	$args['entity'] = $this->getTicket();
+    	MUTicket_Util_Model::updateTicket($args);
         $this->performPostPersistCallback();
     }
 

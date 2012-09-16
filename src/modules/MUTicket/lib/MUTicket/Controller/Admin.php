@@ -124,9 +124,13 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		$entities = $repository->selectWhere($where2, $orderBy, $useJoins = true);
 
 		$total = 0;
+		
+		$ratingrepository = $this->entityManager->getRepository('MUTicket_Entity_Rating');
 
 		foreach ($entities as $entity) {
-			$total = $total + $entity['rating'][0]['ratingvalue'];
+			$where = 'tbl.ticket = \'' . DataUtil::formatForStore($entity['id']) . '\'';
+			$rating = $ratingrepository->selectWhere($where);
+			$total = $total + $rating[0]['ratingvalue'];
 		}
 
 		$objectCount = count($entities);

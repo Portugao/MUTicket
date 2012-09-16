@@ -40,7 +40,6 @@ Implemented Classes
 *lib/MUticket/Controller/User.php
 *lib/MUTicket/Entity/Rating.php
 *lib/MUTicket/Entity/Supporter.php
-*lib/MUTicket/Entity/Ticket.php
 *lib/MUticket/Entity/Repository/Ticket.php
 *lib/MUTicket/Form/Handler/Admin/Config.php
 *lib/MUTicket/Form/Handler/Admin/Edit.php

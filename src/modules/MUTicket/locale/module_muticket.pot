@@ -1,0 +1,1600 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula 1.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-14 13:24-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lib/MUTicket/Api/Admin.php:30 lib/MUTicket/Api/Base/Admin.php:30
+msgid "Frontend"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:31 lib/MUTicket/Api/Base/Admin.php:31
+msgid "Switch to user area."
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:36 lib/MUTicket/Api/Base/Admin.php:36
+#: lib/MUTicket/Api/Base/User.php:36
+#: templates/plugins/function.muticketSelectorObjectTypes.php:29
+#: templates/block/itemlist_modify.tpl:6
+msgid "Tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:37 lib/MUTicket/Api/Base/Admin.php:37
+#: lib/MUTicket/Api/Base/User.php:37 templates/admin/ticket/view.tpl:4
+msgid "Ticket list"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:41 lib/MUTicket/Api/Base/Admin.php:46
+#: lib/MUTicket/Api/Base/User.php:46
+#: templates/plugins/function.muticketSelectorObjectTypes.php:31
+#: templates/block/itemlist_modify.tpl:8
+msgid "Supporters"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:42 lib/MUTicket/Api/Base/Admin.php:47
+#: lib/MUTicket/Api/Base/User.php:47 templates/admin/supporter/view.tpl:4
+#: templates/user/supporter/view.tpl:4
+msgid "Supporter list"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:46 lib/MUTicket/Api/Base/Admin.php:51
+msgid "Configuration"
+msgstr ""
+
+#: lib/MUTicket/Api/Admin.php:47 lib/MUTicket/Api/Base/Admin.php:52
+msgid "Manage settings for this application"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Admin.php:41 lib/MUTicket/Api/Base/User.php:41
+#: templates/plugins/function.muticketSelectorObjectTypes.php:30
+#: templates/admin/ticket/display.tpl:14 templates/block/itemlist_modify.tpl:7
+#: templates/user/ticket/display.tpl:45
+msgid "Ratings"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Admin.php:42 lib/MUTicket/Api/Base/User.php:42
+#: templates/admin/rating/view.tpl:4 templates/user/rating/view.tpl:4
+msgid "Rating list"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Mailz.php:31
+msgid "3 newest tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Mailz.php:32
+msgid "A list of the three newest tickets."
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Mailz.php:37
+msgid "3 random tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/Mailz.php:38
+msgid "A list of three random tickets."
+msgstr ""
+
+#: lib/MUTicket/Api/Base/User.php:30 lib/MUTicket/Api/User.php:30
+msgid "Backend"
+msgstr ""
+
+#: lib/MUTicket/Api/Base/User.php:31 lib/MUTicket/Api/User.php:31
+msgid "Switch to administration area."
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:36
+msgid "All Tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:37
+msgid "List of all tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:41
+msgid "Open Tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:42
+msgid "List of open tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:46
+msgid "Closed Tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:47
+msgid "List of closed tickets"
+msgstr ""
+
+#: lib/MUTicket/Api/User.php:52 lib/MUTicket/Api/User.php:53
+msgid "Create Ticket"
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:28 lib/MUTicket/Base/Installer.php:35
+#, php-format
+msgid ""
+"The upload folder \"%s\" does not exist. Please create it before installing "
+"this application."
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:31 lib/MUTicket/Base/Installer.php:38
+#, php-format
+msgid ""
+"The upload folder \"%s\" is not writable. Please change permissions "
+"accordingly before installing this application."
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:46 lib/MUTicket/Base/Installer.php:124
+msgid "Doctrine Exception: "
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:48
+#, php-format
+msgid "An error was encountered while creating the tables for the %s module."
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:117
+#, php-format
+msgid ""
+"An error was encountered while removing stored object workflows for the %s "
+"module."
+msgstr ""
+
+#: lib/MUTicket/Base/Installer.php:126
+#, php-format
+msgid "An error was encountered while dropping the tables for the %s module."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:88
+msgid "Error! Could not move your file to the destination folder."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:114
+msgid "Error! No file found."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:129
+#, php-format
+msgid "Error! Your file is too big. Please keep it smaller than %s kilobytes."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:136
+#, php-format
+msgid "Error! Your file is too big. Please keep it smaller than %s megabytes."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:149
+msgid ""
+"Error! This file type is not allowed. Please choose another file format."
+msgstr ""
+
+#: lib/MUTicket/Base/UploadHandler.php:158
+msgid "Error! This file type seems not to be a valid image."
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:25 templates/user/header.tpl:13
+msgid "MUTicket"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:27
+msgid "MUTicket module generated by ModuleStudio 0.5.4."
+msgstr ""
+
+#. ! url version of name, should be in lowercase without space
+#: lib/MUTicket/Base/Version.php:29
+msgid "muticket"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:71
+msgid "muticket Tickets Display Hooks"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:88
+msgid "muticket Tickets Filter Hooks"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:93
+msgid "muticket Ratings Display Hooks"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:110
+msgid "muticket Ratings Filter Hooks"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:115
+msgid "muticket Supporters Display Hooks"
+msgstr ""
+
+#: lib/MUTicket/Base/Version.php:132
+msgid "muticket Supporters Filter Hooks"
+msgstr ""
+
+#: lib/MUTicket/Block/Base/ItemList.php:37 lib/MUTicket/Block/ItemList.php:30
+msgid ""
+"Notice: This block will not be displayed until you activate the MUTicket "
+"module."
+msgstr ""
+
+#: lib/MUTicket/Block/Base/ItemList.php:41
+msgid "Item list"
+msgstr ""
+
+#: lib/MUTicket/Block/Base/ItemList.php:42
+msgid "Show a list of MUTicket items based on different criteria."
+msgstr ""
+
+#: lib/MUTicket/Block/Base/ItemList.php:143
+#: lib/MUTicket/Block/ItemList.php:150
+#: lib/MUTicket/ContentType/Base/ItemList.php:38
+msgid "MUTicket items"
+msgstr ""
+
+#: lib/MUTicket/Block/ItemList.php:34
+msgid "Open tickets"
+msgstr ""
+
+#: lib/MUTicket/Block/ItemList.php:35
+msgid "Show a list of open tickets based on different criteria."
+msgstr ""
+
+#: lib/MUTicket/ContentType/Base/ItemList.php:44
+msgid "Display MUTicket items."
+msgstr ""
+
+#: lib/MUTicket/Controller/Base/Admin.php:179
+#: lib/MUTicket/Controller/Base/Admin.php:259
+#: lib/MUTicket/Controller/Base/User.php:191
+#: lib/MUTicket/Controller/Base/User.php:271
+msgid "Error! Invalid identifier received."
+msgstr ""
+
+#: lib/MUTicket/Controller/Base/Admin.php:182
+#: lib/MUTicket/Controller/Base/Admin.php:262
+#: lib/MUTicket/Controller/Base/User.php:194
+#: lib/MUTicket/Controller/Base/User.php:274
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:290
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:319
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:291
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:320
+msgid "No such item."
+msgstr ""
+
+#: lib/MUTicket/Controller/Base/Admin.php:272
+#: lib/MUTicket/Controller/Base/User.php:284
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:590
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:591
+msgid "Done! Item deleted."
+msgstr ""
+
+#: lib/MUTicket/Controller/Base/Ajax.php:100
+msgid "Item"
+msgstr ""
+
+#: lib/MUTicket/Controller/User.php:245
+msgid "Sorry! Only parent tickets are directly available in display!"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:426
+#: lib/MUTicket/Entity/Base/Supporter.php:488
+#: lib/MUTicket/Entity/Base/Ticket.php:1050
+msgid "Open preview page"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:427
+#: lib/MUTicket/Entity/Base/Supporter.php:489
+#: lib/MUTicket/Entity/Base/Ticket.php:1051
+msgid "Preview"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:433
+#: lib/MUTicket/Entity/Base/Rating.php:477
+#: lib/MUTicket/Entity/Base/Supporter.php:495
+#: lib/MUTicket/Entity/Base/Supporter.php:539
+#: lib/MUTicket/Entity/Base/Ticket.php:1057
+#: lib/MUTicket/Entity/Base/Ticket.php:1101
+#: templates/admin/rating/display.tpl:8
+#: templates/admin/supporter/display.tpl:8
+#: templates/admin/ticket/display.tpl:8 templates/user/supporter/view.tpl:65
+#: templates/user/ticket/view.tpl:95
+msgid "Details"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:443
+#: lib/MUTicket/Entity/Base/Rating.php:444
+#: lib/MUTicket/Entity/Base/Rating.php:487
+#: lib/MUTicket/Entity/Base/Rating.php:488
+#: lib/MUTicket/Entity/Base/Supporter.php:505
+#: lib/MUTicket/Entity/Base/Supporter.php:506
+#: lib/MUTicket/Entity/Base/Supporter.php:549
+#: lib/MUTicket/Entity/Base/Supporter.php:550
+#: lib/MUTicket/Entity/Base/Ticket.php:1067
+#: lib/MUTicket/Entity/Base/Ticket.php:1068
+#: lib/MUTicket/Entity/Base/Ticket.php:1111
+#: lib/MUTicket/Entity/Base/Ticket.php:1112
+#: lib/MUTicket/Entity/Supporter.php:64 lib/MUTicket/Entity/Supporter.php:65
+#: lib/MUTicket/Entity/Supporter.php:108 lib/MUTicket/Entity/Supporter.php:109
+#: lib/MUTicket/Entity/Ticket.php:77 lib/MUTicket/Entity/Ticket.php:78
+#: lib/MUTicket/Entity/Ticket.php:121 lib/MUTicket/Entity/Ticket.php:122
+#: templates/user/supporter/display.tpl:23
+#: templates/user/supporter/display.tpl:24
+#: templates/user/supporter/view.tpl:68 templates/user/supporter/view.tpl:69
+#: templates/user/ticket/view.tpl:98 templates/user/ticket/view.tpl:99
+msgid "Edit"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:449
+#: lib/MUTicket/Entity/Base/Rating.php:493
+#: lib/MUTicket/Entity/Base/Supporter.php:511
+#: lib/MUTicket/Entity/Base/Supporter.php:555
+#: lib/MUTicket/Entity/Base/Ticket.php:1073
+#: lib/MUTicket/Entity/Base/Ticket.php:1117 lib/MUTicket/Entity/Ticket.php:127
+#: templates/user/supporter/display.tpl:26
+#: templates/user/supporter/view.tpl:71 templates/user/ticket/view.tpl:101
+msgid "Reuse for new item"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:450
+#: lib/MUTicket/Entity/Base/Rating.php:494
+#: lib/MUTicket/Entity/Base/Supporter.php:512
+#: lib/MUTicket/Entity/Base/Supporter.php:556
+#: lib/MUTicket/Entity/Base/Ticket.php:1074
+#: lib/MUTicket/Entity/Base/Ticket.php:1118 lib/MUTicket/Entity/Ticket.php:128
+#: templates/user/supporter/display.tpl:27
+#: templates/user/supporter/view.tpl:72 templates/user/ticket/view.tpl:102
+msgid "Reuse"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:457
+#: lib/MUTicket/Entity/Base/Rating.php:458
+#: lib/MUTicket/Entity/Base/Rating.php:501
+#: lib/MUTicket/Entity/Base/Rating.php:502
+#: lib/MUTicket/Entity/Base/Supporter.php:519
+#: lib/MUTicket/Entity/Base/Supporter.php:520
+#: lib/MUTicket/Entity/Base/Supporter.php:563
+#: lib/MUTicket/Entity/Base/Supporter.php:564
+#: lib/MUTicket/Entity/Base/Ticket.php:1081
+#: lib/MUTicket/Entity/Base/Ticket.php:1082
+#: lib/MUTicket/Entity/Base/Ticket.php:1125
+#: lib/MUTicket/Entity/Base/Ticket.php:1126
+#: lib/MUTicket/Entity/Supporter.php:78 lib/MUTicket/Entity/Supporter.php:79
+#: lib/MUTicket/Entity/Supporter.php:122 lib/MUTicket/Entity/Supporter.php:123
+#: lib/MUTicket/Entity/Ticket.php:91 lib/MUTicket/Entity/Ticket.php:92
+#: lib/MUTicket/Entity/Ticket.php:135 lib/MUTicket/Entity/Ticket.php:136
+#: templates/admin/rating/delete.tpl:7 templates/admin/rating/delete.tpl:20
+#: templates/admin/supporter/delete.tpl:7
+#: templates/admin/supporter/delete.tpl:20 templates/admin/ticket/delete.tpl:7
+#: templates/admin/ticket/delete.tpl:20 templates/user/rating/delete.tpl:18
+#: templates/user/supporter/delete.tpl:18
+#: templates/user/supporter/display.tpl:31
+#: templates/user/supporter/display.tpl:32
+#: templates/user/supporter/view.tpl:76 templates/user/supporter/view.tpl:77
+#: templates/user/ticket/delete.tpl:18 templates/user/ticket/view.tpl:106
+#: templates/user/ticket/view.tpl:107
+msgid "Delete"
+msgstr ""
+
+#: lib/MUTicket/Entity/Base/Rating.php:466
+#: lib/MUTicket/Entity/Base/Rating.php:467
+#: lib/MUTicket/Entity/Base/Rating.php:510
+#: lib/MUTicket/Entity/Base/Rating.php:511
+#: lib/MUTicket/Entity/Base/Supporter.php:528
+#: lib/MUTicket/Entity/Base/Supporter.php:529
+#: lib/MUTicket/Entity/Base/Supporter.php:572
+#: lib/MUTicket/Entity/Base/Supporter.php:573
+#: lib/MUTicket/Entity/Base/Ticket.php:1090
+#: lib/MUTicket/Entity/Base/Ticket.php:1091
+#: lib/MUTicket/Entity/Base/Ticket.php:1134
+#: lib/MUTicket/Entity/Base/Ticket.php:1135 lib/MUTicket/Entity/Ticket.php:100
+#: lib/MUTicket/Entity/Ticket.php:101 lib/MUTicket/Entity/Ticket.php:144
+#: lib/MUTicket/Entity/Ticket.php:145 templates/user/supporter/display.tpl:35
+#: templates/user/supporter/display.tpl:36
+msgid "Back to overview"
+msgstr ""
+
+#: lib/MUTicket/Entity/Repository/Ticket.php:67
+msgid "Sorry! Access denied!"
+msgstr ""
+
+#: lib/MUTicket/Entity/Supporter.php:47
+msgid "Call statistic and rated tickets of this supporter"
+msgstr ""
+
+#: lib/MUTicket/Entity/Supporter.php:48
+msgid "Rating statictics"
+msgstr ""
+
+#: lib/MUTicket/Entity/Ticket.php:111
+msgid "See details and save an answer!"
+msgstr ""
+
+#: lib/MUTicket/Entity/Validator/Base/Rating.php:34
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:34
+#, php-format
+msgid "Error! Field value may only contain digits (%s)."
+msgstr ""
+
+#: lib/MUTicket/Entity/Validator/Base/Rating.php:38
+#, php-format
+msgid "Error! Field value must not be 0 (%s)."
+msgstr ""
+
+#: lib/MUTicket/Entity/Validator/Base/Rating.php:42
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:38
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:42
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:50
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:34
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:38
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:46
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:50
+#, php-format
+msgid "Error! Length of field value must not be higher than %2$s (%1$s)."
+msgstr ""
+
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:46
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:54
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:42
+#, php-format
+msgid "Error! Field value must not be empty (%s)."
+msgstr ""
+
+#: lib/MUTicket/Entity/Validator/Base/Supporter.php:58
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:54
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:58
+#: lib/MUTicket/Entity/Validator/Base/Ticket.php:62
+#, php-format
+msgid "Error! Field value must be a valid boolean (%s)."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Config.php:48
+msgid "Yes"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Config.php:49
+msgid "No"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Config.php:112
+#: lib/MUTicket/Form/Handler/Admin/Config.php:79
+msgid "Error! Failed to set configuration variables."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Config.php:115
+#: lib/MUTicket/Form/Handler/Admin/Config.php:82
+msgid "Done! Module configuration updated."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:576
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:577
+msgid "Done! Item created."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:578
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:579
+msgid "Error! Creation attempt failed."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:583
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:584
+msgid "Done! Item updated."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:585
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:586
+msgid "Error! Update attempt failed."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:592
+#: lib/MUTicket/Form/Handler/User/Base/Edit.php:593
+msgid "Error! Deletion attempt failed."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Config.php:32
+msgid "Error! No groups available!"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Config.php:93
+msgid "All supporters deleted. You have to save one!"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Edit.php:47
+msgid ""
+"Attention! There is no category path available for the ticket table. So you "
+"can not use\r\n"
+"    categories. If you want to use them, please apply one!"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Edit.php:112
+msgid "Attention! There is no other user in the supporter group!"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Rating/Base/Edit.php:156
+#: lib/MUTicket/Form/Handler/User/Rating/Base/Edit.php:165
+msgid "Done! Rating created."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Rating/Base/Edit.php:159
+#: lib/MUTicket/Form/Handler/User/Rating/Base/Edit.php:168
+msgid "Done! Rating updated."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Rating/Base/Edit.php:162
+#: lib/MUTicket/Form/Handler/User/Rating/Base/Edit.php:171
+msgid "Done! Rating deleted."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Supporter/Base/Edit.php:145
+#: lib/MUTicket/Form/Handler/User/Supporter/Base/Edit.php:145
+msgid "Done! Supporter created."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Supporter/Base/Edit.php:148
+#: lib/MUTicket/Form/Handler/User/Supporter/Base/Edit.php:148
+msgid "Done! Supporter updated."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Supporter/Base/Edit.php:151
+#: lib/MUTicket/Form/Handler/User/Supporter/Base/Edit.php:151
+msgid "Done! Supporter deleted."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:150
+#: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:150
+msgid "Done! Ticket created."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:153
+#: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:153
+msgid "Done! Ticket updated."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:156
+#: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:156
+msgid "Done! Ticket deleted."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:115
+msgid "Done! Answer created."
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:34
+msgid "Sorry. Our support is not available at the moment!"
+msgstr ""
+
+#: lib/MUTicket/Form/Plugin/ColourInput.php:95
+msgid "Close"
+msgstr ""
+
+#: lib/MUTicket/Form/Plugin/ColourInput.php:139
+msgid "Error! Invalid colour."
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Image.php:140
+#, php-format
+msgid "An error occured during thumbnail creation: %s"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:50
+msgid "Category: "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:100
+msgid "A new ticket on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:104
+msgid "An answer to your ticket on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:107
+msgid "An answer to a ticket on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:141
+msgid "Unable to send message"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:147
+msgid "Your ticket was saved and an email sent to our support!"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:150
+msgid "Your support answer was saved and an email sent to the customer!"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:177
+msgid "Another entry was created by an user on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:180
+msgid "There is an answer to your ticket of the support on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:182
+msgid "Title of ticket"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:183
+#: templates/admin/ticket/display.tpl:50 templates/admin/ticket/edit.tpl:34
+#: templates/admin/ticket/rating.tpl:50 templates/admin/ticket/rating.tpl:51
+#: templates/admin/ticket/rating.tpl:54 templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:40 templates/user/ticket/display.tpl:80
+#: templates/user/ticket/edit.tpl:36 templates/user/ticket/view.csv:3
+msgid "Text"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:184
+msgid "Visit this ticket:"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/View.php:181
+msgid "Bytes"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/View.php:184
+msgid "KB"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/View.php:188
+msgid "MB"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/View.php:192
+msgid "GB"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:51
+msgid "1"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:52
+msgid "2"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:53
+msgid "3"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:54
+msgid "4"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:55
+msgid "5"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:56
+msgid "6"
+msgstr ""
+
+#: lib/MUTicket/Util/Controller.php:91
+msgid "No limit"
+msgstr ""
+
+#: lib/MUTicket/Util/Model.php:55
+msgid "Done! The ticket is closed!"
+msgstr ""
+
+#: lib/MUTicket/Version.php:24
+msgid "MUTicket - Handling of support tickets for your customers"
+msgstr ""
+
+#: templates/plugins/function.muticketSelectorTemplates.php:29
+#: templates/block/itemlist_modify.tpl:29
+msgid "Only item titles"
+msgstr ""
+
+#: templates/plugins/function.muticketSelectorTemplates.php:30
+#: templates/block/itemlist_modify.tpl:30
+msgid "With description"
+msgstr ""
+
+#: templates/plugins/function.muticketTemplateHeaders.php:31
+#, php-format
+msgid "%1$s: missing parameter '%2$s'"
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:36
+msgid "This is a required field."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:37
+msgid "Please enter a valid number in this field."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:38
+msgid ""
+"Please use numbers only in this field. please avoid spaces or other "
+"characters such as dots or commas."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:39
+msgid "Please use letters only (a-z) in this field."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:40
+msgid ""
+"Please use only letters (a-z) or numbers (0-9) only in this field. No spaces "
+"or other characters are allowed."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:41
+msgid "Please enter a valid date."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:42
+msgid "Please enter a valid email address. For example yourname@example.com ."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:43
+msgid "Please enter a valid URL."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:44
+msgid ""
+"Please use this date format: dd/mm/yyyy. For example 17/03/2010 for the 17th "
+"of March, 2010."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:45
+msgid "Please enter a valid $ amount. For example $100.00 ."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:46
+msgid "Please make a selection."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:47
+msgid "Please select one of the above options."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:50
+msgid "This value must not contain spaces."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:51
+msgid "Please select a valid html colour code."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:52
+#: templates/plugins/function.muticketValidationError.php:54
+#: templates/plugins/function.muticketValidationError.php:56
+msgid "Please select a value in the past."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:53
+#: templates/plugins/function.muticketValidationError.php:55
+#: templates/plugins/function.muticketValidationError.php:57
+msgid "Please select a value in the future."
+msgstr ""
+
+#: templates/plugins/function.muticketValidationError.php:58
+msgid "This value is already assigned, but must be unique. Please change it."
+msgstr ""
+
+#: templates/plugins/modifier.muticketGetTicketState.php:30
+msgid "New"
+msgstr ""
+
+#: templates/plugins/modifier.muticketGetTicketState.php:49
+msgid "Customer!"
+msgstr ""
+
+#: templates/plugins/modifier.muticketGetTicketState.php:54
+msgid "Supporter!"
+msgstr ""
+
+#: templates/admin/config.tpl:4 templates/admin/config.tpl:7
+msgid "Settings"
+msgstr ""
+
+#: templates/admin/config.tpl:18
+msgid "Here you can manage all basic settings for this application."
+msgstr ""
+
+#: templates/admin/config.tpl:20
+msgid "Supportergroup"
+msgstr ""
+
+#: templates/admin/config.tpl:21 templates/admin/config.tpl:25
+#: templates/admin/config.tpl:29
+msgid "Input this setting."
+msgstr ""
+
+#: templates/admin/config.tpl:24
+msgid "Allow rating?"
+msgstr ""
+
+#: templates/admin/config.tpl:28
+msgid "Allowed filesize?"
+msgstr ""
+
+#: templates/admin/config.tpl:30
+msgid "102400 = 100 KB."
+msgstr ""
+
+#: templates/admin/config.tpl:36
+msgid "Delete existing supporters?"
+msgstr ""
+
+#: templates/admin/config.tpl:42
+msgid "Update configuration"
+msgstr ""
+
+#: templates/admin/config.tpl:43 templates/admin/rating/delete.tpl:22
+#: templates/admin/rating/edit.tpl:82 templates/admin/supporter/delete.tpl:22
+#: templates/admin/supporter/edit.tpl:98 templates/admin/ticket/delete.tpl:22
+#: templates/admin/ticket/edit.tpl:150
+#: templates/admin/ticket/include_selectOne.tpl:15
+#: templates/user/rating/delete.tpl:20 templates/user/supporter/delete.tpl:20
+#: templates/user/supporter/edit.tpl:86 templates/user/ticket/delete.tpl:20
+#: templates/user/ticket/edit.tpl:178
+#: templates/user/ticket/include_selectOne.tpl:15
+msgid "Cancel"
+msgstr ""
+
+#: templates/admin/header.tpl:14
+msgid ""
+"Notice: If there is no supporter present, the support in the frontend is "
+"disabled for costumers!"
+msgstr ""
+
+#: templates/admin/include_categories_display.tpl:3
+#: templates/admin/include_categories_edit.tpl:3
+#: templates/admin/supporter/edit.tpl:41 templates/admin/ticket/view.rss:41
+#: templates/user/include_categories_edit.tpl:3
+#: templates/user/ticket/view.rss:41
+msgid "Categories"
+msgstr ""
+
+#: templates/admin/include_categories_edit.tpl:7
+#: templates/user/include_categories_display.tpl:3
+#: templates/user/include_categories_edit.tpl:7
+msgid "Category"
+msgstr ""
+
+#: templates/admin/include_standardfields_display.tpl:3
+#: templates/admin/include_standardfields_edit.tpl:4
+#: templates/user/include_standardfields_edit.tpl:4
+msgid "Creation and update"
+msgstr ""
+
+#: templates/admin/include_standardfields_display.tpl:6
+msgid "Creation"
+msgstr ""
+
+#: templates/admin/include_standardfields_display.tpl:17
+#: templates/user/include_standardfields_display.tpl:21
+#, php-format
+msgid "Created by %1$s on %2$s"
+msgstr ""
+
+#: templates/admin/include_standardfields_display.tpl:20
+msgid "Last update"
+msgstr ""
+
+#: templates/admin/include_standardfields_display.tpl:31
+#, php-format
+msgid "Updated by %1$s on %2$s"
+msgstr ""
+
+#: templates/admin/include_standardfields_edit.tpl:8
+#: templates/user/include_standardfields_edit.tpl:8
+#, php-format
+msgid "Created by %s"
+msgstr ""
+
+#: templates/admin/include_standardfields_edit.tpl:9
+#: templates/user/include_standardfields_edit.tpl:9
+#, php-format
+msgid "Created on %s"
+msgstr ""
+
+#: templates/admin/include_standardfields_edit.tpl:13
+#: templates/user/include_standardfields_edit.tpl:13
+#, php-format
+msgid "Updated by %s"
+msgstr ""
+
+#: templates/admin/include_standardfields_edit.tpl:14
+#: templates/user/include_standardfields_edit.tpl:14
+#, php-format
+msgid "Updated on %s"
+msgstr ""
+
+#: templates/admin/rating/delete.tpl:4 templates/admin/rating/edit.tpl:75
+#: templates/user/rating/delete.tpl:4 templates/user/rating/edit.tpl:50
+msgid "Delete rating"
+msgstr ""
+
+#: templates/admin/rating/delete.tpl:11 templates/user/rating/delete.tpl:9
+msgid "Do you really want to delete this rating ?"
+msgstr ""
+
+#: templates/admin/rating/delete.tpl:18
+#: templates/admin/supporter/delete.tpl:18
+#: templates/admin/ticket/delete.tpl:18 templates/user/rating/delete.tpl:16
+#: templates/user/supporter/delete.tpl:16 templates/user/ticket/delete.tpl:16
+msgid "Confirmation prompt"
+msgstr ""
+
+#: templates/admin/rating/display.tpl:4 templates/admin/ticket/rating.tpl:43
+#: templates/admin/ticket/rating.tpl:44 templates/user/rating/display.tpl:4
+msgid "Rating"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:7 templates/admin/rating/edit.tpl:13
+msgid "Edit rating"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:10 templates/admin/rating/edit.tpl:78
+#: templates/admin/rating/view.tpl:13 templates/admin/ticket/display.tpl:23
+#: templates/user/rating/view.tpl:11 templates/user/ticket/display.tpl:54
+msgid "Create rating"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:28 templates/admin/supporter/edit.tpl:28
+#: templates/admin/ticket/edit.tpl:28 templates/user/supporter/edit.tpl:23
+#: templates/user/ticket/edit.tpl:27
+msgid "Content"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:30 templates/admin/rating/view.csv:3
+#: templates/admin/rating/view.tpl:41 templates/user/rating/view.csv:3
+#: templates/user/rating/view.tpl:39
+msgid "Ratingvalue"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:31
+msgid "Enter the ratingvalue of the rating"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:49 templates/admin/supporter/edit.tpl:65
+#: templates/admin/ticket/edit.tpl:117 templates/user/rating/edit.tpl:35
+#: templates/user/supporter/edit.tpl:53 templates/user/ticket/edit.tpl:141
+msgid "Hooks"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:61 templates/admin/supporter/edit.tpl:77
+#: templates/admin/ticket/edit.tpl:129 templates/user/supporter/edit.tpl:65
+#: templates/user/ticket/edit.tpl:153
+msgid "Return control"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:63 templates/admin/supporter/edit.tpl:79
+#: templates/admin/ticket/edit.tpl:131 templates/user/supporter/edit.tpl:67
+#: templates/user/ticket/edit.tpl:155
+msgid "Create another item after save"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:72 templates/user/rating/edit.tpl:47
+msgid "Update rating"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:74 templates/user/rating/edit.tpl:49
+msgid "Really delete this rating?"
+msgstr ""
+
+#: templates/admin/rating/edit.tpl:80 templates/admin/supporter/edit.tpl:96
+#: templates/admin/ticket/edit.tpl:148 templates/user/rating/edit.tpl:55
+#: templates/user/supporter/edit.tpl:84 templates/user/ticket/edit.tpl:176
+msgid "OK"
+msgstr ""
+
+#: templates/admin/rating/include_displayItemListMany.tpl:12
+#: templates/admin/rating/include_displayItemListOne.tpl:7
+#: templates/admin/supporter/include_displayItemListMany.tpl:10
+#: templates/admin/supporter/include_displayItemListOne.tpl:7
+#: templates/admin/ticket/display.tpl:89
+#: templates/admin/ticket/include_displayItemListMany.tpl:10
+#: templates/admin/ticket/include_displayItemListOne.tpl:7
+#: templates/admin/ticket/rating.tpl:96 templates/admin/ticket/view.tpl:75
+#: templates/user/supporter/include_displayItemListMany.tpl:10
+#: templates/user/supporter/include_displayItemListOne.tpl:7
+#: templates/user/ticket/display.tpl:117
+#: templates/user/ticket/include_displayItemListMany.tpl:10
+#: templates/user/ticket/include_displayItemListOne.tpl:7
+msgid "Open quick view window"
+msgstr ""
+
+#: templates/admin/rating/include_displayItemListMany.tpl:13
+#: templates/admin/rating/include_displayItemListOne.tpl:8
+#: templates/admin/supporter/include_displayItemListMany.tpl:11
+#: templates/admin/supporter/include_displayItemListOne.tpl:8
+#: templates/admin/ticket/display.tpl:90
+#: templates/admin/ticket/include_displayItemListMany.tpl:11
+#: templates/admin/ticket/include_displayItemListOne.tpl:8
+#: templates/admin/ticket/rating.tpl:97 templates/admin/ticket/view.tpl:76
+#: templates/user/supporter/include_displayItemListMany.tpl:11
+#: templates/user/supporter/include_displayItemListOne.tpl:8
+#: templates/user/ticket/display.tpl:118
+#: templates/user/ticket/include_displayItemListMany.tpl:11
+#: templates/user/ticket/include_displayItemListOne.tpl:8
+msgid "Quick view"
+msgstr ""
+
+#: templates/admin/rating/view.atom:4 templates/admin/rating/view.rss:11
+#: templates/user/rating/view.atom:4 templates/user/rating/view.rss:11
+msgid "Latest ratings"
+msgstr ""
+
+#: templates/admin/rating/view.atom:5 templates/admin/rating/view.rss:12
+#: templates/user/rating/view.atom:5 templates/user/rating/view.rss:12
+msgid "A direct feed showing the list of ratings"
+msgstr ""
+
+#: templates/admin/rating/view.tpl:21 templates/admin/ticket/rating.tpl:16
+#: templates/admin/ticket/view.tpl:13 templates/user/rating/view.tpl:19
+#: templates/user/supporter/view.tpl:18
+msgid "Back to paginated view"
+msgstr ""
+
+#: templates/admin/rating/view.tpl:27 templates/admin/ticket/rating.tpl:22
+#: templates/admin/ticket/view.tpl:19 templates/user/rating/view.tpl:25
+#: templates/user/supporter/view.tpl:23
+msgid "Show all entries"
+msgstr ""
+
+#: templates/admin/rating/view.tpl:43 templates/admin/supporter/view.tpl:38
+#: templates/admin/ticket/rating.tpl:66 templates/admin/ticket/view.tpl:51
+#: templates/user/rating/view.tpl:41 templates/user/supporter/view.tpl:47
+#: templates/user/ticket/view.tpl:72
+msgid "Actions"
+msgstr ""
+
+#: templates/admin/rating/view.tpl:68
+#: templates/mailz/itemlist_Rating_html.tpl:9
+#: templates/mailz/itemlist_Rating_text.tpl:7
+#: templates/user/rating/view.tpl:62
+msgid "No ratings found."
+msgstr ""
+
+#: templates/admin/supporter/delete.tpl:4
+#: templates/admin/supporter/edit.tpl:91 templates/user/supporter/delete.tpl:4
+#: templates/user/supporter/edit.tpl:79
+msgid "Delete supporter"
+msgstr ""
+
+#: templates/admin/supporter/delete.tpl:11
+#: templates/user/supporter/delete.tpl:9
+msgid "Do you really want to delete this supporter ?"
+msgstr ""
+
+#: templates/admin/supporter/display.tpl:4
+#: templates/user/supporter/display.tpl:4
+msgid "Supporter"
+msgstr ""
+
+#: templates/admin/supporter/display.tpl:14
+#: templates/admin/supporter/view.csv:3 templates/admin/supporter/view.tpl:33
+#: templates/user/supporter/display.tpl:12
+#: templates/user/supporter/edit.tpl:30 templates/user/supporter/view.csv:3
+#: templates/user/supporter/view.tpl:42
+msgid "Supportcats"
+msgstr ""
+
+#: templates/admin/supporter/display.tpl:16
+#: templates/admin/supporter/view.csv:3 templates/admin/ticket/display.tpl:76
+#: templates/admin/ticket/edit.tpl:87 templates/admin/ticket/rating.tpl:58
+#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:43
+#: templates/user/supporter/display.tpl:14
+#: templates/user/supporter/edit.tpl:35 templates/user/supporter/view.csv:3
+#: templates/user/supporter/view.tpl:45 templates/user/ticket/edit.tpl:98
+#: templates/user/ticket/view.csv:3 templates/user/ticket/view.tpl:50
+#: templates/user/ticket/view.tpl:70
+msgid "State"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:7 templates/admin/supporter/edit.tpl:13
+#: templates/user/supporter/edit.tpl:7 templates/user/supporter/edit.tpl:11
+msgid "Edit supporter"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:10 templates/admin/supporter/edit.tpl:94
+#: templates/admin/supporter/view.tpl:13 templates/user/supporter/edit.tpl:9
+#: templates/user/supporter/edit.tpl:82 templates/user/supporter/view.tpl:11
+msgid "Create supporter"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:31 templates/admin/supporter/view.csv:3
+#: templates/admin/supporter/view.tpl:30 templates/user/supporter/edit.tpl:25
+#: templates/user/supporter/view.csv:3 templates/user/supporter/view.tpl:39
+msgid "Username"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:32 templates/admin/supporter/edit.tpl:36
+#: templates/user/supporter/edit.tpl:26
+msgid "Input the username of the supporter"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:34
+msgid "Select a user"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:42
+msgid "Input the category of the variety"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:45
+msgid "Select a category"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:48
+msgid "Is this supporter present?"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:49
+msgid "state"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:88 templates/user/supporter/edit.tpl:76
+msgid "Update supporter"
+msgstr ""
+
+#: templates/admin/supporter/edit.tpl:90 templates/user/supporter/edit.tpl:78
+msgid "Really delete this supporter?"
+msgstr ""
+
+#: templates/admin/supporter/view.atom:4 templates/admin/supporter/view.rss:11
+#: templates/user/supporter/view.atom:4 templates/user/supporter/view.rss:11
+msgid "Latest supporters"
+msgstr ""
+
+#: templates/admin/supporter/view.atom:5 templates/admin/supporter/view.rss:12
+#: templates/user/supporter/view.atom:5 templates/user/supporter/view.rss:12
+msgid "A direct feed showing the list of supporters"
+msgstr ""
+
+#: templates/admin/supporter/view.tpl:36
+msgid "Present?"
+msgstr ""
+
+#: templates/admin/supporter/view.tpl:75
+#: templates/mailz/itemlist_Supporter_html.tpl:9
+#: templates/mailz/itemlist_Supporter_text.tpl:7
+#: templates/user/supporter/view.tpl:85
+msgid "No supporters found."
+msgstr ""
+
+#: templates/admin/ticket/delete.tpl:4 templates/admin/ticket/edit.tpl:143
+#: templates/user/ticket/delete.tpl:4 templates/user/ticket/edit.tpl:167
+msgid "Delete ticket"
+msgstr ""
+
+#: templates/admin/ticket/delete.tpl:11 templates/user/ticket/delete.tpl:9
+msgid "Do you really want to delete this ticket ?"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:4 templates/admin/ticket/display.tpl:29
+#: templates/admin/ticket/include_selectOne.tpl:3
+#: templates/user/ticket/display.tpl:12 templates/user/ticket/display.tpl:20
+#: templates/user/ticket/display.tpl:60
+#: templates/user/ticket/include_selectOne.tpl:3
+msgid "Ticket"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:39 templates/admin/ticket/edit.tpl:10
+#: templates/admin/ticket/edit.tpl:146 templates/user/ticket/display.tpl:70
+#: templates/user/ticket/edit.tpl:11 templates/user/ticket/edit.tpl:171
+#: templates/user/ticket/view.tpl:29
+msgid "Create ticket"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:52 templates/admin/ticket/view.csv:3
+#: templates/user/ticket/view.csv:3
+msgid "Parent_id"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:54 templates/admin/ticket/edit.tpl:39
+#: templates/admin/ticket/view.csv:3 templates/user/ticket/edit.tpl:42
+#: templates/user/ticket/edit.tpl:44 templates/user/ticket/view.csv:3
+msgid "Images"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:60 templates/admin/ticket/display.tpl:71
+#: templates/admin/ticket/edit.tpl:51 templates/admin/ticket/edit.tpl:75
+#: templates/user/ticket/display.tpl:88 templates/user/ticket/display.tpl:99
+#: templates/user/ticket/display.tpl:189 templates/user/ticket/display.tpl:199
+#: templates/user/ticket/edit.tpl:58 templates/user/ticket/edit.tpl:86
+msgid "Download"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:65 templates/admin/ticket/edit.tpl:63
+#: templates/admin/ticket/view.csv:3 templates/user/ticket/edit.tpl:71
+#: templates/user/ticket/edit.tpl:73 templates/user/ticket/view.csv:3
+msgid "Files"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:78 templates/admin/ticket/edit.tpl:92
+#: templates/admin/ticket/view.csv:3 templates/user/ticket/display.tpl:106
+#: templates/user/ticket/edit.tpl:103 templates/user/ticket/view.csv:3
+msgid "T_rating"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:80 templates/admin/ticket/edit.tpl:97
+#: templates/admin/ticket/rating.tpl:61 templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:46 templates/user/ticket/display.tpl:108
+#: templates/user/ticket/edit.tpl:109 templates/user/ticket/view.csv:3
+msgid "Rated"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:82 templates/admin/ticket/rating.tpl:64
+#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:49
+#: templates/user/ticket/display.tpl:110 templates/user/ticket/view.csv:3
+msgid "Parent"
+msgstr ""
+
+#: templates/admin/ticket/display.tpl:102
+#: templates/user/ticket/display.tpl:130
+msgid "No set."
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:7 templates/admin/ticket/edit.tpl:13
+#: templates/user/ticket/edit.tpl:9 templates/user/ticket/edit.tpl:15
+msgid "Edit ticket"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:30 templates/admin/ticket/rating.tpl:47
+#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:37
+#: templates/user/ticket/edit.tpl:30 templates/user/ticket/view.csv:3
+#: templates/user/ticket/view.tpl:59 templates/user/ticket/view.tpl:62
+#: templates/user/ticket/view.tpl:65
+msgid "Title"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:31 templates/user/ticket/edit.tpl:31
+msgid "Input the title of the ticket"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:35 templates/user/ticket/edit.tpl:37
+msgid "Input the text of the ticket"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:42 templates/admin/ticket/edit.tpl:66
+#: templates/user/ticket/edit.tpl:48 templates/user/ticket/edit.tpl:77
+msgid "Allowed file extensions:"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:46 templates/admin/ticket/edit.tpl:70
+#: templates/user/ticket/edit.tpl:53 templates/user/ticket/edit.tpl:81
+msgid "Current file"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:56 templates/user/ticket/edit.tpl:63
+msgid "Delete images ?"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:57 templates/admin/ticket/edit.tpl:81
+#: templates/user/ticket/edit.tpl:64 templates/user/ticket/edit.tpl:92
+msgid "Delete existing file"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:80 templates/user/ticket/edit.tpl:91
+msgid "Delete files ?"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:88 templates/user/supporter/edit.tpl:36
+msgid "state ?"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:93
+msgid "t_rating ?"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:98
+msgid "rated ?"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:140 templates/user/ticket/edit.tpl:164
+msgid "Update ticket"
+msgstr ""
+
+#: templates/admin/ticket/edit.tpl:142 templates/user/ticket/edit.tpl:166
+msgid "Really delete this ticket?"
+msgstr ""
+
+#: templates/admin/ticket/include_selectOne.tpl:6
+#: templates/user/ticket/include_selectOne.tpl:6
+msgid "Select ticket"
+msgstr ""
+
+#: templates/admin/ticket/include_selectOne.tpl:8
+#: templates/user/ticket/include_selectOne.tpl:8
+msgid "Find ticket"
+msgstr ""
+
+#: templates/admin/ticket/include_selectOne.tpl:10
+#: templates/user/ticket/include_selectOne.tpl:10
+msgid "Search ticket"
+msgstr ""
+
+#: templates/admin/ticket/include_selectOne.tpl:17
+#: templates/user/ticket/include_selectOne.tpl:17
+msgid "This function requires JavaScript activated!"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:6
+msgid "Rated Tickets and statistics of the supporter:"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:28
+msgid "Show rated answers of this supporter!"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:55
+msgid "Created Date"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:106 templates/admin/ticket/view.tpl:85
+msgid "Not set."
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:124 templates/admin/ticket/view.tpl:103
+#: templates/mailz/itemlist_Ticket_html.tpl:9
+#: templates/mailz/itemlist_Ticket_text.tpl:7
+#: templates/user/ticket/view.tpl:115
+msgid "No tickets found."
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:136
+msgid "Number of answers"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:137
+msgid "The supporter created"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:137
+msgid "answers for customers"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:139
+msgid "Number of rated answers"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:140
+msgid "Customers rated"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:140
+msgid "answers of this supporter"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:141
+msgid "That are "
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:141
+msgid "%"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:141
+msgid " of the total answers"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:144
+msgid "Average of the customer rating for this supporter"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:145
+msgid "Customers have given"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:145
+msgid "points by rating the answers of this supporter"
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:146
+msgid "That is an average of "
+msgstr ""
+
+#: templates/admin/ticket/rating.tpl:146
+msgid "points for the rating of customers"
+msgstr ""
+
+#: templates/admin/ticket/view.atom:4 templates/admin/ticket/view.rss:11
+#: templates/user/ticket/view.atom:4 templates/user/ticket/view.rss:11
+msgid "Latest tickets"
+msgstr ""
+
+#: templates/admin/ticket/view.atom:5 templates/admin/ticket/view.rss:12
+#: templates/user/ticket/view.atom:5 templates/user/ticket/view.rss:12
+msgid "A direct feed showing the list of tickets"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:4
+#: templates/contenttype/itemlist_edit.tpl:4
+msgid "Object type"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:13
+#: templates/contenttype/itemlist_edit.tpl:10
+msgid "Sorting"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:15
+#: templates/contenttype/itemlist_edit.tpl:13
+msgid "Random"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:16
+#: templates/contenttype/itemlist_edit.tpl:15
+msgid "Newest"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:17
+#: templates/contenttype/itemlist_edit.tpl:17
+msgid "Default"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:22
+#: templates/contenttype/itemlist_edit.tpl:22
+msgid "Amount"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:27
+#: templates/contenttype/itemlist_edit.tpl:27
+msgid "Template File"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:35
+#: templates/contenttype/itemlist_edit.tpl:33
+msgid "Filter (expert option)"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:37
+#: templates/contenttype/itemlist_edit.tpl:35
+msgid "Syntax examples"
+msgstr ""
+
+#: templates/block/itemlist_modify.tpl:37
+#: templates/contenttype/itemlist_edit.tpl:35
+msgid "or"
+msgstr ""
+
+#: templates/contenttype/itemlist_Rating_display.tpl:5
+#: templates/contenttype/itemlist_Rating_display_description.tpl:6
+#: templates/contenttype/itemlist_Supporter_display.tpl:5
+#: templates/contenttype/itemlist_Supporter_display_description.tpl:9
+#: templates/contenttype/itemlist_Ticket_display.tpl:5
+#: templates/contenttype/itemlist_Ticket_display_description.tpl:9
+msgid "Read more"
+msgstr ""
+
+#: templates/contenttype/itemlist_Rating_display_description.tpl:8
+#: templates/contenttype/itemlist_Supporter_display_description.tpl:11
+#: templates/contenttype/itemlist_Ticket_display_description.tpl:11
+msgid "No entries found."
+msgstr ""
+
+#: templates/user/rating/edit.tpl:53
+msgid "Vote"
+msgstr ""
+
+#: templates/user/rating/include_displayItemListMany.tpl:5
+msgid "You have rated this support answer:"
+msgstr ""
+
+#: templates/user/supporter/edit.tpl:31
+msgid "Input the supportcats of the supporter"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:5
+msgid "Sorry! At the moment our support is not available!"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:24
+msgid "Do you want to close this ticket?"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:25
+msgid ""
+"You can now close this ticket, if your are sure, that the question of the "
+"customer is answered! Consider you cannot reopen this ticket!"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:28
+msgid ""
+"This ticket is closed. If you have questions again, please open a new ticket!"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:82 templates/user/ticket/display.tpl:183
+msgid "Image"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:92 templates/user/ticket/display.tpl:192
+msgid "No images uploaded!"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:93 templates/user/ticket/display.tpl:193
+msgid "File"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:102 templates/user/ticket/display.tpl:202
+msgid "No files uploaded!"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:13
+msgid "Answer to ticket"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:49
+msgid "Allowed file size:"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:99
+msgid "Input the state of the ticket"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:104
+msgid "Input the t_rating of the ticket"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:110
+msgid "Input the rated of the ticket"
+msgstr ""
+
+#: templates/user/ticket/edit.tpl:173
+msgid "Save answer"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:5
+msgid "New ticket"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:5
+msgid "Waiting for supporter feedback"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:5
+msgid "Waiting for customer feedback"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:9
+msgid "Sorry. At the moment our support is not available!"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:14
+msgid "Open Tickets Overview"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:17
+msgid "Closed Tickets Overview"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:20
+msgid "Ticket Overview"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:54
+msgid "Created"
+msgstr ""
+
+#: templates/user/ticket/view.tpl:70
+msgid "Open"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:249
+msgid ""
+"Close ticket"
+msgstr ""
+
+#: templates/user/ticket/display.tpl:166
+msgid ""
+"RATE NOW THIS SUPPORT ANSWER!"
+msgstr ""
+
+#: templates/admin/config.tpl:34
+msgid ""
+"Do you want to delete all existing supporters?"
+msgstr ""

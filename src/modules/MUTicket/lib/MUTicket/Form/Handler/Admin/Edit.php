@@ -44,8 +44,7 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 
 		$categorypaths = DBUtil::selectObjectArray('categories_registry', $where2);
 		if ($categorypaths == false) {
-			LogUtil::registerStatus($this->__('Attention! There is no category path available for the ticket table. So you can not use
-    categories. If you want to use them, please apply one!'));
+			LogUtil::registerStatus($this->__('Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!'));
 		}
 
 		//get subcategories of the maincategory
@@ -90,13 +89,11 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 		}
 
 		// get supporter ids
-
 		$userids = MUTicket_Util_View::getSupporterIds();
 
 		$where5 = "WHERE $users_column[uid] IN ($userids)";
 
 		// get users from system which are not supporters and members of the correct group
-
 		$users = DBUtil::selectObjectArray('users', $where5);
 
 		$supportusers = array();
@@ -110,6 +107,20 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 		}
 		else {
 			LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
+		}
+		
+		// we get the id of the supporter to edit		
+		$id = $this->request->query->filter('id' , 0, FILTER_SANITIZE_NUMBER_INT);
+		// if we want to edit a supporter we assign the saved categories
+		if ($id > 0) {
+		$supportertoedit = $repository->selectById($id);
+		$savedcats = $supportertoedit['supportcats'];
+		$savedcats = unserialize($savedcats);
+		$this->view->assign('savedcats', $savedcats);
+		}
+		// else nothing to do
+		else {
+			
 		}
 
 		$supporter['supportcatsItems'] = $supportcats;

@@ -44,7 +44,11 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 
 		$categorypaths = DBUtil::selectObjectArray('categories_registry', $where2);
 		if ($categorypaths == false) {
-			LogUtil::registerStatus($this->__('Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!'));
+			$statuscategory = 0;
+			LogUtil::registerError($this->__('Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!'));
+		}
+		else {
+			$statuscategory = 1;
 		}
 
 		//get subcategories of the maincategory
@@ -53,6 +57,7 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 
 		$lang = ZLanguage::getLanguageCode();
 
+		if (is_array($categorypaths) && count($categorypaths) > 0) {
 		foreach ($categorypaths as $categorypath) {
 			$where3 = "WHERE $categorycategory_column[parent_id] = '" . DataUtil::formatForStore($categorypath[category_id]) . "'";
 			$categories = DBUtil::selectObjectArray('categories_category',$where3);
@@ -66,6 +71,10 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 					$supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
 				}
 			}
+		}
+		}
+		else {
+			$supportcats[] = array('value' => 0, 'text' => $this->__('No Category'));
 		}
 
 		// make dropdownlist for users
@@ -108,19 +117,24 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 		else {
 			LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
 		}
-		
-		// we get the id of the supporter to edit		
+
+		// we get the id of the supporter to edit
 		$id = $this->request->query->filter('id' , 0, FILTER_SANITIZE_NUMBER_INT);
 		// if we want to edit a supporter we assign the saved categories
 		if ($id > 0) {
-		$supportertoedit = $repository->selectById($id);
-		$savedcats = $supportertoedit['supportcats'];
-		$savedcats = unserialize($savedcats);
-		$this->view->assign('savedcats', $savedcats);
+			$supportertoedit = $repository->selectById($id);
+			if ($statuscategory == 1) {
+			$savedcats = $supportertoedit['supportcats'];
+			$savedcats = unserialize($savedcats);
+			}
+			else {
+				$savedcats[0] = $this->__('No Category');
+			}
+			$this->view->assign('savedcats', $savedcats);
 		}
 		// else nothing to do
 		else {
-			
+
 		}
 
 		$supporter['supportcatsItems'] = $supportcats;

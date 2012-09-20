@@ -38,8 +38,8 @@
         {/if} *}
         </div>
         <div class="z-formrow">
-            {formlabel for='supportcats' __text='Categories' mandatorysym='1'}
-            {*formintinput group='supporter' id='supportcats' mandatory=true __title='Input the category of the variety' maxLength=4 cssClass='required validate-digits'}
+            {formlabel for='supportcats' __text='Categories' mandatorysym='0'}
+          {* {formintinput group='supporter' id='supportcats' mandatory=true __title='Input the category of the variety' maxLength=4 cssClass='required validate-digits'}
             {muticketValidationError id='supportcats' class='required'}
             {muticketValidationError id='supportcats' class='validate-digits'} *}
             {formcheckboxlist selectedValue=$savedcats group='supporter' id='supportcats' selectionMode=multiple mandatory=true __title='Select a category'}

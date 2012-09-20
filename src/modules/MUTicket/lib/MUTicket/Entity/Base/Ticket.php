@@ -145,7 +145,7 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
      * @ORM\Column(type="boolean")
      * @var boolean $state.
      */
-    protected $state = false;
+    protected $state = true;
 
 
     /**

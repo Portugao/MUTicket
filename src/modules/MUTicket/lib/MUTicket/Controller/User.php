@@ -44,7 +44,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		// DEBUG: permission check aspect ends
 
 		// return view template
-		return $this->redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1)));
+		return $this->redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
 	}
 
 	/**

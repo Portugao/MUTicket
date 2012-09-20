@@ -541,9 +541,7 @@ msgid "All supporters deleted. You have to save one!"
 msgstr "Sämtliche Supporter sind gelöscht. Sie sollten einen Supporter anlegen!"
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:47
-msgid ""
-"Attention! There is no category path available for the ticket table. So you can not use\r\n"
-"    categories. If you want to use them, please apply one!"
+msgid "Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!"
 msgstr "Achtung! Es gibt keinen gültigen Kategoriepfad für die Ticket Tabelle. Somit können Sie die Kategorien nicht nutzen. Wenn Sie dies möchten, legen Sie einen Pfad an!"
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:112

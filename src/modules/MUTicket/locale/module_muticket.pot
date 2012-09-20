@@ -509,9 +509,7 @@ msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:47
 msgid ""
-"Attention! There is no category path available for the ticket table. So you "
-"can not use\r\n"
-"    categories. If you want to use them, please apply one!"
+"Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!"
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:112

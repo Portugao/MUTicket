@@ -24,15 +24,19 @@
 
 <table class="z-datatable">
     <colgroup>
+        <col id="ccreatedDate" />
         <col id="ctitle" />
         <col id="ctext" />
         <col id="cstate" />
-        <col id="crated" />
+       {* <col id="crated" /> *}
        {* <col id="cparent" /> *}
         <col id="citemactions" />
     </colgroup>
     <thead>
     <tr>
+        <th id="hcreatedDate" scope="col" class="z-left">
+            {sortlink __linktext='Created Date' sort='createdDate' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
+        </th>
         <th id="htitle" scope="col" class="z-left">
             {sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
@@ -40,12 +44,12 @@
             {sortlink __linktext='Text' sort='text' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
         <th id="hstate" scope="col" class="z-center">
-            {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
+            {gt text='Open'}
         </th>
-        <th id="hrated" scope="col" class="z-center">
+       {* <th id="hrated" scope="col" class="z-center">
             {sortlink __linktext='Rated' sort='rated' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
-       {* <th id="hparent" scope="col" class="z-left">
+        <th id="hparent" scope="col" class="z-left">
             {sortlink __linktext='Parent' sort='parent' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th> *}
         <th id="hitemactions" scope="col" class="z-right z-order-unsorted">{gt text='Actions'}</th>
@@ -56,6 +60,9 @@
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
         <td headers="htitle" class="z-left">
+            {$ticket.createdDate|dateformat:datetimelong}
+        </td>
+        <td headers="htitle" class="z-left">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
         <td headers="htext" class="z-left">
@@ -64,10 +71,10 @@
         <td headers="hstate" class="z-center">
             {$ticket.state|yesno:true}
         </td>
-        <td headers="hrated" class="z-center">
+       {*  <td headers="hrated" class="z-center">
             {$ticket.rated|yesno:true}
         </td>
-       {* <td headers="hparent" class="z-left">
+       <td headers="hparent" class="z-left">
             {if isset($ticket.Parent) && $ticket.Parent ne null}
                 <a href="{modurl modname='MUTicket' type='admin' func='display' ot='ticket' id=$ticket.Parent.id}">
                     {$ticket.Parent.title|default:""}

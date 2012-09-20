@@ -94,9 +94,9 @@
                 {/if}
             {/if}
         </div>
-       {* <div class="z-formrow muticket_form_hidden">
-            {formlabel for='state' __text='State' mandatorysym='0'}
-            {formcheckbox group='ticket' id='state' mandatory=false readOnly=false __title='Input the state of the ticket'}
+        <div class="z-formrow muticket_form_hidden">
+            {formlabel for='state' __text='State' mandatorysym='1'}
+            {formcheckbox group='ticket' id='state' mandatory=false readOnly=false __title='Input the state of the ticket' checked='checked'}
              {muticketValidationError id='state' class='required'}
         </div>
         <div class="z-formrow muticket_form_hidden">
@@ -104,10 +104,12 @@
             {formcheckbox group='ticket' id='rated' mandatory=false __title='Input the rated of the ticket'}
             {muticketValidationError id='rated' class='required'}
             {muticketValidationError id='rated' class='validate-digits'} 
-        </div> *}
+        </div> 
     </fieldset>
-    <input type="hidden" id="state" name="state" value="1">
-    <input type="hidden" id="rated" name="rated" value="0">
+    
+ {*   <input type="hidden" id="state" name="state" value="1">
+    <input type="hidden" id="rated" name="rated" value="0"> *}
+    
     {if $func eq 'display'}
     <div class="z-formrow muticket_form_hidden">
     {include file='user/include_categories_edit.tpl' obj=$ticket groupName='ticketObj'}

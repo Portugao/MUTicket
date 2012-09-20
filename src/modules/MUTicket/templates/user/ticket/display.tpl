@@ -22,7 +22,7 @@
 <div class="ticket_user_header_menue">
 {if $kind eq 0 && $ticket.state eq 1}
 {gt text='Do you want to close this ticket?' assign='closeTicket'}
-<a href="#" id="ticket_user_header_close" class="ui-state-default ui-corner-all">{gt text='Close ticket'}</a><div title="{$closeTicket}" id="dialog">{gt text='You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!'}</div>
+<a href="index.php?module=muticket&type=ajax&func=close&ticket={$ticket.id}" id="ticket_user_header_close" class="ui-state-default ui-corner-all">{gt text='Close ticket'}</a><div title="{$closeTicket}" id="dialog">{gt text='You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!'}</div>
 {/if}
 {if $kind eq 1 && $ticket.state eq 0}
 <div id="ticket_closed">{gt text='This ticket is closed. If you have questions again, please open a new ticket!'}</div>

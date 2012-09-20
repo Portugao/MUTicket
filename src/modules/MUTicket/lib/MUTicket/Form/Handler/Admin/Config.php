@@ -80,7 +80,7 @@ class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Admin_Bas
 			}
 
 			LogUtil::registerStatus($this->__('Done! Module configuration updated.'));
-			 
+
 			if($delete_supporter == 1 && $supportergroup != $newsupportergroup) {
 
 				$repository = $this->entityManager->getRepository('MUTicket_Entity_Supporter');

@@ -31,7 +31,7 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Do you want to delete all existing supporters?</legend>
+                <legend>{gt text='Do you want to delete all existing supporters?'}</legend>
                 <div class="z-formrow">
                     {formlabel for='supporters' __text='Delete existing supporters?'}
                     {formcheckbox id='delete_supporter' name='delete_supporter' group='supporter'}              

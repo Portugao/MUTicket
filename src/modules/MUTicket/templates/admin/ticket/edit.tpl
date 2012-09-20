@@ -88,11 +88,11 @@
             {formcheckbox group='ticket' id='state' readOnly=false __title='state ?' cssClass=''}
             {muticketValidationError id='state' class=''}
         </div>
-        <div class="z-formrow muticket_form_hidden">
+       {* <div class="z-formrow muticket_form_hidden">
             {formlabel for='t_rating' __text='T_rating'}
             {formcheckbox group='ticket' id='t_rating' readOnly=false __title='t_rating ?' cssClass=''}
             {muticketValidationError id='t_rating' class=''}
-        </div>
+        </div> *}
         <div class="z-formrow muticket_form_hidden">
             {formlabel for='rated' __text='Rated'}
             {formcheckbox group='ticket' id='rated' readOnly=false __title='rated ?' cssClass=''}

@@ -76,7 +76,7 @@
     <dt>{gt text='State'}</dt>
     <dd>{$ticket.state|yesno:true}</dd>
     <dt>{gt text='T_rating'}</dt>
-    <dd>{$ticket.t_rating|yesno:true}</dd>
+   {* <dd>{$ticket.t_rating|yesno:true}</dd> *}
     <dt>{gt text='Rated'}</dt>
     <dd>{$ticket.rated|yesno:true}</dd>
     <dt>{gt text='Parent'}</dt>

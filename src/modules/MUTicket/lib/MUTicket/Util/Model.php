@@ -54,8 +54,6 @@ class MUTicket_Util_Model extends Zikula_AbstractBase
 
 		LogUtil::registerStatus($this->__('Done! The ticket is closed!'));
 
-		return true;
-
 	}
 
 	/**

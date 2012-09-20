@@ -96,7 +96,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 			}
 		}
 
-		if (!$parentid ) {
+		if ($parentid == 0) {
 			$entry = $handler->__('A new ticket on ');
 		}
 		else {
@@ -111,7 +111,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 		// We build the url for the email message
 		$host = System::serverGetVar('HTTP_HOST') . '/';
 		// workaround because of bug in MOST or doctrine2 TODO
-		if (!$parentid) {
+		if ($parentid == 0) {
 			$url = 'http://' . $host . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $ticketid));
 		}
 		else {
@@ -135,76 +135,90 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 
 		// We send a mail if an email address is saved
 		if ($toaddress != '') {
-			foreach ($toaddress as $address) {
-				$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $address, $entry, $ticketcategory, $title, $text, $url, $kind);
-				if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
-					LogUtil::registerError($handler->__('Unable to send message'));
-				}
-				else {
-					// Formating of status text
-					if ($kind == 'Customer') {
-
-						$message = $handler->__('Your ticket was saved and an email sent to our support!');
+			if (is_array($toaddress)) {
+				foreach ($toaddress as $address) {
+					$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $address, $entry, $ticketcategory, $title, $text, $url, $kind);
+					if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
+						$success = false;
 					}
 					else {
-						$message = $handler->__('Your support answer was saved and an email sent to the customer!');
+						$success = true;
 					}
 				}
 			}
+			else {
+				$messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind);
+				if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
+					$success = false;
+				}
+				else {
+					$success = true;
+				}
+			}
+			
+				// Formating of status text
+				if ($kind == 'Customer') {
+                    if ($success == false) {
+                    	$message = $handler->__('Unable to send message');
+                    }
+					$message = $handler->__('Your ticket was saved and an email sent to our support!');
+				}
+				else {
+					$message = $handler->__('Your support answer was saved and an email sent to the customer!');
+				}			
 		}
 
-		LogUtil::registerStatus($message);
+	return $message;
+}
 
+/**
+ *
+ * get the mail content for the message to send
+ * returns array $messagecontent
+ */
+public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind) {
+
+	$serviceManager = ServiceUtil::getManager();
+	$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
+
+	$messagecontent = array();
+	$messagecontent['from'] = $from;
+	$messagecontent['fromaddress'] = $fromaddress;
+	/*$messagecontent['toname'] = 'Webmaster';*/
+	$messagecontent['toaddress'] = $toaddress;
+	$messagecontent['subject'] = $entry . $from . $ticketcategory;
+	if ($kind == 'Customer') {
+		$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
 	}
-
-	/**
-	 *
-	 * get the mail content for the message to send
-	 * returns array $messagecontent
-	 */
-	public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind) {
-
-		$serviceManager = ServiceUtil::getManager();
-		$handler = new Zikula_Form_View($serviceManager, 'MUTicket');
-
-		$messagecontent = array();
-		$messagecontent['from'] = $from;
-		$messagecontent['fromaddress'] = $fromaddress;
-		/*$messagecontent['toname'] = 'Webmaster';*/
-		$messagecontent['toaddress'] = $toaddress;
-		$messagecontent['subject'] = $entry . $from . $ticketcategory;
-		if ($kind == 'Customer') {
-			$messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
-		}
-		else {
-			$messagecontent['body'] = $handler->__('There is an answer to your ticket of the support on '). '<h2>' . $from . '</h2>';
-		}
-		$messagecontent['body'] .= $handler->__('Title of ticket') . '<br />' . $title . '<br /><br />';
-		$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
-		$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
-		$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
-		$messagecontent['altbody'] = '';
-		$messagecontent['html'] = true;
-
-		return $messagecontent;
+	else {
+		$messagecontent['body'] = $handler->__('There is an answer to your ticket of the support on '). '<h2>' . $from . '</h2>';
 	}
+	$messagecontent['body'] .= $handler->__('Title of ticket') . '<br />' . $title . '<br /><br />';
+	$messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
+	$messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
+	$messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
+	$messagecontent['altbody'] = '';
+	$messagecontent['html'] = true;
 
-	/**
-	 * get the email address of the user that
-	 * created parent ticket
-	 * @parentid id of the parent ticket
-	 * @returns $email string
-	 */
+	return $messagecontent;
+}
 
-	public function getMailAddressOfUser($parentid) {
+/**
+ * get the email address of the user that
+ * created parent ticket
+ * @parentid id of the parent ticket
+ * @returns $email string
+ */
 
-		// get entity with id is parentid
-		$entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $parentid));
-		// get userid created the parent ticket
-		$userid = $entity['createdUserId'];
-		$email = UserUtil::getVar('email', $userid);
+public function getMailAddressOfUser($parentid) {
 
-		return $email;
+	// get entity with id is parentid
+	$entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $parentid));
+	// get userid created the parent ticket
+	$userid = $entity['createdUserId'];
+	$email = UserUtil::getVar('email', $userid);
 
-	}
+	return $email;
+
+}
 }

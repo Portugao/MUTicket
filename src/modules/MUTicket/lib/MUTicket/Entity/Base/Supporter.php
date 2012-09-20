@@ -602,7 +602,7 @@ abstract class MUTicket_Entity_Base_Supporter extends Zikula_EntityAccess
         $this['username'] = ((isset($this['username']) && !empty($this['username'])) ? DataUtil::formatForDisplayHTML($this['username']) : '');
     }
     if ($currentFunc != 'edit') {
-        $this['supportcats'] = ((isset($this['supportcats']) && !empty($this['supportcats'])) ? DataUtil::formatForDisplayHTML($this['supportcats']) : '');
+        //$this['supportcats'] = ((isset($this['supportcats']) && !empty($this['supportcats'])) ? DataUtil::formatForDisplayHTML($this['supportcats']) : '');
     }
         $this['state'] = (bool) $this['state'];
         $this->prepareItemActions();

@@ -172,6 +172,9 @@ button.muticketInlineButton {
 #ticket_user_header_close {
     background: #eee url('/images/icons/extrasmall/fileclose.png') 0 5px no-repeat;
     padding: 5px 5px 10px 20px; 
+    margin: 0 0 10px 0;
+    display: block;
+    width: 120px;
     line-height: 1.0em;
     border: 1px solid #999;	
 }
@@ -347,6 +350,7 @@ button.muticketInlineButton {
 .muticket_rating_form_class {
     display: none;
 }
+
 
 
 

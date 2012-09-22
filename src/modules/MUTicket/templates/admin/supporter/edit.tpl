@@ -37,13 +37,19 @@
             {muticketValidationError id='username' class='required'} 
         {/if} *}
         </div>
+        {if $statuscategory == 1}
         <div class="z-formrow">
-            {formlabel for='supportcats' __text='Categories' mandatorysym='0'}
+            {formlabel for='supportcats' __text='Categories' mandatorysym='1'}
           {* {formintinput group='supporter' id='supportcats' mandatory=true __title='Input the category of the variety' maxLength=4 cssClass='required validate-digits'}
             {muticketValidationError id='supportcats' class='required'}
             {muticketValidationError id='supportcats' class='validate-digits'} *}
             {formcheckboxlist selectedValue=$savedcats group='supporter' id='supportcats' selectionMode=multiple mandatory=true __title='Select a category'}
         </div>
+        {else}
+        <div class="z-formrow" style="display: none;">
+            {formcheckboxlist selectedValue=$savedcats group='supporter' id='supportcats' selectionMode=multiple mandatory=true __title='Select a category'}
+         </div>
+        {/if}
         <div class="z-formrow">
             {formlabel for='state' __text='Is this supporter present?' mandatorysym='0'}
             {formcheckbox group='supporter' id='state' mame='state' readOnly=false __title='state' checked=checked}

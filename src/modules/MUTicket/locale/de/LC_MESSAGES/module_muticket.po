@@ -548,6 +548,10 @@ msgstr "Achtung! Es gibt keinen gültigen Kategoriepfad für die Ticket Tabelle.
 msgid "Attention! There is no other user in the supporter group!"
 msgstr "Achtung! Es gibt keinen weiteren Benutzer in der Gruppe der Supporter!"
 
+#: lib/MUTicket/Form/Handler/Admin/Edit.php:131
+msgid "No Category"
+msgstr "Keine Kategorie"
+
 #: lib/MUTicket/Form/Handler/Admin/Rating/Base/Edit.php:156
 #: lib/MUTicket/Form/Handler/User/Rating/Base/Edit.php:165
 msgid "Done! Rating created."

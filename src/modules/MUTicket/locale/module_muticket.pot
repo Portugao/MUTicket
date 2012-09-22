@@ -3,69 +3,82 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-14 13:24-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-09-22 14:19+0100\n"
+"Last-Translator: Michael Ueberschaer <kontakt@webdesign-in-bremen.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/MUTicket/Api/Admin.php:30 lib/MUTicket/Api/Base/Admin.php:30
+#: lib/MUTicket/Api/Admin.php:30
+#: lib/MUTicket/Api/Base/Admin.php:30
 msgid "Frontend"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:31 lib/MUTicket/Api/Base/Admin.php:31
+#: lib/MUTicket/Api/Admin.php:31
+#: lib/MUTicket/Api/Base/Admin.php:31
 msgid "Switch to user area."
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:36 lib/MUTicket/Api/Base/Admin.php:36
+#: lib/MUTicket/Api/Admin.php:36
+#: lib/MUTicket/Api/Base/Admin.php:36
 #: lib/MUTicket/Api/Base/User.php:36
 #: templates/plugins/function.muticketSelectorObjectTypes.php:29
 #: templates/block/itemlist_modify.tpl:6
 msgid "Tickets"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:37 lib/MUTicket/Api/Base/Admin.php:37
-#: lib/MUTicket/Api/Base/User.php:37 templates/admin/ticket/view.tpl:4
+#: lib/MUTicket/Api/Admin.php:37
+#: lib/MUTicket/Api/Base/Admin.php:37
+#: lib/MUTicket/Api/Base/User.php:37
+#: templates/admin/ticket/view.tpl:4
 msgid "Ticket list"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:41 lib/MUTicket/Api/Base/Admin.php:46
+#: lib/MUTicket/Api/Admin.php:41
+#: lib/MUTicket/Api/Base/Admin.php:46
 #: lib/MUTicket/Api/Base/User.php:46
 #: templates/plugins/function.muticketSelectorObjectTypes.php:31
 #: templates/block/itemlist_modify.tpl:8
 msgid "Supporters"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:42 lib/MUTicket/Api/Base/Admin.php:47
-#: lib/MUTicket/Api/Base/User.php:47 templates/admin/supporter/view.tpl:4
+#: lib/MUTicket/Api/Admin.php:42
+#: lib/MUTicket/Api/Base/Admin.php:47
+#: lib/MUTicket/Api/Base/User.php:47
+#: templates/admin/supporter/view.tpl:4
 #: templates/user/supporter/view.tpl:4
 msgid "Supporter list"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:46 lib/MUTicket/Api/Base/Admin.php:51
+#: lib/MUTicket/Api/Admin.php:46
+#: lib/MUTicket/Api/Base/Admin.php:51
 msgid "Configuration"
 msgstr ""
 
-#: lib/MUTicket/Api/Admin.php:47 lib/MUTicket/Api/Base/Admin.php:52
+#: lib/MUTicket/Api/Admin.php:47
+#: lib/MUTicket/Api/Base/Admin.php:52
 msgid "Manage settings for this application"
 msgstr ""
 
-#: lib/MUTicket/Api/Base/Admin.php:41 lib/MUTicket/Api/Base/User.php:41
+#: lib/MUTicket/Api/Base/Admin.php:41
+#: lib/MUTicket/Api/Base/User.php:41
 #: templates/plugins/function.muticketSelectorObjectTypes.php:30
-#: templates/admin/ticket/display.tpl:14 templates/block/itemlist_modify.tpl:7
+#: templates/admin/ticket/display.tpl:14
+#: templates/block/itemlist_modify.tpl:7
 #: templates/user/ticket/display.tpl:45
 msgid "Ratings"
 msgstr ""
 
-#: lib/MUTicket/Api/Base/Admin.php:42 lib/MUTicket/Api/Base/User.php:42
-#: templates/admin/rating/view.tpl:4 templates/user/rating/view.tpl:4
+#: lib/MUTicket/Api/Base/Admin.php:42
+#: lib/MUTicket/Api/Base/User.php:42
+#: templates/admin/rating/view.tpl:4
+#: templates/user/rating/view.tpl:4
 msgid "Rating list"
 msgstr ""
 
@@ -85,11 +98,13 @@ msgstr ""
 msgid "A list of three random tickets."
 msgstr ""
 
-#: lib/MUTicket/Api/Base/User.php:30 lib/MUTicket/Api/User.php:30
+#: lib/MUTicket/Api/Base/User.php:30
+#: lib/MUTicket/Api/User.php:30
 msgid "Backend"
 msgstr ""
 
-#: lib/MUTicket/Api/Base/User.php:31 lib/MUTicket/Api/User.php:31
+#: lib/MUTicket/Api/Base/User.php:31
+#: lib/MUTicket/Api/User.php:31
 msgid "Switch to administration area."
 msgstr ""
 
@@ -117,25 +132,25 @@ msgstr ""
 msgid "List of closed tickets"
 msgstr ""
 
-#: lib/MUTicket/Api/User.php:52 lib/MUTicket/Api/User.php:53
+#: lib/MUTicket/Api/User.php:52
+#: lib/MUTicket/Api/User.php:53
 msgid "Create Ticket"
 msgstr ""
 
-#: lib/MUTicket/Base/Installer.php:28 lib/MUTicket/Base/Installer.php:35
+#: lib/MUTicket/Base/Installer.php:28
+#: lib/MUTicket/Base/Installer.php:35
 #, php-format
-msgid ""
-"The upload folder \"%s\" does not exist. Please create it before installing "
-"this application."
+msgid "The upload folder \"%s\" does not exist. Please create it before installing this application."
 msgstr ""
 
-#: lib/MUTicket/Base/Installer.php:31 lib/MUTicket/Base/Installer.php:38
+#: lib/MUTicket/Base/Installer.php:31
+#: lib/MUTicket/Base/Installer.php:38
 #, php-format
-msgid ""
-"The upload folder \"%s\" is not writable. Please change permissions "
-"accordingly before installing this application."
+msgid "The upload folder \"%s\" is not writable. Please change permissions accordingly before installing this application."
 msgstr ""
 
-#: lib/MUTicket/Base/Installer.php:46 lib/MUTicket/Base/Installer.php:124
+#: lib/MUTicket/Base/Installer.php:46
+#: lib/MUTicket/Base/Installer.php:124
 msgid "Doctrine Exception: "
 msgstr ""
 
@@ -146,9 +161,7 @@ msgstr ""
 
 #: lib/MUTicket/Base/Installer.php:117
 #, php-format
-msgid ""
-"An error was encountered while removing stored object workflows for the %s "
-"module."
+msgid "An error was encountered while removing stored object workflows for the %s module."
 msgstr ""
 
 #: lib/MUTicket/Base/Installer.php:126
@@ -175,15 +188,15 @@ msgid "Error! Your file is too big. Please keep it smaller than %s megabytes."
 msgstr ""
 
 #: lib/MUTicket/Base/UploadHandler.php:149
-msgid ""
-"Error! This file type is not allowed. Please choose another file format."
+msgid "Error! This file type is not allowed. Please choose another file format."
 msgstr ""
 
 #: lib/MUTicket/Base/UploadHandler.php:158
 msgid "Error! This file type seems not to be a valid image."
 msgstr ""
 
-#: lib/MUTicket/Base/Version.php:25 templates/user/header.tpl:13
+#: lib/MUTicket/Base/Version.php:25
+#: templates/user/header.tpl:13
 msgid "MUTicket"
 msgstr ""
 
@@ -220,10 +233,9 @@ msgstr ""
 msgid "muticket Supporters Filter Hooks"
 msgstr ""
 
-#: lib/MUTicket/Block/Base/ItemList.php:37 lib/MUTicket/Block/ItemList.php:30
-msgid ""
-"Notice: This block will not be displayed until you activate the MUTicket "
-"module."
+#: lib/MUTicket/Block/Base/ItemList.php:37
+#: lib/MUTicket/Block/ItemList.php:30
+msgid "Notice: This block will not be displayed until you activate the MUTicket module."
 msgstr ""
 
 #: lib/MUTicket/Block/Base/ItemList.php:41
@@ -305,7 +317,8 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Ticket.php:1101
 #: templates/admin/rating/display.tpl:8
 #: templates/admin/supporter/display.tpl:8
-#: templates/admin/ticket/display.tpl:8 templates/user/supporter/view.tpl:65
+#: templates/admin/ticket/display.tpl:8
+#: templates/user/supporter/view.tpl:65
 #: templates/user/ticket/view.tpl:95
 msgid "Details"
 msgstr ""
@@ -322,14 +335,20 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Ticket.php:1068
 #: lib/MUTicket/Entity/Base/Ticket.php:1111
 #: lib/MUTicket/Entity/Base/Ticket.php:1112
-#: lib/MUTicket/Entity/Supporter.php:64 lib/MUTicket/Entity/Supporter.php:65
-#: lib/MUTicket/Entity/Supporter.php:108 lib/MUTicket/Entity/Supporter.php:109
-#: lib/MUTicket/Entity/Ticket.php:77 lib/MUTicket/Entity/Ticket.php:78
-#: lib/MUTicket/Entity/Ticket.php:121 lib/MUTicket/Entity/Ticket.php:122
+#: lib/MUTicket/Entity/Supporter.php:64
+#: lib/MUTicket/Entity/Supporter.php:65
+#: lib/MUTicket/Entity/Supporter.php:108
+#: lib/MUTicket/Entity/Supporter.php:109
+#: lib/MUTicket/Entity/Ticket.php:77
+#: lib/MUTicket/Entity/Ticket.php:78
+#: lib/MUTicket/Entity/Ticket.php:121
+#: lib/MUTicket/Entity/Ticket.php:122
 #: templates/user/supporter/display.tpl:23
 #: templates/user/supporter/display.tpl:24
-#: templates/user/supporter/view.tpl:68 templates/user/supporter/view.tpl:69
-#: templates/user/ticket/view.tpl:98 templates/user/ticket/view.tpl:99
+#: templates/user/supporter/view.tpl:68
+#: templates/user/supporter/view.tpl:69
+#: templates/user/ticket/view.tpl:98
+#: templates/user/ticket/view.tpl:99
 msgid "Edit"
 msgstr ""
 
@@ -338,9 +357,11 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Supporter.php:511
 #: lib/MUTicket/Entity/Base/Supporter.php:555
 #: lib/MUTicket/Entity/Base/Ticket.php:1073
-#: lib/MUTicket/Entity/Base/Ticket.php:1117 lib/MUTicket/Entity/Ticket.php:127
+#: lib/MUTicket/Entity/Base/Ticket.php:1117
+#: lib/MUTicket/Entity/Ticket.php:127
 #: templates/user/supporter/display.tpl:26
-#: templates/user/supporter/view.tpl:71 templates/user/ticket/view.tpl:101
+#: templates/user/supporter/view.tpl:71
+#: templates/user/ticket/view.tpl:101
 msgid "Reuse for new item"
 msgstr ""
 
@@ -349,9 +370,11 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Supporter.php:512
 #: lib/MUTicket/Entity/Base/Supporter.php:556
 #: lib/MUTicket/Entity/Base/Ticket.php:1074
-#: lib/MUTicket/Entity/Base/Ticket.php:1118 lib/MUTicket/Entity/Ticket.php:128
+#: lib/MUTicket/Entity/Base/Ticket.php:1118
+#: lib/MUTicket/Entity/Ticket.php:128
 #: templates/user/supporter/display.tpl:27
-#: templates/user/supporter/view.tpl:72 templates/user/ticket/view.tpl:102
+#: templates/user/supporter/view.tpl:72
+#: templates/user/ticket/view.tpl:102
 msgid "Reuse"
 msgstr ""
 
@@ -367,19 +390,28 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Ticket.php:1082
 #: lib/MUTicket/Entity/Base/Ticket.php:1125
 #: lib/MUTicket/Entity/Base/Ticket.php:1126
-#: lib/MUTicket/Entity/Supporter.php:78 lib/MUTicket/Entity/Supporter.php:79
-#: lib/MUTicket/Entity/Supporter.php:122 lib/MUTicket/Entity/Supporter.php:123
-#: lib/MUTicket/Entity/Ticket.php:91 lib/MUTicket/Entity/Ticket.php:92
-#: lib/MUTicket/Entity/Ticket.php:135 lib/MUTicket/Entity/Ticket.php:136
-#: templates/admin/rating/delete.tpl:7 templates/admin/rating/delete.tpl:20
+#: lib/MUTicket/Entity/Supporter.php:78
+#: lib/MUTicket/Entity/Supporter.php:79
+#: lib/MUTicket/Entity/Supporter.php:122
+#: lib/MUTicket/Entity/Supporter.php:123
+#: lib/MUTicket/Entity/Ticket.php:91
+#: lib/MUTicket/Entity/Ticket.php:92
+#: lib/MUTicket/Entity/Ticket.php:135
+#: lib/MUTicket/Entity/Ticket.php:136
+#: templates/admin/rating/delete.tpl:7
+#: templates/admin/rating/delete.tpl:20
 #: templates/admin/supporter/delete.tpl:7
-#: templates/admin/supporter/delete.tpl:20 templates/admin/ticket/delete.tpl:7
-#: templates/admin/ticket/delete.tpl:20 templates/user/rating/delete.tpl:18
+#: templates/admin/supporter/delete.tpl:20
+#: templates/admin/ticket/delete.tpl:7
+#: templates/admin/ticket/delete.tpl:20
+#: templates/user/rating/delete.tpl:18
 #: templates/user/supporter/delete.tpl:18
 #: templates/user/supporter/display.tpl:31
 #: templates/user/supporter/display.tpl:32
-#: templates/user/supporter/view.tpl:76 templates/user/supporter/view.tpl:77
-#: templates/user/ticket/delete.tpl:18 templates/user/ticket/view.tpl:106
+#: templates/user/supporter/view.tpl:76
+#: templates/user/supporter/view.tpl:77
+#: templates/user/ticket/delete.tpl:18
+#: templates/user/ticket/view.tpl:106
 #: templates/user/ticket/view.tpl:107
 msgid "Delete"
 msgstr ""
@@ -395,9 +427,12 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Ticket.php:1090
 #: lib/MUTicket/Entity/Base/Ticket.php:1091
 #: lib/MUTicket/Entity/Base/Ticket.php:1134
-#: lib/MUTicket/Entity/Base/Ticket.php:1135 lib/MUTicket/Entity/Ticket.php:100
-#: lib/MUTicket/Entity/Ticket.php:101 lib/MUTicket/Entity/Ticket.php:144
-#: lib/MUTicket/Entity/Ticket.php:145 templates/user/supporter/display.tpl:35
+#: lib/MUTicket/Entity/Base/Ticket.php:1135
+#: lib/MUTicket/Entity/Ticket.php:100
+#: lib/MUTicket/Entity/Ticket.php:101
+#: lib/MUTicket/Entity/Ticket.php:144
+#: lib/MUTicket/Entity/Ticket.php:145
+#: templates/user/supporter/display.tpl:35
 #: templates/user/supporter/display.tpl:36
 msgid "Back to overview"
 msgstr ""
@@ -508,12 +543,15 @@ msgid "All supporters deleted. You have to save one!"
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:47
-msgid ""
-"Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!"
+msgid "Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!"
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Edit.php:112
 msgid "Attention! There is no other user in the supporter group!"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Edit.php:131
+msgid "No Category"
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Rating/Base/Edit.php:156
@@ -623,11 +661,16 @@ msgid "Title of ticket"
 msgstr ""
 
 #: lib/MUTicket/Util/Base/Settings.php:183
-#: templates/admin/ticket/display.tpl:50 templates/admin/ticket/edit.tpl:34
-#: templates/admin/ticket/rating.tpl:50 templates/admin/ticket/rating.tpl:51
-#: templates/admin/ticket/rating.tpl:54 templates/admin/ticket/view.csv:3
-#: templates/admin/ticket/view.tpl:40 templates/user/ticket/display.tpl:80
-#: templates/user/ticket/edit.tpl:36 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:50
+#: templates/admin/ticket/edit.tpl:34
+#: templates/admin/ticket/rating.tpl:50
+#: templates/admin/ticket/rating.tpl:51
+#: templates/admin/ticket/rating.tpl:54
+#: templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:40
+#: templates/user/ticket/display.tpl:80
+#: templates/user/ticket/edit.tpl:36
+#: templates/user/ticket/view.csv:3
 msgid "Text"
 msgstr ""
 
@@ -711,9 +754,7 @@ msgid "Please enter a valid number in this field."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:38
-msgid ""
-"Please use numbers only in this field. please avoid spaces or other "
-"characters such as dots or commas."
+msgid "Please use numbers only in this field. please avoid spaces or other characters such as dots or commas."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:39
@@ -721,9 +762,7 @@ msgid "Please use letters only (a-z) in this field."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:40
-msgid ""
-"Please use only letters (a-z) or numbers (0-9) only in this field. No spaces "
-"or other characters are allowed."
+msgid "Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:41
@@ -739,9 +778,7 @@ msgid "Please enter a valid URL."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:44
-msgid ""
-"Please use this date format: dd/mm/yyyy. For example 17/03/2010 for the 17th "
-"of March, 2010."
+msgid "Please use this date format: dd/mm/yyyy. For example 17/03/2010 for the 17th of March, 2010."
 msgstr ""
 
 #: templates/plugins/function.muticketValidationError.php:45
@@ -792,7 +829,8 @@ msgstr ""
 msgid "Supporter!"
 msgstr ""
 
-#: templates/admin/config.tpl:4 templates/admin/config.tpl:7
+#: templates/admin/config.tpl:4
+#: templates/admin/config.tpl:7
 msgid "Settings"
 msgstr ""
 
@@ -804,7 +842,8 @@ msgstr ""
 msgid "Supportergroup"
 msgstr ""
 
-#: templates/admin/config.tpl:21 templates/admin/config.tpl:25
+#: templates/admin/config.tpl:21
+#: templates/admin/config.tpl:25
 #: templates/admin/config.tpl:29
 msgid "Input this setting."
 msgstr ""
@@ -829,27 +868,31 @@ msgstr ""
 msgid "Update configuration"
 msgstr ""
 
-#: templates/admin/config.tpl:43 templates/admin/rating/delete.tpl:22
-#: templates/admin/rating/edit.tpl:82 templates/admin/supporter/delete.tpl:22
-#: templates/admin/supporter/edit.tpl:98 templates/admin/ticket/delete.tpl:22
+#: templates/admin/config.tpl:43
+#: templates/admin/rating/delete.tpl:22
+#: templates/admin/rating/edit.tpl:82
+#: templates/admin/supporter/delete.tpl:22
+#: templates/admin/supporter/edit.tpl:98
+#: templates/admin/ticket/delete.tpl:22
 #: templates/admin/ticket/edit.tpl:150
 #: templates/admin/ticket/include_selectOne.tpl:15
-#: templates/user/rating/delete.tpl:20 templates/user/supporter/delete.tpl:20
-#: templates/user/supporter/edit.tpl:86 templates/user/ticket/delete.tpl:20
+#: templates/user/rating/delete.tpl:20
+#: templates/user/supporter/delete.tpl:20
+#: templates/user/supporter/edit.tpl:86
+#: templates/user/ticket/delete.tpl:20
 #: templates/user/ticket/edit.tpl:178
 #: templates/user/ticket/include_selectOne.tpl:15
 msgid "Cancel"
 msgstr ""
 
 #: templates/admin/header.tpl:14
-msgid ""
-"Notice: If there is no supporter present, the support in the frontend is "
-"disabled for costumers!"
+msgid "Notice: If there is no supporter present, the support in the frontend is disabled for costumers!"
 msgstr ""
 
 #: templates/admin/include_categories_display.tpl:3
 #: templates/admin/include_categories_edit.tpl:3
-#: templates/admin/supporter/edit.tpl:41 templates/admin/ticket/view.rss:41
+#: templates/admin/supporter/edit.tpl:41
+#: templates/admin/ticket/view.rss:41
 #: templates/user/include_categories_edit.tpl:3
 #: templates/user/ticket/view.rss:41
 msgid "Categories"
@@ -910,45 +953,60 @@ msgstr ""
 msgid "Updated on %s"
 msgstr ""
 
-#: templates/admin/rating/delete.tpl:4 templates/admin/rating/edit.tpl:75
-#: templates/user/rating/delete.tpl:4 templates/user/rating/edit.tpl:50
+#: templates/admin/rating/delete.tpl:4
+#: templates/admin/rating/edit.tpl:75
+#: templates/user/rating/delete.tpl:4
+#: templates/user/rating/edit.tpl:50
 msgid "Delete rating"
 msgstr ""
 
-#: templates/admin/rating/delete.tpl:11 templates/user/rating/delete.tpl:9
+#: templates/admin/rating/delete.tpl:11
+#: templates/user/rating/delete.tpl:9
 msgid "Do you really want to delete this rating ?"
 msgstr ""
 
 #: templates/admin/rating/delete.tpl:18
 #: templates/admin/supporter/delete.tpl:18
-#: templates/admin/ticket/delete.tpl:18 templates/user/rating/delete.tpl:16
-#: templates/user/supporter/delete.tpl:16 templates/user/ticket/delete.tpl:16
+#: templates/admin/ticket/delete.tpl:18
+#: templates/user/rating/delete.tpl:16
+#: templates/user/supporter/delete.tpl:16
+#: templates/user/ticket/delete.tpl:16
 msgid "Confirmation prompt"
 msgstr ""
 
-#: templates/admin/rating/display.tpl:4 templates/admin/ticket/rating.tpl:43
-#: templates/admin/ticket/rating.tpl:44 templates/user/rating/display.tpl:4
+#: templates/admin/rating/display.tpl:4
+#: templates/admin/ticket/rating.tpl:43
+#: templates/admin/ticket/rating.tpl:44
+#: templates/user/rating/display.tpl:4
 msgid "Rating"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:7 templates/admin/rating/edit.tpl:13
+#: templates/admin/rating/edit.tpl:7
+#: templates/admin/rating/edit.tpl:13
 msgid "Edit rating"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:10 templates/admin/rating/edit.tpl:78
-#: templates/admin/rating/view.tpl:13 templates/admin/ticket/display.tpl:23
-#: templates/user/rating/view.tpl:11 templates/user/ticket/display.tpl:54
+#: templates/admin/rating/edit.tpl:10
+#: templates/admin/rating/edit.tpl:78
+#: templates/admin/rating/view.tpl:13
+#: templates/admin/ticket/display.tpl:23
+#: templates/user/rating/view.tpl:11
+#: templates/user/ticket/display.tpl:54
 msgid "Create rating"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:28 templates/admin/supporter/edit.tpl:28
-#: templates/admin/ticket/edit.tpl:28 templates/user/supporter/edit.tpl:23
+#: templates/admin/rating/edit.tpl:28
+#: templates/admin/supporter/edit.tpl:28
+#: templates/admin/ticket/edit.tpl:28
+#: templates/user/supporter/edit.tpl:23
 #: templates/user/ticket/edit.tpl:27
 msgid "Content"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:30 templates/admin/rating/view.csv:3
-#: templates/admin/rating/view.tpl:41 templates/user/rating/view.csv:3
+#: templates/admin/rating/edit.tpl:30
+#: templates/admin/rating/view.csv:3
+#: templates/admin/rating/view.tpl:41
+#: templates/user/rating/view.csv:3
 #: templates/user/rating/view.tpl:39
 msgid "Ratingvalue"
 msgstr ""
@@ -957,35 +1015,47 @@ msgstr ""
 msgid "Enter the ratingvalue of the rating"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:49 templates/admin/supporter/edit.tpl:65
-#: templates/admin/ticket/edit.tpl:117 templates/user/rating/edit.tpl:35
-#: templates/user/supporter/edit.tpl:53 templates/user/ticket/edit.tpl:141
+#: templates/admin/rating/edit.tpl:49
+#: templates/admin/supporter/edit.tpl:65
+#: templates/admin/ticket/edit.tpl:117
+#: templates/user/rating/edit.tpl:35
+#: templates/user/supporter/edit.tpl:53
+#: templates/user/ticket/edit.tpl:141
 msgid "Hooks"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:61 templates/admin/supporter/edit.tpl:77
-#: templates/admin/ticket/edit.tpl:129 templates/user/supporter/edit.tpl:65
+#: templates/admin/rating/edit.tpl:61
+#: templates/admin/supporter/edit.tpl:77
+#: templates/admin/ticket/edit.tpl:129
+#: templates/user/supporter/edit.tpl:65
 #: templates/user/ticket/edit.tpl:153
 msgid "Return control"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:63 templates/admin/supporter/edit.tpl:79
-#: templates/admin/ticket/edit.tpl:131 templates/user/supporter/edit.tpl:67
+#: templates/admin/rating/edit.tpl:63
+#: templates/admin/supporter/edit.tpl:79
+#: templates/admin/ticket/edit.tpl:131
+#: templates/user/supporter/edit.tpl:67
 #: templates/user/ticket/edit.tpl:155
 msgid "Create another item after save"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:72 templates/user/rating/edit.tpl:47
+#: templates/admin/rating/edit.tpl:72
+#: templates/user/rating/edit.tpl:47
 msgid "Update rating"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:74 templates/user/rating/edit.tpl:49
+#: templates/admin/rating/edit.tpl:74
+#: templates/user/rating/edit.tpl:49
 msgid "Really delete this rating?"
 msgstr ""
 
-#: templates/admin/rating/edit.tpl:80 templates/admin/supporter/edit.tpl:96
-#: templates/admin/ticket/edit.tpl:148 templates/user/rating/edit.tpl:55
-#: templates/user/supporter/edit.tpl:84 templates/user/ticket/edit.tpl:176
+#: templates/admin/rating/edit.tpl:80
+#: templates/admin/supporter/edit.tpl:96
+#: templates/admin/ticket/edit.tpl:148
+#: templates/user/rating/edit.tpl:55
+#: templates/user/supporter/edit.tpl:84
+#: templates/user/ticket/edit.tpl:176
 msgid "OK"
 msgstr ""
 
@@ -996,7 +1066,8 @@ msgstr ""
 #: templates/admin/ticket/display.tpl:89
 #: templates/admin/ticket/include_displayItemListMany.tpl:10
 #: templates/admin/ticket/include_displayItemListOne.tpl:7
-#: templates/admin/ticket/rating.tpl:96 templates/admin/ticket/view.tpl:75
+#: templates/admin/ticket/rating.tpl:96
+#: templates/admin/ticket/view.tpl:75
 #: templates/user/supporter/include_displayItemListMany.tpl:10
 #: templates/user/supporter/include_displayItemListOne.tpl:7
 #: templates/user/ticket/display.tpl:117
@@ -1012,7 +1083,8 @@ msgstr ""
 #: templates/admin/ticket/display.tpl:90
 #: templates/admin/ticket/include_displayItemListMany.tpl:11
 #: templates/admin/ticket/include_displayItemListOne.tpl:8
-#: templates/admin/ticket/rating.tpl:97 templates/admin/ticket/view.tpl:76
+#: templates/admin/ticket/rating.tpl:97
+#: templates/admin/ticket/view.tpl:76
 #: templates/user/supporter/include_displayItemListMany.tpl:11
 #: templates/user/supporter/include_displayItemListOne.tpl:8
 #: templates/user/ticket/display.tpl:118
@@ -1021,31 +1093,42 @@ msgstr ""
 msgid "Quick view"
 msgstr ""
 
-#: templates/admin/rating/view.atom:4 templates/admin/rating/view.rss:11
-#: templates/user/rating/view.atom:4 templates/user/rating/view.rss:11
+#: templates/admin/rating/view.atom:4
+#: templates/admin/rating/view.rss:11
+#: templates/user/rating/view.atom:4
+#: templates/user/rating/view.rss:11
 msgid "Latest ratings"
 msgstr ""
 
-#: templates/admin/rating/view.atom:5 templates/admin/rating/view.rss:12
-#: templates/user/rating/view.atom:5 templates/user/rating/view.rss:12
+#: templates/admin/rating/view.atom:5
+#: templates/admin/rating/view.rss:12
+#: templates/user/rating/view.atom:5
+#: templates/user/rating/view.rss:12
 msgid "A direct feed showing the list of ratings"
 msgstr ""
 
-#: templates/admin/rating/view.tpl:21 templates/admin/ticket/rating.tpl:16
-#: templates/admin/ticket/view.tpl:13 templates/user/rating/view.tpl:19
+#: templates/admin/rating/view.tpl:21
+#: templates/admin/ticket/rating.tpl:16
+#: templates/admin/ticket/view.tpl:13
+#: templates/user/rating/view.tpl:19
 #: templates/user/supporter/view.tpl:18
 msgid "Back to paginated view"
 msgstr ""
 
-#: templates/admin/rating/view.tpl:27 templates/admin/ticket/rating.tpl:22
-#: templates/admin/ticket/view.tpl:19 templates/user/rating/view.tpl:25
+#: templates/admin/rating/view.tpl:27
+#: templates/admin/ticket/rating.tpl:22
+#: templates/admin/ticket/view.tpl:19
+#: templates/user/rating/view.tpl:25
 #: templates/user/supporter/view.tpl:23
 msgid "Show all entries"
 msgstr ""
 
-#: templates/admin/rating/view.tpl:43 templates/admin/supporter/view.tpl:38
-#: templates/admin/ticket/rating.tpl:66 templates/admin/ticket/view.tpl:51
-#: templates/user/rating/view.tpl:41 templates/user/supporter/view.tpl:47
+#: templates/admin/rating/view.tpl:43
+#: templates/admin/supporter/view.tpl:38
+#: templates/admin/ticket/rating.tpl:66
+#: templates/admin/ticket/view.tpl:51
+#: templates/user/rating/view.tpl:41
+#: templates/user/supporter/view.tpl:47
 #: templates/user/ticket/view.tpl:72
 msgid "Actions"
 msgstr ""
@@ -1058,7 +1141,8 @@ msgid "No ratings found."
 msgstr ""
 
 #: templates/admin/supporter/delete.tpl:4
-#: templates/admin/supporter/edit.tpl:91 templates/user/supporter/delete.tpl:4
+#: templates/admin/supporter/edit.tpl:91
+#: templates/user/supporter/delete.tpl:4
 #: templates/user/supporter/edit.tpl:79
 msgid "Delete supporter"
 msgstr ""
@@ -1074,43 +1158,60 @@ msgid "Supporter"
 msgstr ""
 
 #: templates/admin/supporter/display.tpl:14
-#: templates/admin/supporter/view.csv:3 templates/admin/supporter/view.tpl:33
+#: templates/admin/supporter/view.csv:3
+#: templates/admin/supporter/view.tpl:33
 #: templates/user/supporter/display.tpl:12
-#: templates/user/supporter/edit.tpl:30 templates/user/supporter/view.csv:3
+#: templates/user/supporter/edit.tpl:30
+#: templates/user/supporter/view.csv:3
 #: templates/user/supporter/view.tpl:42
 msgid "Supportcats"
 msgstr ""
 
 #: templates/admin/supporter/display.tpl:16
-#: templates/admin/supporter/view.csv:3 templates/admin/ticket/display.tpl:76
-#: templates/admin/ticket/edit.tpl:87 templates/admin/ticket/rating.tpl:58
-#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:43
+#: templates/admin/supporter/view.csv:3
+#: templates/admin/ticket/display.tpl:76
+#: templates/admin/ticket/edit.tpl:87
+#: templates/admin/ticket/rating.tpl:58
+#: templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:43
 #: templates/user/supporter/display.tpl:14
-#: templates/user/supporter/edit.tpl:35 templates/user/supporter/view.csv:3
-#: templates/user/supporter/view.tpl:45 templates/user/ticket/edit.tpl:98
-#: templates/user/ticket/view.csv:3 templates/user/ticket/view.tpl:50
+#: templates/user/supporter/edit.tpl:35
+#: templates/user/supporter/view.csv:3
+#: templates/user/supporter/view.tpl:45
+#: templates/user/ticket/edit.tpl:98
+#: templates/user/ticket/view.csv:3
+#: templates/user/ticket/view.tpl:50
 #: templates/user/ticket/view.tpl:70
 msgid "State"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:7 templates/admin/supporter/edit.tpl:13
-#: templates/user/supporter/edit.tpl:7 templates/user/supporter/edit.tpl:11
+#: templates/admin/supporter/edit.tpl:7
+#: templates/admin/supporter/edit.tpl:13
+#: templates/user/supporter/edit.tpl:7
+#: templates/user/supporter/edit.tpl:11
 msgid "Edit supporter"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:10 templates/admin/supporter/edit.tpl:94
-#: templates/admin/supporter/view.tpl:13 templates/user/supporter/edit.tpl:9
-#: templates/user/supporter/edit.tpl:82 templates/user/supporter/view.tpl:11
+#: templates/admin/supporter/edit.tpl:10
+#: templates/admin/supporter/edit.tpl:94
+#: templates/admin/supporter/view.tpl:13
+#: templates/user/supporter/edit.tpl:9
+#: templates/user/supporter/edit.tpl:82
+#: templates/user/supporter/view.tpl:11
 msgid "Create supporter"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:31 templates/admin/supporter/view.csv:3
-#: templates/admin/supporter/view.tpl:30 templates/user/supporter/edit.tpl:25
-#: templates/user/supporter/view.csv:3 templates/user/supporter/view.tpl:39
+#: templates/admin/supporter/edit.tpl:31
+#: templates/admin/supporter/view.csv:3
+#: templates/admin/supporter/view.tpl:30
+#: templates/user/supporter/edit.tpl:25
+#: templates/user/supporter/view.csv:3
+#: templates/user/supporter/view.tpl:39
 msgid "Username"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:32 templates/admin/supporter/edit.tpl:36
+#: templates/admin/supporter/edit.tpl:32
+#: templates/admin/supporter/edit.tpl:36
 #: templates/user/supporter/edit.tpl:26
 msgid "Input the username of the supporter"
 msgstr ""
@@ -1135,21 +1236,27 @@ msgstr ""
 msgid "state"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:88 templates/user/supporter/edit.tpl:76
+#: templates/admin/supporter/edit.tpl:88
+#: templates/user/supporter/edit.tpl:76
 msgid "Update supporter"
 msgstr ""
 
-#: templates/admin/supporter/edit.tpl:90 templates/user/supporter/edit.tpl:78
+#: templates/admin/supporter/edit.tpl:90
+#: templates/user/supporter/edit.tpl:78
 msgid "Really delete this supporter?"
 msgstr ""
 
-#: templates/admin/supporter/view.atom:4 templates/admin/supporter/view.rss:11
-#: templates/user/supporter/view.atom:4 templates/user/supporter/view.rss:11
+#: templates/admin/supporter/view.atom:4
+#: templates/admin/supporter/view.rss:11
+#: templates/user/supporter/view.atom:4
+#: templates/user/supporter/view.rss:11
 msgid "Latest supporters"
 msgstr ""
 
-#: templates/admin/supporter/view.atom:5 templates/admin/supporter/view.rss:12
-#: templates/user/supporter/view.atom:5 templates/user/supporter/view.rss:12
+#: templates/admin/supporter/view.atom:5
+#: templates/admin/supporter/view.rss:12
+#: templates/user/supporter/view.atom:5
+#: templates/user/supporter/view.rss:12
 msgid "A direct feed showing the list of supporters"
 msgstr ""
 
@@ -1164,71 +1271,101 @@ msgstr ""
 msgid "No supporters found."
 msgstr ""
 
-#: templates/admin/ticket/delete.tpl:4 templates/admin/ticket/edit.tpl:143
-#: templates/user/ticket/delete.tpl:4 templates/user/ticket/edit.tpl:167
+#: templates/admin/ticket/delete.tpl:4
+#: templates/admin/ticket/edit.tpl:143
+#: templates/user/ticket/delete.tpl:4
+#: templates/user/ticket/edit.tpl:167
 msgid "Delete ticket"
 msgstr ""
 
-#: templates/admin/ticket/delete.tpl:11 templates/user/ticket/delete.tpl:9
+#: templates/admin/ticket/delete.tpl:11
+#: templates/user/ticket/delete.tpl:9
 msgid "Do you really want to delete this ticket ?"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:4 templates/admin/ticket/display.tpl:29
+#: templates/admin/ticket/display.tpl:4
+#: templates/admin/ticket/display.tpl:29
 #: templates/admin/ticket/include_selectOne.tpl:3
-#: templates/user/ticket/display.tpl:12 templates/user/ticket/display.tpl:20
+#: templates/user/ticket/display.tpl:12
+#: templates/user/ticket/display.tpl:20
 #: templates/user/ticket/display.tpl:60
 #: templates/user/ticket/include_selectOne.tpl:3
 msgid "Ticket"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:39 templates/admin/ticket/edit.tpl:10
-#: templates/admin/ticket/edit.tpl:146 templates/user/ticket/display.tpl:70
-#: templates/user/ticket/edit.tpl:11 templates/user/ticket/edit.tpl:171
+#: templates/admin/ticket/display.tpl:39
+#: templates/admin/ticket/edit.tpl:10
+#: templates/admin/ticket/edit.tpl:146
+#: templates/user/ticket/display.tpl:70
+#: templates/user/ticket/edit.tpl:11
+#: templates/user/ticket/edit.tpl:171
 #: templates/user/ticket/view.tpl:29
 msgid "Create ticket"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:52 templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:52
+#: templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view.csv:3
 msgid "Parent_id"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:54 templates/admin/ticket/edit.tpl:39
-#: templates/admin/ticket/view.csv:3 templates/user/ticket/edit.tpl:42
-#: templates/user/ticket/edit.tpl:44 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:54
+#: templates/admin/ticket/edit.tpl:39
+#: templates/admin/ticket/view.csv:3
+#: templates/user/ticket/edit.tpl:42
+#: templates/user/ticket/edit.tpl:44
+#: templates/user/ticket/view.csv:3
 msgid "Images"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:60 templates/admin/ticket/display.tpl:71
-#: templates/admin/ticket/edit.tpl:51 templates/admin/ticket/edit.tpl:75
-#: templates/user/ticket/display.tpl:88 templates/user/ticket/display.tpl:99
-#: templates/user/ticket/display.tpl:189 templates/user/ticket/display.tpl:199
-#: templates/user/ticket/edit.tpl:58 templates/user/ticket/edit.tpl:86
+#: templates/admin/ticket/display.tpl:60
+#: templates/admin/ticket/display.tpl:71
+#: templates/admin/ticket/edit.tpl:51
+#: templates/admin/ticket/edit.tpl:75
+#: templates/user/ticket/display.tpl:88
+#: templates/user/ticket/display.tpl:99
+#: templates/user/ticket/display.tpl:189
+#: templates/user/ticket/display.tpl:199
+#: templates/user/ticket/edit.tpl:58
+#: templates/user/ticket/edit.tpl:86
 msgid "Download"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:65 templates/admin/ticket/edit.tpl:63
-#: templates/admin/ticket/view.csv:3 templates/user/ticket/edit.tpl:71
-#: templates/user/ticket/edit.tpl:73 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:65
+#: templates/admin/ticket/edit.tpl:63
+#: templates/admin/ticket/view.csv:3
+#: templates/user/ticket/edit.tpl:71
+#: templates/user/ticket/edit.tpl:73
+#: templates/user/ticket/view.csv:3
 msgid "Files"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:78 templates/admin/ticket/edit.tpl:92
-#: templates/admin/ticket/view.csv:3 templates/user/ticket/display.tpl:106
-#: templates/user/ticket/edit.tpl:103 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:78
+#: templates/admin/ticket/edit.tpl:92
+#: templates/admin/ticket/view.csv:3
+#: templates/user/ticket/display.tpl:106
+#: templates/user/ticket/edit.tpl:103
+#: templates/user/ticket/view.csv:3
 msgid "T_rating"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:80 templates/admin/ticket/edit.tpl:97
-#: templates/admin/ticket/rating.tpl:61 templates/admin/ticket/view.csv:3
-#: templates/admin/ticket/view.tpl:46 templates/user/ticket/display.tpl:108
-#: templates/user/ticket/edit.tpl:109 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:80
+#: templates/admin/ticket/edit.tpl:97
+#: templates/admin/ticket/rating.tpl:61
+#: templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:46
+#: templates/user/ticket/display.tpl:108
+#: templates/user/ticket/edit.tpl:109
+#: templates/user/ticket/view.csv:3
 msgid "Rated"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:82 templates/admin/ticket/rating.tpl:64
-#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:49
-#: templates/user/ticket/display.tpl:110 templates/user/ticket/view.csv:3
+#: templates/admin/ticket/display.tpl:82
+#: templates/admin/ticket/rating.tpl:64
+#: templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:49
+#: templates/user/ticket/display.tpl:110
+#: templates/user/ticket/view.csv:3
 msgid "Parent"
 msgstr ""
 
@@ -1237,51 +1374,68 @@ msgstr ""
 msgid "No set."
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:7 templates/admin/ticket/edit.tpl:13
-#: templates/user/ticket/edit.tpl:9 templates/user/ticket/edit.tpl:15
+#: templates/admin/ticket/edit.tpl:7
+#: templates/admin/ticket/edit.tpl:13
+#: templates/user/ticket/edit.tpl:9
+#: templates/user/ticket/edit.tpl:15
 msgid "Edit ticket"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:30 templates/admin/ticket/rating.tpl:47
-#: templates/admin/ticket/view.csv:3 templates/admin/ticket/view.tpl:37
-#: templates/user/ticket/edit.tpl:30 templates/user/ticket/view.csv:3
-#: templates/user/ticket/view.tpl:59 templates/user/ticket/view.tpl:62
+#: templates/admin/ticket/edit.tpl:30
+#: templates/admin/ticket/rating.tpl:47
+#: templates/admin/ticket/view.csv:3
+#: templates/admin/ticket/view.tpl:37
+#: templates/user/ticket/edit.tpl:30
+#: templates/user/ticket/view.csv:3
+#: templates/user/ticket/view.tpl:59
+#: templates/user/ticket/view.tpl:62
 #: templates/user/ticket/view.tpl:65
 msgid "Title"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:31 templates/user/ticket/edit.tpl:31
+#: templates/admin/ticket/edit.tpl:31
+#: templates/user/ticket/edit.tpl:31
 msgid "Input the title of the ticket"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:35 templates/user/ticket/edit.tpl:37
+#: templates/admin/ticket/edit.tpl:35
+#: templates/user/ticket/edit.tpl:37
 msgid "Input the text of the ticket"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:42 templates/admin/ticket/edit.tpl:66
-#: templates/user/ticket/edit.tpl:48 templates/user/ticket/edit.tpl:77
+#: templates/admin/ticket/edit.tpl:42
+#: templates/admin/ticket/edit.tpl:66
+#: templates/user/ticket/edit.tpl:48
+#: templates/user/ticket/edit.tpl:77
 msgid "Allowed file extensions:"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:46 templates/admin/ticket/edit.tpl:70
-#: templates/user/ticket/edit.tpl:53 templates/user/ticket/edit.tpl:81
+#: templates/admin/ticket/edit.tpl:46
+#: templates/admin/ticket/edit.tpl:70
+#: templates/user/ticket/edit.tpl:53
+#: templates/user/ticket/edit.tpl:81
 msgid "Current file"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:56 templates/user/ticket/edit.tpl:63
+#: templates/admin/ticket/edit.tpl:56
+#: templates/user/ticket/edit.tpl:63
 msgid "Delete images ?"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:57 templates/admin/ticket/edit.tpl:81
-#: templates/user/ticket/edit.tpl:64 templates/user/ticket/edit.tpl:92
+#: templates/admin/ticket/edit.tpl:57
+#: templates/admin/ticket/edit.tpl:81
+#: templates/user/ticket/edit.tpl:64
+#: templates/user/ticket/edit.tpl:92
 msgid "Delete existing file"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:80 templates/user/ticket/edit.tpl:91
+#: templates/admin/ticket/edit.tpl:80
+#: templates/user/ticket/edit.tpl:91
 msgid "Delete files ?"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:88 templates/user/supporter/edit.tpl:36
+#: templates/admin/ticket/edit.tpl:88
+#: templates/user/supporter/edit.tpl:36
 msgid "state ?"
 msgstr ""
 
@@ -1293,11 +1447,13 @@ msgstr ""
 msgid "rated ?"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:140 templates/user/ticket/edit.tpl:164
+#: templates/admin/ticket/edit.tpl:140
+#: templates/user/ticket/edit.tpl:164
 msgid "Update ticket"
 msgstr ""
 
-#: templates/admin/ticket/edit.tpl:142 templates/user/ticket/edit.tpl:166
+#: templates/admin/ticket/edit.tpl:142
+#: templates/user/ticket/edit.tpl:166
 msgid "Really delete this ticket?"
 msgstr ""
 
@@ -1333,11 +1489,13 @@ msgstr ""
 msgid "Created Date"
 msgstr ""
 
-#: templates/admin/ticket/rating.tpl:106 templates/admin/ticket/view.tpl:85
+#: templates/admin/ticket/rating.tpl:106
+#: templates/admin/ticket/view.tpl:85
 msgid "Not set."
 msgstr ""
 
-#: templates/admin/ticket/rating.tpl:124 templates/admin/ticket/view.tpl:103
+#: templates/admin/ticket/rating.tpl:124
+#: templates/admin/ticket/view.tpl:103
 #: templates/mailz/itemlist_Ticket_html.tpl:9
 #: templates/mailz/itemlist_Ticket_text.tpl:7
 #: templates/user/ticket/view.tpl:115
@@ -1400,13 +1558,17 @@ msgstr ""
 msgid "points for the rating of customers"
 msgstr ""
 
-#: templates/admin/ticket/view.atom:4 templates/admin/ticket/view.rss:11
-#: templates/user/ticket/view.atom:4 templates/user/ticket/view.rss:11
+#: templates/admin/ticket/view.atom:4
+#: templates/admin/ticket/view.rss:11
+#: templates/user/ticket/view.atom:4
+#: templates/user/ticket/view.rss:11
 msgid "Latest tickets"
 msgstr ""
 
-#: templates/admin/ticket/view.atom:5 templates/admin/ticket/view.rss:12
-#: templates/user/ticket/view.atom:5 templates/user/ticket/view.rss:12
+#: templates/admin/ticket/view.atom:5
+#: templates/admin/ticket/view.rss:12
+#: templates/user/ticket/view.atom:5
+#: templates/user/ticket/view.rss:12
 msgid "A direct feed showing the list of tickets"
 msgstr ""
 
@@ -1496,29 +1658,30 @@ msgid "Do you want to close this ticket?"
 msgstr ""
 
 #: templates/user/ticket/display.tpl:25
-msgid ""
-"You can now close this ticket, if your are sure, that the question of the "
-"customer is answered! Consider you cannot reopen this ticket!"
+msgid "You can now close this ticket, if your are sure, that the question of the customer is answered! Consider you cannot reopen this ticket!"
 msgstr ""
 
 #: templates/user/ticket/display.tpl:28
-msgid ""
-"This ticket is closed. If you have questions again, please open a new ticket!"
+msgid "This ticket is closed. If you have questions again, please open a new ticket!"
 msgstr ""
 
-#: templates/user/ticket/display.tpl:82 templates/user/ticket/display.tpl:183
+#: templates/user/ticket/display.tpl:82
+#: templates/user/ticket/display.tpl:183
 msgid "Image"
 msgstr ""
 
-#: templates/user/ticket/display.tpl:92 templates/user/ticket/display.tpl:192
+#: templates/user/ticket/display.tpl:92
+#: templates/user/ticket/display.tpl:192
 msgid "No images uploaded!"
 msgstr ""
 
-#: templates/user/ticket/display.tpl:93 templates/user/ticket/display.tpl:193
+#: templates/user/ticket/display.tpl:93
+#: templates/user/ticket/display.tpl:193
 msgid "File"
 msgstr ""
 
-#: templates/user/ticket/display.tpl:102 templates/user/ticket/display.tpl:202
+#: templates/user/ticket/display.tpl:102
+#: templates/user/ticket/display.tpl:202
 msgid "No files uploaded!"
 msgstr ""
 
@@ -1583,16 +1746,14 @@ msgid "Open"
 msgstr ""
 
 #: templates/user/ticket/display.tpl:249
-msgid ""
-"Close ticket"
+msgid "Close ticket"
 msgstr ""
 
 #: templates/user/ticket/display.tpl:166
-msgid ""
-"RATE NOW THIS SUPPORT ANSWER!"
+msgid "RATE NOW THIS SUPPORT ANSWER!"
 msgstr ""
 
 #: templates/admin/config.tpl:34
-msgid ""
-"Do you want to delete all existing supporters?"
+msgid "Do you want to delete all existing supporters?"
 msgstr ""
+

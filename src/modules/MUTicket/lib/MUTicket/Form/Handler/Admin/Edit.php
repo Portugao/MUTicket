@@ -128,7 +128,7 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 			$savedcats = unserialize($savedcats);
 			}
 			else {
-				$savedcats[0] = $this->__('No Category');
+				$savedcats[0] = 0;
 			}
 			$this->view->assign('savedcats', $savedcats);
 		}
@@ -139,7 +139,8 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 
 		$supporter['supportcatsItems'] = $supportcats;
 		$supporter['usernameItems'] = $supportusers;
-		$this->view->assign('supporter', $supporter);
+		$this->view->assign('supporter', $supporter)
+		           ->assign('statuscategory', $statuscategory);
 
 		return true;
 

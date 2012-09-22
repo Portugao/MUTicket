@@ -16,9 +16,9 @@
 /**
  * Smarty function to wrap MUTicket_Form_View generated form controls with suitable form tags.
  *
- * @param array            $params  Parameters passed in the block tag.
- * @param string           $content Content of the block.
- * @param Zikula_Form_View $view    Reference to Zikula_Form_View object.
+ * @param array $params Parameters passed in the block tag.
+ * @param string $content Content of the block.
+ * @param Zikula_Form_View $view Reference to Zikula_Form_View object.
  *
  * @return string The rendered output.
  */
@@ -55,31 +55,31 @@ function smarty_block_muticketform($params, $content, $view)
 		$out = "
 <form id=\"{$formId}\" {$classString}action=\"$action\" method=\"post\"{$encodingHtml}>
 		$content
-    <div>
-    {$view->getStateHTML()}
-    {$view->getStateDataHTML()}
-    {$view->getIncludesHTML()}
-    {$view->getCsrfTokenHtml()}
-        <input type=\"hidden\" name=\"__formid\" id=\"form__id\" value=\"{$formId}\" />
-        <input type=\"hidden\" name=\"FormEventTarget\" id=\"FormEventTarget\" value=\"\" />
-        <input type=\"hidden\" name=\"FormEventArgument\" id=\"FormEventArgument\" value=\"\" />
-        <script type=\"text/javascript\">
-        <!--
-            function FormDoPostBack(eventTarget, eventArgument)
-            {
-                var f = document.getElementById('{$formId}');
-                if (!f.onsubmit || f.onsubmit())
-                {
-                    f.FormEventTarget.value = eventTarget;
-                    f.FormEventArgument.value = eventArgument;
-                    f.submit();
-                }
-            }
-        // -->
-        </script>
-    </div>
+<div>
+		{$view->getStateHTML()}
+		{$view->getStateDataHTML()}
+		{$view->getIncludesHTML()}
+		{$view->getCsrfTokenHtml()}
+<input type=\"hidden\" name=\"__formid\" id=\"form__id\" value=\"{$formId}\" />
+<input type=\"hidden\" name=\"FormEventTarget\" id=\"FormEventTarget\" value=\"\" />
+<input type=\"hidden\" name=\"FormEventArgument\" id=\"FormEventArgument\" value=\"\" />
+<script type=\"text/javascript\">
+<!--
+function FormDoPostBack(eventTarget, eventArgument)
+{
+var f = document.getElementById('{$formId}');
+if (!f.onsubmit || f.onsubmit())
+{
+f.FormEventTarget.value = eventTarget;
+f.FormEventArgument.value = eventArgument;
+f.submit();
+}
+}
+// -->
+</script>
+</div>
 </form>
 ";
-    return $out;
+		return $out;
 	}
 }

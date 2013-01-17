@@ -167,7 +167,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 			}
 		}
 
-		// We check for supportes that are active
+		// We check for supporters that are active
 		// If there is no supporter active, we show no link for new tickets
 		// and no edit form for answers
 		$supporteractive = MUTicket_Util_View::checkIfSupporters();

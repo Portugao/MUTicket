@@ -1,4 +1,6 @@
 CHANGELOG
 ---------
 
-Changes in MUTicket 1.0.0
+Changes in MUTicket 1.0.1
+
+closed #38 Enable in the settings now, that users that are in the supportergroup can create tickets

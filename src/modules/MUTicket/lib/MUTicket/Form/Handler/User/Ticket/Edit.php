@@ -26,6 +26,19 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	 */
 	public function initialize(Zikula_Form_View $view)
 	{
+		
+		$supporterTickets = MUTicket_Util_View::userForRating(2);
+		// if supporters may not create tickets
+		
+		if ($supporterTickets == 0) {
+			$uid = UserUtil::getVar('uid');
+			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+			if (in_array($uid, $supporteruids)) {
+				$url = ModUtil::url($this->name, 'user', 'view');
+				return LogUtil::registerPermissionError($url);
+			}
+		}
+		
 		// We check for supportes that are active
 		// If there is no supporter active, we break the input process
 		$supporteractive = MUTicket_Util_View::checkIfSupporters();
@@ -62,30 +75,42 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	 */
 	public function handleCommand(Zikula_Form_View $view, &$args)
 	{
+		$supporterTickets = MUTicket_Util_View::userForRating(2);
+		// if supporters may not create tickets
+
+		if ($supporterTickets == 0) {
+			$uid = UserUtil::getVar('uid');
+			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+			if (in_array($uid, $supporteruids)) {
+				$url = ModUtil::url($this->name, 'user', 'view');
+				return LogUtil::registerPermissionError($url);
+			}
+		}
+
 		$result = parent::handleCommand($view, $args);
 		if ($result === false) {
 			return $result;
 		}
 		else {
-		// we get parentid
-		// We check if ticket is a parent ticket
-		$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
-			
-		// fetch posted data input values as an associative array
-		$formData = $this->view->getValues();
-		// we want the array with our field values
-		//$entity = $formData[$this->objectTypeLower];
-		$repository = MUTicket_Util_Model::getTicketRepository();
-		$entity = $repository->selectById($this->idValues['id']);
-			
-		// Get relevant datas for mailing
-		$data['id'] = $this->idValues['id'];
-		$data['parentid'] = $parentid;
-		$data['title'] = $entity['title'];
-		$data['text'] = $entity['text'];
-		$data['categories'] = $entity['categories'];
+			// we get parentid
+			// We check if ticket is a parent ticket
+			$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
+				
+			// fetch posted data input values as an associative array
+			$formData = $this->view->getValues();
+			// we want the array with our field values
+			//$entity = $formData[$this->objectTypeLower];
+			$repository = MUTicket_Util_Model::getTicketRepository();
+			$entity = $repository->selectById($this->idValues['id']);
+				
+			// Get relevant datas for mailing
+			$data['id'] = $this->idValues['id'];
+			$data['parentid'] = $parentid;
+			$data['title'] = $entity['title'];
+			$data['text'] = $entity['text'];
+			$data['categories'] = $entity['categories'];
 
-		MUTicket_Util_Base_Settings::handleModvarsPostPersist($data);
+			MUTicket_Util_Base_Settings::handleModvarsPostPersist($data);
 		}
 
 	}

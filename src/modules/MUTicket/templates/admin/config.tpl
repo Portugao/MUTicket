@@ -28,7 +28,11 @@
                     {formlabel for='fileSize' __text='Allowed filesize?'}
                     {formintinput id='fileSize' group='config' maxLength=20 width=20em __title='Input this setting.'}
                     <div class="z-informationmsg z-formnote">{gt text="102400 = 100 KB."}</div>
-                </div>
+                </div>                             
+                <div class="z-formrow">
+                    {formlabel for='supporterTicktes' __text='Supporter group may create tickets?'}
+                    {formcheckbox id='supporterTickets' group='config' __title='Activate or deactivate this option.'}              
+                </div> 
             </fieldset>
             <fieldset>
                 <legend>{gt text='Do you want to delete all existing supporters?'}</legend>

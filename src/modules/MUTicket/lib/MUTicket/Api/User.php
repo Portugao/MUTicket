@@ -46,7 +46,7 @@ class MUTicket_Api_User extends MUTicket_Api_Base_User
                              'text' => $this->__('Closed Tickets'),
                              'title' => $this->__('List of closed tickets'));
         }
-        if (MUTicket_Util_View::checkIfSupporters() == 1 && MUTicket_Util_View::userForRating() == 1) {
+        if (MUTicket_Util_View::checkIfSupporters() == 1 && MUTicket_Util_View::userForRating(2) == 1) {
         	if (SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_EDIT)) {
             	$links[] = array('url' => ModUtil::url('MUTicket', 'user', 'edit', array('ot' => 'ticket')),
                              'text' => $this->__('Create Ticket'),

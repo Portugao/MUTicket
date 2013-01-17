@@ -16,5 +16,27 @@
  */
 class MUTicket_Installer extends MUTicket_Base_Installer
 {
-    // feel free to extend the installer here
+    public function upgrade($oldversion)
+    {
+    
+        // Upgrade dependent on old version number
+        switch ($oldversion) {
+            case '1.0.0':
+            	
+            	$this->setVar('supporterTickets', '');
+            	
+                /*try {
+                    DoctrineHelper::updateSchema($this->entityManager, $this->listEntityClasses());
+                } catch (Exception $e) {
+                    if (System::isDevelopmentMode()) {
+                        LogUtil::registerError($this->__('Doctrine Exception: ') . $e->getMessage());
+                    }
+                    return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s module.', array($this->getName())));
+                }*/
+        }
+    
+
+        // update successful
+        return true;
+    }
 }

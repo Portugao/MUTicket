@@ -115,7 +115,7 @@
         </td>
         {/if}   
         <td headers="hupdated" align="left" valign="middle">
-            {$ticket.createdDate|dateformat:datetimelong}
+            {$ticket.createdDate|dateformat:datetimebrief}
         </td>    
         <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
@@ -230,13 +230,43 @@
               /*  MU(this).append("<img id='muticket_state_ajax' src='/images/ajax/icon_animated_busy.gif' />"); */
                 var url = MU(this).attr('href');
                 MU.get(url, function(ergebnis) {             
-                    if (ergebnis) {
-    
+                    if (ergebnis) { 
                         MU(labeldialog).dialog('open');
                         MU(labeldialog).html(ergebnis);
                    }               
                 });               
-            });      
+            });              
+        });
+
+        
+        function tooltip(obj) {
+            if (!obj.length) return;
+            MU("body").append('<div id="tooltip" />');
+            var tooltip = MU("#tooltip");
+            var title;
+            obj.hover(      
+                function() {
+                    title = MU(this).attr("title") ? MU(this).attr("title") : "{{gt text='No decription'}}";
+                    MU(this).attr("title", "");
+                    tooltip.html(title);
+                    tooltip.stop(true,true)
+                    .delay(50)
+                    .fadeIn("fast")
+                    .dequeue();
+                }, 
+                function() {
+                   MU(this).attr("title", title);
+                   tooltip.stop(true,true).fadeOut("fast");
+                }).mousemove(function(e) {
+                     tooltip.animate({
+                     top:e.pageY + 10,
+                     left:e.pageX + 10
+                     },30);
+                   });    
+        }
+
+        MU(document).ready(function() {
+             tooltip(MU(".tooltip"));       
         });
 
         /* ]]> */

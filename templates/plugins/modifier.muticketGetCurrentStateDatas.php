@@ -26,7 +26,7 @@ function smarty_modifier_muticketGetCurrentStateDatas($id)
     
 	$currentState = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', $selectionArgs);
 	
-	$result = "<span style='padding: 2px 5px 2px 30px; width: 25px; height: 25px; background-size: cover; background: url(/" . $currentState['uploadIconFullPath'] . ") no-repeat' id='muticket_currentstate_" . $id . "'>" . $currentState['title'] . "</span>";
+	$result = "<a href='#' class='tooltip' title='" . $currentState['description'] . "' style='padding: 2px 5px 2px 30px; width: 25px; height: 25px; background-size: cover; background: url(/" . $currentState['uploadIconFullPath'] . ") no-repeat' id='muticket_currentstate_" . $id . "'>" . $currentState['title'] . "</a>";
 
 	return $result;
 }

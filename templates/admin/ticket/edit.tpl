@@ -165,8 +165,7 @@
             {include file='admin/include_standardfields_edit.tpl' obj=$ticket panel=true}
         {/if}
         {/if}
-
-        
+     
         {* include display hooks *}
         {assign var='hookid' value=null}
         {if $mode ne 'create'}

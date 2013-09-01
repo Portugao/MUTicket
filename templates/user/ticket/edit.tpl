@@ -27,16 +27,17 @@
       {*  <h3 id="z-panel-header-fields" class="z-panel-header z-panel-indicator z-pointer">{gt text='Fields'}</h3> *}
         <div class="z-panel-content z-panel-active" style="overflow: visible">
             <fieldset>
-                <legend>{gt text='Content'}</legend>
-                {if $func ne 'display'}                
+                <legend>{gt text='Content'}</legend>                            
                 <div class="z-formrow">
-                    {formlabel for='title' __text='Title'}
-                    {formtextinput group='ticket' id='title' mandatory=false readOnly=false __title='Enter the title of the ticket' textMode='singleline' maxLength=255 cssClass='' }
+                {if $func ne 'display'} 
+                    {formlabel for='title' __text='Title' mandatorysym='1'}
+                    {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Enter the title of the ticket' textMode='singleline' maxLength=255 cssClass='required'}
+                {/if} 
                 </div>
-                {/if}               
+                              
                 <div class="z-formrow">
                     {formlabel for='text' __text='Text' mandatorysym='1'}
-                    {formtextinput group='ticket' id='text' mandatory=true __title='Enter the text of the ticket' textMode='multiline' rows='6' cols='50' cssClass='required' }
+                    {formtextinput group='ticket' id='text' mandatory=true __title='Enter the text of the ticket' textMode='multiline' rows='6' cols='50' cssClass='required'}
                     {muticketValidationError id='text' class='required'}
                 </div>           
                 <div class="z-formrow">
@@ -186,6 +187,9 @@
 
         {* include possible submit actions *}
         <div class="z-buttons z-formbuttons">
+        {if $func eq 'display'}
+        {formbutton id="btnSubmit" commandName='create' __text='Submit' class='z-bt-save'}
+        {else}
         {foreach item='action' from=$actions}
             {assign var='actionIdCapital' value=$action.id|@ucwords}
             {gt text=$action.title assign='actionTitle'}
@@ -197,6 +201,7 @@
                 {formbutton id="btn`$actionIdCapital`" commandName=$action.id text=$actionTitle class=$action.buttonClass}
            {* {/if} *}
         {/foreach}
+        {/if}
            {* {formbutton id='btnCancel' commandName='cancel' __text='Cancel' class='z-bt-cancel'} *}
         </div>
   {/muticketFormFrame}

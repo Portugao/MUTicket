@@ -98,12 +98,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	    $func = $this->request->query->filter('func','', FILTER_SANITIZE_STRING);
 	    $ot = $this->request->query->filter('ot','', FILTER_SANITIZE_STRING);
 	    $rated = $this->request->query->filter('rated', 0, FILTER_SANITIZE_NUMBER_INT);
-	    
-	    $ticketstate = 1;
-	    
-	    // We look for state - 2 is open, 3 is closed, if no state, state will get 1 for all
-	    $ticketstate = $this->request->query->filter('state', 1);
-	    
+	        
 	    // check for entity where parent_id is NULL
 	    if ($ot == 'ticket' && $func == 'view') {
 	        if (!empty($where)) {
@@ -117,7 +112,11 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	        $where = $where;
 	    }
 	    	
-	    
+	    $ticketstate = 1;
+	     
+	    // We look for state - 2 is open, 3 is closed, if no state, state will get 1 for all
+	    $ticketstate = $this->request->query->filter('state', 1);
+	    	    
 	    if(isset($ticketstate)) {
 	        if (!empty($where) && $ticketstate != 1) {
 	            $where .= ' AND ';
@@ -174,7 +173,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	
 	    $selectionArgs = array(
 	            'ot' => $objectType,
-	            'where' => '',
+	            'where' => $where,
 	            'orderBy' => $sort . ' ' . $sdir
 	    );
 	

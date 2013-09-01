@@ -9,11 +9,11 @@
 {gt text='Sorry. At the moment our support is not available!'}
 </div>
 {/if}
-{if $state eq 2 || $state eq 3}
-{if $state eq 2}
+{if $ticketstate eq 2 || $ticketstate eq 3}
+{if $ticketstate eq 2}
 {gt text='Open Tickets Overview' assign='templateTitle'}
 {/if}
-{if $state eq 3}
+{if $ticketstate eq 3}
 {gt text='Closed Tickets Overview' assign='templateTitle'}
 {/if}
 {else}
@@ -35,54 +35,54 @@
 
 <table class="z-datatable ticket_user_table">
     <colgroup>
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <col id="cstate" />
         {/if}
         <col id="ccreated" />
         <col id="ctitle" />
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <col id="cowner" />
         {/if}
         <col id="copen" />
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <col id="clabel" />
         {/if}
         <col id="cintactions" />
     </colgroup>
     <thead>
     <tr>
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <th id="hstate" scope="col" align="center" valign="middle">
         {gt text='State'}
         </th>
         {/if}
         <th id="hcreated" scope="col" align="left" valign="middle">
-        {if $state}
-            {if $state == 2}
+        {if $ticketstate}
+            {if $ticketstate == 2}
                 {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=2}
             {/if}
-            {if $state == 3}
+            {if $ticketstate == 3}
                 {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=3}
             {/if}
-            {if $state == 1}
+            {if $ticketstate == 1}
                 {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'}
             {/if}        
         {/if}   
         </th>
         <th id="htitle" scope="col" align="left" valign="middle">
-        {if $state}
-            {if $state == 2}
+        {if $ticketstate}
+            {if $ticketstate == 2}
             	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=2}
             {/if}
-            {if $state == 3}
+            {if $ticketstate == 3}
             	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=3}
             {/if}
-            {if $state == 1}
+            {if $ticketstate == 1}
             	{sortlink __linktext='Title' sort='title' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'}
             {/if}
         {/if}
         </th>
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <th id="howner" scope="col" align="center" valign="middle">
         {gt text='Owner'}
         </th>
@@ -90,7 +90,7 @@
         <th id="hopen" scope="col" align="left" valign="middle">
            {* {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'} *}{gt text='Open'}
         </th>
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <th id="hlabel" scope="col" align="center" valign="middle">
         {gt text='Label'}
         </th>
@@ -102,7 +102,7 @@
 
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <td headers="hstate" align="center" valign="middle">
             <span class="muticket_ticket_state">
             {if $ticket.currentState ne 0}
@@ -120,8 +120,8 @@
         <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
-        {if $kind eq 0 && $state ne 0}
-        <td headers="howner" align="center" valign="middle">
+        {if $kind eq 0 && $ticketstate ne 0}
+        <td class="muticket_ticket_owner_change" headers="howner" align="center" valign="middle">
         {if $ticket.owner gt 1}
             {$ticket.owner|profilelinkbyuid}
         {else}&nbsp;{/if}
@@ -130,7 +130,7 @@
         <td headers="hopen" align="left" valign="middle">
             {$ticket.state|yesno:true}
         </td>
-        {if $kind eq 0 && $state ne 0}
+        {if $kind eq 0 && $ticketstate ne 0}
         <td headers="hlabel" align="center" valign="middle">
             {if isset($ticket.labelticket) && count($ticket.labelticket > 0)}
             {include file='user/label/include_displayItemListManyIcons.tpl' items=$ticket.labelticket}
@@ -235,7 +235,17 @@
                         MU(labeldialog).html(ergebnis);
                    }               
                 });               
-            });              
+            }); 
+            
+            MU(".muticket_ticket_owner_change").toggle(
+            function () {
+                var content = MU(this).text();
+                MU(this).html("toll");
+                },
+            function () {
+                MU(this).text(content);
+            }    
+            );             
         });
 
         

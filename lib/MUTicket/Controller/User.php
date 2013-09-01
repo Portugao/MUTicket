@@ -255,7 +255,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	    $this->view->assign('items', $entities)
 	    ->assign('sort', $sort)
 	    ->assign('sdir', $sdir)
-	    ->assign('state', $ticketstate)
+	    ->assign('ticketstate', $ticketstate)
 	    ->assign('kind', $kind)
 	    ->assign('supporteractive', $supporteractive)
 	    ->assign('pageSize', $resultsPerPage)

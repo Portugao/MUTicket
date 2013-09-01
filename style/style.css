@@ -400,4 +400,18 @@ div.muticket-view form.muticketQuickNavForm fieldset #num {
 .muticket_ticket_state_change {
     cursor: pointer;	
 }
+
+div#tooltip {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 180px;
+	background: #efefef;
+	color: #333;
+	border-radius: 5px;
+	padding: 5px;
+	border: 1px solid #333;
+	-webkit-box-shadow:  2px 2px 5px 2px #ddd;      
+    box-shadow:  2px 2px 5px 2px #ddd;
+    font-size: 0.9em;
 }

@@ -1,0 +1,8 @@
+{* purpose of this template: current states xml inclusion template in user area *}
+<currentstate id="{$item.id}" createdon="{$item.createdDate|dateformat}" updatedon="{$item.updatedDate|dateformat}">
+    <id>{$item.id}</id>
+    <title><![CDATA[{$item.title}]]></title>
+    <description><![CDATA[{$item.description}]]></description>
+    <uploadIcon{if $item.uploadIcon ne ''} extension="{$item.uploadIconMeta.extension}" size="{$item.uploadIconMeta.size}" isImage="{if $item.uploadIconMeta.isImage}true{else}false{/if}"{if $item.uploadIconMeta.isImage} width="{$item.uploadIconMeta.width}" height="{$item.uploadIconMeta.height}" format="{$item.uploadIconMeta.format}"{/if}{/if}>{$item.uploadIcon}</uploadIcon>
+    <workflowState>{$item.workflowState|muticketObjectState:false|lower}</workflowState>
+</currentstate>

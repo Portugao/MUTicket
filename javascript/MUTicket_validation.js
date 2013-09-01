@@ -1,90 +1,84 @@
+'use strict';
 
-/**
- * Add special validation rules.
- */
-function muticketAddCommonValidationRules(objectType, id)
-{
-    Validation.addAllThese([
-        ['validate-nospace', Zikula.__('No spaces', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            return (val.indexOf(' ') == -1);
-        }],
-        ['validate-htmlcolour', Zikula.__('Please select a valid html colour code.', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            return Validation.get('IsEmpty').test(val) || (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(val));
-        }],
-        ['validate-datetime-past', Zikula.__('Please select a value in the past.', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            var cmpVal = muticketReadDate(val, true);
-            return Validation.get('IsEmpty').test(val) || (cmpVal < muticketToday('datetime'));
-        }],
-        ['validate-datetime-future', Zikula.__('Please select a value in the future.', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            var cmpVal = muticketReadDate(val, true);
-            return Validation.get('IsEmpty').test(val) || (cmpVal >= muticketToday('datetime'));
-        }],
-        ['validate-date-past', Zikula.__('Please select a value in the past.', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            var cmpVal = muticketReadDate(val, false);
-            return Validation.get('IsEmpty').test(val) || (cmpVal < muticketToday('date'));
-        }],
-        ['validate-date-future', Zikula.__('Please select a value in the future.', 'module_MUTicket'), function(val, elem) {
-            val = new String(val);
-            var cmpVal = muticketReadDate(val, false);
-            return Validation.get('IsEmpty').test(val) || (cmpVal >= muticketToday('date'));
-        }],
-        ['validate-time-past', Zikula.__('Please select a value in the past.', 'module_MUTicket'), function(val, elem) {
-            var cmpVal = new String(val);
-            return Validation.get('IsEmpty').test(val) || (cmpVal < muticketToday('time'));
-        }],
-        ['validate-time-future', Zikula.__('Please select a value in the future.', 'module_MUTicket'), function(val, elem) {
-            var cmpVal = new String(val);
-            return Validation.get('IsEmpty').test(val) || (cmpVal >= muticketToday('time'));
-        }]
-    ]);
-}
+function muticketToday(format) {
+    var timestamp, todayDate, month, day, hours, minutes, seconds;
 
-function muticketToday(format)
-{
-    var timestamp = new Date();
-    var todayDate = '';
-    if (format != 'time') {
-        var month = new String((parseInt(timestamp.getMonth())+1));
-        if (month.length == 1) month = '0' + month;
-        var day = new String(timestamp.getDate());
-        if (day.length == 1) day = '0' + day;
+    timestamp = new Date();
+    todayDate = '';
+    if (format !== 'time') {
+        month = new String((parseInt(timestamp.getMonth()) + 1));
+        if (month.length === 1) {
+            month = '0' + month;
+        }
+        day = new String(timestamp.getDate());
+        if (day.length === 1) {
+            day = '0' + day;
+        }
         todayDate += timestamp.getFullYear() + '-' + month + '-' + day;
     }
-    if (format == 'datetime') {
+    if (format === 'datetime') {
         todayDate += ' ';
     }
     if (format != 'date') {
-        var hours = new String(timestamp.getHours());
-        if (hours.length == 1) hours = '0' + hours;
-        var minutes = new String(timestamp.getMinutes());
-        if (minutes.length == 1) day = '0' + day;
-        var seconds = new String(timestamp.getSeconds());
-        if (seconds.length == 1) day = '0' + day;
+        hours = new String(timestamp.getHours());
+        if (hours.length === 1) {
+            hours = '0' + hours;
+        }
+        minutes = new String(timestamp.getMinutes());
+        if (minutes.length === 1) {
+            minutes = '0' + minutes;
+        }
+        seconds = new String(timestamp.getSeconds());
+        if (seconds.length === 1) {
+            seconds = '0' + seconds;
+        }
         todayDate += hours + ':' + minutes;// + ':' + seconds;
     }
     return todayDate;
 }
 
 // returns YYYY-MM-DD even if date is in DD.MM.YYYY
-function muticketReadDate(val, includeTime)
-{
+function muticketReadDate(val, includeTime) {
     // look if we have YYYY-MM-DD
-    if (val.substr(4, 1) == '-' && val.substr(7, 1) == '-') {
+    if (val.substr(4, 1) === '-' && val.substr(7, 1) === '-') {
         return val;
     }
 
     // look if we have DD.MM.YYYY
-    if (val.substr(2, 1) == '.' && val.substr(4, 1) == '.') {
-        var newVal = val.substr(6, 4) + '-' + val.substr(3, 2) + '-' + val.substr(0, 2)
-        if (includeTime == true) {
+    if (val.substr(2, 1) === '.' && val.substr(4, 1) === '.') {
+        var newVal = val.substr(6, 4) + '-' + val.substr(3, 2) + '-' + val.substr(0, 2);
+        if (includeTime === true) {
             newVal += ' ' + val.substr(11, 5);
         }
         return newVal;
     }
 }
 
+/**
+ * Add special validation rules.
+ */
+function muticketAddCommonValidationRules(objectType, id) {
+    Validation.addAllThese([
+        ['validate-nospace', Zikula.__('No spaces', 'module_muticket_js'), function(val, elem) {
+            var valStr;
+            valStr = new String(val);
+            return (valStr.indexOf(' ') === -1);
+        }],
+        ['validate-htmlcolour', Zikula.__('Please select a valid html colour code.', 'module_muticket_js'), function(val, elem) {
+            var valStr;
+            valStr = new String(val);
+            return Validation.get('IsEmpty').test(val) || (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(valStr));
+        }],
+        ['validate-upload', Zikula.__('Please select a valid file extension.', 'module_muticket_js'), function(val, elem) {
+            var allowedExtensions;
+            if (val === '') {
+                return true;
+            }
+            var fileExtension = '.' + val.substr(val.lastIndexOf('.') + 1);
+            allowedExtensions = $('fileextensions' + elem.id).innerHTML;
+            allowedExtensions = '(.' + allowedExtensions.replace(/, /g, '|.').replace(/,/g, '|.') + ')$';
+            allowedExtensions = new RegExp(allowedExtensions, 'i');
+            return allowedExtensions.test(val);
+        }],
+    ]);
+}

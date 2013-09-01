@@ -11,54 +11,56 @@
     {gt text='Edit supporter' assign='templateTitle'}
 {/if}
 <div class="muticket-supporter muticket-edit">
-{pagesetvar name='title' value=$templateTitle}
-<div class="z-frontendcontainer">
-    <h2>{$templateTitle}</h2>
+    {pagesetvar name='title' value=$templateTitle}
+    <div class="z-frontendcontainer">
+        <h2>{$templateTitle}</h2>
 {form cssClass='z-form'}
     {* add validation summary and a <div> element for styling the form *}
     {muticketFormFrame}
+
     {formsetinitialfocus inputId='username'}
+
 
     <fieldset>
         <legend>{gt text='Content'}</legend>
+        
         <div class="z-formrow">
             {formlabel for='username' __text='Username' mandatorysym='1'}
-            {formtextinput group='supporter' id='username' mandatory=true readOnly=false __title='Input the username of the supporter' textMode='singleline' maxLength=100 cssClass='required'}
+            {formtextinput group='supporter' id='username' mandatory=true readOnly=false __title='Enter the username of the supporter' textMode='singleline' maxLength=100 cssClass='required' }
             {muticketValidationError id='username' class='required'}
         </div>
+        
         <div class="z-formrow">
             {formlabel for='supportcats' __text='Supportcats' mandatorysym='1'}
-            {formtextinput group='supporter' id='supportcats' mandatory=true readOnly=false __title='Input the supportcats of the supporter' textMode='singleline' maxLength=255 cssClass='required'}
+            {formtextinput group='supporter' id='supportcats' mandatory=true readOnly=false __title='Enter the supportcats of the supporter' textMode='singleline' maxLength=255 cssClass='required' }
             {muticketValidationError id='supportcats' class='required'}
         </div>
+        
         <div class="z-formrow">
             {formlabel for='state' __text='State' mandatorysym='1'}
-            {formcheckbox group='supporter' id='state' readOnly=false __title='state ?' cssClass='required'}
+            {formcheckbox group='supporter' id='state' readOnly=false __title='state ?' cssClass='required' }
             {muticketValidationError id='state' class='required'}
         </div>
     </fieldset>
-
+    
     {if $mode ne 'create'}
         {include file='user/include_standardfields_edit.tpl' obj=$supporter}
     {/if}
-
+    
     {* include display hooks *}
-    {if $mode eq 'create'}
-        {notifydisplayhooks eventname='muticket.ui_hooks.supporters.form_edit' id=null assign='hooks'}
-    {else}
-        {notifydisplayhooks eventname='muticket.ui_hooks.supporters.form_edit' id=$supporter.id assign='hooks'}
+    {assign var='hookid' value=null}
+    {if $mode ne 'create'}
+        {assign var='hookid' value=$supporter.id}
     {/if}
-    {if is_array($hooks) && isset($hooks[0])}
-        <fieldset>
-            <legend>{gt text='Hooks'}</legend>
-            {foreach key='hookName' item='hook' from=$hooks}
-            <div class="z-formrow">
+    {notifydisplayhooks eventname='muticket.ui_hooks.supporters.form_edit' id=$hookId assign='hooks'}
+    {if is_array($hooks) && count($hooks)}
+        {foreach key='providerArea' item='hook' from=$hooks}
+            <fieldset>
                 {$hook}
-            </div>
-            {/foreach}
-        </fieldset>
+            </fieldset>
+        {/foreach}
     {/if}
-
+    
     {* include return control *}
     {if $mode eq 'create'}
         <fieldset>
@@ -69,59 +71,68 @@
             </div>
         </fieldset>
     {/if}
-
+    
     {* include possible submit actions *}
     <div class="z-buttons z-formbuttons">
-    {if $mode eq 'edit'}
-        {formbutton id='btnUpdate' commandName='update' __text='Update supporter' class='z-bt-save'}
-      {if !$inlineUsage}
-        {gt text='Really delete this supporter?' assign="deleteConfirmMsg"}
-        {formbutton id='btnDelete' commandName='delete' __text='Delete supporter' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
-      {/if}
-    {elseif $mode eq 'create'}
-        {formbutton id='btnCreate' commandName='create' __text='Create supporter' class='z-bt-ok'}
-    {else}
-        {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
-    {/if}
+    {foreach item='action' from=$actions}
+        {assign var='actionIdCapital' value=$action.id|@ucwords}
+        {gt text=$action.title assign='actionTitle'}
+        {*gt text=$action.description assign='actionDescription'*}{* TODO: formbutton could support title attributes *}
+        {if $action.id eq 'delete'}
+            {gt text='Really delete this supporter?' assign='deleteConfirmMsg'}
+            {formbutton id="btn`$actionIdCapital`" commandName=$action.id text=$actionTitle class=$action.buttonClass confirmMessage=$deleteConfirmMsg}
+        {else}
+            {formbutton id="btn`$actionIdCapital`" commandName=$action.id text=$actionTitle class=$action.buttonClass}
+        {/if}
+    {/foreach}
         {formbutton id='btnCancel' commandName='cancel' __text='Cancel' class='z-bt-cancel'}
     </div>
-  {/muticketFormFrame}
+    {/muticketFormFrame}
 {/form}
 
-</div>
+    </div>
 </div>
 {include file='user/footer.tpl'}
 
 {icon type='edit' size='extrasmall' assign='editImageArray'}
 {icon type='delete' size='extrasmall' assign='deleteImageArray'}
 
-<script type="text/javascript" charset="utf-8">
+
+<script type="text/javascript">
 /* <![CDATA[ */
-    var editImage = '<img src="{{$editImageArray.src}}" width="16" height="16" alt="" />';
-    var removeImage = '<img src="{{$deleteImageArray.src}}" width="16" height="16" alt="" />';
+
+    var formButtons, formValidator;
+
+    function handleFormButton (event) {
+        var result = formValidator.validate();
+        if (!result) {
+            // validation error, abort form submit
+            Event.stop(event);
+        } else {
+            // hide form buttons to prevent double submits by accident
+            formButtons.each(function (btn) {
+                btn.addClassName('z-hide');
+            });
+        }
+
+        return result;
+    }
 
     document.observe('dom:loaded', function() {
 
-        muticketAddCommonValidationRules('supporter', '{{if $mode eq 'create'}}{{else}}{{$supporter.id}}{{/if}}');
-
-        // observe button events instead of form submit
-        var valid = new Validation('{{$__formid}}', {onSubmit: false, immediate: true, focusOnError: false});
+        muticketAddCommonValidationRules('supporter', '{{if $mode ne 'create'}}{{$supporter.id}}{{/if}}');
+        {{* observe validation on button events instead of form submit to exclude the cancel command *}}
+        formValidator = new Validation('{{$__formid}}', {onSubmit: false, immediate: true, focusOnError: false});
         {{if $mode ne 'create'}}
-            var result = valid.validate();
+            var result = formValidator.validate();
         {{/if}}
 
-        $('{{if $mode eq 'create'}}btnCreate{{else}}btnUpdate{{/if}}').observe('click', function(event) {
-            var result = valid.validate();
-            if (!result) {
-                // validation error, abort form submit
-                Event.stop(event);
-            } else {
-                // hide form buttons to prevent double submits by accident
-                $$('div.z-formbuttons input').each(function(btn) {
-                    btn.hide();
-                });
+        formButtons = $('{{$__formid}}').select('div.z-formbuttons input');
+
+        formButtons.each(function (elem) {
+            if (elem.id != 'btnCancel') {
+                elem.observe('click', handleFormButton);
             }
-            return result;
         });
 
         Zikula.UI.Tooltips($$('.muticketFormTooltips'));

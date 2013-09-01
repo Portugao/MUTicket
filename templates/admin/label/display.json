@@ -1,0 +1,3 @@
+{* purpose of this template: labels display json view in admin area *}
+{muticketTemplateHeaders contentType='application/json'}
+{$label->toJson()}

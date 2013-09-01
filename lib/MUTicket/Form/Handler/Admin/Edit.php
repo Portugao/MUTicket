@@ -20,10 +20,10 @@ class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_
 	/**
 	 * Custom initialisation tasks.
 	 */
-	protected function initializeAdditions()
+	public function postInitialize()
 	{
 
-		parent::initializeAdditions();
+		parent::postInitialize();
 
 		$supportergroup = $this->getVar('supportergroup');
 

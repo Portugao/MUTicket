@@ -4,4 +4,5 @@
     <username><![CDATA[{$item.username}]]></username>
     <supportcats><![CDATA[{$item.supportcats}]]></supportcats>
     <state>{if !$item.state}0{else}1{/if}</state>
+    <workflowState>{$item.workflowState|muticketObjectState:false|lower}</workflowState>
 </supporter>

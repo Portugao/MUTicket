@@ -22,70 +22,78 @@ class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Ed
      *
      * This method takes care of all necessary initialisation of our data and form states.
      *
+     * @param Zikula_Form_View $view The form view instance.
+     *
      * @return boolean False in case of initialization errors, otherwise true.
      */
     public function initialize(Zikula_Form_View $view)
     {
-    	
         $this->inlineUsage = ((UserUtil::getTheme() == 'Printer') ? true : false);
-        $this->idPrefix = $this->request->getGet()->filter('idp', '', FILTER_SANITIZE_STRING);
-
+        $this->idPrefix = $this->request->query->filter('idp', '', FILTER_SANITIZE_STRING);
+    
         // initialise redirect goal
-        $this->returnTo = $this->request->getGet()->filter('returnTo', null, FILTER_SANITIZE_STRING);
+        $this->returnTo = $this->request->query->filter('returnTo', null, FILTER_SANITIZE_STRING);
         // store current uri for repeated creations
         $this->repeatReturnUrl = System::getCurrentURI();
-
+    
         $this->permissionComponent = $this->name . ':' . $this->objectTypeCapital . ':';
-
+    
         $entityClass = $this->name . '_Entity_' . ucfirst($this->objectType);
         $objectTemp = new $entityClass();
-        $this->idFields = $objectTemp->get_idFields();
-
+        $this->idFields = $objectTemp->get_idFields();         
+    
         // retrieve identifier of the object we wish to view
-        $this->idValues = MUTicket_Util_Controller::retrieveIdentifier($this->request, array(), $this->objectType, $this->idFields);
-        $hasIdentifier = MUTicket_Util_Controller::isValidIdentifier($this->idValues);
-
+        $controllerHelper = new MUTicket_Util_Controller($this->view->getServiceManager());
+        $this->idValues = $controllerHelper->retrieveIdentifier($this->request, array(), $this->objectType, $this->idFields);
+        $hasIdentifier = $controllerHelper->isValidIdentifier($this->idValues);
+    
         $entity = null;
         $this->mode = ($hasIdentifier) ? 'edit' : 'create';
-
+    
         if ($this->mode == 'edit') {
-            if (!SecurityUtil::checkPermission($this->permissionComponent, '::', ACCESS_EDIT)) {
-                // set an error message and return false
+            if (!SecurityUtil::checkPermission($this->permissionComponent, $this->createCompositeIdentifier() . '::', ACCESS_EDIT)) {
                 return LogUtil::registerPermissionError();
             }
-
+    
             $entity = $this->initEntityForEdit();
-
+    
             if ($this->hasPageLockSupport === true && ModUtil::available('PageLock')) {
                 // try to guarantee that only one person at a time can be editing this entity
                 ModUtil::apiFunc('PageLock', 'user', 'pageLock',
-                                         array('lockName' => $this->name . $this->objectTypeCapital . $this->createCompositeIdentifier(),
-                                               'returnUrl' => $this->getRedirectUrl(null, $entity)));
+                array('lockName' => $this->name . $this->objectTypeCapital . $this->createCompositeIdentifier(),
+                'returnUrl' => $this->getRedirectUrl(null)));
             }
-        }
-        else {
-            if (!SecurityUtil::checkPermission($this->permissionComponent, '::', ACCESS_ADD)) {
+        } else {
+            if (!SecurityUtil::checkPermission($this->permissionComponent, '::', ACCESS_EDIT)) {
                 return LogUtil::registerPermissionError();
             }
-
-            $entity = $this->initEntityForCreation($entityClass);
+    
+            $entity = $this->initEntityForCreation();
         }
-
+    
         $this->view->assign('mode', $this->mode)
-                   ->assign('inlineUsage', $this->inlineUsage);
-
+        ->assign('inlineUsage', $this->inlineUsage);
+    
         if ($this->hasCategories === true) {
             $this->initCategoriesForEdit($entity);
         }
         
         // We set text field to empty if entity class is ticket
         if ($entityClass == 'MUTicket_Entity_Ticket') {
-        $entity['text'] = '';
+            $entity['text'] = '';
         }
-
+    
         // save entity reference for later reuse
         $this->entityRef = $entity;
-
+    
+        $workflowHelper = new MUTicket_Util_Workflow($this->view->getServiceManager());
+        $actions = $workflowHelper->getActionsForObject($entity);
+        if ($actions === false || !is_array($actions)) {
+            return LogUtil::registerError($this->__('Error! Could not determine workflow actions.'));
+        }
+        // assign list of allowed actions to the view for further processing
+        $this->view->assign('actions', $actions);
+    
         // everything okay, no initialization errors occured
         return true;
     }

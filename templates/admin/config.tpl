@@ -21,8 +21,8 @@
                     {formdropdownlist id='supportergroup' group='config' maxLength=255 width=20em __title='Input this setting.'}
                 </div>
                 <div class="z-formrow">
-                    {formlabel for='rating' __text='Allow rating?'}
-                    {formdropdownlist id='rating' group='config' maxLength=255 width=20em __title='Input this setting.'}
+                    {formlabel for='ratingAllowed' __text='Allow rating?'}
+                    {formdropdownlist id='ratingAllowed' group='config' maxLength=255 width=20em __title='Input this setting.'}
                 </div>
                 <div class="z-formrow">
                     {formlabel for='fileSize' __text='Allowed filesize?'}

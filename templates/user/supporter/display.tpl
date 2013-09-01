@@ -5,44 +5,38 @@
 {assign var='templateTitle' value=$supporter.username|default:$templateTitle}
 {pagesetvar name='title' value=$templateTitle|@html_entity_decode}
 <div class="z-frontendcontainer">
-    <h2>{$templateTitle|notifyfilters:'muticket.filter_hooks.supporters.filter'}</h2>
+    <h2>{$templateTitle|notifyfilters:'muticket.filter_hooks.supporters.filter'}{icon id='itemactionstrigger' type='options' size='extrasmall' __alt='Actions' class='z-pointer z-hide'}</h2>
 
 
-<dl id="MUTicket_body">
+<dl>
     <dt>{gt text='Supportcats'}</dt>
     <dd>{$supporter.supportcats}</dd>
     <dt>{gt text='State'}</dt>
     <dd>{$supporter.state|yesno:true}</dd>
+    
 </dl>
-    {include file='user/include_standardfields_display.tpl' obj=$supporter}
+{include file='user/include_standardfields_display.tpl' obj=$supporter}
 
 {if !isset($smarty.get.theme) || $smarty.get.theme ne 'Printer'}
-<p>
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
-
-        <a href="{modurl modname='MUTicket' type='user' func='edit' ot='supporter' id=$supporter.id}" title="{gt text='Edit'}" class="z-icon-es-edit">
-            {gt text='Edit'}
-        </a>
-        <a href="{modurl modname='MUTicket' type='user' func='edit' ot='supporter' astemplate=$supporter.id}" title="{gt text='Reuse for new item'}" class="z-icon-es-saveas">
-            {gt text='Reuse'}
-        </a>
-    {/checkpermissionblock}
-    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_DELETE'}
-        <a href="{modurl modname='MUTicket' type='user' func='delete' ot='supporter' id=$supporter.id}" title="{gt text='Delete'}" class="z-icon-es-delete">
-            {gt text='Delete'}
-        </a>
-    {/checkpermissionblock}
-    <a href="{modurl modname='MUTicket' type='user' func='view' ot='supporter'}" title="{gt text='Back to overview'}" class="z-icon-es-back">
-        {gt text='Back to overview'}
-    </a>
-</p>
-
-{* include display hooks *}
-{notifydisplayhooks eventname='muticket.ui_hooks.supporters.display_view' id=$supporter.id urlobject=$currentUrlObject assign='hooks'}
-{foreach key='hookname' item='hook' from=$hooks}
-    {$hook}
-{/foreach}
-
+    {* include display hooks *}
+    {notifydisplayhooks eventname='muticket.ui_hooks.supporters.display_view' id=$supporter.id urlobject=$currentUrlObject assign='hooks'}
+    {foreach key='providerArea' item='hook' from=$hooks}
+        {$hook}
+    {/foreach}
+    {if count($supporter._actions) gt 0}
+        <p id="itemactions">
+        {foreach item='option' from=$supporter._actions}
+            <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}" class="z-icon-es-{$option.icon}">{$option.linkText|safetext}</a>
+        {/foreach}
+        </p>
+        <script type="text/javascript">
+        /* <![CDATA[ */
+            document.observe('dom:loaded', function() {
+                muticketInitItemActions('supporter', 'display', 'itemactions');
+            });
+        /* ]]> */
+        </script>
+    {/if}
 {/if}
 
 </div>

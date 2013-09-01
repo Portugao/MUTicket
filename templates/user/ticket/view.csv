@@ -1,6 +1,26 @@
 {* purpose of this template: tickets view csv view in user area *}
 {muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='Tickets.csv'}
-"{gt text='Title'}";"{gt text='Text'}";"{gt text='Parent_id'}";"{gt text='Images'}";"{gt text='Files'}";"{gt text='State'}";"{gt text='T_rating'}";"{gt text='Rated'}""{gt text='Parent'}"
+"{gt text='Title'}";"{gt text='Text'}";"{gt text='Parent_id'}";"{gt text='Images'}";"{gt text='Files'}";"{gt text='State'}";"{gt text='Rated'}";"{gt text='Owner'}";"{gt text='Due date'}";"{gt text='Due text'}";"{gt text='Current state'}";"{gt text='Workflow state'}"
+;"{gt text='Parent'}"
+;"{gt text='Rating'}"
+;"{gt text='Children'}"
+;"{gt text='Labelticket'}"
 {foreach item='ticket' from=$items}
-"{$ticket.title|replace:"\"":""}";"{$ticket.text|replace:"\"":""}";"{$ticket.parent_id|replace:"\"":""}";"{$ticket.images}";"{$ticket.files}";"{$ticket.state|yesno:true}";"{$ticket.t_rating|yesno:true}";"{$ticket.rated|yesno:true}"{if isset($ticket.Parent) && $ticket.Parent ne null}{$ticket.Parent.title|default:""}{/if}{/foreach}
-
+    "{$ticket.title|replace:"\"":""}";"{$ticket.text|replace:"\"":""}";"{$ticket.parent_id|replace:"\"":""}";"{$ticket.images}";"{$ticket.files}";"{if !$ticket.state}0{else}1{/if}";"{if !$ticket.rated}0{else}1{/if}";"{usergetvar name='uname' uid=$ticket.owner}";"{$ticket.dueDate|dateformat:'datetimebrief'}";"{$ticket.dueText|replace:"\"":""}";"{$ticket.currentState|muticketGetListEntry:'ticket':'currentState'|safetext|replace:"\"":""}";"{$item.workflowState|muticketObjectState:false|lower}"
+    ;"{if isset($ticket.Parent) && $ticket.Parent ne null}{$ticket.Parent.title|default:''}{/if}"
+    ;"{if isset($ticket.Rating) && $ticket.Rating ne null}{$ticket.Rating.ratingvalue|default:''}{/if}"
+    ;"
+    {if isset($ticket.Children) && $ticket.Children ne null}
+        {foreach name='relationLoop' item='relatedItem' from=$ticket.Children}
+        {$relatedItem.title|default:''}{if !$smarty.foreach.relationLoop.last}, {/if}
+        {/foreach}
+    {/if}
+    "
+    ;"
+    {if isset($ticket.Labelticket) && $ticket.Labelticket ne null}
+        {foreach name='relationLoop' item='relatedItem' from=$ticket.Labelticket}
+        {$relatedItem.name|default:''}{if !$smarty.foreach.relationLoop.last}, {/if}
+        {/foreach}
+    {/if}
+    "
+{/foreach}

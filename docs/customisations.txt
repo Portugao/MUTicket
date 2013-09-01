@@ -5,11 +5,9 @@ CUSTOMISATIONS
 
 MUTicket - Manual additions and amendments
 
+1.0.0
 
 Changes by hand on the model to change in MOST
-
-supporter entity
-varchar supportcats now 1000 
 
 config with new input rating yes or not
 rating bool
@@ -21,39 +19,50 @@ commented out supportcats line
 
 Changed Files
 
-*templates/admin/supporter/edit.tpl
-*templates/admin/supporter/view.tpl
-*templates/admin/ticket/view.tpl
+
 *templates/admin/config.tpl
 *templates/admin/footer.tpl
 *templates/admin/main.tpl
+*templates/admin/supporter/edit.tpl
+*templates/admin/supporter/view.tpl
 *templates/admin/ticket/rating.tpl
+*templates/admin/ticket/edit.tpl
+*templates/admin/ticket/view.tpl
 
+
+*templates/user/footer.tpl
+*templates/user/header.tpl
+*templates/user/include_standardfields_display.tpl
 *templates/user/rating/edit.tpl
 *templates/user/rating/include_displayItemListMany.tpl
+*templates/user/ticket/display.tpl
 *templates/user/ticket/edit.tpl
-*templates/user/footer.tpl
-*templates/user/include_standardfields_display.tpl
+*templates/user/ticket/view.tpl
 
+
+*style/style.css
 
 Implemented Classes
 
+*lib/MUTicket/Api/Admin.php
 *lib/MUTicket/Api/User.php
 *lib/MUTicket/Block/Itemlist.php
+*lib/MUticket/Controller/Admin.php
 *lib/MUticket/Controller/Ajax.php
-*lib/MUticket/Controller/User.php
-*lib/MUticket/Controller/User.php
+*lib/MUTicket/Controller/User.php
 *lib/MUTicket/Entity/Rating.php
 *lib/MUTicket/Entity/Supporter.php
 *lib/MUticket/Entity/Repository/Ticket.php
 *lib/MUTicket/Form/Handler/Admin/Config.php
 *lib/MUTicket/Form/Handler/Admin/Edit.php
 *lib/MUTicket/Form/Handler/Admin/Supporter/Edit.php
+*lib/MUTicket/Form/Handler/Admin/Ticket/Edit.php
 *lib/MUTicket/Form/Handler/User/Edit.php
 *lib/MUTicket/Form/Handler/User/Rating/Edit.php
 *lib/MUTicket/Form/Handler/User/Ticket/Edit.php
 *lib/MUTicket/Util/Base/Settings.php
 *lib/MUTicket/Util/Controller.php
+*lib/MUTicket/Util/ListEntries.php
 *lib/MUTicket/Util/Model.php
 *lib/MUTicket/Util/View.php
 *lib/MUTicket/Installer.php
@@ -64,6 +73,7 @@ Additional Files
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php
 *templates/plugins/modifier.muticketCatName.php
+*templates/plugins/modifier.muticketCatCurrentStateDatas.php
 *templates/plugins/modifier.muticketShowRating.php
 
 

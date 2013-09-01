@@ -90,17 +90,17 @@
 
     {* include possible submit actions *}
     <div class="z-buttons z-formbuttons">
-    {if $mode eq 'edit'}
-        {formbutton id='btnUpdate' commandName='update' __text='Update supporter' class='z-bt-save'}
-      {if !$inlineUsage}
-        {gt text='Really delete this supporter?' assign="deleteConfirmMsg"}
-        {formbutton id='btnDelete' commandName='delete' __text='Delete supporter' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
-      {/if}
-    {elseif $mode eq 'create'}
-        {formbutton id='btnCreate' commandName='create' __text='Create supporter' class='z-bt-ok'}
-    {else}
-        {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
-    {/if}
+    {foreach item='action' from=$actions}
+        {assign var='actionIdCapital' value=$action.id|@ucwords}
+        {gt text=$action.title assign='actionTitle'}
+        {*gt text=$action.description assign='actionDescription'*}{* TODO: formbutton could support title attributes *}
+        {if $action.id eq 'delete'}
+            {gt text='Really delete this supporter?' assign='deleteConfirmMsg'}
+            {formbutton id="btn`$actionIdCapital`" commandName=$action.id text=$actionTitle class=$action.buttonClass confirmMessage=$deleteConfirmMsg}
+        {else}
+            {formbutton id="btn`$actionIdCapital`" commandName=$action.id text=$actionTitle class=$action.buttonClass}
+        {/if}
+    {/foreach}
         {formbutton id='btnCancel' commandName='cancel' __text='Cancel' class='z-bt-cancel'}
     </div>
   {/muticketFormFrame}

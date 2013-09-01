@@ -1,32 +1,35 @@
-{* purpose of this template: inclusion template for managing related Ticket in user area *}
-<fieldset>
+{* purpose of this template: inclusion template for managing related ticket in user area *}
+{if !isset($displayMode)}
+    {assign var='displayMode' value='dropdown'}
+{/if}
+{if !isset($allowEditing)}
+    {assign var='allowEditing' value=false}
+{/if}
+{if isset($panel) && $panel eq true}
+    <h3 class="ticket z-panel-header z-panel-indicator z-pointer">{gt text='Ticket'}</h3>
+    <fieldset class="ticket z-panel-content" style="display: none">
+{else}
+    <fieldset class="ticket">
+{/if}
     <legend>{gt text='Ticket'}</legend>
     <div class="z-formrow">
-    <div class="muticketRelationRightSide">
-        <a id="{$idPrefix}AddLink" href="javascript:void(0);" style="display: none">{gt text='Select ticket'}</a>
-        <div id="{$idPrefix}AddFields">
-            <label for="{$idPrefix}Selector">{gt text='Find ticket'}</label>
-            <br />
-            {icon type='search' size='extrasmall' __alt='Search ticket'}
-            <input type="text" name="{$idPrefix}Selector" id="{$idPrefix}Selector" value="" />
-            <input type="hidden" name="{$idPrefix}Scope" id="{$idPrefix}Scope" value="0" />
-            {img src='indicator_circle.gif' modname='core' set='ajax' alt='' id="`$idPrefix`Indicator" style='display: none'}
-            <div id="{$idPrefix}SelectorChoices" class="muticketAutoCompleteWithImage"></div>
-            <input type="button" id="{$idPrefix}SelectorDoCancel" name="{$idPrefix}SelectorDoCancel" value="{gt text='Cancel'}" class="z-button muticketInlineButton" />
-            <a id="{$idPrefix}SelectorDoNew" href="{modurl modname='MUTicket' type='user' func='edit' ot='ticket'}" title="{gt text='Create new ticket'}" class="z-button muticketInlineButton">{gt text='Create'}</a>
-        </div>
-        <noscript><p>{gt text='This function requires JavaScript activated!'}</p></noscript>
-    </div>
-    <div class="muticketRelationLeftSide">
-        {if isset($userSelection.$aliasName) && $userSelection.$aliasName ne ''}
-            {* the user has submitted something *}
-            {include file='user/ticket/include_selectEditItemListOne.tpl' item=$userSelection.$aliasName}
-        {elseif $mode ne 'create' || isset($relItem.$aliasName)}
-            {include file='user/ticket/include_selectEditItemListOne.tpl' item=$relItem.$aliasName}
-        {else}
-            {include file='user/ticket/include_selectEditItemListOne.tpl'}
+    {if $displayMode eq 'dropdown'}
+        {formlabel for=$alias __text='Choose ticket'}
+        {muticketRelationSelectorList group=$group id=$alias aliasReverse=$aliasReverse mandatory=$mandatory __title='Choose the ticket' selectionMode='single' objectType='ticket' linkingItem=$linkingItem}
+    {elseif $displayMode eq 'autocomplete'}
+        {assign var='createLink' value=''}
+        {if $allowEditing eq true}
+            {modurl modname='MUTicket' type='user' func='edit' ot='ticket' forcelongurl=true assign='createLink'}
         {/if}
-    </div>
-    <br style="clear: both" />
+        {muticketRelationSelectorAutoComplete group=$group id=$alias aliasReverse=$aliasReverse mandatory=$mandatory __title='Choose the ticket' selectionMode='single' objectType='ticket' linkingItem=$linkingItem idPrefix=$idPrefix createLink=$createLink selectedEntityName='ticket' withImage=true}
+        <div class="muticketRelationLeftSide">
+            {if isset($linkingItem.$alias)}
+                {include file='user/ticket/include_selectEditItemListOne.tpl'  item=$linkingItem.$alias}
+            {else}
+                {include file='user/ticket/include_selectEditItemListOne.tpl' }
+            {/if}
+        </div>
+        <br class="z-clearer" />
+    {/if}
     </div>
 </fieldset>

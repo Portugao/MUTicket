@@ -157,7 +157,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	{
 		// we get parentid
 		// We check if ticket is a parent ticket
-		$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
+		$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_STRING);
 
 		// redirect to the list of tickets
 		$viewArgs = array('ot' => $this->objectType);

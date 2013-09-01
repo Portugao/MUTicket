@@ -1,0 +1,9 @@
+{* purpose of this template: current states view xml view in user area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+<currentStates>
+{foreach item='item' from=$items}
+    {include file='user/currentState/include.xml'}
+{foreachelse}
+    <noCurrentState />
+{/foreach}
+</currentStates>

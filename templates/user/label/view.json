@@ -1,0 +1,8 @@
+{* purpose of this template: labels view json view in user area *}
+{muticketTemplateHeaders contentType='application/json'}
+[
+{foreach item='item' from=$items name='labels'}
+    {if not $smarty.foreach.labels.first},{/if}
+    {$item->toJson()}
+{/foreach}
+]

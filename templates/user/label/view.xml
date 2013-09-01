@@ -1,0 +1,9 @@
+{* purpose of this template: labels view xml view in user area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+<labels>
+{foreach item='item' from=$items}
+    {include file='user/label/include.xml'}
+{foreachelse}
+    <noLabel />
+{/foreach}
+</labels>

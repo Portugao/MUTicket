@@ -1,0 +1,6 @@
+{* purpose of this template: labels view csv view in user area *}
+{muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='Labels.csv'}
+"{gt text='Name'}";"{gt text='Label color'}";"{gt text='Workflow state'}"
+{foreach item='label' from=$items}
+    "{$label.name|replace:"\"":""}";"{$label.labelColor|replace:"\"":""}";"{$item.workflowState|muticketObjectState:false|lower}"
+{/foreach}

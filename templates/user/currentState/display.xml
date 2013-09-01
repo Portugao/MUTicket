@@ -1,0 +1,4 @@
+{* purpose of this template: current states display xml view in user area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+{getbaseurl assign='baseurl'}
+{include file='user/currentState/include.xml' item=$currentState}

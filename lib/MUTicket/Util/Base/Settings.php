@@ -203,6 +203,18 @@ public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketc
 	return $messagecontent;
 }
 
+
+public function getMailContentForStateChange($ticketid)
+{
+    // get entity with id is parentid
+    $entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $tickettid));
+    // get ownerid
+    $ownerid = $entity['owner'];
+    $email = UserUtil::getVar('email', $userid);
+    
+    return $email;    
+}
+
 /**
  * get the email address of the user that
  * created parent ticket
@@ -210,9 +222,9 @@ public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketc
  * @returns $email string
  */
 
-public function getMailAddressOfUser($parentid) {
-
-	// get entity with id is parentid
+public function getMailAddressOfUser($parentid) 
+{
+    // get entity with id is parentid
 	$entity = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', array('ot' => 'ticket', 'id' => $parentid));
 	// get userid created the parent ticket
 	$userid = $entity['createdUserId'];

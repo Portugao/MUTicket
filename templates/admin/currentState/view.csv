@@ -1,0 +1,6 @@
+{* purpose of this template: current states view csv view in admin area *}
+{muticketTemplateHeaders contentType='text/comma-separated-values; charset=iso-8859-15' asAttachment=true filename='CurrentStates.csv'}
+"{gt text='Title'}";"{gt text='Description'}";"{gt text='Upload icon'}";"{gt text='Workflow state'}"
+{foreach item='currentState' from=$items}
+    "{$currentState.title|replace:"\"":""}";"{$currentState.description|replace:"\"":""}";"{$currentState.uploadIcon}";"{$item.workflowState|muticketObjectState:false|lower}"
+{/foreach}

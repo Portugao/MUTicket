@@ -1,2 +1,2 @@
-{* purpose of this template: supporters main view in user area *}
+{* purpose of this template: labels main view in user area *}
 {modfunc modname='MUTicket' type='user' func='view'}

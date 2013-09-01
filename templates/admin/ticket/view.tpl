@@ -121,4 +121,3 @@
     {/if}
 </div>
 {include file='admin/footer.tpl'}
-

@@ -1,0 +1,8 @@
+{* purpose of this template: current states view json view in user area *}
+{muticketTemplateHeaders contentType='application/json'}
+[
+{foreach item='item' from=$items name='currentStates'}
+    {if not $smarty.foreach.currentStates.first},{/if}
+    {$item->toJson()}
+{/foreach}
+]

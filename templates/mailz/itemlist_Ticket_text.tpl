@@ -1,8 +1,8 @@
 {* Purpose of this template: Display tickets in text mailings *}
-{foreach item='item' from=$items}
-        {$item.title}
-        {modurl modname='MUTicket' type='user' func='display' ot=$objectType id=$item.id fqurl=true}
+{foreach item='ticket' from=$items}
+{$ticket.title}
+{modurl modname='MUTicket' type='user' func='display' ot=$objectType id=$ticket.id fqurl=true}
 -----
 {foreachelse}
-    {gt text='No tickets found.'}
+{gt text='No tickets found.'}
 {/foreach}

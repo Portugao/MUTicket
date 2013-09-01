@@ -2,4 +2,5 @@
 <rating id="{$item.id}" createdon="{$item.createdDate|dateformat}" updatedon="{$item.updatedDate|dateformat}">
     <id>{$item.id}</id>
     <ratingvalue>{$item.ratingvalue}</ratingvalue>
+    <workflowState>{$item.workflowState|muticketObjectState:false|lower}</workflowState>
 </rating>

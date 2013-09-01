@@ -1,63 +1,75 @@
-
 /* view pages */
 div#z-maincontent.z-module-muticket table tbody tr td {
     vertical-align: top;
 }
 
 /* display pages */
-div.muticketRightBox {
+.muticket-display.withrightbox div.z-panel-content {
+    float: left;
+    width: 79%;
+}
+.muticket-display div.muticketrightbox {
     float: right;
     margin: 0 1em;
     padding: .5em;
+    width: 20%;
     /*border: 1px solid #666;*/
 }
 
-div.muticketRightBox h3 {
+.muticket-display div.muticketrightbox h3 {
     color: #333;
     font-weight: 400;
     border-bottom: 1px solid #CCC;
     padding-bottom: 8px;
 }
 
-div.muticketRightBox p.manageLink {
+.muticket-display div.muticketrightbox p.manageLink {
     margin-left: 18px;
 }
-
 .muticketColourPicker {
     cursor: pointer;
 }
-
 /* validation */
-input.required, textarea.required {
+div.z-formrow input.required, div.z-formrow textarea.required {
     border: 1px solid #00a8e6;
 }
-input.validation-failed, textarea.validation-failed {
+div.z-formrow input.validation-failed, div.z-formrow textarea.validation-failed {
     border: 1px solid #f30;
-    color : #f30;
+    color: #f30;
 }
-input.validation-passed, textarea.validation-passed {
+div.z-formrow input.validation-passed, div.z-formrow textarea.validation-passed {
     border: 1px solid #0c0;
-    color : #000;
+    color: #000;
 }
 
 .validation-advice {
     margin: 5px 0;
     padding: 5px;
     background-color: #f90;
-    color : #fff;
+    color: #fff;
     font-weight: 700;
 }
 
 /* edit pages */
 div.muticketRelationLeftSide {
-float: left;
-width: 25%;
+    float: left;
+    width: 25%;
 }
 
 div.muticketRelationRightSide {
-float: right;
-width: 65%;
+    float: right;
+    width: 65%;
 }
+
+/* hide legends if z-panels are used as both contain the same labels */
+div.muticket-edit .z-panel-content legend {
+    display: none;
+}
+
+div.muticketLiveSearchUser {
+    margin: 0;
+}
+
 
 div.muticketAutoCompleteWrap {
     position: absolute;
@@ -69,24 +81,34 @@ div.muticketAutoCompleteWrap {
 }
 
 div.muticketAutoComplete,
+div.muticketAutoCompleteUser,
 div.muticketAutoCompleteWithImage {
     position: relative !important;
     top: 2px !important;
-    left: 0 !important;
-    width: 100px;
+    width: 191px !important;
     background-color: #fff;
     border: 1px solid #888;
     margin: 0;
     padding: 0;
 }
 
+div.muticketAutoComplete,
+div.muticketAutoCompleteWithImage {
+    left: 0 !important;
+}
+div.muticketAutoCompleteUser {
+    left: 29% !important;
+}
+
 div.muticketAutoComplete ul,
+div.muticketAutoCompleteUser ul,
 div.muticketAutoCompleteWithImage ul {
     margin: 0;
     padding: 0;
 }
 
 div.muticketAutoComplete ul li,
+div.muticketAutoCompleteUser ul li,
 div.muticketAutoCompleteWithImage ul li {
     margin: 0;
     padding: 0.2em 0 0.2em 20px;
@@ -101,11 +123,15 @@ div.muticketAutoCompleteWithImage ul li {
 div.muticketAutoComplete ul li {
     background-image: url("../../../images/icons/extrasmall/tab_right.png");
 }
+div.muticketAutoCompleteUser ul li {
+    background-image: url("../../../images/icons/extrasmall/user.png");
+}
 div.muticketAutoCompleteWithImage ul li {
     background-image: url("../../../images/icons/extrasmall/agt_Multimedia.png");
 }
 
 div.muticketAutoComplete ul li.selected,
+div.muticketAutoCompleteUser ul li.selected,
 div.muticketAutoCompleteWithImage ul li.selected {
     background-color: #ffb;
 }
@@ -124,6 +150,26 @@ div.muticketAutoCompleteWithImage ul li div.itemdesc {
 
 button.muticketInlineButton {
     margin-top: 1em;
+}
+
+div.muticket-view form.muticketQuickNavForm {
+    margin: 10px 0;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+}
+
+div.muticket-view form.muticketQuickNavForm fieldset {
+    padding: 3px 10px;
+    margin-bottom: 0;
+}
+
+div.muticket-view form.muticketQuickNavForm fieldset h3 {
+    margin-top: 0;
+}
+
+div.muticket-view form.muticketQuickNavForm fieldset #num {
+    width: 50px;
+    text-align: right;
 }
 
 /*------------------------Own styles----------------------*/
@@ -351,8 +397,7 @@ button.muticketInlineButton {
     display: none;
 }
 
-
-
-
-
-
+.muticket_ticket_state_change {
+    cursor: pointer;	
+}
+}

@@ -7,7 +7,26 @@
     <images{if $item.images ne ''} extension="{$item.imagesMeta.extension}" size="{$item.imagesMeta.size}" isImage="{if $item.imagesMeta.isImage}true{else}false{/if}"{if $item.imagesMeta.isImage} width="{$item.imagesMeta.width}" height="{$item.imagesMeta.height}" format="{$item.imagesMeta.format}"{/if}{/if}>{$item.images}</images>
     <files{if $item.files ne ''} extension="{$item.filesMeta.extension}" size="{$item.filesMeta.size}" isImage="{if $item.filesMeta.isImage}true{else}false{/if}"{if $item.filesMeta.isImage} width="{$item.filesMeta.width}" height="{$item.filesMeta.height}" format="{$item.filesMeta.format}"{/if}{/if}>{$item.files}</files>
     <state>{if !$item.state}0{else}1{/if}</state>
-    <t_rating>{if !$item.t_rating}0{else}1{/if}</t_rating>
     <rated>{if !$item.rated}0{else}1{/if}</rated>
-    <parent>{if isset($item.Parent) && $item.Parent ne null}{$item.Parent.title|default:""}{/if}</parent>
+    <owner>{usergetvar name='uname' uid=$item.owner}</owner>
+    <dueDate>{$item.dueDate|dateformat:'datetimebrief'}</dueDate>
+    <dueText><![CDATA[{$item.dueText}]]></dueText>
+    <currentState>{$item.currentState|muticketGetListEntry:'ticket':'currentState'|safetext}</currentState>
+    <workflowState>{$item.workflowState|muticketObjectState:false|lower}</workflowState>
+    <parent>{if isset($item.Parent) && $item.Parent ne null}{$item.Parent.title|default:''}{/if}</parent>
+    <rating>{if isset($item.Rating) && $item.Rating ne null}{$item.Rating.ratingvalue|default:''}{/if}</rating>
+    <children>
+    {if isset($item.Children) && $item.Children ne null}
+        {foreach name='relationLoop' item='relatedItem' from=$item.Children}
+        <ticket>{$relatedItem.title|default:''}</ticket>
+        {/foreach}
+    {/if}
+    </children>
+    <labelticket>
+    {if isset($item.Labelticket) && $item.Labelticket ne null}
+        {foreach name='relationLoop' item='relatedItem' from=$item.Labelticket}
+        <label>{$relatedItem.name|default:''}</label>
+        {/foreach}
+    {/if}
+    </labelticket>
 </ticket>

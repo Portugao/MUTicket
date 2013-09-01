@@ -1,9 +1,9 @@
 {* purpose of this template: tickets view view in user area *}
 <div class="muticket-ticket muticket-view">
 {include file='user/header.tpl'}
-{if $kind eq 0}
-<div class="z-informationmsg z-formnote"><div style="line-height: 1.2em; padding: 0 10px;"><img src='modules/MUTicket/images/New.png' /> {gt text='New ticket'} <img src='modules/MUTicket/images/Supporter.png' /> {gt text='Waiting for supporter feedback'} <img src='modules/MUTicket/images/Customer.png' /> {gt text='Waiting for customer feedback'}</div></div>
-{/if}
+{pageaddvar name='javascript' value='jquery'}
+{pageaddvar name='javascript' value='jquery-ui'}
+{pageaddvar name='stylesheet' value='modules/MUTicket/style/jquery-ui-1.8.21.custom.css'}
 {if $supporteractive eq 0}
 <div id="ticket_user_nosupport">
 {gt text='Sorry. At the moment our support is not available!'}
@@ -40,7 +40,13 @@
         {/if}
         <col id="ccreated" />
         <col id="ctitle" />
+        {if $kind eq 0 && $state ne 0}
+        <col id="cowner" />
+        {/if}
         <col id="copen" />
+        {if $kind eq 0 && $state ne 0}
+        <col id="clabel" />
+        {/if}
         <col id="cintactions" />
     </colgroup>
     <thead>
@@ -50,7 +56,7 @@
         {gt text='State'}
         </th>
         {/if}
-        <th id="hstate" scope="col" align="left" valign="middle">
+        <th id="hcreated" scope="col" align="left" valign="middle">
         {if $state}
             {if $state == 2}
                 {sortlink __linktext='Created' sort='createdDate' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket' state=2}
@@ -76,9 +82,19 @@
             {/if}
         {/if}
         </th>
-        <th id="hstate" scope="col" align="left" valign="middle">
+        {if $kind eq 0 && $state ne 0}
+        <th id="howner" scope="col" align="center" valign="middle">
+        {gt text='Owner'}
+        </th>
+        {/if}
+        <th id="hopen" scope="col" align="left" valign="middle">
            {* {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'} *}{gt text='Open'}
         </th>
+        {if $kind eq 0 && $state ne 0}
+        <th id="hlabel" scope="col" align="center" valign="middle">
+        {gt text='Label'}
+        </th>
+        {/if}
         <th id="hintactions" scope="col" align="left" valign="middle" class="z-wrap z-order-unsorted">{gt text='Actions'}</th>
     </tr>
     </thead>
@@ -88,7 +104,14 @@
     <tr class="{cycle values='z-odd, z-even'}">
         {if $kind eq 0 && $state ne 0}
         <td headers="hstate" align="center" valign="middle">
-            {$ticket.id|muticketGetTicketState:$ticket.id}
+            <span class="muticket_ticket_state">
+            {if $ticket.currentState ne 0}
+            {$ticket.currentState|muticketGetCurrentStateDatas}
+            {else}
+            {gt text='No state set'}
+            {/if}
+            </span>
+            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=dialog&theme=printer" class="muticket_ticket_state_change"><img src="/images/icons/extrasmall/agt_softwareD.png" /></a>
         </td>
         {/if}   
         <td headers="hupdated" align="left" valign="middle">
@@ -97,9 +120,26 @@
         <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
-        <td headers="hstate" align="left" valign="middle">
+        {if $kind eq 0 && $state ne 0}
+        <td headers="howner" align="center" valign="middle">
+        {if $ticket.owner gt 1}
+            {$ticket.owner|profilelinkbyuid}
+        {else}&nbsp;{/if}
+        </td>
+        {/if}  
+        <td headers="hopen" align="left" valign="middle">
             {$ticket.state|yesno:true}
         </td>
+        {if $kind eq 0 && $state ne 0}
+        <td headers="hlabel" align="center" valign="middle">
+            {if isset($ticket.labelticket) && count($ticket.labelticket > 0)}
+            {include file='user/label/include_displayItemListManyIcons.tpl' items=$ticket.labelticket}
+            {else}
+            {gt text='Not set'}
+            {/if}
+            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=label&theme=printer" class="muticket_ticket_label_change"><img src="images/icons/extrasmall/exec.png" /></a>
+        </td>
+        {/if}  
         <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
                 {icon type='display' size='extrasmall' __alt='Details'}
@@ -126,7 +166,6 @@
           </td>
         </tr>
     {/foreach}
-
     </tbody>
 </table>
 
@@ -139,3 +178,66 @@
 </div>
 </div>
 {include file='user/footer.tpl'}
+
+ <script type="text/javascript" charset="utf-8">
+        /* <![CDATA[ */
+        var MU = jQuery.noConflict();
+
+        MU(document).ready(function() {
+        var statedialog = MU("<div title='Change state' id='statedialog'></div>");
+        var labeldialog = MU("<div title='Change labels' id='labeldialog'></div>");
+
+            MU(statedialog).dialog({
+                show: "slow",
+                autoOpen: false,
+                width: 400,
+                height: 400,
+                modal: true,
+                buttons: {
+                    "{{gt text='Cancel'}}": function() {
+                        MU(this).dialog("close");
+                    }           	    
+                }
+            });
+            
+            MU(labeldialog).dialog({
+                show: "slow",
+                autoOpen: false,
+                width: 400,
+                height: 400,
+                modal: true,
+                buttons: {
+                    "{{gt text='Cancel'}}": function() {
+                        MU(this).dialog("close");
+                    }           	    
+                }
+            });
+            MU('.muticket_ticket_state_change').click(function(e){
+                e.preventDefault();
+              /*  MU(this).append("<img id='muticket_state_ajax' src='/images/ajax/icon_animated_busy.gif' />"); */
+                var url = MU(this).attr('href');
+                MU.get(url, function(ergebnis) {             
+                    if (ergebnis) {
+    
+                        MU(statedialog).dialog('open');
+                        MU(statedialog).html(ergebnis);
+                   }               
+                });               
+            });
+            
+            MU('.muticket_ticket_label_change').click(function(e){
+                e.preventDefault();
+              /*  MU(this).append("<img id='muticket_state_ajax' src='/images/ajax/icon_animated_busy.gif' />"); */
+                var url = MU(this).attr('href');
+                MU.get(url, function(ergebnis) {             
+                    if (ergebnis) {
+    
+                        MU(labeldialog).dialog('open');
+                        MU(labeldialog).html(ergebnis);
+                   }               
+                });               
+            });      
+        });
+
+        /* ]]> */
+        </script>

@@ -1,5 +1,4 @@
 {* purpose of this template: close an iframe from within this iframe *}
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -12,7 +11,7 @@
         <script type="text/javascript" src="{$baseurl}modules/MUTicket/javascript/MUTicket_editFunctions.js"></script>
     </head>
     <body>
-        <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript">
         /* <![CDATA[ */
             // close window from parent document
             document.observe('dom:loaded', function() {
@@ -22,4 +21,3 @@
         </script>
     </body>
 </html>
-

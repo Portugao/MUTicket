@@ -1,0 +1,4 @@
+{* purpose of this template: labels display xml view in user area *}
+{muticketTemplateHeaders contentType='text/xml'}<?xml version="1.0" encoding="{charset}" ?>
+{getbaseurl assign='baseurl'}
+{include file='user/label/include.xml' item=$label}

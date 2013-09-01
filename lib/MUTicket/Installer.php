@@ -24,15 +24,17 @@ class MUTicket_Installer extends MUTicket_Base_Installer
             case '1.0.0':
             	
             	$this->setVar('supporterTickets', '');
+            	$this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
+            	$this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
             	
-                /*try {
+                try {
                     DoctrineHelper::updateSchema($this->entityManager, $this->listEntityClasses());
                 } catch (Exception $e) {
                     if (System::isDevelopmentMode()) {
                         LogUtil::registerError($this->__('Doctrine Exception: ') . $e->getMessage());
                     }
                     return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s module.', array($this->getName())));
-                }*/
+                }
         }
     
 

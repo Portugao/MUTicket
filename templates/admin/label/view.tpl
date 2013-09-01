@@ -39,6 +39,7 @@
                 <col id="cselect" />
                 <col id="cname" />
                 <col id="clabelcolor" />
+                <col id="cfontcolor" />
                 <col id="citemactions" />
             </colgroup>
             <thead>
@@ -51,6 +52,9 @@
                 </th>
                 <th id="hlabelcolor" scope="col" class="z-left">
                     {sortlink __linktext='Label color' currentsort=$sort modname='MUTicket' type='admin' func='view' ot='label' sort='labelColor' sortdir=$sdir all=$all own=$own workflowState=$workflowState searchterm=$searchterm pageSize=$pageSize}
+                </th>
+                <th id="hfontcolor" scope="col" class="z-left">
+                    {sortlink __linktext='Font color' currentsort=$sort modname='MUTicket' type='admin' func='view' ot='label' sort='fontColor' sortdir=$sdir all=$all own=$own workflowState=$workflowState searchterm=$searchterm pageSize=$pageSize}
                 </th>
                 <th id="hitemactions" scope="col" class="z-right z-order-unsorted">{gt text='Actions'}</th>
             </tr>
@@ -67,6 +71,9 @@
                 </td>
                 <td headers="hlabelcolor" class="z-left">
                     {$label.labelColor}
+                </td>
+                <td headers="hfontcolor" class="z-left">
+                    {$label.fontColor}
                 </td>
                 <td id="itemactions{$label.id}" headers="hitemactions" class="z-right z-nowrap z-w02">
                     {if count($label._actions) gt 0}

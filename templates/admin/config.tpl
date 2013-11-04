@@ -7,13 +7,14 @@
     {icon type='config' size='small' __alt='Settings'}
     <h3>{$templateTitle}</h3>
 </div>
-
     {form cssClass='z-form'}
-
 
         {* add validation summary and a <div> element for styling the form *}
         {muticketFormFrame}
-        {formsetinitialfocus inputId='supportergroup'}
+            {formsetinitialfocus inputId='supportergroup'}
+            {formtabbedpanelset}
+            {gt text='General' assign='tabTitle'}
+            {formtabbedpanel title=$tabTitle}
             <fieldset>
                 <legend>{gt text='Here you can manage all basic settings for this application.'}</legend>
                 <div class="z-formrow">
@@ -46,6 +47,24 @@
                 {formbutton commandName='save' __text='Update configuration' class='z-bt-save'}
                 {formbutton commandName='cancel' __text='Cancel' class='z-bt-cancel'}
             </div>
+            
+              {/formtabbedpanel}
+            {gt text='Extended' assign='tabTitle'}
+            {formtabbedpanel title=$tabTitle}
+            <fieldset>
+                <legend>{gt text='Extended'}</legend>
+            
+                <div class="z-formrow">
+                    {formlabel for='messageNewOwner' __text='Message new owner'}
+                    {formtextinput id='messageNewOwner' group='config' maxLength=255 __title='Enter the message new owner.'}
+                </div>
+                <div class="z-formrow">
+                    {formlabel for='messageDueDate' __text='Message due date'}
+                    {formtextinput id='messageDueDate' group='config' maxLength=255 __title='Enter the message due date.'}
+                </div>
+            </fieldset>
+            {/formtabbedpanel}
+            {/formtabbedpanelset}
         {/muticketFormFrame}
     {/form}
 </div>

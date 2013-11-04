@@ -20,8 +20,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
      *
      * This function returns the edit form for rating
      */
-    public function voteform() {
-         
+    public function voteform() 
+    {       
         $request = new Zikula_Request_Http();
         $ticket = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         $parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
@@ -30,8 +30,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
         return $result;
     }
 
-    public function close() {
-         
+    public function close() 
+    {
         // may the user close the ticket?
         $kind = MUTicket_Util_View::userForRating();
         if ($kind == 1) {
@@ -45,5 +45,42 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
          
         return System::redirect(ModUtil::url($this->name, 'user', 'view' , array('ot' => 'ticket', 'state' => 3)));
     }
-
+    
+    /**
+     * This method create a list of options for a select box
+     * @return string
+     */
+    public function getactiveSupporter()
+    {        
+        return ModUtil::apiFunc('MUTicket', 'ajax', 'getactivesupporter');
+    }
+    
+    /**
+     *
+     */
+    public function changeCurrentState()
+    {
+        $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $args['state'] = $this->request->request->filter('currentState', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('statemessage',0, FILTER_SANITIZE_STRING);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+    
+        ModUtil::apiFunc($this->name, 'ajax', 'changeCurrentState', $args);
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+    }
+    
+    /**
+     * 
+     */
+    public function changeSupporter()
+    {
+        $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $args['supporter'] = $this->request->request->filter('supporter', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_STRING);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+ 
+        ModUtil::apiFunc($this->name, 'ajax', 'changeSupporter', $args);        
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+    }
+    
 }

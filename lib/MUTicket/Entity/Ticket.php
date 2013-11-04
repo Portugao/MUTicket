@@ -21,18 +21,26 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
  *
  * This is the concrete entity class for ticket entities.
  * @ORM\Entity(repositoryClass="MUTicket_Entity_Repository_Ticket")
-  * @ORM\Table(name="muticket_ticket",
-  *     indexes={
+ * @ORM\Table(name="muticket_ticket",
+ *     indexes={
  *         @ORM\Index(name="workflowstateindex", columns={"workflowState"})
-  *     }
-  * )
+ *     }
+ * )
  * @ORM\HasLifecycleCallbacks
  */
 class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 {
-    // feel free to add your own methods here
+    /**
+     * Unidirectional - Many ticketlabel [tickets] have many labelticket [labels] (OWNING SIDE).
+     *
+     * @ORM\ManyToMany(targetEntity="MUTicket_Entity_Label")
+     * @ORM\JoinTable(name="muticket_ticket_label")
+     * @ORM\OrderBy({"name" = "ASC"})
+     * @var MUTicket_Entity_Label[] $labelticket.
+     */
+    protected $labelticket = null;
 
-    
+
     /**
      * Post-Process the data after the entity has been constructed by the entity manager.
      *
@@ -44,7 +52,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPostLoadCallback();
     }
-    
+
     /**
      * Pre-Process the data prior to an insert operation.
      *
@@ -56,7 +64,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPrePersistCallback();
     }
-    
+
     /**
      * Post-Process the data after an insert operation.
      *
@@ -68,7 +76,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPostPersistCallback();
     }
-    
+
     /**
      * Pre-Process the data prior a delete operation.
      *
@@ -80,7 +88,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPreRemoveCallback();
     }
-    
+
     /**
      * Post-Process the data after a delete.
      *
@@ -92,7 +100,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPostRemoveCallback();
     }
-    
+
     /**
      * Pre-Process the data prior to an update operation.
      *
@@ -104,7 +112,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPreUpdateCallback();
     }
-    
+
     /**
      * Post-Process the data after an update operation.
      *
@@ -116,7 +124,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPostUpdateCallback();
     }
-    
+
     /**
      * Pre-Process the data prior to a save operation.
      *
@@ -129,7 +137,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPreSaveCallback();
     }
-    
+
     /**
      * Post-Process the data after a save operation.
      *
@@ -142,5 +150,5 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
     {
         $this->performPostSaveCallback();
     }
-    
+
 }

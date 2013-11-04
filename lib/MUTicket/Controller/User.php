@@ -64,34 +64,37 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	 */
 	public function view(array $args = array())
 	{
-	    $controllerHelper = new MUTicket_Util_Controller($this->serviceManager);
-	
-	    // parameter specifying which type of objects we are treating
-	    $objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
-	    $utilArgs = array('controller' => 'user', 'action' => 'view');
-	    if (!in_array($objectType, $controllerHelper->getObjectTypes('controllerAction', $utilArgs))) {
-	        $objectType = $controllerHelper->getDefaultObjectType('controllerAction', $utilArgs);
-	    }
-	    $this->throwForbiddenUnless(SecurityUtil::checkPermission($this->name . ':' . ucwords($objectType) . ':', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
-	    $entityClass = $this->name . '_Entity_' . ucwords($objectType);
-	    $repository = $this->entityManager->getRepository($entityClass);
-	    $viewHelper = new MUTicket_Util_View($this->serviceManager);
-	
-	    // parameter for used sorting field
-	    $sort = (isset($args['sort']) && !empty($args['sort'])) ? $args['sort'] : $this->request->query->filter('sort', '', FILTER_SANITIZE_STRING);
-	    if (empty($sort) || !in_array($sort, $repository->getAllowedSortingFields())) {
-	        $sort = $repository->getDefaultSortingField();
-	    }
-	
-	    // parameter for used sort order
-	    $sdir = (isset($args['sortdir']) && !empty($args['sortdir'])) ? $args['sortdir'] : $this->request->query->filter('sortdir', '', FILTER_SANITIZE_STRING);
-	    $sdir = strtolower($sdir);
-	    if ($sdir != 'asc' && $sdir != 'desc') {
-	        $sdir = 'asc';
-	    }
-	
-	    // convenience vars to make code clearer
-	    $currentUrlArgs = array('ot' => $objectType);
+        $controllerHelper = new MUTicket_Util_Controller($this->serviceManager);
+        
+        // parameter specifying which type of objects we are treating
+        $objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+        $utilArgs = array('controller' => 'user', 'action' => 'view');
+        if (!in_array($objectType, $controllerHelper->getObjectTypes('controllerAction', $utilArgs))) {
+            $objectType = $controllerHelper->getDefaultObjectType('controllerAction', $utilArgs);
+        }
+        if (!isset($args['skipPermissionCheck']) || $args['skipPermissionCheck'] != 1) {
+            $this->throwForbiddenUnless(SecurityUtil::checkPermission($this->name . ':' . ucwords($objectType) . ':', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+        }
+        $entityClass = $this->name . '_Entity_' . ucwords($objectType);
+        $repository = $this->entityManager->getRepository($entityClass);
+        $repository->setControllerArguments($args);
+        $viewHelper = new MUTicket_Util_View($this->serviceManager);
+        
+        // parameter for used sorting field
+        $sort = (isset($args['sort']) && !empty($args['sort'])) ? $args['sort'] : $this->request->query->filter('sort', '', FILTER_SANITIZE_STRING);
+        if (empty($sort) || !in_array($sort, $repository->getAllowedSortingFields())) {
+            $sort = $repository->getDefaultSortingField();
+        }
+        
+        // parameter for used sort order
+        $sdir = (isset($args['sortdir']) && !empty($args['sortdir'])) ? $args['sortdir'] : $this->request->query->filter('sortdir', '', FILTER_SANITIZE_STRING);
+        $sdir = strtolower($sdir);
+        if ($sdir != 'asc' && $sdir != 'desc') {
+            $sdir = 'asc';
+        }
+        
+        // convenience vars to make code clearer
+        $currentUrlArgs = array('ot' => $objectType);
 	    
 	    // We rule the view depends on several parameters
 	    
@@ -287,7 +290,7 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 		}
 			
 		// Is it allowed to rate
-		$rating = ModUtil::getVar($this->name, 'rating');
+		$rating = ModUtil::getVar($this->name, 'ratingAllowed');
 			
 		// May this user rate
 		$kind = MUTicket_Util_View::userForRating();

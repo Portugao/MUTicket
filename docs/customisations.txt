@@ -72,6 +72,8 @@ Additional Files
 
 *templates/plugins/block.muticketform.php
 *templates/plugins/block.muticketratingform.php
+*templates/plugins/function.muticketSelectorCurrentState.php
+*templates/plugins/function.muticketSelectorSupporter.php
 *templates/plugins/modifier.muticketCatName.php
 *templates/plugins/modifier.muticketCatCurrentStateDatas.php
 *templates/plugins/modifier.muticketShowRating.php

@@ -154,12 +154,12 @@
         {include file='admin/label/include_selectEditMany.tpl' group='ticket' alias='labelticket' aliasReverse='ticketlabel' mandatory=false idPrefix='muticketTicket_Labelticket' linkingItem=$ticket panel=false displayMode='dropdown' allowEditing=true}        
         {/if}
         {/if}
-                {if $editkind eq 'label'}         
-                <div class="z-formrow">
-                    {formlabel for='sendLabelMessage' __text='Send Message?' mandatorysym='0'}
-                    {formcheckbox group='message' id='sendLabelMessage' mandatory=false __title='Choose if an email should be send'}
-                </div>                
-                {/if}
+        {if $editkind eq 'label'}         
+             <div class="z-formrow">
+            {formlabel for='sendLabelMessage' __text='Send Message?' mandatorysym='0'}
+            {formcheckbox group='message' id='sendLabelMessage' mandatory=false __title='Choose if an email should be send'}
+            </div>                
+        {/if}
         {if $editkind eq 'none'}
         {if $mode ne 'create'}
             {include file='admin/include_standardfields_edit.tpl' obj=$ticket panel=true}

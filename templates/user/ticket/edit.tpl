@@ -31,15 +31,14 @@
                 <div class="z-formrow">
                 {if $func ne 'display'} 
                     {formlabel for='title' __text='Title' mandatorysym='1'}
-                    {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Enter the title of the ticket' textMode='singleline' maxLength=255 cssClass='required'}
+                    {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Enter the title of the ticket' textMode='singleline' maxLength=255 cssClass='required' }
                 {/if} 
-                </div>
-                              
+                </div>                             
                 <div class="z-formrow">
                     {formlabel for='text' __text='Text' mandatorysym='1'}
-                    {formtextinput group='ticket' id='text' mandatory=true __title='Enter the text of the ticket' textMode='multiline' rows='6' cols='50' cssClass='required'}
+                    {formtextinput group='ticket' id='text' mandatory=true __title='Enter the text of the ticket' textMode='multiline' rows='6' cols='50' cssClass='required' }
                     {muticketValidationError id='text' class='required'}
-                </div>           
+                </div>          
                 <div class="z-formrow">
                     {formlabel for='images' __text='Images'}<br />{* break required for Google Chrome *}
                     {formuploadinput group='ticket' id='images' mandatory=false readOnly=false cssClass=' validate-upload' }
@@ -236,8 +235,6 @@
     }
 
     document.observe('dom:loaded', function() {
-        // initialise auto completion for user fields
-        muticketInitUserField('owner', 'getTicketOwnerUsers');
 
         muticketAddCommonValidationRules('ticket', '{{if $mode ne 'create'}}{{$ticket.id}}{{/if}}');
         {{* observe validation on button events instead of form submit to exclude the cancel command *}}
@@ -254,16 +251,7 @@
             }
         });
 
-        var panel = new Zikula.UI.Panels('MUTicket_panel', {
-            headerSelector: 'h3',
-            headerClassName: 'z-panel-header z-panel-indicator',
-            contentClassName: 'z-panel-content',
-            active: $('z-panel-header-fields')
-        });
-
         Zikula.UI.Tooltips($$('.muticketFormTooltips'));
-        muticketInitUploadField('images');
-        muticketInitUploadField('files');
     });
 
 /* ]]> */

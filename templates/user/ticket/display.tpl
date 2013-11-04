@@ -1,4 +1,4 @@
-{* purpose of this template: tickets display view in user area *}
+{zdebug}{* purpose of this template: tickets display view in user area *}
 {include file='user/header.tpl'}
 {if $supporteractive eq 0}
 <div id="ticket_user_nosupport">

@@ -4,6 +4,8 @@
 {pageaddvar name='javascript' value='jquery'}
 {pageaddvar name='javascript' value='jquery-ui'}
 {pageaddvar name='stylesheet' value='modules/MUTicket/style/jquery-ui-1.8.21.custom.css'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_editFunctions.js'}
+{pageaddvar name='javascript' value='modules/MUTicket/javascript/MUTicket_validation.js'}
 {if $supporteractive eq 0}
 <div id="ticket_user_nosupport">
 {gt text='Sorry. At the moment our support is not available!'}
@@ -32,13 +34,14 @@
         </a>
     {/checkpermissionblock} *}
 
+{include file='user/ticket/view_quickNav.tpl' all=$all own=$own workflowStateFilter=false}{* see template file for available options *}
 
 <table class="z-datatable ticket_user_table">
     <colgroup>
+        <col id="ccreated" />
         {if $kind eq 0 && $ticketstate ne 0}
         <col id="cstate" />
         {/if}
-        <col id="ccreated" />
         <col id="ctitle" />
         {if $kind eq 0 && $ticketstate ne 0}
         <col id="cowner" />
@@ -47,15 +50,13 @@
         {if $kind eq 0 && $ticketstate ne 0}
         <col id="clabel" />
         {/if}
+        {if $kind eq 0 && $ticketstate ne 0}
+        <col id="cduedate" />
+        {/if}
         <col id="cintactions" />
     </colgroup>
     <thead>
     <tr>
-        {if $kind eq 0 && $ticketstate ne 0}
-        <th id="hstate" scope="col" align="center" valign="middle">
-        {gt text='State'}
-        </th>
-        {/if}
         <th id="hcreated" scope="col" align="left" valign="middle">
         {if $ticketstate}
             {if $ticketstate == 2}
@@ -69,6 +70,11 @@
             {/if}        
         {/if}   
         </th>
+        {if $kind eq 0 && $ticketstate ne 0}
+        <th id="hstate" scope="col" align="center" valign="middle">
+        {gt text='State'}
+        </th>
+        {/if}
         <th id="htitle" scope="col" align="left" valign="middle">
         {if $ticketstate}
             {if $ticketstate == 2}
@@ -95,6 +101,11 @@
         {gt text='Label'}
         </th>
         {/if}
+        {if $kind eq 0 && $ticketstate ne 0}
+        <th id="hduedate" scope="col" align="center" valign="middle">
+        {gt text='Due date'}
+        </th>
+        {/if}
         <th id="hintactions" scope="col" align="left" valign="middle" class="z-wrap z-order-unsorted">{gt text='Actions'}</th>
     </tr>
     </thead>
@@ -102,29 +113,67 @@
 
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
+        <td headers="hupdated" align="left" valign="middle">
+            {$ticket.createdDate|dateformat:datebrief}
+        </td> 
         {if $kind eq 0 && $ticketstate ne 0}
         <td headers="hstate" align="center" valign="middle">
-            <span class="muticket_ticket_state">
+            <div class="muticket_ticket_state_change">
+            <span class="muticket_ticket_edit_button">&nbsp;</span>
+            <div class="muticket_currentstate">
             {if $ticket.currentState ne 0}
             {$ticket.currentState|muticketGetCurrentStateDatas}
             {else}
-            {gt text='No state set'}
+            {gt text='Not set'}
             {/if}
-            </span>
-            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=dialog&theme=printer" class="muticket_ticket_state_change"><img src="/images/icons/extrasmall/agt_softwareD.png" /></a>
+            </div>
+            
+        <div class="muticket_currentstate_form">
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeCurrentState' ticket=$ticket.id}" method="post">
+            <select id="currentState" name="currentState">
+            <option>{gt text='Set current state'}</option>
+            {muticketSelectorCurrentState assign='States'}
+            {foreach item='State' from=$States}
+            <option value={$State.value}>{$State.text}</option>
+            {/foreach}
+            </select><br />
+            <label for='statemessage'>{gt text='Send message?'}</label>
+            <input type='checkbox' name='statemessage' value='1' /><br />
+            <input type='hidden' name='actualsupporter' value={$data.id} />
+            <input type='submit' value='Submit' />
+        </form>   
+        </div> 
+        </div>        
         </td>
-        {/if}   
-        <td headers="hupdated" align="left" valign="middle">
-            {$ticket.createdDate|dateformat:datetimebrief}
-        </td>    
+        {/if}      
         <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
         {if $kind eq 0 && $ticketstate ne 0}
-        <td class="muticket_ticket_owner_change" headers="howner" align="center" valign="middle">
+        <td headers="howner" align="center" valign="middle">
+        <div class="muticket_ticket_owner_change">
+        <span class="muticket_ticket_edit_button">&nbsp;</span>
+        <div class="muticket_owner">
         {if $ticket.owner gt 1}
             {$ticket.owner|profilelinkbyuid}
-        {else}&nbsp;{/if}
+        {else}{gt text='Not set'}{/if}
+        </div>
+        <div class="muticket_owner_form">
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeSupporter' ticket=$ticket.id}" method="post">
+            <select id="supporter" name="supporter">
+            <option>{gt text='Set owner'}</option>
+            {muticketSelectorSupporter assign='options'}
+            {foreach item='data' from=$options}
+            <option value={$data.text}>{$data.text}</option>
+            {/foreach}
+            </select><br />
+            <label for='ownermessage'>{gt text='Send message?'}</label>
+            <input type='checkbox' name='ownermessage' value='1' /><br />
+            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='submit' value='Submit' />
+        </form>
+        </div>
+        </div>
         </td>
         {/if}  
         <td headers="hopen" align="left" valign="middle">
@@ -137,9 +186,47 @@
             {else}
             {gt text='Not set'}
             {/if}
-            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=label&theme=printer" class="muticket_ticket_label_change"><img src="images/icons/extrasmall/exec.png" /></a>
+            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=label&theme=printer" class="muticket_ticket_label_change"><img style="width: 10px; height: 10px;" src="images/icons/extrasmall/xedit.png" /></a>
         </td>
-        {/if}  
+        {/if}
+        {if $kind eq 0 && $ticketstate ne 0}
+        <td headers="hduedate" align="center" valign="middle">
+        <div class="muticket_ticket_date_change">
+        <span class="muticket_ticket_edit_button">&nbsp;</span>
+        <div class="muticket_duedate">
+        {if $ticket.dueText ne ''}
+        {$ticket.dueText}
+        {else}
+        {if $ticket.dueDate > $ticket.createdDate}
+        {$ticket.dueDate|dateformat:datebrief}
+        {else}
+        {gt text='Not set'}
+        {/if}
+        {/if}
+        </div>
+        <div class="muticket_duedate_form">
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeSupporter' ticket=$ticket.id}" method="post">
+            <input id='duedate' type='text' value={$ticket.dueDate|dateformat:datebrief}></input><img id="dueDate_img" class="clickable" alt="Datum auswählen" style="vertical-align: middle" src="http://zik135.webdesign-in-bremen.com/javascript/jscalendar/img.gif"><br />
+            <input id='duetext' type='text' value={$ticket.dueText}></input><br />
+            <input type='submit' value='Submit' />
+        </form>        
+        </td>
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        Calendar.setup(
+        {
+        inputField : "dueDate",
+        ifFormat : "%Y-%m-%d %H:%M",
+        showsTime : true,
+        timeFormat : "24",
+        singleClick : false,
+        button : "dueDate_img",
+        firstDay: 1
+        }
+        );
+        /* ]]> */
+        </script>
+        {/if}    
         <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
                 {icon type='display' size='extrasmall' __alt='Details'}
@@ -212,18 +299,6 @@
                     }           	    
                 }
             });
-            MU('.muticket_ticket_state_change').click(function(e){
-                e.preventDefault();
-              /*  MU(this).append("<img id='muticket_state_ajax' src='/images/ajax/icon_animated_busy.gif' />"); */
-                var url = MU(this).attr('href');
-                MU.get(url, function(ergebnis) {             
-                    if (ergebnis) {
-    
-                        MU(statedialog).dialog('open');
-                        MU(statedialog).html(ergebnis);
-                   }               
-                });               
-            });
             
             MU('.muticket_ticket_label_change').click(function(e){
                 e.preventDefault();
@@ -237,15 +312,17 @@
                 });               
             }); 
             
-            MU(".muticket_ticket_owner_change").toggle(
+            MU(".muticket_ticket_edit_button").toggle(
             function () {
-                var content = MU(this).text();
-                MU(this).html("toll");
-                },
+            var user = MU(this).next();
+            var form = user.next();
+                form.show();
+            },
             function () {
-                MU(this).text(content);
-            }    
-            );             
+                MU(this).next().next().hide();             
+             }             
+             );
+         
         });
 
         

@@ -18,15 +18,17 @@
  *
  * @return string the category name
  */
-function smarty_modifier_muticketGetCurrentStateDatas($id)
+function smarty_modifier_muticketGetCurrentStateDatas($id, $kind = 'template')
 {
-    
-    $selectionArgs = array('id' => $id,
-                           'ot' => currentState);
-    
-	$currentState = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', $selectionArgs);
-	
-	$result = "<a href='#' class='tooltip' title='" . $currentState['description'] . "' style='padding: 2px 5px 2px 30px; width: 25px; height: 25px; background-size: cover; background: url(/" . $currentState['uploadIconFullPath'] . ") no-repeat' id='muticket_currentstate_" . $id . "'>" . $currentState['title'] . "</a>";
 
-	return $result;
+    $selectionArgs = array('id' => $id,
+            'ot' => currentState);
+
+    $currentState = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', $selectionArgs);
+    if ($kind == 'template') {
+        $result = "<a href='#' class='tooltip' title='" . $currentState['description'] . "' style='padding: 2px 5px 2px 30px; width: 25px; height: 25px; background-size: cover; background: url(/" . $currentState['uploadIconFullPath'] . ") no-repeat' id='muticket_currentstate_" . $id . "'>" . $currentState['title'] . "</a>";
+        return $result;
+    }
+
+    return $currentState;
 }

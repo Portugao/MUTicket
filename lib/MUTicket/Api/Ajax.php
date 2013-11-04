@@ -16,5 +16,94 @@
  */
 class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 {
-    // feel free to add own api methods here
+    public function getactiveSupporter()
+    {
+
+        $dom = ZLanguage::getModuleDomain('MUTicket');
+        // we get a repository for Supporter
+        //$modelhelper = new MUTicket_Util_Model();
+        $repository = MUTicket_Util_Model::getSupporterRepository();//$modelhelper->getSupporterRepository();
+
+        //$viewHelper = new MUTicket_Util_View();
+        $supporterids = MUTicket_Util_View::getSupporterIds();//$viewHelper->getSupporterIds();
+        $out = "<span class='muticket_ticket_owner_cancel'></span><form action=''><select id='owner' name='owner'><option value='1'>Set owner</option>";
+        if (is_array($supporterids)) {
+            foreach ($supporterids as $supporterid) {
+                $supporter = $repository->selectById($supporterid);
+                $out .= "<option value='" . $supporter['id'] . "'>" . $supporter['username'] . "</option>";
+            }
+        } else {
+            $supporter = $repository->selectById($supporterids);
+            $out .= "<option value='" . $supporter['id'] . "'>" . $supporter['username'] . "</option>";
+        }
+
+        $textsubmit = __('Submit', $dom);
+
+        $out .= "</select><br /><input type='submit' value='" . $textsubmit . "' /></form>";
+
+        return $out;
+    }
+    
+    /**
+     *
+     */
+    public function changeCurrentState($args)
+    {
+        $repository = MUTicket_Util_Model::getTicketRepository();
+    
+        $ticket = $args['ticket'];
+        $thisticket = $repository->selectById($ticket);
+    
+        $sendmail = $args['sendmessage'];
+        $state = $args['state'];
+        $actualsupporter = $args['actualsupporter'];  
+        $userid = $thisticket['owner'];
+    
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+    
+        $thisticket->setCurrentState($state);
+    
+        $entityManager->flush();
+    
+        if ($sendmail == 1) {
+            if ($userid > 1) {
+                $usermail = UserUtil::getVar('email', $userid);
+                MUTicket_Util_Base_Internal::handleChanges('currentState', $usermail, $thisticket);
+            }
+        }
+    
+    }
+    /**
+     *
+     */
+    public function changeSupporter($args)
+    {
+        $repository = MUTicket_Util_Model::getTicketRepository();
+
+        $ticket = $args['ticket'];
+        $thisticket = $repository->selectById($ticket);
+
+        $sendmail = $args['sendmessage'];
+        $actualsupporter = $args['actualsupporter'];
+        $userid = UserUtil::getIdFromName($args['supporter']);
+        if ($userid <= 1 || $userid == false) {
+            $userid = UserUtil::getIdFromName($actualsupporter);
+        }
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+
+        $thisticket->setOwner($userid);
+
+        $entityManager->flush();
+
+        if ($sendmail == 1) {
+            if ($userid > 1) {
+            $usermail = UserUtil::getVar('email', $userid);
+            MUTicket_Util_Base_Internal::handleChanges('supporter', $usermail, $thisticket);
+            }
+        }
+
+    }
 }

@@ -18,6 +18,40 @@
  */
 class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Admin_Base_Config
 {
+    /**
+     * Initialize form handler.
+     *
+     * This method takes care of all necessary initialisation of our data and form states.
+     *
+     * @param Zikula_Form_View $view The form view instance.
+     *
+     * @return boolean False in case of initialization errors, otherwise true.
+     */
+    public function initialize(Zikula_Form_View $view)
+    {
+        // permission check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            return $view->registerError(LogUtil::registerPermissionError());
+        }
+    
+        // retrieve module vars
+        $modVars = $this->getVars();
+        // initialise list entries for the 'rating allowed' setting
+    
+        $modVars['ratingAllowedItems'] = array(array('value' => '1', 'text' => 'Yes'),
+                array('value' => '0', 'text' => 'No')
+        );
+    
+        // assign all module vars
+        $this->view->assign('config', $modVars);
+    
+        // custom initialisation aspects
+        $this->initializeAdditions();
+    
+        // everything okay, no initialization errors occured
+        return true;
+    }
+    
 	protected function initializeAdditions()
 	{
 		// make dropdownlist for supporter groups

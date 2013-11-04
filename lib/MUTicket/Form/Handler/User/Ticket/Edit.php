@@ -153,7 +153,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	 * Get the default redirect url. Required if no returnTo parameter has been supplied.
 	 * This method is called in handleCommand so we know which command has been performed.
 	 */
-	protected function getDefaultReturnUrl($args, $obj)
+	protected function getDefaultReturnUrl($args)
 	{
 		// we get parentid
 		// We check if ticket is a parent ticket
@@ -162,6 +162,8 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 		// redirect to the list of tickets
 		$viewArgs = array('ot' => $this->objectType);
 		$url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
+		
+		LogUtil::registerStatus($parentid);
 
 		if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
 			// redirect to the detail page of parent ticket
@@ -169,7 +171,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 		}
 		if ($args['commandName'] == 'create' && $this->mode == 'create' && $parentid == 0) {
 			// redirect to just created parent ticket
-			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id'] ));
+			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
 		}
 
 		return $url;

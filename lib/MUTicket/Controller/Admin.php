@@ -74,7 +74,7 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 	 *@param string  $ot           Treated object type.
 	 */
 
-	public function rating($args)
+	public function rating(array $args = array())
 	{
 		// DEBUG: permission check aspect starts
 		$this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
@@ -133,12 +133,17 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 
 		$objectCount = count($entities);
 
+		if($total > 0) {
 		$average = $total / $objectCount;
 		$average = round($average, 1);
 
 		// percent of rated tickets
 		$percent = $objectCount / $counttickets * 100;
 		$percent = round($percent, 2);
+		} else {
+		    $average = 0;
+		    $percent = 0;
+		}
 
 		// assign all to template
 		$this->view->assign('items', $entities )
@@ -148,9 +153,10 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 		->assign('total', $total)
 		->assign('average', $average)
 		->assign('supporter', $supportername );
-
+		
 		// fetch and return the appropriate template
-		return MUTicket_Util_View::processTemplate($this->view, 'admin', $objectType, 'rating', $args);
-			
+		$viewHelper = new MUTicket_Util_View($this->serviceManager);
+		
+		return $viewHelper->processTemplate($this->view, 'admin', $objectType, 'rating', $args);			
 	}
 }

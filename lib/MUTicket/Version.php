@@ -23,6 +23,9 @@ class MUTicket_Version extends MUTicket_Base_Version
 		$meta['displayname']          = $this->__('MUTicket');		 
 		// the module description
         $meta['description']  = $this->__('MUTicket - Handling of support tickets for your customers');
+        // core requirement
+        $meta['core_min']             = '1.3.5'; // requires minimum 1.3.5
+        $meta['core_max']             = '1.3.6'; // not ready for 1.3.7 yet
         
         return $meta;
         

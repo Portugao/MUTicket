@@ -22,7 +22,7 @@ function smarty_modifier_muticketGetCurrentStateDatas($id, $kind = 'template')
 {
 
     $selectionArgs = array('id' => $id,
-            'ot' => currentState);
+            'ot' => 'currentState');
 
     $currentState = ModUtil::apiFunc('MUTicket', 'selection', 'getEntity', $selectionArgs);
     if ($kind == 'template') {

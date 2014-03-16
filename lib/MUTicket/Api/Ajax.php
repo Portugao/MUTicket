@@ -43,37 +43,128 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         return $out;
     }
-    
+
     /**
      *
      */
     public function changeCurrentState($args)
     {
         $repository = MUTicket_Util_Model::getTicketRepository();
-    
+
         $ticket = $args['ticket'];
         $thisticket = $repository->selectById($ticket);
-    
+
         $sendmail = $args['sendmessage'];
         $state = $args['state'];
-        $actualsupporter = $args['actualsupporter'];  
+        $actualsupporter = $args['actualsupporter'];
         $userid = $thisticket['owner'];
-    
+
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
-    
+
         $thisticket->setCurrentState($state);
-    
+
         $entityManager->flush();
-    
+
         if ($sendmail == 1) {
             if ($userid > 1) {
                 $usermail = UserUtil::getVar('email', $userid);
                 MUTicket_Util_Base_Internal::handleChanges('currentState', $usermail, $thisticket);
             }
         }
-    
+
     }
+
+    /**
+     *
+     */
+    public function changeDueDate($args)
+    {
+        $repository = MUTicket_Util_Model::getTicketRepository();
+
+        $ticket = $args['ticket'];
+        $thisticket = $repository->selectById($ticket);
+
+        $sendmail = $args['sendmessage'];
+        $dueDate = $args['dueDate'];
+        $dueText = $args['dueText'];
+        $actualsupporter = $args['actualsupporter'];
+        $userid = $thisticket['owner'];
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+
+        if ($dueText == '') {
+            if ($dueDate != '') {
+                $thisticket->setDueDate($dueDate);
+            } else {
+                $thisticket->setDueDate(NULL);
+            }
+            $thisticket->setDueText('');
+        } else {
+            $thisticket->setDueText($dueText);
+            $thisticket->setDueDate(NULL);
+        }
+
+        $entityManager->flush();
+
+        if ($sendmail == 1) {
+            if ($userid > 1) {
+                $usermail = UserUtil::getVar('email', $userid);
+                MUTicket_Util_Base_Internal::handleChanges('dueDate', $usermail, $thisticket);
+            }
+        }
+
+    }
+
+    /**
+     *
+     */
+    public function changeLabel($args)
+    {
+        $repository = MUTicket_Util_Model::getTicketRepository();
+
+        $ticket = $args['ticket'];
+        $thisticket = $repository->selectById($ticket);
+        // we get existing labels for this ticket
+        $existinglabels = $thisticket->getLabelticket();
+
+        $sendmail = $args['sendmessage'];
+        $actualsupporter = $args['actualsupporter'];
+        $userid = UserUtil::getIdFromName($args['supporter']);
+        if ($userid <= 1 || $userid == false) {
+            $userid = UserUtil::getIdFromName($actualsupporter);
+        }
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+
+        $labels = $args['labels'];
+
+        $labelrepository = MUTicket_Util_Model::getLabelRepository();
+
+        // array for objects of labels
+        $labelobjects = array();
+
+        foreach ($labels as $label) {
+            $thislabel = $labelrepository->selectById($label);
+            if ($existinglabels != NULL) {
+
+            }
+            $labelobjects[] = $thislabel;
+        }
+        $thisticket->setLabelticket($labelobjects);
+
+        $entityManager->flush();
+
+        if ($sendmail == 1) {
+            if ($userid > 1) {
+                $usermail = UserUtil::getVar('email', $userid);
+                MUTicket_Util_Base_Internal::handleChanges('label', $usermail, $thisticket);
+            }
+        }
+    }
+
     /**
      *
      */
@@ -100,8 +191,8 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         if ($sendmail == 1) {
             if ($userid > 1) {
-            $usermail = UserUtil::getVar('email', $userid);
-            MUTicket_Util_Base_Internal::handleChanges('supporter', $usermail, $thisticket);
+                $usermail = UserUtil::getVar('email', $userid);
+                MUTicket_Util_Base_Internal::handleChanges('supporter', $usermail, $thisticket);
             }
         }
 

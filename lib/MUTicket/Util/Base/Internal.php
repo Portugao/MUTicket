@@ -22,11 +22,8 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
     */
     public function handleChanges($kind, $email, $ticket)
     {
-        if ($kind == 'supporter') {
             $messagecontent = self::getContent($kind, $email, $ticket);
             self::sendMessage($messagecontent);
-        }
-
     }
 
     public function sendMessage($messagecontent)
@@ -62,6 +59,9 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         }
         if ($kind == 'currentState') {
             $messagecontent['subject'] = $handler->__('Changing of current state for a ticket');
+        }
+        if ($kind == 'label') {
+            $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
         }
         if ($kind == 'supporter') {
             $messagecontent['body'] = $handler->__('A Ticket was moved to you as supporter.') . '<br />';

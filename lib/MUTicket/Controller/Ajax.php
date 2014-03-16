@@ -23,8 +23,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     public function voteform() 
     {       
         $request = new Zikula_Request_Http();
-        $ticket = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
-        $parent = $request->getGet()->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
+        $ticket = $request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $parent = $request->query->filter('parent', NULL, FILTER_SANITIZE_NUMBER_INT);
         $result = ModUtil::func($this->name, 'user', 'edit', array('ot' => 'rating', 'ticket' => $ticket, 'parent' => $parent));
 
         return $result;
@@ -39,7 +39,7 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
         }
         // we get the relevant id
         $request = new Zikula_Request_Http();
-        $id = $request->getGet()->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $id = $request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         // we close the ticket
         MUTicket_Util_Model::closeTicket($id);
          
@@ -58,6 +58,20 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     /**
      *
      */
+    public function changeLabel()
+    {
+        $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $args['labels'] = $this->request->request->filter('label', '', FILTER_SANITIZE_NUMBER_INT);
+        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_STRING);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+    
+        ModUtil::apiFunc($this->name, 'ajax', 'changeLabel', $args);
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
+    }
+    
+    /**
+     *
+     */
     public function changeCurrentState()
     {
         $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
@@ -66,7 +80,22 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
         $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
     
         ModUtil::apiFunc($this->name, 'ajax', 'changeCurrentState', $args);
-        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
+    }
+    
+    /**
+     *
+     */
+    public function changeDueDate()
+    {
+        $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
+        $args['dueDate'] = $this->request->request->filter('duedate', '', FILTER_SANITIZE_STRING);
+        $args['dueText'] = $this->request->request->filter('duetext', '', FILTER_SANITIZE_STRING);        
+        $args['sendmessage'] = $this->request->request->filter('statemessage',0, FILTER_SANITIZE_STRING);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+    
+        ModUtil::apiFunc($this->name, 'ajax', 'changeDueDate', $args);
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
     }
     
     /**
@@ -80,7 +109,7 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
         $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
  
         ModUtil::apiFunc($this->name, 'ajax', 'changeSupporter', $args);        
-        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+        return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
     }
     
 }

@@ -18,5 +18,8 @@
  */
 class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_Ticket
 {
-    // feel free to add your own methods here, like for example reusable DQL queries
+    /**
+     * @var string The default sorting field/expression.
+     */
+    protected $defaultSortingField = 'createdDate';
 }

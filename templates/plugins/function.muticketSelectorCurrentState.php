@@ -12,7 +12,7 @@
  */
 
 /**
- * The muticketSelectorSupporter plugin provides items for a dropdown selector.
+ * The muticketSelectorCurrentState plugin provides items for a dropdown selector.
  *
  * Available parameters:
  *   - assign:   If set, the results are assigned to the corresponding variable instead of printed out.

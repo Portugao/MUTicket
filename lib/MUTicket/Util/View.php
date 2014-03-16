@@ -84,6 +84,8 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 	 */
 	public static function userForRating($check = 1) {
 
+	    $supporterTickets = '';
+	    
 		if ($check == 2) {
 			$supporterTickets = ModUtil::getVar('MUTicket', supporterTickets);
 			if ($supporterTickets == 1) {

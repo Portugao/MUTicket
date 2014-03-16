@@ -39,14 +39,14 @@
 <table class="z-datatable ticket_user_table">
     <colgroup>
         <col id="ccreated" />
-        {if $kind eq 0 && $ticketstate ne 0}
-        <col id="cstate" />
-        {/if}
         <col id="ctitle" />
         {if $kind eq 0 && $ticketstate ne 0}
         <col id="cowner" />
         {/if}
-        <col id="copen" />
+        <col id="copen" />        
+        {if $kind eq 0 && $ticketstate ne 0}
+        <col id="cstate" />
+        {/if}
         {if $kind eq 0 && $ticketstate ne 0}
         <col id="clabel" />
         {/if}
@@ -70,11 +70,6 @@
             {/if}        
         {/if}   
         </th>
-        {if $kind eq 0 && $ticketstate ne 0}
-        <th id="hstate" scope="col" align="center" valign="middle">
-        {gt text='State'}
-        </th>
-        {/if}
         <th id="htitle" scope="col" align="left" valign="middle">
         {if $ticketstate}
             {if $ticketstate == 2}
@@ -97,6 +92,11 @@
            {* {sortlink __linktext='State' sort='state' currentsort=$sort sortdir=$sdir modname='MUTicket' type='user' func='view' ot='ticket'} *}{gt text='Open'}
         </th>
         {if $kind eq 0 && $ticketstate ne 0}
+        <th id="hstate" scope="col" align="center" valign="middle">
+        {gt text='State'}
+        </th>
+        {/if}
+        {if $kind eq 0 && $ticketstate ne 0}
         <th id="hlabel" scope="col" align="center" valign="middle">
         {gt text='Label'}
         </th>
@@ -116,36 +116,6 @@
         <td headers="hupdated" align="left" valign="middle">
             {$ticket.createdDate|dateformat:datebrief}
         </td> 
-        {if $kind eq 0 && $ticketstate ne 0}
-        <td headers="hstate" align="center" valign="middle">
-            <div class="muticket_ticket_state_change">
-            <span class="muticket_ticket_edit_button">&nbsp;</span>
-            <div class="muticket_currentstate">
-            {if $ticket.currentState ne 0}
-            {$ticket.currentState|muticketGetCurrentStateDatas}
-            {else}
-            {gt text='Not set'}
-            {/if}
-            </div>
-            
-        <div class="muticket_currentstate_form">
-        <form action="{modurl modname='MUTicket' type='ajax' func='changeCurrentState' ticket=$ticket.id}" method="post">
-            <select id="currentState" name="currentState">
-            <option>{gt text='Set current state'}</option>
-            {muticketSelectorCurrentState assign='States'}
-            {foreach item='State' from=$States}
-            <option value={$State.value}>{$State.text}</option>
-            {/foreach}
-            </select><br />
-            <label for='statemessage'>{gt text='Send message?'}</label>
-            <input type='checkbox' name='statemessage' value='1' /><br />
-            <input type='hidden' name='actualsupporter' value={$data.id} />
-            <input type='submit' value='Submit' />
-        </form>   
-        </div> 
-        </div>        
-        </td>
-        {/if}      
         <td headers="htitle" align="left" valign="middle">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
         </td>
@@ -175,24 +145,73 @@
         </div>
         </div>
         </td>
-        {/if}  
+        {/if}
         <td headers="hopen" align="left" valign="middle">
             {$ticket.state|yesno:true}
         </td>
         {if $kind eq 0 && $ticketstate ne 0}
+        <td headers="hstate" align="center" valign="middle">
+            <div class="muticket_ticket_state_change">
+            <span class="muticket_ticket_edit_button">&nbsp;</span>
+            <div class="muticket_currentstate">
+            {if $ticket.currentState ne 0}
+            {$ticket.currentState|muticketGetCurrentStateDatas}
+            {else}
+            {gt text='Not set'}
+            {/if}
+            </div>
+            
+        <div class="muticket_currentstate_form">
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeCurrentState' ticket=$ticket.id}" method="post">
+            <select id="currentState" name="currentState">
+            <option>{gt text='Set current state'}</option>
+            {muticketSelectorCurrentState assign='States'}
+            {foreach item='State' from=$States}
+            <option value={$State.value}>{$State.text}</option>
+            {/foreach}
+            </select><br />
+            <label for='statemessage'>{gt text='Send message?'}</label>
+            <input type='checkbox' name='statemessage' value='1' /><br />
+            <input type='hidden' name='actualsupporter' value={$data.id} />
+            <input type='submit' value='Submit' />
+        </form>   
+        </div> 
+        </div>        
+        </td>
+        {/if}        
+        {if $kind eq 0 && $ticketstate ne 0}
         <td headers="hlabel" align="center" valign="middle">
+        <div class="muticket_ticket_label_change">
+        <span class="muticket_label_edit_button">&nbsp;</span>
+            <div class="muticket_label">     
             {if isset($ticket.labelticket) && count($ticket.labelticket > 0)}
             {include file='user/label/include_displayItemListManyIcons.tpl' items=$ticket.labelticket}
             {else}
             {gt text='Not set'}
             {/if}
-            <a href="index.php?module=muticket&type=admin&func=edit&ot=ticket&id={$ticket.id}&kind=label&theme=printer" class="muticket_ticket_label_change"><img style="width: 10px; height: 10px;" src="images/icons/extrasmall/xedit.png" /></a>
+            </div>
+        <div class="muticket_label_form">
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeLabel' ticket=$ticket.id}" method="post">
+            <select id="label" name="label[]" multiple=true>
+            <option>{gt text='Set label'}</option>
+            {muticketSelectorLabel assign='labels'}
+            {foreach item='label' from=$labels}
+            <option value={$label.value}>{$label.text}</option>
+            {/foreach}
+            </select><br />
+            <label for='ownermessage'>{gt text='Send message?'}</label>
+            <input type='checkbox' name='ownermessage' value='1' /><br />
+            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='submit' value='Submit' />
+        </form>
+        </div> 
+        </div>       
         </td>
         {/if}
         {if $kind eq 0 && $ticketstate ne 0}
         <td headers="hduedate" align="center" valign="middle">
-        <div class="muticket_ticket_date_change">
-        <span class="muticket_ticket_edit_button">&nbsp;</span>
+        <div class="muticket_ticket_duedate_change">
+        <span class="muticket_duedate_edit_button">&nbsp;</span>
         <div class="muticket_duedate">
         {if $ticket.dueText ne ''}
         {$ticket.dueText}
@@ -205,17 +224,21 @@
         {/if}
         </div>
         <div class="muticket_duedate_form">
-        <form action="{modurl modname='MUTicket' type='ajax' func='changeSupporter' ticket=$ticket.id}" method="post">
-            <input id='duedate' type='text' value={$ticket.dueDate|dateformat:datebrief}></input><img id="dueDate_img" class="clickable" alt="Datum auswählen" style="vertical-align: middle" src="http://zik135.webdesign-in-bremen.com/javascript/jscalendar/img.gif"><br />
-            <input id='duetext' type='text' value={$ticket.dueText}></input><br />
+        <form action="{modurl modname='MUTicket' type='ajax' func='changeDueDate' ticket=$ticket.id}" method="post">
+            <label for='duedate'>{gt text='Enter duedate!'}</label>
+            <input id='duedate' name='duedate' type='text' value='{if $ticket.dueDate > $ticket.createdDate}{$ticket.dueDate}{else}{/if}'></input><img id="dueDate_img" class="clickable" alt="Datum auswählen" style="vertical-align: middle" src="http://zik135.webdesign-in-bremen.com/javascript/jscalendar/img.gif"><br />
+            <label for='duetext'>{gt text='Enter a text like end of october!'}</label>
+            <input id='duetext'  name='duetext' type='text' value={$ticket.dueText}></input><br />
             <input type='submit' value='Submit' />
-        </form>        
+        </form> 
+        </div>
+        </div>       
         </td>
         <script type="text/javascript">
-        /* <![CDATA[ */
+        <![CDATA[ 
         Calendar.setup(
         {
-        inputField : "dueDate",
+        inputField : "duedate",
         ifFormat : "%Y-%m-%d %H:%M",
         showsTime : true,
         timeFormat : "24",
@@ -224,7 +247,7 @@
         firstDay: 1
         }
         );
-        /* ]]> */
+        ]]> 
         </script>
         {/if}    
         <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
@@ -300,17 +323,27 @@
                 }
             });
             
-            MU('.muticket_ticket_label_change').click(function(e){
-                e.preventDefault();
-              /*  MU(this).append("<img id='muticket_state_ajax' src='/images/ajax/icon_animated_busy.gif' />"); */
-                var url = MU(this).attr('href');
-                MU.get(url, function(ergebnis) {             
-                    if (ergebnis) { 
-                        MU(labeldialog).dialog('open');
-                        MU(labeldialog).html(ergebnis);
-                   }               
-                });               
-            }); 
+            MU(".muticket_label_edit_button").toggle(
+            function () {
+            var user = MU(this).next();
+            var form = user.next();
+                form.show();
+            },
+            function () {
+                MU(this).next().next().hide();             
+             }             
+             );
+             
+            MU(".muticket_duedate_edit_button").toggle(
+            function () {
+            var user = MU(this).next();
+            var form = user.next();
+                form.show();
+            },
+            function () {
+                MU(this).next().next().hide();             
+             }             
+             );
             
             MU(".muticket_ticket_edit_button").toggle(
             function () {

@@ -431,7 +431,7 @@ div#tooltip {
 	-webkit-box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	border-radius: 5px;
-	width: 200px;
+	width: auto;
 	right: 20px;
 }
 
@@ -474,7 +474,7 @@ div#tooltip {
 	-webkit-box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	border-radius: 5px;
-	width: 150px;
+	width: auto;
 	right: 20px;
 }
 
@@ -503,7 +503,7 @@ div#tooltip {
 	-webkit-box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	border-radius: 5px;
-	width: 150px;
+	width: auto;
 	right: 20px;
 }
 
@@ -532,6 +532,6 @@ div#tooltip {
 	-webkit-box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	box-shadow: 2px 2px 3px rgba(78,78,78,1.00);
 	border-radius: 5px;
-	width: 150px;
+	width: auto;
 	right: 20px;
 }

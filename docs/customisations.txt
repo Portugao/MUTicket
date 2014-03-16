@@ -52,6 +52,8 @@ Implemented Classes
 *lib/MUTicket/Controller/User.php
 *lib/MUTicket/Entity/Rating.php
 *lib/MUTicket/Entity/Supporter.php
+*lib/MUTicket/Entity/Ticket.php
+*lib/MUticket/Entity/Repository/CurrentState.php
 *lib/MUticket/Entity/Repository/Ticket.php
 *lib/MUTicket/Form/Handler/Admin/Config.php
 *lib/MUTicket/Form/Handler/Admin/Edit.php
@@ -74,6 +76,7 @@ Additional Files
 *templates/plugins/block.muticketratingform.php
 *templates/plugins/function.muticketSelectorCurrentState.php
 *templates/plugins/function.muticketSelectorSupporter.php
+*templates/plugins/function.muticketSelectorLabel.php
 *templates/plugins/modifier.muticketCatName.php
 *templates/plugins/modifier.muticketCatCurrentStateDatas.php
 *templates/plugins/modifier.muticketShowRating.php

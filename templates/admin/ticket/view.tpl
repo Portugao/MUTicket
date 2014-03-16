@@ -93,17 +93,21 @@
                 {gt text='Not set.'}
             {/if}
         </td> *}
-        <td headers="hitemactions" class="z-right z-nowrap z-w02">
-            {if count($ticket._actions) gt 0}
-            {strip}
-                {foreach item='option' from=$ticket._actions}
-                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
-                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
-                    </a>
-                {/foreach}
-            {/strip}
-            {/if}
-        </td>
+                <td id="itemactions{$ticket.id}" headers="hitemactions" class="z-right z-nowrap z-w02">
+                    {if count($ticket._actions) gt 0}
+                        {foreach item='option' from=$ticket._actions}
+                            <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>{icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}</a>
+                        {/foreach}
+                        {icon id="itemactions`$ticket.id`trigger" type='options' size='extrasmall' __alt='Actions' class='z-pointer z-hide'}
+                        <script type="text/javascript">
+                        /* <![CDATA[ */
+                            document.observe('dom:loaded', function() {
+                                muticketInitItemActions('ticket', 'view', 'itemactions{{$ticket.id}}');
+                            });
+                        /* ]]> */
+                        </script>
+                    {/if}
+                </td>
     </tr>
     {foreachelse}
         <tr class="z-admintableempty">
@@ -121,3 +125,17 @@
     {/if}
 </div>
 {include file='admin/footer.tpl'}
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    document.observe('dom:loaded', function() {
+    {{* init the "toggle all" functionality *}}
+    if ($('toggle_tickets') != undefined) {
+        $('toggle_tickets').observe('click', function (e) {
+            Zikula.toggleInput('tickets_view');
+            e.stop()
+        });
+    }
+    });
+/* ]]> */
+</script>

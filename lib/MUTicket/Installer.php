@@ -23,7 +23,7 @@ class MUTicket_Installer extends MUTicket_Base_Installer
         switch ($oldversion) {
             case '1.0.0':
             	
-            	$this->setVar('supporterTickets', '');
+            	$this->setVar('supporterTickets', false);
             	$this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
             	$this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
             	

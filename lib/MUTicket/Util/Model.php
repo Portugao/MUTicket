@@ -182,6 +182,21 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
 
 		return $repository;
 	}
+	
+	/**
+	 *
+	 This method is for getting a repository for labels
+	 *
+	 */
+	
+	public static function getLabelRepository() {
+	
+	    $serviceManager = ServiceUtil::getManager();
+	    $entityManager = $serviceManager->getService('doctrine.entitymanager');
+	    $repository = $entityManager->getRepository('MUTicket_Entity_Label');
+	
+	    return $repository;
+	}
 
 	/**
 	 *

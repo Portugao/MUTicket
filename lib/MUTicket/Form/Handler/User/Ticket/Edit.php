@@ -94,7 +94,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 		else {
 			// we get parentid
 			// We check if ticket is a parent ticket
-			$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
+			$parentid = $this->request->request->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
 				
 			// fetch posted data input values as an associative array
 			$formData = $this->view->getValues();
@@ -157,21 +157,18 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	{
 		// we get parentid
 		// We check if ticket is a parent ticket
-		$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_STRING);
+		$parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
 
 		// redirect to the list of tickets
 		$viewArgs = array('ot' => $this->objectType);
 		$url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
-		
-		LogUtil::registerStatus($parentid);
 
-		if ($args['commandName'] != 'delete' && !($this->mode == 'create' && $args['commandName'] == 'cancel')) {
-			// redirect to the detail page of parent ticket
-			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
-		}
-		if ($args['commandName'] == 'create' && $this->mode == 'create' && $parentid == 0) {
+		if ($this->mode == 'create' && $parentid == 0) {
 			// redirect to just created parent ticket
 			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
+		} else {
+		    // redirect to parent ticket
+		    $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
 		}
 
 		return $url;

@@ -27,6 +27,11 @@ class MUTicket_Installer extends MUTicket_Base_Installer
             	$this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
             	$this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
             	
+            	$rating = $this->getVar('rating');
+            	if ($this->setVar('ratingAllowed', $rating)) {
+            	    $this->delVar('rating');
+            	}
+            	
                 try {
                     DoctrineHelper::updateSchema($this->entityManager, $this->listEntityClasses());
                 } catch (Exception $e) {
@@ -35,6 +40,18 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     }
                     return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s module.', array($this->getName())));
                 }
+                
+                $ticketsrepository = MUTicket_Util_Model::getTicketRepository();
+                $tickets = $ticketsrepository->selectWhere();
+                
+                foreach ($tickets as $ticket) {
+                
+                MUTicket_Util_Workflow::executeAction();
+                }
+                
+            case '1.1.0':
+                
+                // later updates
         }
     
 

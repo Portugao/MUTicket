@@ -32,6 +32,7 @@
                 {if $func ne 'display'} 
                     {formlabel for='title' __text='Title' mandatorysym='1'}
                     {formtextinput group='ticket' id='title' mandatory=true readOnly=false __title='Enter the title of the ticket' textMode='singleline' maxLength=255 cssClass='required' }
+                    {muticketValidationError id='title' class='required'}
                 {/if} 
                 </div>                             
                 <div class="z-formrow">

@@ -177,7 +177,7 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
     protected $dueText = '';
     
     /**
-     * @ORM\Column(length=255)
+     * @ORM\Column(length=255, nullable=true)
      * @var string $currentState.
      */
     protected $currentState = '0';

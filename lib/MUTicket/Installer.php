@@ -18,20 +18,20 @@ class MUTicket_Installer extends MUTicket_Base_Installer
 {
     public function upgrade($oldversion)
     {
-    
+
         // Upgrade dependent on old version number
         switch ($oldversion) {
             case '1.0.0':
-            	
-            	$this->setVar('supporterTickets', false);
-            	$this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
-            	$this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
-            	
-            	$rating = $this->getVar('rating');
-            	if ($this->setVar('ratingAllowed', $rating)) {
-            	    $this->delVar('rating');
-            	}
-            	
+                 
+                $this->setVar('supporterTickets', false);
+                $this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
+                $this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
+                 
+                $rating = $this->getVar('rating');
+                if ($this->setVar('ratingAllowed', $rating)) {
+                    $this->delVar('rating');
+                }
+                 
                 try {
                     DoctrineHelper::updateSchema($this->entityManager, $this->listEntityClasses());
                 } catch (Exception $e) {
@@ -40,20 +40,60 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     }
                     return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s module.', array($this->getName())));
                 }
+
+                // we get serviceManager
+                $serviceManager = ServiceUtil::getManager();
+                // we get entityManager
+                $entityManager = $serviceManager->getService('doctrine.entitymanager');
+
+                // we set all entities of tickets, supporters and ratings to approved
+                // we get repositories
+                $ticketrepository = MUTicket_Util_Model::getTicketRepository();
+                $supporterrepository = MUTicket_Util_Model::getSupporterRepository();
+                $ratingrepository = MUTicket_Util_Model::getRatingRepository();
                 
-                $ticketsrepository = MUTicket_Util_Model::getTicketRepository();
-                $tickets = $ticketsrepository->selectWhere();
-                
+                //$where = 'tbl.owner = = \'' . 0 . '\'';
+                //$where = 'tbl.owner = 0';
+                // we get all tickets
+                $tickets = $ticketrepository->selectWhere();
+                LogUtil::registerStatus(count($tickets));
+
+                // we set each ticket to approved
                 foreach ($tickets as $ticket) {
-                
-                MUTicket_Util_Workflow::executeAction();
+                    $thisticket = $ticketrepository->selectById($ticket['id']);
+                    $thisticket->setCurrentState(NULL);
+                    $thisticket->setWorkflowState('approved');
+                    $entityManager->flush();
                 }
-                
+
+                // we get all supporters
+                $supporters = $supporterrepository->selectWhere();
+
+                // we set each supporter to approved
+                foreach ($supporters as $supporter) {
+                    $thissupporter = $supporterrepository->selectById($supporter['id']);
+                    $supportcats = $thissupporter->getSupportcats();
+                    $supportcats = html_entity_decode($supportcats);
+                    $thissupporter->setSupportcats($supportcats);
+                    $thissupporter->setWorkflowState('approved');
+                    $entityManager->flush();
+                }
+
+                // we get all ratings
+                $ratings = $ratingrepository->selectWhere();
+
+                // we set each rating to approved
+                foreach ($ratings as $rating) {
+                    $thisrating = $ratingrepository->selectById($rating['id']);
+                    $thisrating->setWorkflowState('approved');
+                    $entityManager->flush();
+                }
+
             case '1.1.0':
-                
+
                 // later updates
         }
-    
+
 
         // update successful
         return true;

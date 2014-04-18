@@ -18,5 +18,29 @@
  */
 class MUTicket_Entity_Repository_Rating extends MUTicket_Entity_Repository_Base_Rating
 {
-    // feel free to add your own methods here, like for example reusable DQL queries
+    /**
+     * Adds default filters as where clauses.
+     *
+     * @param Doctrine\ORM\QueryBuilder $qb         Query builder to be enhanced.
+     * @param array                     $parameters List of determined filter options.
+     *
+     * @return Doctrine\ORM\QueryBuilder Enriched query builder instance.
+     */
+    protected function applyDefaultFilters(QueryBuilder $qb, $parameters)
+    {
+        $currentModule = ModUtil::getName();//FormUtil::getPassedValue('module', '', 'GETPOST');
+        $currentType = FormUtil::getPassedValue('type', 'user', 'GETPOST');
+        if ($currentType == 'admin' && ($currentModule == 'MUTicket' || $currentModule == 'Extensions')) {
+            return $qb;
+        }
+    
+        if (!in_array('workflowState', array_keys($parameters)) || empty($parameters['workflowState'])) {
+            // per default we show approved ratings only
+            $onlineStates = array('approved');
+            $qb->andWhere('tbl.workflowState IN (:onlineStates)')
+               ->setParameter('onlineStates', DataUtil::formatForStore($onlineStates));
+        }
+    
+        return $qb;
+    }
 }

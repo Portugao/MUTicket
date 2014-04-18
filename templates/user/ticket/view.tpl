@@ -34,7 +34,7 @@
         </a>
     {/checkpermissionblock} *}
 
-{include file='user/ticket/view_quickNav.tpl' all=$all own=$own workflowStateFilter=false}{* see template file for available options *}
+{* {include file='user/ticket/view_quickNav.tpl' all=$all own=$own workflowStateFilter=false}{* see template file for available options *} *}
 
 <table class="z-datatable ticket_user_table">
     <colgroup>

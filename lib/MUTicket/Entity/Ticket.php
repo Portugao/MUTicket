@@ -169,7 +169,6 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
      */
     public function prePersistCallback()
     {
-        $this->setWorkflowState('approved');
         $this->performPrePersistCallback();
     }
 

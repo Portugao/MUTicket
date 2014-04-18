@@ -51,12 +51,9 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                 $ticketrepository = MUTicket_Util_Model::getTicketRepository();
                 $supporterrepository = MUTicket_Util_Model::getSupporterRepository();
                 $ratingrepository = MUTicket_Util_Model::getRatingRepository();
-                
-                //$where = 'tbl.owner = = \'' . 0 . '\'';
-                //$where = 'tbl.owner = 0';
+
                 // we get all tickets
                 $tickets = $ticketrepository->selectWhere();
-                LogUtil::registerStatus(count($tickets));
 
                 // we set each ticket to approved
                 foreach ($tickets as $ticket) {
@@ -64,6 +61,14 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     $thisticket->setCurrentState(NULL);
                     $thisticket->setWorkflowState('approved');
                     $entityManager->flush();
+                    $workflowHelper = new Zikula_Workflow('none', 'MUTicket');
+                    $obj['__WORKFLOW__']['obj_table'] = 'ticket';
+                    $obj['__WORKFLOW__']['obj_idcolumn'] = 'id';
+                    $obj['id'] = $ticket['id'];
+                    $workflowHelper->registerWorkflow($obj);
+                    //Zikula_Workflow_Util::executeAction('none', $obj, 'submit', 'ticket', 'MUTicket', 'id');
+                    //$workflowHelper->executeAction('submit', $obj, 'initial');
+                    //WorkflowUtil::executeAction('none', $thisticket, 'submit', 'ticket', 'MUTicket');
                 }
 
                 // we get all supporters
@@ -77,6 +82,7 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     $thissupporter->setSupportcats($supportcats);
                     $thissupporter->setWorkflowState('approved');
                     $entityManager->flush();
+                    //WorkflowUtil::executeAction('none', $thissupporter, 'initial', 'supporter', 'MUTicket');
                 }
 
                 // we get all ratings
@@ -87,6 +93,7 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     $thisrating = $ratingrepository->selectById($rating['id']);
                     $thisrating->setWorkflowState('approved');
                     $entityManager->flush();
+                    //WorkflowUtil::executeAction('none', $thisrating, 'initial', 'rating', 'MUTicket');
                 }
 
             case '1.1.0':

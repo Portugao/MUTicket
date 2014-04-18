@@ -71,10 +71,10 @@ class MUTicket_Entity_Validator_Base_Ticket extends MUTicket_Validator
             $errorInfo['message'] = __f('Error! Length of field value must not be higher than %2$s (%1$s).', array('due text', 255), $dom);
             return $errorInfo;
         }
-        if (!$this->isStringNotEmpty('currentState')) {
+        /*if (!$this->isStringNotEmpty('currentState')) {
             $errorInfo['message'] = __f('Error! Field value must not be empty (%s).', array('current state'), $dom);
             return $errorInfo;
-        }
+        }*/
     
         return true;
     }

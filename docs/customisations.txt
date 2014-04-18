@@ -78,7 +78,7 @@ Additional Files
 *templates/plugins/function.muticketSelectorSupporter.php
 *templates/plugins/function.muticketSelectorLabel.php
 *templates/plugins/modifier.muticketCatName.php
-*templates/plugins/modifier.muticketCatCurrentStateDatas.php
+*templates/plugins/modifier.muticketGetCurrentStateDatas.php
 *templates/plugins/modifier.muticketShowRating.php
 
 

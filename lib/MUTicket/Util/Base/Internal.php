@@ -64,7 +64,7 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
             $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
         }
         if ($kind == 'supporter') {
-            $messagecontent['body'] = $handler->__('A Ticket was moved to you as supporter.') . '<br />';
+            $messagecontent['body'] = $handler->__('A ticket was moved to you as supporter.') . '<br />';
             $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');
         }
         if ($kind == 'currentState') {

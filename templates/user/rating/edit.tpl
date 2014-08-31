@@ -53,7 +53,7 @@
         {formbutton id='btnDelete' commandName='delete' __text='Delete rating' class='z-bt-delete z-btred' confirmMessage=$deleteConfirmMsg}
       {/if}
     {elseif $mode eq 'create'}
-        {formbutton id='btnCreate' commandName='create' __text='Vote' class='z-bt-ok'}
+        {formbutton id='btnCreate' commandName='submit' __text='Vote' class='z-bt-ok'}
     {else}
         {formbutton id='btnUpdate' commandName='update' __text='OK' class='z-bt-ok'}
     {/if}

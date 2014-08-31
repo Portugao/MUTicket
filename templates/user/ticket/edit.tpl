@@ -152,7 +152,7 @@
     {/if}
     {if $func eq 'display'}
     	<input type="hidden" id="muticketTicket_ParentItemList" name="muticketTicket_ParentItemList" value="{$ticketid}">
-    	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="0">
+    	<input type="hidden" id="muticketTicket_ParentMode" name="muticketTicket_ParentMode" value="{$ticketid}">
     {/if}
     {* {include file='user/ticket/include_selectOne.tpl' relItem=$ticket aliasName='parent' idPrefix='muticketTicket_Parent'} *}
     {* include display hooks *}
@@ -188,7 +188,7 @@
         {* include possible submit actions *}
         <div class="z-buttons z-formbuttons">
         {if $func eq 'display'}
-        {formbutton id="btnSubmit" commandName='create' __text='Submit' class='z-bt-save'}
+        {formbutton id="btnSubmit" commandName='submit' __text='Submit' class='z-bt-ok'}
         {else}
         {foreach item='action' from=$actions}
             {assign var='actionIdCapital' value=$action.id|@ucwords}

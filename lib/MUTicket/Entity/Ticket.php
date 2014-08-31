@@ -169,6 +169,15 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
      */
     public function prePersistCallback()
     {
+        $request = new Zikula_Request_Http();
+        $parent = $request->request->filter('muticketTicket_ParentMode', NULL, FILTER_SANITIZE_NUMBER_INT);
+        if ($parent != NULL) {
+            $repository = MUTicket_Util_Model::getTicketRepository();
+            $thisparent = $repository->selectById($parent);
+            $this->setParent($thisparent);
+            
+        }
+        $this->setWorkflowState('approved');
         $this->performPrePersistCallback();
     }
 

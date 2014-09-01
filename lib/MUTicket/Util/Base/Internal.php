@@ -17,8 +17,8 @@
 class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
 {
     /*
-     * This function handles the changing of different things of an ticket
-    * for example sending email
+     * This function handles the changing of different things of a ticket
+     * for example sending email
     */
     public function handleChanges($kind, $email, $ticket)
     {
@@ -48,6 +48,9 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         
         $serviceManager = ServiceUtil::getManager();
         $handler = new Zikula_Form_View($serviceManager, 'MUTicket');
+        
+        $baseurl = System::getBaseUrl();
+        $url = $baseurl . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $ticket['id']));
 
         $messagecontent = array();
         $messagecontent['from'] = $from;
@@ -71,18 +74,18 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
             $messagecontent['body'] = $handler->__('To a ticket was set another current state.') . '<br />';
             $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');
         }
-        
-        $messagecontent['body'] .= '<h2><br />' . $handler->__('Ticket title')  . ': ' . $ticket['title'] . '</h2>';
-        $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
-        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'];
-       /* if ($kind == 'state') {
-            $messagecontent['body'] = $handler->__('There is an answer to your ticket of the support on '). '<h2>' . $from . '</h2>';
+        if ($kind == 'label') {
+            $messagecontent['body'] = $handler->__('To a ticket other labels were set.') . '<br />';
+            $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');            
         }
-        $messagecontent['body'] .= $handler->__('Title of ticket') . '<br />' . $title . '<br /><br />';
-        $messagecontent['body'] .= $handler->__('Text') . '<br />' . $text . '<br /><br />';
+        
+        $messagecontent['body'] .= '<h2><br />' . $handler->__('Title of ticket')  . ': ' . $ticket['title'] . '</h2>';
+        $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
+        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />< br/>';
+
         $messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
         $messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';
-        $messagecontent['altbody'] = '';*/
+        $messagecontent['altbody'] = '';
         $messagecontent['html'] = true;
 
         return $messagecontent;

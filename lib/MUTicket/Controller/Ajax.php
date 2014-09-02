@@ -62,8 +62,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     {
         $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         $args['labels'] = $this->request->request->filter('label', '', FILTER_SANITIZE_NUMBER_INT);
-        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_STRING);
-        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_NUMBER_INT);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupporter', '', FILTER_SANITIZE_STRING);
     
         ModUtil::apiFunc($this->name, 'ajax', 'changeLabel', $args);
         return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
@@ -76,8 +76,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     {
         $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         $args['state'] = $this->request->request->filter('currentState', '', FILTER_SANITIZE_STRING);
-        $args['sendmessage'] = $this->request->request->filter('statemessage',0, FILTER_SANITIZE_STRING);
-        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('statemessage',0, FILTER_SANITIZE_NUMBER_INT);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupporter', '', FILTER_SANITIZE_STRING);
     
         ModUtil::apiFunc($this->name, 'ajax', 'changeCurrentState', $args);
         return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
@@ -91,8 +91,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
         $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         $args['dueDate'] = $this->request->request->filter('duedate', '', FILTER_SANITIZE_STRING);
         $args['dueText'] = $this->request->request->filter('duetext', '', FILTER_SANITIZE_STRING);        
-        $args['sendmessage'] = $this->request->request->filter('statemessage',0, FILTER_SANITIZE_STRING);
-        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('duedatemessage',0, FILTER_SANITIZE_NUMBER_INT);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupporter', '', FILTER_SANITIZE_STRING);
     
         ModUtil::apiFunc($this->name, 'ajax', 'changeDueDate', $args);
         return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));
@@ -105,8 +105,8 @@ class MUTicket_Controller_Ajax extends MUTicket_Controller_Base_Ajax
     {
         $args['ticket'] = $this->request->query->filter('ticket', 0, FILTER_SANITIZE_NUMBER_INT);
         $args['supporter'] = $this->request->request->filter('supporter', '', FILTER_SANITIZE_STRING);
-        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_STRING);
-        $args['actualsupporter'] = $this->request->request->filter('actualsupportr', '', FILTER_SANITIZE_STRING);
+        $args['sendmessage'] = $this->request->request->filter('ownermessage',0, FILTER_SANITIZE_NUMBER_INT);
+        $args['actualsupporter'] = $this->request->request->filter('actualsupporter', '', FILTER_SANITIZE_STRING);
  
         ModUtil::apiFunc($this->name, 'ajax', 'changeSupporter', $args);        
         return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 2)));

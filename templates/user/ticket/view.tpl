@@ -34,7 +34,7 @@
         </a>
     {/checkpermissionblock} *}
 
-{* {include file='user/ticket/view_quickNav.tpl' all=$all own=$own workflowStateFilter=false}{* see template file for available options *} *}
+{* {include file='user/ticket/view_quickNav.tpl' all=$all own=$own workflowStateFilter=false}{* see template file for available options *}
 
 <table class="z-datatable ticket_user_table">
     <colgroup>
@@ -154,7 +154,7 @@
             <div class="muticket_ticket_state_change">
             <span class="muticket_ticket_edit_button">&nbsp;</span>
             <div class="muticket_currentstate">
-            {if $ticket.currentState ne 0}
+            {if $ticket.currentState ne NULL}
             {$ticket.currentState|muticketGetCurrentStateDatas}
             {else}
             {gt text='Not set'}
@@ -193,8 +193,8 @@
         <div class="muticket_label_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeLabel' ticket=$ticket.id}" method="post">
             <select id="label" name="label[]" multiple=true>
-            <option>{gt text='Set label'}</option>
-            {muticketSelectorLabel assign='labels'}
+            <option value=''>{gt text='Set label'}</option>
+            {muticketSelectorLabel ticket=$ticket.id}
             {foreach item='label' from=$labels}
             <option value={$label.value}>{$label.text}</option>
             {/foreach}

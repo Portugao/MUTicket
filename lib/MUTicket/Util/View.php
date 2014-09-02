@@ -110,7 +110,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 
 	/**
 	 *
-	 * this method checks if there is a supporter saved
+	 * this method checks if there is a supporter saved and is active
 	 *
 	 **/
 
@@ -119,7 +119,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 		$repository = MUTicket_Util_Model::getSupporterRepository();
 		$where = 'tbl.state = 1';
 		$supporters = $repository->selectWhere($where);
-		if (count($supporters)  > 0 && is_array($supporters) == true) {
+		if (count($supporters)  > 0 && is_array($supporters)) {
 			return 1;
 		}
 		else {

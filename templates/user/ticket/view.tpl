@@ -193,7 +193,7 @@
         <div class="muticket_label_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeLabel' ticket=$ticket.id}" method="post">
             <select id="label" name="label[]" multiple=true>
-            <option value=''>{gt text='Set label'}</option>
+            <option value=0>{gt text='Set label'}</option>
             {muticketSelectorLabel ticket=$ticket.id}
             {foreach item='label' from=$labels}
             <option value={$label.value}>{$label.text}</option>

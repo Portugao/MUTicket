@@ -165,8 +165,8 @@ abstract class MUTicket_Entity_Base_Ticket extends Zikula_EntityAccess
     protected $owner = 0;
     
     /**
-     * @ORM\Column(type="datetime")
-     * @var datetime $dueDate.
+     * @ORM\Column(type="date")
+     * @var date $dueDate.
      */
     protected $dueDate = null;
     

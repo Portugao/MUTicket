@@ -122,12 +122,21 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
      */
     public function changeLabel($args)
     {
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+
         $repository = MUTicket_Util_Model::getTicketRepository();
 
         $ticket = $args['ticket'];
         $thisticket = $repository->selectById($ticket);
         // we get existing labels for this ticket
         $existinglabels = $thisticket->getLabelticket();
+        foreach ($existinglabels as $existinglabel) {
+            $existinglabelIds[] = $existinglabel['id'];
+        }
+
+        //$thisticket->setLabelticket(NULL);
+        //$entityManager->flush();
 
         $sendmail = $args['sendmessage'];
         $actualsupporter = $args['actualsupporter'];
@@ -135,9 +144,6 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         if ($userid <= 1 || $userid == false) {
             $userid = UserUtil::getIdFromName($actualsupporter);
         }
-
-        $serviceManager = ServiceUtil::getManager();
-        $entityManager = $serviceManager->getService('doctrine.entitymanager');
 
         $labels = $args['labels'];
 
@@ -147,15 +153,33 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $labelobjects = array();
 
         foreach ($labels as $label) {
-            $thislabel = $labelrepository->selectById($label);
-            if ($existinglabels != NULL) {
+            if ($label > 0) {
+                $thislabel = $labelrepository->selectById($label);
+                if ($existinglabels != NULL) {
 
+                    if (!in_array($thislabel['id'], $existinglabelIds)) {
+                        $labelobjects[] = $thislabel;
+                    }
+                } else {
+                    $labelobjects[] = $thislabel;
+                }
             }
-            $labelobjects[] = $thislabel;
-        }
-        $thisticket->setLabelticket($labelobjects);
 
-        $entityManager->flush();
+
+            $thisticket->setLabelticket($labelobjects);
+
+            $entityManager->flush();
+
+            if ($existinglabelIds != NULL) {
+                foreach ($existinglabelIds as $existinglabelId) {
+                    if(!in_array($existinglabelId, $labels)) {
+                        $existinglabel = $labelrepository->selectById($existinglabelId);
+                        $thisticket->removeLabelticket($existinglabel);
+                    }
+                }
+            }
+            $entityManager->flush();
+        }
 
         if ($sendmail == 1) {
             if ($userid > 1) {

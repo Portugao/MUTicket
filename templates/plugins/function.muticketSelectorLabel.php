@@ -25,16 +25,45 @@
 function smarty_function_muticketSelectorLabel($params, $view)
 {
     $args = array('ot' => 'label');
+    $ticketId = $params['ticket'];
+    // we get ticket repository
+    $repository = MUTicket_Util_Model::getTicketRepository();
+    // we get ticket by Id
+    $ticket = $repository->selectById($ticketId);
+    // we get labels of ticket
+    $ticketLabels = $ticket->getLabelticket();
+    if ($ticketLabels != NULL) {
+        $existingLabels = array();
+        $labelrepository = MUTicket_Util_Model::getLabelRepository();
+        foreach ($ticketLabels as $ticketLabel) {
+            $thisLabel = $labelrepository->selectById($ticketLabel['id']);
+            $existingLabels[] = $thisLabel['id'];
+            
+        }
+    }
     $labels = ModUtil::apiFunc('MUTicket', 'selection', 'getEntities' , $args);
+
     $result = array();
-    
+    $output = '';
     foreach ($labels as $label) {
-        $result[] = array('text' => $label['name'], 'value' => $label['id']);
+        $output .= "<option ";
+
+        $output .= "value='";
+        $output .= $label['id'];
+        $output .= "'";
+
+        if (in_array($label['id'], $existingLabels)) {
+            $output .= " selected=selected";
+        }
+        $output .= ">";
+        $output .= $label['name'];
+        $output .= "</option>";
+        //$result[] = array('text' => $label['name'], 'value' => $label['id']);
     }
 
     if (array_key_exists('assign', $params)) {
         $view->assign($params['assign'], $result);
         return;
     }
-    return $result;
+    return $output;
 }

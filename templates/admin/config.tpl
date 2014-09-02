@@ -42,11 +42,6 @@
                     {formcheckbox id='delete_supporter' name='delete_supporter' group='supporter'}              
                 </div>           
             </fieldset>
-
-            <div class="z-buttons z-formbuttons">
-                {formbutton commandName='save' __text='Update configuration' class='z-bt-save'}
-                {formbutton commandName='cancel' __text='Cancel' class='z-bt-cancel'}
-            </div>
             
               {/formtabbedpanel}
             {gt text='Extended' assign='tabTitle'}
@@ -65,6 +60,11 @@
             </fieldset>
             {/formtabbedpanel}
             {/formtabbedpanelset}
+            
+            <div class="z-buttons z-formbuttons">
+                {formbutton commandName='save' __text='Update configuration' class='z-bt-save'}
+                {formbutton commandName='cancel' __text='Cancel' class='z-bt-cancel'}
+            </div>
         {/muticketFormFrame}
     {/form}
 </div>

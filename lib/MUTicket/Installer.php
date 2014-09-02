@@ -16,7 +16,31 @@
  */
 class MUTicket_Installer extends MUTicket_Base_Installer
 {
-    public function upgrade($oldversion)
+    /**
+     * Install the MUTicket application.
+     *
+     * @return boolean True on success, or false.
+     */
+    public function install()
+    {
+        parent::install();
+        
+        $dom = ZLanguage::getModuleDomain('MUTicket');
+
+        $this->setVar('messageNewOwner', __('Hi supporter, here you get this ticket to work for the customer by yourself.', $dom));
+        $this->setVar('messageDueDate', __('Dear Customer! We assume that we are able to clear your ticket until the given date', $dom));
+    }
+    
+    /**
+     * Upgrade the MUTicket application from an older version.
+     *
+     * If the upgrade fails at some point, it returns the last upgraded version.
+     *
+     * @param integer $oldVersion Version to upgrade from.
+     *
+     * @return boolean True on success, false otherwise.
+     */
+    public function upgrade($oldVersion)
     {
 
         // Upgrade dependent on old version number
@@ -25,7 +49,7 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                  
                 $this->setVar('supporterTickets', false);
                 $this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
-                $this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date:');
+                $this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date');
                  
                 $rating = $this->getVar('rating');
                 if ($this->setVar('ratingAllowed', $rating)) {

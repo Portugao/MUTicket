@@ -67,6 +67,7 @@ Implemented Classes
 *lib/MUTicket/Util/ListEntries.php
 *lib/MUTicket/Util/Model.php
 *lib/MUTicket/Util/View.php
+
 *lib/MUTicket/Installer.php
 *lib/MUTicket/Version.php
 

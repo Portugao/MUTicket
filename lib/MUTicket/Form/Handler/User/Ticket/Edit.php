@@ -28,9 +28,11 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	{
 		
 		$supporterTickets = MUTicket_Util_View::userForRating(2);
-		// if supporters may not create tickets
 		
-		if ($supporterTickets == 0) {
+		$func = $this->request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
+		
+		// if supporters may not create tickets
+		if ($supporterTickets == 0 && $func == 'edit') {
 			$uid = UserUtil::getVar('uid');
 			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
 			if (in_array($uid, $supporteruids)) {
@@ -75,10 +77,13 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 	 */
 	public function handleCommand(Zikula_Form_View $view, &$args)
 	{
-		$supporterTickets = MUTicket_Util_View::userForRating(2);
+	    // We get parentid
+	    // We check if ticket is a parent ticket
+	    $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
+		
 		// if supporters may not create tickets
-
-		if ($supporterTickets == 0) {
+	    $supporterTickets = MUTicket_Util_View::userForRating(2);
+		if ($supporterTickets == 0 && $parentid != 0) {
 			$uid = UserUtil::getVar('uid');
 			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
 			if (in_array($uid, $supporteruids)) {
@@ -92,10 +97,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 			return $result;
 		}
 		else {
-			// we get parentid
-			// We check if ticket is a parent ticket
-			$parentid = $this->request->request->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
-				
+			
 			// fetch posted data input values as an associative array
 			$formData = $this->view->getValues();
 			// we want the array with our field values

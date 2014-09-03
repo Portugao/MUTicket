@@ -18,7 +18,6 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 {
     public function getactiveSupporter()
     {
-
         $dom = ZLanguage::getModuleDomain('MUTicket');
         // we get a repository for Supporter
         //$modelhelper = new MUTicket_Util_Model();

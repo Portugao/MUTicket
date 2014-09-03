@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MUTicket\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 09:29+0000\n"
+"POT-Creation-Date: 2014-09-03 14:39+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,8 +10,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: workflows/function.none_permissioncheck.php:55
 msgid "None workflow (no approval)"
@@ -119,8 +120,8 @@ msgstr "Inhalt updaten"
 #: templates/admin/supporter/delete.tpl:20 templates/admin/label/view.tpl:111
 #: templates/admin/label/delete.tpl:7 templates/admin/label/delete.tpl:20
 #: templates/admin/rating/view.tpl:97 templates/admin/rating/delete.tpl:7
-#: templates/admin/rating/delete.tpl:20 templates/user/ticket/view.tpl:266
-#: templates/user/ticket/view.tpl:267 templates/user/ticket/delete.tpl:18
+#: templates/admin/rating/delete.tpl:20 templates/user/ticket/view.tpl:257
+#: templates/user/ticket/view.tpl:258 templates/user/ticket/delete.tpl:18
 #: templates/user/currentState/delete.tpl:18
 #: templates/user/supporter/delete.tpl:18 templates/user/label/delete.tpl:18
 #: templates/user/rating/delete.tpl:18
@@ -582,7 +583,7 @@ msgstr "Keine Ergebnisse gefunden!"
 #: templates/external/currentState/find.tpl:116
 #: templates/external/supporter/find.tpl:116
 #: templates/external/label/find.tpl:115
-#: templates/external/rating/find.tpl:113 templates/admin/config.tpl:48
+#: templates/external/rating/find.tpl:113 templates/admin/config.tpl:66
 #: templates/admin/ticket/edit.tpl:211 templates/admin/ticket/delete.tpl:22
 #: templates/admin/currentState/edit.tpl:114
 #: templates/admin/currentState/delete.tpl:22
@@ -672,7 +673,7 @@ msgid "MUTicket items"
 msgstr "MUTicket EölMUTicket Element"
 
 #: lib/MUTicket/Base/Installer.php:38 lib/MUTicket/Base/Installer.php:138
-#: lib/MUTicket/Installer.php:39
+#: lib/MUTicket/Installer.php:63
 msgid "Doctrine Exception: "
 msgstr "Doctrine Ausnahmefehler:"
 
@@ -706,7 +707,7 @@ msgstr ""
 "ist ein Fehler aufgetreten."
 
 #: lib/MUTicket/Base/Installer.php:140
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "An error was encountered while dropping the tables for the %s extension."
 msgstr ""
@@ -789,24 +790,20 @@ msgid "muticket Supporters Filter Hooks"
 msgstr "muticket Supporter Filter Hooks"
 
 #: lib/MUTicket/Base/Version.php:145
-#, fuzzy
 msgid "muticket Current states Display Hooks"
-msgstr "muticket Supporter Ansicht Hooks"
+msgstr "muticket Aktueller Status Ansicht Hooks"
 
 #: lib/MUTicket/Base/Version.php:163
-#, fuzzy
 msgid "muticket Current states Filter Hooks"
-msgstr "muticket Supporter Filter Hooks"
+msgstr "muticket Aktueller Status  Filter Hooks"
 
 #: lib/MUTicket/Base/Version.php:168
-#, fuzzy
 msgid "muticket Labels Display Hooks"
-msgstr "muticket Bewertungen Ansicht Hooks"
+msgstr "muticket Label Ansicht Hooks"
 
 #: lib/MUTicket/Base/Version.php:186
-#, fuzzy
 msgid "muticket Labels Filter Hooks"
-msgstr "muticket Bewertungen Filter Hooks"
+msgstr "muticket Label Filter Hooks"
 
 #: lib/MUTicket/Block/ItemList.php:34
 msgid "Open tickets"
@@ -821,19 +818,32 @@ msgid "Latest MUTicket items"
 msgstr "Ansicht von letzten MUTicket Elementen."
 
 #: lib/MUTicket/NewsletterPlugin/ItemList.php:36
-#, fuzzy
 msgid "List of tickets and other MUTicket items"
-msgstr "Liste von Themen und andere MUStatements Elementen"
+msgstr "Liste von Tickets und andere MUTicket Elementen"
 
 #: lib/MUTicket/NewsletterPlugin/ItemList.php:46
-#, fuzzy
 msgid ""
 "This plugin shows a list of tickets and other items of the MUTicket module."
 msgstr ""
-"Dieses Plugin zeigt eine Liste von Kollektionen und anderen Elementen von "
-"MUVideo."
+"Dieses Plugin zeigt eine Liste von Tickets und anderen Elementen von "
+"MUTicket."
 
-#: lib/MUTicket/Installer.php:41
+#: lib/MUTicket/Installer.php:30
+msgid ""
+"Hi supporter, here you get this ticket to work for the customer by yourself."
+msgstr ""
+"Hallo Supporter, hier erhälst Du dieses Ticket, damit es für den Kunden "
+"bearbeitest."
+
+#: lib/MUTicket/Installer.php:31
+msgid ""
+"Dear Customer! We assume that we are able to clear your ticket until the "
+"given date"
+msgstr ""
+"Lieber Kunde! Wir bemühen uns, Ihr Ticket bis zum angegebenen Zeitpunkt zu "
+"klären"
+
+#: lib/MUTicket/Installer.php:65
 #, php-format
 msgid "An error was encountered while dropping the tables for the %s module."
 msgstr "Ein Fehler ist aufgetreten beim Löschen der Tabellen für das Modul %s."
@@ -860,7 +870,7 @@ msgstr "Ein neues Ticket auf "
 
 #: lib/MUTicket/Util/Base/Settings.php:105
 msgid "An answer to your ticket on "
-msgstr "Eine Antwort auf Ihr Ticket "
+msgstr "Eine Antwort auf Ihr Ticket  auf "
 
 #: lib/MUTicket/Util/Base/Settings.php:108
 msgid "An answer to a ticket on "
@@ -878,7 +888,8 @@ msgstr "Ihr Ticket wurde gespeichert und unser Support per email informiert!"
 #: lib/MUTicket/Util/Base/Settings.php:187
 msgid "Your support answer was saved and an email sent to the customer!"
 msgstr ""
-"Ihre Support Antwort wurde gespeichert und eine mail an den Kunden geschickt!"
+"Deine Support Antwort wurde gespeichert und eine mail an den Kunden "
+"geschickt!"
 
 #: lib/MUTicket/Util/Base/Settings.php:211
 msgid "Another entry was created by an user on "
@@ -889,7 +900,7 @@ msgid "There is an answer to your ticket of the support on "
 msgstr "Zu Ihrem Ticket gibt es eine Antwort des Supports bei "
 
 #: lib/MUTicket/Util/Base/Settings.php:216
-#: lib/MUTicket/Util/Base/Internal.php:82
+#: lib/MUTicket/Util/Base/Internal.php:93
 msgid "Title of ticket"
 msgstr "Titel des Tickets"
 
@@ -908,7 +919,7 @@ msgid "Text"
 msgstr "Text"
 
 #: lib/MUTicket/Util/Base/Settings.php:218
-#: lib/MUTicket/Util/Base/Internal.php:86
+#: lib/MUTicket/Util/Base/Internal.php:97
 msgid "Visit this ticket:"
 msgstr "Dieses Ticket aufrufen:"
 
@@ -921,22 +932,23 @@ msgid "Changing of current state for a ticket"
 msgstr "Änderung eines aktullen Status für ein Ticket"
 
 #: lib/MUTicket/Util/Base/Internal.php:67
+#: lib/MUTicket/Util/Base/Internal.php:70
 msgid "Changing of labels for a ticket"
 msgstr "Änderung der Labels für ein Ticket"
 
-#: lib/MUTicket/Util/Base/Internal.php:70
-msgid "A ticket was moved to you as supporter."
-msgstr "Ein Ticket wurde an Dich als Supporter weiter gereicht."
+#: lib/MUTicket/Util/Base/Internal.php:73
+msgid "Date we try to give you a feedback"
+msgstr "Datum bis zu dem wir versuchen Ihnen eine Antwort zu geben"
 
-#: lib/MUTicket/Util/Base/Internal.php:74
+#: lib/MUTicket/Util/Base/Internal.php:79
 msgid "To a ticket was set another current state."
 msgstr "Für ein Ticket wurde ein anderer aktueller Status gesetzt."
 
-#: lib/MUTicket/Util/Base/Internal.php:78
+#: lib/MUTicket/Util/Base/Internal.php:82
 msgid "To a ticket other labels were set."
 msgstr "Für ein Ticket wurden andere Labels gesetzt."
 
-#: lib/MUTicket/Util/Base/Internal.php:84
+#: lib/MUTicket/Util/Base/Internal.php:95
 msgid "Status of ticket"
 msgstr "Status des Tickets"
 
@@ -1154,7 +1166,7 @@ msgstr "Vorschau"
 #: templates/admin/ticket/display.tpl:8
 #: templates/admin/currentState/display.tpl:8
 #: templates/admin/supporter/display.tpl:8 templates/admin/label/display.tpl:8
-#: templates/admin/rating/display.tpl:8 templates/user/ticket/view.tpl:255
+#: templates/admin/rating/display.tpl:8 templates/user/ticket/view.tpl:246
 msgid "Details"
 msgstr "Details"
 
@@ -1184,7 +1196,7 @@ msgstr "Details"
 #: lib/MUTicket/Entity/CurrentState.php:111
 #: lib/MUTicket/Entity/Supporter.php:64 lib/MUTicket/Entity/Supporter.php:65
 #: lib/MUTicket/Entity/Supporter.php:108 lib/MUTicket/Entity/Supporter.php:109
-#: templates/user/ticket/view.tpl:258 templates/user/ticket/view.tpl:259
+#: templates/user/ticket/view.tpl:249 templates/user/ticket/view.tpl:250
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1197,7 +1209,7 @@ msgstr "Bearbeiten"
 #: lib/MUTicket/Entity/Base/Rating.php:612
 #: lib/MUTicket/Entity/Base/Rating.php:656
 #: lib/MUTicket/Entity/Base/Label.php:639
-#: lib/MUTicket/Entity/Base/Label.php:683 templates/user/ticket/view.tpl:261
+#: lib/MUTicket/Entity/Base/Label.php:683 templates/user/ticket/view.tpl:252
 msgid "Reuse for new item"
 msgstr "Für ein neues Element wieder benutzen"
 
@@ -1210,7 +1222,7 @@ msgstr "Für ein neues Element wieder benutzen"
 #: lib/MUTicket/Entity/Base/Rating.php:613
 #: lib/MUTicket/Entity/Base/Rating.php:657
 #: lib/MUTicket/Entity/Base/Label.php:640
-#: lib/MUTicket/Entity/Base/Label.php:684 templates/user/ticket/view.tpl:262
+#: lib/MUTicket/Entity/Base/Label.php:684 templates/user/ticket/view.tpl:253
 msgid "Reuse"
 msgstr "Wieder benutzen"
 
@@ -1494,7 +1506,7 @@ msgstr "Suche und wähle Supporter"
 #: templates/external/supporter/find.tpl:31
 #: templates/external/label/find.tpl:32 templates/external/rating/find.tpl:31
 msgid "Search and select current state"
-msgstr ""
+msgstr "Suche und wähle aktuellen Status"
 
 #: templates/external/ticket/find.tpl:32
 #: templates/external/currentState/find.tpl:32
@@ -1685,8 +1697,8 @@ msgstr "Workflow Status"
 #: templates/admin/currentState/edit.tpl:33
 #: templates/admin/currentState/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:81
-#: templates/user/ticket/view.tpl:76 templates/user/ticket/view.tpl:79
-#: templates/user/ticket/view.tpl:82 templates/user/ticket/edit.tpl:33
+#: templates/user/ticket/view.tpl:80 templates/user/ticket/view.tpl:83
+#: templates/user/ticket/view.tpl:86 templates/user/ticket/edit.tpl:33
 #: templates/user/ticket/view.csv:3
 #: templates/user/currentState/view_quickNav.tpl:33
 #: templates/user/currentState/view.tpl:41
@@ -1739,7 +1751,7 @@ msgstr "Dateien"
 #: templates/admin/supporter/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:86
 #: templates/user/ticket/view_quickNav.tpl:118
-#: templates/user/ticket/view.tpl:92 templates/user/ticket/view.tpl:96
+#: templates/user/ticket/view.tpl:96 templates/user/ticket/view.tpl:100
 #: templates/user/ticket/edit.tpl:96 templates/user/ticket/view.csv:3
 #: templates/user/supporter/display.tpl:14
 #: templates/user/supporter/view_quickNav.tpl:35
@@ -1771,7 +1783,7 @@ msgstr "Bewertet"
 #: templates/admin/ticket/edit.tpl:110 templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:68
 #: templates/user/ticket/view_quickNav.tpl:88
-#: templates/user/ticket/view.tpl:88 templates/user/ticket/view.csv:3
+#: templates/user/ticket/view.tpl:92 templates/user/ticket/view.csv:3
 msgid "Owner"
 msgstr "Besitzer"
 
@@ -1781,7 +1793,7 @@ msgstr "Besitzer"
 #: templates/admin/ticket/view_quickNav.tpl:89
 #: templates/admin/ticket/edit.tpl:119 templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:89
-#: templates/user/ticket/view.tpl:106 templates/user/ticket/edit.tpl:106
+#: templates/user/ticket/view.tpl:110 templates/user/ticket/edit.tpl:106
 #: templates/user/ticket/view.csv:3
 #, fuzzy
 msgid "Due date"
@@ -2021,19 +2033,16 @@ msgid "Upload icon"
 msgstr "Icon"
 
 #: templates/external/currentState/select.tpl:4
-#, fuzzy
 msgid "Current state information"
-msgstr "Information der erweiteren information"
+msgstr "Aktuellen Stati Information"
 
 #: templates/external/supporter/find.tpl:48
-#, fuzzy
 msgid "Link to the supporter"
-msgstr "Link zur Nachricht"
+msgstr "Link zum Supporter"
 
 #: templates/external/supporter/find.tpl:49
-#, fuzzy
 msgid "ID of supporter"
-msgstr "Supporter erstellen"
+msgstr "ID des Supporters"
 
 #: templates/external/supporter/find.tpl:55
 #: templates/external/supporter/select.tpl:14
@@ -2066,22 +2075,19 @@ msgid "Supportcats"
 msgstr "Supporter Kategorien"
 
 #: templates/external/supporter/select.tpl:4
-#, fuzzy
 msgid "Supporter information"
-msgstr "Nachrichteninformation"
+msgstr "Supporterinformation"
 
 #: templates/external/label/find.tpl:48
-#, fuzzy
 msgid "Link to the label"
-msgstr "Link zur Nachricht"
+msgstr "Link zum Label"
 
 #: templates/external/label/find.tpl:49
-#, fuzzy
 msgid "ID of label"
-msgstr "Parent_id"
+msgstr "ID des Labels"
 
 #: templates/external/label/find.tpl:55 templates/external/label/select.tpl:14
-#: templates/admin/label/display.tpl:4 templates/user/ticket/view.tpl:101
+#: templates/admin/label/display.tpl:4 templates/user/ticket/view.tpl:105
 #: templates/user/label/display.tpl:4
 msgid "Label"
 msgstr "Label"
@@ -2092,7 +2098,6 @@ msgstr "Label"
 #: templates/admin/label/view.csv:3 templates/user/label/view_quickNav.tpl:33
 #: templates/user/label/view.tpl:40 templates/user/label/edit.tpl:28
 #: templates/user/label/view.csv:3
-#, fuzzy
 msgid "Name"
 msgstr "Name"
 
@@ -2107,9 +2112,8 @@ msgid "Label color"
 msgstr "Labelfarbe"
 
 #: templates/external/label/select.tpl:4
-#, fuzzy
 msgid "Label information"
-msgstr "Nachrichteninformation"
+msgstr "Labelinformation"
 
 #: templates/external/rating/find.tpl:48
 #, fuzzy
@@ -2117,9 +2121,8 @@ msgid "Link to the rating"
 msgstr "Link zur Nachricht"
 
 #: templates/external/rating/find.tpl:49
-#, fuzzy
 msgid "ID of rating"
-msgstr "Bewertungen erlaubt?"
+msgstr "ID der Bewertung"
 
 #: templates/external/rating/find.tpl:55
 #: templates/external/rating/select.tpl:14
@@ -2141,9 +2144,8 @@ msgid "Ratingvalue"
 msgstr "Wert der Bewertung"
 
 #: templates/external/rating/select.tpl:4
-#, fuzzy
 msgid "Rating information"
-msgstr "Nachrichteninformation"
+msgstr "Bewertungsinformation"
 
 #: templates/admin/config.tpl:4 templates/admin/config.tpl:7
 msgid "Settings"
@@ -2180,7 +2182,7 @@ msgstr "102400 = 100 KB."
 
 #: templates/admin/config.tpl:34
 msgid "Supporter group may create tickets?"
-msgstr ""
+msgstr "Darf die Supportergruppe Tickets erstellen?"
 
 #: templates/admin/config.tpl:35
 msgid "Activate or deactivate this option."
@@ -2194,33 +2196,32 @@ msgstr "Möchten Sie sämtliche Supporter löschen?"
 msgid "Delete existing supporters?"
 msgstr "Vorhandene Supporter löschen?"
 
-#: templates/admin/config.tpl:47
-msgid "Update configuration"
-msgstr "Konfiguration aktualisieren"
-
-#: templates/admin/config.tpl:52 templates/admin/config.tpl:55
+#: templates/admin/config.tpl:47 templates/admin/config.tpl:50
 msgid "Extended"
 msgstr "Erweitert"
 
-#: templates/admin/config.tpl:58
-#, fuzzy
+#: templates/admin/config.tpl:53
 msgid "Message new owner"
-msgstr "Du hast eine neue private Nachricht"
+msgstr "Nachricht neuer Benutzer"
 
-#: templates/admin/config.tpl:59
+#: templates/admin/config.tpl:54
 #, fuzzy
 msgid "Enter the message new owner."
 msgstr "Du hast eine neue private Nachricht"
 
-#: templates/admin/config.tpl:62
+#: templates/admin/config.tpl:57
 #, fuzzy
 msgid "Message due date"
 msgstr "Bitte gib das Startdatum der Nachricht ein"
 
-#: templates/admin/config.tpl:63
+#: templates/admin/config.tpl:58
 #, fuzzy
 msgid "Enter the message due date."
 msgstr "Bitte gib das Startdatum der Nachricht ein"
+
+#: templates/admin/config.tpl:65
+msgid "Update configuration"
+msgstr "Konfiguration aktualisieren"
 
 #: templates/admin/include_standardfields_edit.tpl:4
 #: templates/admin/include_standardfields_edit.tpl:9
@@ -2264,7 +2265,7 @@ msgstr "Aktualisert am %s"
 #: templates/admin/supporter/view.tpl:38 templates/admin/label/display.tpl:9
 #: templates/admin/label/view.tpl:59 templates/admin/label/view.tpl:83
 #: templates/admin/rating/display.tpl:9 templates/admin/rating/view.tpl:51
-#: templates/admin/rating/view.tpl:69 templates/user/ticket/view.tpl:109
+#: templates/admin/rating/view.tpl:69 templates/user/ticket/view.tpl:113
 #: templates/user/currentState/display.tpl:8
 #: templates/user/currentState/view.tpl:49
 #: templates/user/currentState/view.tpl:78
@@ -2278,7 +2279,7 @@ msgstr "Aktionen"
 
 #: templates/admin/ticket/display.tpl:24 templates/admin/ticket/edit.tpl:12
 #: templates/admin/label/display.tpl:23 templates/user/ticket/display.tpl:70
-#: templates/user/ticket/view.tpl:31 templates/user/ticket/edit.tpl:11
+#: templates/user/ticket/view.tpl:35 templates/user/ticket/edit.tpl:11
 #: templates/user/label/display.tpl:21
 msgid "Create ticket"
 msgstr "Ticket anlegen"
@@ -2372,9 +2373,8 @@ msgstr "Ein Feed, der eine Liste der Tickets anzeigt"
 #: templates/admin/ticket/include_selectEditOne.tpl:17
 #: templates/user/ticket/include_selectOne.tpl:17
 #: templates/user/ticket/include_selectEditOne.tpl:17
-#, fuzzy
 msgid "Choose ticket"
-msgstr "Ticket schliessen"
+msgstr "Ticket wählen"
 
 #: templates/admin/ticket/include_selectOne.tpl:18
 #: templates/admin/ticket/include_selectOne.tpl:24
@@ -2384,9 +2384,8 @@ msgstr "Ticket schliessen"
 #: templates/user/ticket/include_selectOne.tpl:24
 #: templates/user/ticket/include_selectEditOne.tpl:18
 #: templates/user/ticket/include_selectEditOne.tpl:24
-#, fuzzy
 msgid "Choose the ticket"
-msgstr "Ticket schliessen"
+msgstr "Wähle das Ticket"
 
 #: templates/admin/ticket/view_quickNav.tpl:6
 #: templates/admin/currentState/view_quickNav.tpl:6
@@ -2398,7 +2397,6 @@ msgstr "Ticket schliessen"
 #: templates/user/supporter/view_quickNav.tpl:6
 #: templates/user/label/view_quickNav.tpl:6
 #: templates/user/rating/view_quickNav.tpl:6
-#, fuzzy
 msgid "Quick navigation"
 msgstr "Schnellnavigation"
 
@@ -2412,7 +2410,6 @@ msgstr "Schnellnavigation"
 #: templates/user/supporter/view_quickNav.tpl:24
 #: templates/user/label/view_quickNav.tpl:24
 #: templates/user/rating/view_quickNav.tpl:35
-#, fuzzy
 msgid "Search"
 msgstr "Suchen"
 
@@ -2450,12 +2447,12 @@ msgstr "Alle Einträge anzeigen"
 msgid "Created Date"
 msgstr "Erstelldatum"
 
-#: templates/admin/ticket/view.tpl:47 templates/user/ticket/view.tpl:92
+#: templates/admin/ticket/view.tpl:47 templates/user/ticket/view.tpl:96
 msgid "Open"
 msgstr "Offen"
 
 #: templates/admin/ticket/view.tpl:113 templates/admin/ticket/rating.tpl:124
-#: templates/user/ticket/view.tpl:275
+#: templates/user/ticket/view.tpl:266
 #: templates/mailz/itemlist_Ticket_text.tpl:7
 #: templates/mailz/itemlist_Ticket_html.tpl:10
 msgid "No tickets found."
@@ -2467,7 +2464,6 @@ msgid "Edit ticket"
 msgstr "Ticket aktualisieren"
 
 #: templates/admin/ticket/edit.tpl:31
-#, fuzzy
 msgid "Fields"
 msgstr "Felder"
 
@@ -2480,19 +2476,16 @@ msgid "Content"
 msgstr "Inhalt"
 
 #: templates/admin/ticket/edit.tpl:41 templates/user/ticket/edit.tpl:34
-#, fuzzy
 msgid "Enter the title of the ticket"
 msgstr "Geben Sie den Titel des Tickets ein"
 
 #: templates/admin/ticket/edit.tpl:45 templates/user/ticket/edit.tpl:40
-#, fuzzy
 msgid "Enter the text of the ticket"
 msgstr "Geben Sie den Text des Tickets ein"
 
 #: templates/admin/ticket/edit.tpl:51 templates/admin/ticket/edit.tpl:77
 #: templates/admin/currentState/edit.tpl:46 templates/user/ticket/edit.tpl:46
 #: templates/user/ticket/edit.tpl:72 templates/user/currentState/edit.tpl:41
-#, fuzzy
 msgid "Reset to empty value"
 msgstr "Zu leerem Wert zurück setzen"
 
@@ -2536,10 +2529,12 @@ msgid ""
 "If you want to give this ticket to another supporter you should have a look "
 "if he is present!"
 msgstr ""
+"Wenn Du dieses Ticket einem anderen Supporter übergeben möchtest, solltest "
+"du schauen, ob er präsent ist!"
 
 #: templates/admin/ticket/edit.tpl:111
 msgid "Enter a part of the user name to search"
-msgstr ""
+msgstr "Gib einen Teil des Benutzernamens für die Suche ein"
 
 #: templates/admin/ticket/edit.tpl:114
 #, fuzzy
@@ -2575,16 +2570,15 @@ msgstr "Gib den Robots Text für den Metatag ein"
 #: templates/user/currentState/include_selectOne.tpl:24
 #, fuzzy
 msgid "Choose the current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/ticket/edit.tpl:138 templates/admin/ticket/edit.tpl:159
-#, fuzzy
 msgid "Send Message?"
-msgstr "Senden der Nachricht nicht möglich"
+msgstr "Nachricht senden?"
 
 #: templates/admin/ticket/edit.tpl:139 templates/admin/ticket/edit.tpl:160
 msgid "Choose if an email should be send"
-msgstr ""
+msgstr "Wähle, ob eine mail geschickt werden soll"
 
 #: templates/admin/ticket/edit.tpl:187
 #: templates/admin/currentState/edit.tpl:93
@@ -2609,7 +2603,6 @@ msgid "Really delete this ticket?"
 msgstr "Dieses Ticket wirklich löschen?"
 
 #: templates/admin/ticket/view.csv:6 templates/user/ticket/view.csv:6
-#, fuzzy
 msgid "Children"
 msgstr "Kinder"
 
@@ -2650,14 +2643,13 @@ msgstr "Anzahl der Antworten"
 
 #: templates/admin/ticket/rating.tpl:137
 msgid "The supporter created"
-msgstr "Dieser Supporter hat angelegt"
+msgstr "Dieser Supporter hat"
 
 #: templates/admin/ticket/rating.tpl:137
-#, fuzzy
 msgid "answer for customers"
 msgid_plural "answers for customers"
-msgstr[0] "Antworten für Kunden"
-msgstr[1] "Antworten für Kunden"
+msgstr[0] "Antwort für Kunden angelegt"
+msgstr[1] "Antworten für Kunden angelegt"
 
 #: templates/admin/ticket/rating.tpl:139
 msgid "Number of rated answers"
@@ -2668,9 +2660,8 @@ msgid "Customers rated"
 msgstr "Kunden bewerteten"
 
 #: templates/admin/ticket/rating.tpl:140
-#, fuzzy
 msgid "answer of this supporter"
-msgstr "Antworten dieses Supporters"
+msgstr "Antwort dieses Supporters"
 
 #: templates/admin/ticket/rating.tpl:141
 msgid "That are "
@@ -2681,7 +2672,6 @@ msgid "%"
 msgstr "%"
 
 #: templates/admin/ticket/rating.tpl:141
-#, fuzzy
 msgid "of the total answers"
 msgstr "der kompletten Antworten"
 
@@ -2691,25 +2681,23 @@ msgstr "Durchschnitt der Kundenbewertungen für diesen Supporter"
 
 #: templates/admin/ticket/rating.tpl:145
 msgid "Customers have given"
-msgstr "Kunden haben gegeben"
+msgstr "Kunden haben"
 
 #: templates/admin/ticket/rating.tpl:145
-#, fuzzy
 msgid "point by rating the answers of this supporter"
 msgid_plural "points by rating the answers of this supporter"
-msgstr[0] "Punkte beim Bewerten dieses Supporters"
-msgstr[1] "Punkte beim Bewerten dieses Supporters"
+msgstr[0] "Punkt beim Bewerten dieses Supporters gegeben"
+msgstr[1] "Punkte beim Bewerten dieses Supporters gegeben"
 
 #: templates/admin/ticket/rating.tpl:146
 msgid "That is an average of "
 msgstr "Das ist ein Durchschnitt von "
 
 #: templates/admin/ticket/rating.tpl:146
-#, fuzzy
 msgid "point for the rating of customers"
 msgid_plural "points for the rating of customers"
-msgstr[0] "Punkte für die Bewertungen der Kunden"
-msgstr[1] "Punkte für die Bewertungen der Kunden"
+msgstr[0] "Punkt für die Bewertungen der Kunden"
+msgstr[1] "Punkten für die Bewertungen der Kunden"
 
 #: templates/admin/currentState/view.rss:11
 #: templates/admin/currentState/view.atom:4
@@ -2717,7 +2705,7 @@ msgstr[1] "Punkte für die Bewertungen der Kunden"
 #: templates/user/currentState/view.atom:4
 #, fuzzy
 msgid "Latest current states"
-msgstr "MUStatements Elemente anzeigen"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/currentState/view.rss:12
 #: templates/admin/currentState/view.atom:5
@@ -2731,7 +2719,7 @@ msgstr "Ein direkter Feed, der eine Liste der Bewertungen anzeigt"
 #: templates/user/currentState/include_selectOne.tpl:17
 #, fuzzy
 msgid "Choose current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/currentState/view.tpl:12
 #: templates/admin/currentState/edit.tpl:10
@@ -2739,7 +2727,7 @@ msgstr "Geben Sie den Status des Tickets ein"
 #: templates/user/currentState/edit.tpl:9
 #, fuzzy
 msgid "Create current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/currentState/view.tpl:70 templates/admin/label/view.tpl:70
 #: templates/admin/rating/view.tpl:62 templates/user/currentState/view.tpl:57
@@ -2774,19 +2762,19 @@ msgstr "Wähle eine Aktion"
 #: templates/user/currentState/edit.tpl:11
 #, fuzzy
 msgid "Edit current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/currentState/edit.tpl:34
 #: templates/user/currentState/edit.tpl:29
 #, fuzzy
 msgid "Enter the title of the current state"
-msgstr "Gib den Robots Text für den Metatag ein"
+msgstr "Erledigt! Aktueller Status erstellt."
 
 #: templates/admin/currentState/edit.tpl:40
 #: templates/user/currentState/edit.tpl:35
 #, fuzzy
 msgid "Enter the description of the current state"
-msgstr "Wählen Sie den Wert der Bewertung"
+msgstr "Erledigt! Aktueller Status erstellt."
 
 #: templates/admin/currentState/edit.tpl:49
 #: templates/user/currentState/edit.tpl:44
@@ -2809,7 +2797,7 @@ msgstr "Diese erweiterten Informationen wirklich löschen?"
 #: templates/user/currentState/delete.tpl:4
 #, fuzzy
 msgid "Delete current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
 #: templates/admin/currentState/delete.tpl:11
 #: templates/user/currentState/delete.tpl:9
@@ -2894,7 +2882,7 @@ msgstr "Möchten Sie diesen Supporter wirklich löschen?"
 #: templates/user/label/view.rss:11 templates/user/label/view.atom:4
 #, fuzzy
 msgid "Latest labels"
-msgstr "Letzte Alben"
+msgstr "Wähle die Labels"
 
 #: templates/admin/label/view.rss:12 templates/admin/label/view.atom:5
 #: templates/user/label/view.rss:12 templates/user/label/view.atom:5
@@ -2920,9 +2908,8 @@ msgstr "Mit gewählter Nachricht"
 
 #: templates/admin/label/edit.tpl:7 templates/admin/label/edit.tpl:13
 #: templates/user/label/edit.tpl:7 templates/user/label/edit.tpl:11
-#, fuzzy
 msgid "Edit label"
-msgstr "Album bearbeiten"
+msgstr "Label bearbeiten"
 
 #: templates/admin/label/edit.tpl:34 templates/user/label/edit.tpl:29
 #, fuzzy
@@ -2932,11 +2919,11 @@ msgstr "Gib deb Namen des Rangs ein"
 #: templates/admin/label/edit.tpl:40 templates/user/label/edit.tpl:35
 #, fuzzy
 msgid "Choose the label color of the label"
-msgstr "Wähle den Adressaten"
+msgstr "Erledigt! Label erstellt."
 
 #: templates/admin/label/edit.tpl:48
 msgid "Choose the font color of the label"
-msgstr ""
+msgstr "Wähle die Schriftfarbe für das Label"
 
 #: templates/admin/label/edit.tpl:91 templates/user/label/edit.tpl:78
 #, fuzzy
@@ -2956,7 +2943,7 @@ msgstr "Möchtest du dieses Album wirklich löschen?"
 #: templates/user/label/include_selectEditMany.tpl:17
 #, fuzzy
 msgid "Choose labels"
-msgstr "Wähle eine Aktion"
+msgstr "Wähle die Labels"
 
 #: templates/admin/label/include_selectEditMany.tpl:18
 #: templates/admin/label/include_selectEditMany.tpl:24
@@ -3139,58 +3126,58 @@ msgstr "Keins gesetzt."
 msgid "RATE NOW THIS SUPPORT ANSWER!"
 msgstr "BEWERTEN SIE JETZT DIESE SUPPORTANTWORT!"
 
-#: templates/user/ticket/view.tpl:11
+#: templates/user/ticket/view.tpl:15
 msgid "Sorry. At the moment our support is not available!"
 msgstr "Entschuldigung! Derzeit ist unser Support nicht erreichbar!"
 
-#: templates/user/ticket/view.tpl:16
+#: templates/user/ticket/view.tpl:20
 msgid "Open Tickets Overview"
 msgstr "Übersicht der offenen Tickets"
 
-#: templates/user/ticket/view.tpl:19
+#: templates/user/ticket/view.tpl:23
 msgid "Closed Tickets Overview"
 msgstr "Übersicht der geschlossenen Tickets"
 
-#: templates/user/ticket/view.tpl:22
+#: templates/user/ticket/view.tpl:26
 msgid "Ticket Overview"
 msgstr "Ticket Übersicht"
 
-#: templates/user/ticket/view.tpl:63 templates/user/ticket/view.tpl:66
-#: templates/user/ticket/view.tpl:69
+#: templates/user/ticket/view.tpl:67 templates/user/ticket/view.tpl:70
+#: templates/user/ticket/view.tpl:73
 msgid "Created"
 msgstr "Erstellt"
 
-#: templates/user/ticket/view.tpl:129 templates/user/ticket/view.tpl:160
-#: templates/user/ticket/view.tpl:190 templates/user/ticket/view.tpl:222
+#: templates/user/ticket/view.tpl:133 templates/user/ticket/view.tpl:164
+#: templates/user/ticket/view.tpl:194 templates/user/ticket/view.tpl:226
 msgid "Not set"
 msgstr "Nicht gesetzt."
 
-#: templates/user/ticket/view.tpl:134
+#: templates/user/ticket/view.tpl:138
 msgid "Set owner"
 msgstr "Setze Benutzer"
 
-#: templates/user/ticket/view.tpl:140 templates/user/ticket/view.tpl:173
-#: templates/user/ticket/view.tpl:202
+#: templates/user/ticket/view.tpl:144 templates/user/ticket/view.tpl:177
+#: templates/user/ticket/view.tpl:206 templates/user/ticket/view.tpl:236
 msgid "Send message?"
 msgstr "Nachricht senden?"
 
-#: templates/user/ticket/view.tpl:167
+#: templates/user/ticket/view.tpl:171
 #, fuzzy
 msgid "Set current state"
-msgstr "Geben Sie den Status des Tickets ein"
+msgstr "Liste aller aktuellen Stati"
 
-#: templates/user/ticket/view.tpl:196
+#: templates/user/ticket/view.tpl:200
 msgid "Set label"
 msgstr "Setze Label"
 
-#: templates/user/ticket/view.tpl:228
+#: templates/user/ticket/view.tpl:232
 #, fuzzy
 msgid "Enter duedate!"
 msgstr "Gib den Folder ein"
 
-#: templates/user/ticket/view.tpl:230
+#: templates/user/ticket/view.tpl:234
 msgid "Enter a text like end of october!"
-msgstr ""
+msgstr "Gib einen Text wie Ende Oktober ein!"
 
 #: templates/user/ticket/edit.tpl:13
 msgid "Answer to ticket"
@@ -3201,6 +3188,8 @@ msgid ""
 "If you do not want to give a concrete date, you can enter a string like "
 "\"end of november 2013\"."
 msgstr ""
+"Wenn Du kein konkretes Datum eingeben möchtest, kannst Du einen Text wie "
+"\"Ende November 2013\" eingeben."
 
 #: templates/user/supporter/edit.tpl:29
 msgid "Enter the username of the supporter"
@@ -3225,6 +3214,9 @@ msgid ""
 msgstr ""
 "Wenn Du dies änderst speichere bitte den Block erneut um die Parameter "
 "unterhalb wieder zu laden."
+
+#~ msgid "A ticket was moved to you as supporter."
+#~ msgstr "Ein Ticket wurde an Dich als Supporter weiter gereicht."
 
 #~ msgid ""
 #~ "The upload folder \"%s\" does not exist. Please create it before "

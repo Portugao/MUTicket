@@ -135,16 +135,16 @@
 <div id="statistic_tickets">
 <div id="statistic_tickets_left">
 <div id="ticketsnumber"><h3>{gt text='Number of answers'}</h3>
-{gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answers for customers'}</div>
+{gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answer for customers' plural='answers for customers' tag1=$counttickets count=$counttickets}</div>
 
 <div id="ticketsrated"><h3>{gt text='Number of rated answers'}</h3>
-{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answers of this supporter'}<br />
-{gt text='That are '} <span>{$percent}{gt text='%'}</span>{gt text=' of the total answers'}</div>
+{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answer of this supporter' plural ='answers of this supporter' tag1=$objectcount count=$objectcount}<br />
+{gt text='That are '} <span>{$percent}{gt text='%'}</span> {gt text='of the total answers'}</div>
 </div>
 <div id="statistic_tickets_right">
 <div id="ticketpercent"><h3>{gt text='Average of the customer rating for this supporter'}</h3>
-{gt text='Customers have given'} <span>{$total}</span> {gt text='points by rating the answers of this supporter'}<br />
-{gt text='That is an average of '} <span>{$average}</span> {gt text='points for the rating of customers'}</div></div> 
+{gt text='Customers have given'} <span>{$total}</span> {gt text='point by rating the answers of this supporter' plural='points by rating the answers of this supporter' tag1=$total count=$total}<br />
+{gt text='That is an average of '} <span>{$average}</span> {gt text='point for the rating of customers' plural='points for the rating of customers' tag1=$average count=$average}</div></div> 
 </div>
 
         <script type="text/javascript" charset="utf-8">

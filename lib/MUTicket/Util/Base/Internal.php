@@ -66,22 +66,33 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         if ($kind == 'label') {
             $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
         }
+        if ($kind == 'label') {
+            $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
+        }
+        if ($kind == 'dueDate') {
+            $messagecontent['subject'] = $from . ' - ' . $handler->__('Date we try to give you a feedback');
+        }
         if ($kind == 'supporter') {
-            $messagecontent['body'] = $handler->__('A ticket was moved to you as supporter.') . '<br />';
-            $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');
+            $messagecontent['body'] = ModUtil::getVar('MUTicket', 'messageNewOwner') . '<br />';
         }
         if ($kind == 'currentState') {
             $messagecontent['body'] = $handler->__('To a ticket was set another current state.') . '<br />';
-            $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');
         }
         if ($kind == 'label') {
-            $messagecontent['body'] = $handler->__('To a ticket other labels were set.') . '<br />';
-            $messagecontent['body'] .= ModUtil::getVar('MUTicket', 'messageNewOwner');            
+            $messagecontent['body'] = $handler->__('To a ticket other labels were set.') . '<br />';           
+        }
+        if ($kind == 'dueDate') {
+            if ($ticket['dueText']) {
+                $datetext = $ticket['dueText'];
+            } else {
+                $datetext = DateUtil::formatDatetime($ticket['dueDate'], 'datebrief');
+            }
+            $messagecontent['body'] = ModUtil::getVar('MUTicket', 'messageDueDate') . ': ' . $datetext .'<br />';
         }
         
-        $messagecontent['body'] .= '<h2><br />' . $handler->__('Title of ticket')  . ': ' . $ticket['title'] . '</h2>';
+        $messagecontent['body'] .= '<h2>' . $handler->__('Title of ticket')  . ': ' . $ticket['title'] . '</h2>';
         $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
-        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />< br/>';
+        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />' . '<br />';
 
         $messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
         $messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';

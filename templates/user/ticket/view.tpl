@@ -140,7 +140,7 @@
             <label for='ownermessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='ownermessage' value='1' /><br />
             <input type='hidden' name='actualsupporter' value={$data.text} />
-            <input type='submit' value='Submit' />
+            <input type='submit' value={gt text='Submit'} />
         </form>
         </div>
         </div>
@@ -172,8 +172,8 @@
             </select><br />
             <label for='statemessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='statemessage' value='1' /><br />
-            <input type='hidden' name='actualsupporter' value={$data.id} />
-            <input type='submit' value='Submit' />
+            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='submit' value={gt text='Submit'} />
         </form>   
         </div> 
         </div>        
@@ -184,7 +184,7 @@
         <div class="muticket_ticket_label_change">
         <span class="muticket_label_edit_button">&nbsp;</span>
             <div class="muticket_label">     
-            {if isset($ticket.labelticket) && count($ticket.labelticket > 0)}
+            {if isset($ticket.labelticket) && count($ticket.labelticket != null)}
             {include file='user/label/include_displayItemListManyIcons.tpl' items=$ticket.labelticket}
             {else}
             {gt text='Not set'}
@@ -202,7 +202,7 @@
             <label for='ownermessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='ownermessage' value='1' /><br />
             <input type='hidden' name='actualsupporter' value={$data.text} />
-            <input type='submit' value='Submit' />
+            <input type='submit' value={gt text='Submit'} />
         </form>
         </div> 
         </div>       
@@ -226,29 +226,16 @@
         <div class="muticket_duedate_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeDueDate' ticket=$ticket.id}" method="post">
             <label for='duedate'>{gt text='Enter duedate!'}</label>
-            <input id='duedate' name='duedate' type='text' value='{if $ticket.dueDate > $ticket.createdDate}{$ticket.dueDate}{else}{/if}'></input><img id="dueDate_img" class="clickable" alt="Datum auswählen" style="vertical-align: middle" src="http://zik135.webdesign-in-bremen.com/javascript/jscalendar/img.gif"><br />
+            <input id='datepicker' name='duedate' type='text' value='{if $ticket.dueDate > $ticket.createdDate}{$ticket.dueDate|dateformat:datebrief}{else}{/if}'></input><br />
             <label for='duetext'>{gt text='Enter a text like end of october!'}</label>
-            <input id='duetext'  name='duetext' type='text' value={$ticket.dueText}></input><br />
-            <input type='submit' value='Submit' />
+            <input id='duetext'  name='duetext' type='text' value='{$ticket.dueText}'></input><br />
+            <label for='duedatemessage'>{gt text='Send message?'}</label>
+            <input type='checkbox' name='duedatemessage' value='1' /><br />
+            <input type='submit' value={gt text='Submit'} />
         </form> 
         </div>
         </div>       
         </td>
-        <script type="text/javascript">
-        <![CDATA[ 
-        Calendar.setup(
-        {
-        inputField : "duedate",
-        ifFormat : "%Y-%m-%d %H:%M",
-        showsTime : true,
-        timeFormat : "24",
-        singleClick : false,
-        button : "dueDate_img",
-        firstDay: 1
-        }
-        );
-        ]]> 
-        </script>
         {/if}    
         <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
@@ -357,6 +344,10 @@
              );
          
         });
+        
+         MU(function() {
+             MU( "#datepicker" ).datepicker();
+         });
 
         
         function tooltip(obj) {

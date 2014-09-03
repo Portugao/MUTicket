@@ -929,7 +929,7 @@ msgstr "Änderung des Supporters für ein Ticket"
 
 #: lib/MUTicket/Util/Base/Internal.php:64
 msgid "Changing of current state for a ticket"
-msgstr "Änderung eines aktullen Status für ein Ticket"
+msgstr "Änderung eines aktuellen Status für ein Ticket"
 
 #: lib/MUTicket/Util/Base/Internal.php:67
 #: lib/MUTicket/Util/Base/Internal.php:70
@@ -3154,7 +3154,7 @@ msgstr "Nicht gesetzt."
 
 #: templates/user/ticket/view.tpl:138
 msgid "Set owner"
-msgstr "Setze Benutzer"
+msgstr "Setze Besitzer"
 
 #: templates/user/ticket/view.tpl:144 templates/user/ticket/view.tpl:177
 #: templates/user/ticket/view.tpl:206 templates/user/ticket/view.tpl:236
@@ -3162,9 +3162,8 @@ msgid "Send message?"
 msgstr "Nachricht senden?"
 
 #: templates/user/ticket/view.tpl:171
-#, fuzzy
 msgid "Set current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Setze aktuellen Status"
 
 #: templates/user/ticket/view.tpl:200
 msgid "Set label"
@@ -3196,7 +3195,6 @@ msgid "Enter the username of the supporter"
 msgstr "Geben Sie den Benutzernamen des Supporters an"
 
 #: templates/user/supporter/edit.tpl:35
-#, fuzzy
 msgid "Enter the supportcats of the supporter"
 msgstr "Geben Sie die Kategorien für diesen Supporter ein"
 

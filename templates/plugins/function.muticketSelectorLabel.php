@@ -24,7 +24,6 @@
  */
 function smarty_function_muticketSelectorLabel($params, $view)
 {
-    $args = array('ot' => 'label');
     $ticketId = $params['ticket'];
     // we get ticket repository
     $repository = MUTicket_Util_Model::getTicketRepository();
@@ -41,6 +40,9 @@ function smarty_function_muticketSelectorLabel($params, $view)
             
         }
     }
+    
+    $args = array('ot' => 'label', 'orderBy' => 'name ASC');
+    
     $labels = ModUtil::apiFunc('MUTicket', 'selection', 'getEntities' , $args);
 
     $result = array();

@@ -130,7 +130,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
                 $toaddress = MUTicket_Util_Model::getSupporterMails($ticketcategory2);
             } else {
                 $ownerid = $entity['owner'];
-                $toadress = UserUtil::getVar('email', $ownerid);
+                $toaddress = UserUtil::getVar('email', $ownerid);
             }
         }
         // get mail of parent ticket creater

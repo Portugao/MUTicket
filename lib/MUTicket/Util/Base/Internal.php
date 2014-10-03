@@ -55,7 +55,7 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         $messagecontent = array();
         $messagecontent['from'] = $from;
         $messagecontent['fromaddress'] = $fromaddress;
-        /*$messagecontent['toname'] = 'Webmaster';*/
+
         $messagecontent['toaddress'] = $email;
         if ($kind == 'supporter') {
             $messagecontent['subject'] = $handler->__('Changing of supporter for a ticket');

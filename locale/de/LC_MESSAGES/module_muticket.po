@@ -832,7 +832,7 @@ msgstr ""
 msgid ""
 "Hi supporter, here you get this ticket to work for the customer by yourself."
 msgstr ""
-"Hallo Supporter, hier erhälst Du dieses Ticket, damit es für den Kunden "
+"Hallo Supporter, hier erhälst Du dieses Ticket, damit Du es für den Kunden "
 "bearbeitest."
 
 #: lib/MUTicket/Installer.php:31
@@ -2205,9 +2205,8 @@ msgid "Message new owner"
 msgstr "Nachricht neuer Benutzer"
 
 #: templates/admin/config.tpl:54
-#, fuzzy
 msgid "Enter the message new owner."
-msgstr "Du hast eine neue private Nachricht"
+msgstr "Gib die Nachricht für einen neuen Benutzer ein."
 
 #: templates/admin/config.tpl:57
 #, fuzzy
@@ -2542,9 +2541,8 @@ msgid "Switch to the user administration"
 msgstr "Wechsel zum Administrationsbereich."
 
 #: templates/admin/ticket/edit.tpl:114
-#, fuzzy
 msgid "Manage user"
-msgstr "Benutzerkommentar"
+msgstr "benutzer managen"
 
 #: templates/admin/ticket/edit.tpl:121 templates/admin/ticket/edit.tpl:123
 #: templates/user/ticket/edit.tpl:108 templates/user/ticket/edit.tpl:110
@@ -2717,9 +2715,8 @@ msgstr "Ein direkter Feed, der eine Liste der Bewertungen anzeigt"
 
 #: templates/admin/currentState/include_selectOne.tpl:17
 #: templates/user/currentState/include_selectOne.tpl:17
-#, fuzzy
 msgid "Choose current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Wähle aktuellen Status"
 
 #: templates/admin/currentState/view.tpl:12
 #: templates/admin/currentState/edit.tpl:10
@@ -2760,9 +2757,8 @@ msgstr "Wähle eine Aktion"
 #: templates/admin/currentState/edit.tpl:13
 #: templates/user/currentState/edit.tpl:7
 #: templates/user/currentState/edit.tpl:11
-#, fuzzy
 msgid "Edit current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Aktuellen Stati bearbeiten"
 
 #: templates/admin/currentState/edit.tpl:34
 #: templates/user/currentState/edit.tpl:29
@@ -2897,14 +2893,12 @@ msgstr "Schriftfarbe"
 #: templates/admin/label/view.tpl:96 templates/user/label/view.tpl:76
 #: templates/mailz/itemlist_label_html.tpl:10
 #: templates/mailz/itemlist_label_text.tpl:7
-#, fuzzy
 msgid "No labels found."
-msgstr "Keine Alben gefunden"
+msgstr "Keine Labels gefunden"
 
 #: templates/admin/label/view.tpl:108
-#, fuzzy
 msgid "With selected labels"
-msgstr "Mit gewählter Nachricht"
+msgstr "Gewählter Labels"
 
 #: templates/admin/label/edit.tpl:7 templates/admin/label/edit.tpl:13
 #: templates/user/label/edit.tpl:7 templates/user/label/edit.tpl:11
@@ -2912,9 +2906,8 @@ msgid "Edit label"
 msgstr "Label bearbeiten"
 
 #: templates/admin/label/edit.tpl:34 templates/user/label/edit.tpl:29
-#, fuzzy
 msgid "Enter the name of the label"
-msgstr "Gib deb Namen des Rangs ein"
+msgstr "Gib deb Namen des Labels ein"
 
 #: templates/admin/label/edit.tpl:40 templates/user/label/edit.tpl:35
 #, fuzzy
@@ -2926,24 +2919,21 @@ msgid "Choose the font color of the label"
 msgstr "Wähle die Schriftfarbe für das Label"
 
 #: templates/admin/label/edit.tpl:91 templates/user/label/edit.tpl:78
-#, fuzzy
 msgid "Really delete this label?"
-msgstr "Dieses Bild wirklich löschen?"
+msgstr "Dieses Label wirklich löschen?"
 
 #: templates/admin/label/delete.tpl:4 templates/user/label/delete.tpl:4
 msgid "Delete label"
 msgstr "Label löschen"
 
 #: templates/admin/label/delete.tpl:11 templates/user/label/delete.tpl:9
-#, fuzzy
 msgid "Do you really want to delete this label ?"
-msgstr "Möchtest du dieses Album wirklich löschen?"
+msgstr "Möchtest du dieses Label wirklich löschen?"
 
 #: templates/admin/label/include_selectEditMany.tpl:17
 #: templates/user/label/include_selectEditMany.tpl:17
-#, fuzzy
 msgid "Choose labels"
-msgstr "Wähle die Labels"
+msgstr "Label wählen"
 
 #: templates/admin/label/include_selectEditMany.tpl:18
 #: templates/admin/label/include_selectEditMany.tpl:24
@@ -3033,7 +3023,6 @@ msgstr "Objekt Typ"
 
 #: templates/contenttype/item_edit.tpl:8
 #: templates/contenttype/itemlist_edit.tpl:8
-#, fuzzy
 msgid ""
 "If you change this please save the element once to reload the parameters "
 "below."

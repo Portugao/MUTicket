@@ -145,9 +145,9 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 	public function postLoadCallback()
 	{
 		$request = new Zikula_Request_Http();
-		$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
-		$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
-		$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+		$type = $request->query->filter('type', 'admin', FILTER_SANITIZE_STRING);
+		$func = $request->query->filter('func', 'view', FILTER_SANITIZE_STRING);
+		$ot = $request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
 
 		if ($type == 'admin') {
 			if ($ot == 'supporter') {
@@ -174,9 +174,9 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 	public function prePersistCallback()
 	{
 		$request = new Zikula_Request_Http();
-		$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
-		$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
-		$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+		$type = $request->query->filter('type', 'admin', FILTER_SANITIZE_STRING);
+		$func = $request->query->filter('func', 'view', FILTER_SANITIZE_STRING);
+		$ot = $request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
 		 
 		if ($type == 'admin' && $func == 'edit' && $ot == 'supporter') {
 			$this->getSupportcats();
@@ -233,9 +233,10 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 	public function preUpdateCallback()
 	{
 		$request = new Zikula_Request_Http();
-		$type = $request->getGet()->filter('type', 'admin', FILTER_SANITIZE_STRING);
-		$func = $request->getGet()->filter('func', 'view', FILTER_SANITIZE_STRING);
-		$ot = $request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+		$type = $request->query->filter('type', 'admin', FILTER_SANITIZE_STRING);
+		$module = $request->query->filter('module', '', FILTER_SANITIZE_STRING);		
+		$func = $request->query->filter('func', 'view', FILTER_SANITIZE_STRING);
+		$ot = $request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
 		 
 		if ($type == 'admin' && $func == 'edit' && $ot == 'supporter') {
 			$this->getSupportcats();
@@ -243,6 +244,10 @@ class MUTicket_Entity_Supporter extends MUTicket_Entity_Base_Supporter
 			$cats = serialize($supportercats);
 			$this->setSupportcats($cats);
 		}
+		if ($type == 'admin') {
+		    $this->setWorkflowState('approved');
+		}
+		
 		$this->performPreUpdateCallback();
 	}
 

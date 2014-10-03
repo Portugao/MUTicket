@@ -183,9 +183,10 @@ div.muticket-view form.muticketQuickNavForm fieldset #num {
    background: #eee;
    position: relative;
    float: left;
-   width: 100%;
-  /* -moz-border-radius: 5px;*/
-   border: 1px solid #CCCCCC;	
+   width: 96%;
+   padding: 5px 2% 0;
+   -moz-border-radius: 5px;
+   border-bottom: 1px solid #CCCCCC;
 }
 
 .ticket_user_header_left {

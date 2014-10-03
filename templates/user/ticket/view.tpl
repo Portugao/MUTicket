@@ -131,7 +131,7 @@
         <div class="muticket_owner_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeSupporter' ticket=$ticket.id}" method="post">
             <select id="supporter" name="supporter">
-            <option>{gt text='Set owner'}</option>
+            <option value=''>{gt text='Set owner'}</option>
             {muticketSelectorSupporter assign='options'}
             {foreach item='data' from=$options}
             <option value={$data.text}>{$data.text}</option>
@@ -154,7 +154,7 @@
             <div class="muticket_ticket_state_change">
             <span class="muticket_ticket_edit_button">&nbsp;</span>
             <div class="muticket_currentstate">
-            {if $ticket.currentState ne NULL}
+            {if $ticket.currentState > 0}
             {$ticket.currentState|muticketGetCurrentStateDatas}
             {else}
             {gt text='Not set'}
@@ -164,7 +164,7 @@
         <div class="muticket_currentstate_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeCurrentState' ticket=$ticket.id}" method="post">
             <select id="currentState" name="currentState">
-            <option>{gt text='Set current state'}</option>
+            <option value='0'>{gt text='Set current state'}</option>
             {muticketSelectorCurrentState assign='States'}
             {foreach item='State' from=$States}
             <option value={$State.value}>{$State.text}</option>
@@ -184,7 +184,7 @@
         <div class="muticket_ticket_label_change">
         <span class="muticket_label_edit_button">&nbsp;</span>
             <div class="muticket_label">     
-            {if isset($ticket.labelticket) && count($ticket.labelticket != null)}
+            {if isset($ticket.labelticket) && count($ticket.labelticket) > 0}
             {include file='user/label/include_displayItemListManyIcons.tpl' items=$ticket.labelticket}
             {else}
             {gt text='Not set'}
@@ -226,7 +226,7 @@
         <div class="muticket_duedate_form">
         <form action="{modurl modname='MUTicket' type='ajax' func='changeDueDate' ticket=$ticket.id}" method="post">
             <label for='duedate'>{gt text='Enter duedate!'}</label>
-            <input id='datepicker' name='duedate' type='text' value='{if $ticket.dueDate > $ticket.createdDate}{$ticket.dueDate|dateformat:datebrief}{else}{/if}'></input><br />
+            <input class='datepicker' name='duedate' type='text' value='{if $ticket.dueDate > $ticket.createdDate}{$ticket.dueDate|dateformat:datebrief}{else}{/if}'></input><br />
             <label for='duetext'>{gt text='Enter a text like end of october!'}</label>
             <input id='duetext'  name='duetext' type='text' value='{$ticket.dueText}'></input><br />
             <label for='duedatemessage'>{gt text='Send message?'}</label>
@@ -346,7 +346,7 @@
         });
         
          MU(function() {
-             MU( "#datepicker" ).datepicker();
+             MU( ".datepicker" ).datepicker();
          });
 
         

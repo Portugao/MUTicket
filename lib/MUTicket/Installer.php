@@ -24,13 +24,15 @@ class MUTicket_Installer extends MUTicket_Base_Installer
     public function install()
     {
         parent::install();
-        
+
         $dom = ZLanguage::getModuleDomain('MUTicket');
 
         $this->setVar('messageNewOwner', __('Hi supporter, here you get this ticket to work for the customer by yourself.', $dom));
         $this->setVar('messageDueDate', __('Dear Customer! We assume that we are able to clear your ticket until the given date', $dom));
+
+        return true;
     }
-    
+
     /**
      * Upgrade the MUTicket application from an older version.
      *
@@ -44,25 +46,28 @@ class MUTicket_Installer extends MUTicket_Base_Installer
     {
 
         // Upgrade dependent on old version number
-        switch ($oldversion) {
+        switch ($oldVersion) {
             case '1.0.0':
+
+                $rating = $this->getVar('rating');
+                $this->setVar('ratingAllowed', $rating);
+                $this->delVar('rating');
+
+                $dom = ZLanguage::getModuleDomain('MUTicket');
                  
                 $this->setVar('supporterTickets', false);
-                $this->setVar('messageNewOwner', 'Hi supporter, here you get this ticket to work for the customer by yourself.');
-                $this->setVar('messageDueDate', 'Dear Customer!  We assume that we are able to clear your ticket until the given date');
+                $this->setVar('messageNewOwner', __('Hi supporter, here you get this ticket to work for the customer by yourself.', $dom));
+                $this->setVar('messageDueDate', __('Dear Customer! We assume that we are able to clear your ticket until the given date', $dom));
                  
-                $rating = $this->getVar('rating');
-                if ($this->setVar('ratingAllowed', $rating)) {
-                    $this->delVar('rating');
-                }
-                 
+                // ...
+                // update the database schema
                 try {
                     DoctrineHelper::updateSchema($this->entityManager, $this->listEntityClasses());
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     if (System::isDevelopmentMode()) {
                         LogUtil::registerError($this->__('Doctrine Exception: ') . $e->getMessage());
                     }
-                    return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s module.', array($this->getName())));
+                    return LogUtil::registerError($this->__f('An error was encountered while dropping the tables for the %s extension.', array($this->getName())));
                 }
 
                 // we get serviceManager
@@ -76,29 +81,52 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                 $supporterrepository = MUTicket_Util_Model::getSupporterRepository();
                 $ratingrepository = MUTicket_Util_Model::getRatingRepository();
 
+                $workflowHelper = new Zikula_Workflow('none', 'MUTicket');
+
                 // we get all tickets
                 $tickets = $ticketrepository->selectWhere();
 
                 // we set each ticket to approved
+                // and register a workflow
                 foreach ($tickets as $ticket) {
                     $thisticket = $ticketrepository->selectById($ticket['id']);
                     $thisticket->setCurrentState(NULL);
                     $thisticket->setWorkflowState('approved');
                     $entityManager->flush();
-                    $workflowHelper = new Zikula_Workflow('none', 'MUTicket');
+
                     $obj['__WORKFLOW__']['obj_table'] = 'ticket';
                     $obj['__WORKFLOW__']['obj_idcolumn'] = 'id';
                     $obj['id'] = $ticket['id'];
-                    $workflowHelper->registerWorkflow($obj);
-                    //Zikula_Workflow_Util::executeAction('none', $obj, 'submit', 'ticket', 'MUTicket', 'id');
-                    //$workflowHelper->executeAction('submit', $obj, 'initial');
-                    //WorkflowUtil::executeAction('none', $thisticket, 'submit', 'ticket', 'MUTicket');
+                    $workflowHelper->registerWorkflow($obj, 'approved');
+                }
+
+                // we get all ratings
+                $ratings = $ratingrepository->selectWhere();
+
+                // we set each rating to approved
+                // and register a workflow
+                foreach ($ratings as $rating) {
+                    $thisrating = $ratingrepository->selectById($rating['id']);
+                    $thisrating->setWorkflowState('approved');
+                    $entityManager->flush();
+                    $obj['__WORKFLOW__']['obj_table'] = 'rating';
+                    $obj['__WORKFLOW__']['obj_idcolumn'] = 'id';
+                    $obj['id'] = $rating['id'];
+                    $workflowHelper->registerWorkflow($obj, 'approved');
                 }
 
                 // we get all supporters
                 $supporters = $supporterrepository->selectWhere();
 
                 // we set each supporter to approved
+                // and register a workflow
+                foreach ($supporters as $supporter) {
+                    $obj['__WORKFLOW__']['obj_table'] = 'supporter';
+                    $obj['__WORKFLOW__']['obj_idcolumn'] = 'id';
+                    $obj['id'] = $supporter['id'];
+                    $workflowHelper->registerWorkflow($obj, 'approved');
+                }
+                
                 foreach ($supporters as $supporter) {
                     $thissupporter = $supporterrepository->selectById($supporter['id']);
                     $supportcats = $thissupporter->getSupportcats();
@@ -106,23 +134,10 @@ class MUTicket_Installer extends MUTicket_Base_Installer
                     $thissupporter->setSupportcats($supportcats);
                     $thissupporter->setWorkflowState('approved');
                     $entityManager->flush();
-                    //WorkflowUtil::executeAction('none', $thissupporter, 'initial', 'supporter', 'MUTicket');
                 }
-
-                // we get all ratings
-                $ratings = $ratingrepository->selectWhere();
-
-                // we set each rating to approved
-                foreach ($ratings as $rating) {
-                    $thisrating = $ratingrepository->selectById($rating['id']);
-                    $thisrating->setWorkflowState('approved');
-                    $entityManager->flush();
-                    //WorkflowUtil::executeAction('none', $thisrating, 'initial', 'rating', 'MUTicket');
-                }
-
-            case '1.1.0':
-
-                // later updates
+                
+                case '1.1.0':
+                    // for later update
         }
 
 

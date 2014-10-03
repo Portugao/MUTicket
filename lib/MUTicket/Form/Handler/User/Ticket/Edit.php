@@ -17,162 +17,162 @@
  */
 class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_Ticket_Base_Edit
 {
-	/**
-	 * Initialize form handler.
-	 *
-	 * This method takes care of all necessary initialisation of our data and form states.
-	 *
-	 * @return boolean False in case of initialization errors, otherwise true.
-	 */
-	public function initialize(Zikula_Form_View $view)
-	{
-		
-		$supporterTickets = MUTicket_Util_View::userForRating(2);
-		
-		$func = $this->request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
-		
-		// if supporters may not create tickets
-		if ($supporterTickets == 0 && $func == 'edit') {
-			$uid = UserUtil::getVar('uid');
-			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-			if (in_array($uid, $supporteruids)) {
-				$url = ModUtil::url($this->name, 'user', 'view');
-				return LogUtil::registerPermissionError($url);
-			}
-		}
-		
-		// We check for supportes that are active
-		// If there is no supporter active, we break the input process
-		$supporteractive = MUTicket_Util_View::checkIfSupporters();
-		if ($supporteractive == 0) {
-			$url = ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1));
-			return LogUtil::registerError(__('Sorry. Our support is not available at the moment!'),0 , $url);
-		}
-			
-		parent::initialize($view);
+    /**
+     * Initialize form handler.
+     *
+     * This method takes care of all necessary initialisation of our data and form states.
+     *
+     * @return boolean False in case of initialization errors, otherwise true.
+     */
+    public function initialize(Zikula_Form_View $view)
+    {
 
-		// we rule the text for the button to create tickets or answers
-		$func = $this->request->query->filter('func', 'display', FILTER_SANITIZE_STRING);
-		$id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
+        $supporterTickets = MUTicket_Util_View::userForRating(2);
 
-		$fileSize = MUTicket_Util_Controller::maxSize();
+        $func = $this->request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
 
-		// set mode to create
-		$this->mode = 'create';
+        // if supporters may not create tickets
+        if ($supporterTickets == 0 && $func == 'edit') {
+            $uid = UserUtil::getVar('uid');
+            $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+            if (in_array($uid, $supporteruids)) {
+                $url = ModUtil::url($this->name, 'user', 'view');
+                return LogUtil::registerPermissionError($url);
+            }
+        }
 
-		// we assign to template
-		$this->view->assign('mode', $this->mode)
-		->assign('func', $func)
-		->assign('ticketid', $id)
-		->assign('fileSize', $fileSize);
+        // We check for supportes that are active
+        // If there is no supporter active, we break the input process
+        $supporteractive = MUTicket_Util_View::checkIfSupporters();
+        if ($supporteractive == 0) {
+            $url = ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket', 'state' => 1));
+            return LogUtil::registerError(__('Sorry. Our support is not available at the moment!'),0 , $url);
+        }
+         
+        parent::initialize($view);
 
-		// everything okay, no initialization errors occured
-		return true;
-	}
+        // we rule the text for the button to create tickets or answers
+        $func = $this->request->query->filter('func', 'display', FILTER_SANITIZE_STRING);
+        $id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
 
-	/**
-	 * Command event handler.
-	 *
-	 * This event handler is called when a command is issued by the user.
-	 */
-	public function handleCommand(Zikula_Form_View $view, &$args)
-	{
-	    // We get parentid
-	    // We check if ticket is a parent ticket
-	    $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
-		
-		// if supporters may not create tickets
-	    $supporterTickets = MUTicket_Util_View::userForRating(2);
-		if ($supporterTickets == 0 && $parentid != 0) {
-			$uid = UserUtil::getVar('uid');
-			$supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-			if (in_array($uid, $supporteruids)) {
-				$url = ModUtil::url($this->name, 'user', 'view');
-				return LogUtil::registerPermissionError($url);
-			}
-		}
+        $fileSize = MUTicket_Util_Controller::maxSize();
 
-		$result = parent::handleCommand($view, $args);
-		if ($result === false) {
-			return $result;
-		}
-		else {
-			
-			// fetch posted data input values as an associative array
-			$formData = $this->view->getValues();
-			// we want the array with our field values
-			//$entity = $formData[$this->objectTypeLower];
-			$repository = MUTicket_Util_Model::getTicketRepository();
-			$entity = $repository->selectById($this->idValues['id']);
-				
-			// Get relevant datas for mailing
-			$data['id'] = $this->idValues['id'];
-			$data['parentid'] = $parentid;
-			$data['title'] = $entity['title'];
-			$data['text'] = $entity['text'];
-			$data['categories'] = $entity['categories'];
+        // set mode to create
+        $this->mode = 'create';
 
-			MUTicket_Util_Base_Settings::handleModvarsPostPersist($data);
-		}
+        // we assign to template
+        $this->view->assign('mode', $this->mode)
+        ->assign('func', $func)
+        ->assign('ticketid', $id)
+        ->assign('fileSize', $fileSize);
 
-	}
+        // everything okay, no initialization errors occured
+        return true;
+    }
 
-	/**
-	 * Get success or error message for default operations.
-	 *
-	 * @param Array   $args    arguments from handleCommand method.
-	 * @param Boolean $success true if this is a success, false for default error.
-	 * @return String desired status or error message.
-	 */
-	protected function getDefaultMessage($args, $success = false)
-	{
-		if ($success !== true) {
-			return parent::getDefaultMessage($args, $success);
-		}
+    /**
+     * Command event handler.
+     *
+     * This event handler is called when a command is issued by the user.
+     */
+    public function handleCommand(Zikula_Form_View $view, &$args)
+    {
+        // We get parentid
+        // We check if ticket is a parent ticket
+        $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
+        LogUtil::registerError($parentid);
 
-		$parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
-			
+        // if supporters may not create tickets
+        if (ModUtil::getVar($this->name, 'supporterTickets') == 0 && $parentid == 0) {
+            $uid = UserUtil::getVar('uid');
+            $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
+            if (in_array($uid, $supporteruids)) {
+                $url = ModUtil::url($this->name, 'user', 'view');
+                return LogUtil::registerPermissionError($url);
+            }
+        }
 
-		$message = '';
-		switch ($args['commandName']) {
-			case 'create':
-				$message = $this->__('Done! Ticket created.');
-				if ($parentid > 0) {
-					$message = $this->__('Done! Answer created.');
-				}
-				break;
-			case 'update':
-				$message = $this->__('Done! Ticket updated.');
-				break;
-			case 'delete':
-				$message = $this->__('Done! Ticket deleted.');
-				break;
-		}
-		return $message;
-	}
+        $result = parent::handleCommand($view, $args);
+        if ($result === false) {
+            return $result;
+        }
+        else {
+             
+            // fetch posted data input values as an associative array
+            $formData = $this->view->getValues();
+            // we want the array with our field values
+            //$entity = $formData[$this->objectTypeLower];
+            $repository = MUTicket_Util_Model::getTicketRepository();
+            $entity = $repository->selectById($this->idValues['id']);
 
-	/**
-	 * Get the default redirect url. Required if no returnTo parameter has been supplied.
-	 * This method is called in handleCommand so we know which command has been performed.
-	 */
-	protected function getDefaultReturnUrl($args)
-	{
-		// we get parentid
-		// We check if ticket is a parent ticket
-		$parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
+            // Get relevant datas for mailing
+            $data['id'] = $this->idValues['id'];
+            $data['parentid'] = $parentid;
+            $data['title'] = $entity['title'];
+            $data['text'] = $entity['text'];
+            $data['categories'] = $entity['categories'];
 
-		// redirect to the list of tickets
-		$viewArgs = array('ot' => $this->objectType);
-		$url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
+            $message = MUTicket_Util_Base_Settings::handleModvarsPostPersist($data);
+            return $result;
+        }
+    }
 
-		if ($this->mode == 'create' && $parentid == 0) {
-			// redirect to just created parent ticket
-			$url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
-		} else {
-		    // redirect to parent ticket
-		    $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
-		}
+    /**
+     * Get success or error message for default operations.
+     *
+     * @param Array   $args    arguments from handleCommand method.
+     * @param Boolean $success true if this is a success, false for default error.
+     * @return String desired status or error message.
+     */
+    protected function getDefaultMessage($args, $success = false)
+    {
+        if ($success !== true) {
+            return parent::getDefaultMessage($args, $success);
+        }
 
-		return $url;
-	}
+        $parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
+         
+
+        $message = '';
+        switch ($args['commandName']) {
+            case 'create':
+                $message = $this->__('Done! Ticket created.');
+                if ($parentid > 0) {
+                    $message = $this->__('Done! Answer created.');
+                }
+                break;
+            case 'update':
+                $message = $this->__('Done! Ticket updated.');
+                break;
+            case 'delete':
+                $message = $this->__('Done! Ticket deleted.');
+                break;
+        }
+        return $message;
+    }
+
+    /**
+     * Get the default redirect url. Required if no returnTo parameter has been supplied.
+     * This method is called in handleCommand so we know which command has been performed.
+     */
+    protected function getDefaultReturnUrl($args)
+    {
+        // we get parentid
+        // We check if ticket is a parent ticket
+        $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
+
+        // redirect to the list of tickets
+        $viewArgs = array('ot' => $this->objectType);
+        $url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
+
+        if ($this->mode == 'create' && $parentid == 0) {
+            // redirect to just created parent ticket
+            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
+        } else {
+            // redirect to parent ticket
+            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
+        }
+
+        return $url;
+    }
 }

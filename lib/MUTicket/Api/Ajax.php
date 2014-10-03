@@ -71,7 +71,6 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
                 MUTicket_Util_Base_Internal::handleChanges('currentState', $usermail, $thisticket);
             }
         }
-
     }
 
     /**
@@ -88,7 +87,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $dueDate = $args['dueDate'];
         $dueText = $args['dueText'];
         $actualsupporter = $args['actualsupporter'];
-        $userid = $thisticket['owner'];
+        $userid = $thisticket['createdUserId'];
 
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
@@ -113,7 +112,6 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
                 MUTicket_Util_Base_Internal::handleChanges('dueDate', $usermail, $thisticket);
             }
         }
-
     }
 
     /**
@@ -130,12 +128,12 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $thisticket = $repository->selectById($ticket);
         // we get existing labels for this ticket
         $existinglabels = $thisticket->getLabelticket();
+        
+        $existinglabelIds = array();
+
         foreach ($existinglabels as $existinglabel) {
             $existinglabelIds[] = $existinglabel['id'];
         }
-
-        //$thisticket->setLabelticket(NULL);
-        //$entityManager->flush();
 
         $sendmail = $args['sendmessage'];
         $actualsupporter = $args['actualsupporter'];
@@ -154,19 +152,17 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         foreach ($labels as $label) {
             if ($label > 0) {
                 $thislabel = $labelrepository->selectById($label);
-                if ($existinglabels != NULL) {
+                if (is_array($existinglabelIds)) {
 
                     if (!in_array($thislabel['id'], $existinglabelIds)) {
-                        $labelobjects[] = $thislabel;
+                       $labelobjects[] = $thislabel;
                     }
                 } else {
                     $labelobjects[] = $thislabel;
                 }
             }
 
-
             $thisticket->setLabelticket($labelobjects);
-
             $entityManager->flush();
 
             if ($existinglabelIds != NULL) {
@@ -177,6 +173,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
                     }
                 }
             }
+
             $entityManager->flush();
         }
 

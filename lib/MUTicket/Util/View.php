@@ -31,7 +31,7 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 
         // get supporter group
         $supportergroup = ModUtil::getVar('MUTicket', 'supportergroup');
-        	
+         
         if ($supportergroup == '') {
             $url = ModUtil::url('MUTicket', 'admin', 'config');
             LogUtil::registerError('You have to save a supporter group!',null , $url);
@@ -90,8 +90,11 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
             $supporterTickets = ModUtil::getVar('MUTicket', 'supporterTickets');
             if ($supporterTickets == 1) {
                 $kind = 1;
-                return $kind;
+
+            } else {
+                $kind = 0;
             }
+            return $kind;
         }
 
         // get the supporterids

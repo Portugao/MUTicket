@@ -29,6 +29,8 @@ class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Admin_Bas
      */
     public function initialize(Zikula_Form_View $view)
     {
+        $dom = ZLanguage::getModuleDomain($this->name);
+        
         // permission check
         if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
             return $view->registerError(LogUtil::registerPermissionError());
@@ -38,9 +40,9 @@ class MUTicket_Form_Handler_Admin_Config extends MUTicket_Form_Handler_Admin_Bas
         $modVars = $this->getVars();
         // initialise list entries for the 'rating allowed' setting
     
-        $modVars['ratingAllowedItems'] = array(array('value' => '1', 'text' => 'Yes'),
-                array('value' => '0', 'text' => 'No')
-        );
+        $modVars['ratingAllowedItems'] = array(array('value' => '1', 'text' => __('Yes', $dom)),
+                array('value' => '0', 'text' => __('No', $dom)
+        ));
     
         // assign all module vars
         $this->view->assign('config', $modVars);

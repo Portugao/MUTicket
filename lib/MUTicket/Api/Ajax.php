@@ -128,11 +128,12 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $thisticket = $repository->selectById($ticket);
         // we get existing labels for this ticket
         $existinglabels = $thisticket->getLabelticket();
-        
+
         $existinglabelIds = array();
 
         foreach ($existinglabels as $existinglabel) {
             $existinglabelIds[] = $existinglabel['id'];
+            LogUtil::registerStatus($existinglabel['id']);
         }
 
         $sendmail = $args['sendmessage'];
@@ -144,6 +145,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         $labels = $args['labels'];
 
+        // we get a repository for labels
         $labelrepository = MUTicket_Util_Model::getLabelRepository();
 
         // array for objects of labels
@@ -155,14 +157,16 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
                 if (is_array($existinglabelIds)) {
 
                     if (!in_array($thislabel['id'], $existinglabelIds)) {
-                       $labelobjects[] = $thislabel;
+                        //$labelobjects[] = $thislabel;
+                        $thisticket->addLabelticket($thislabel);
                     }
                 } else {
-                    $labelobjects[] = $thislabel;
+                    //$labelobjects[] = $thislabel;
+                    $thisticket->addLabelticket($thislabel);
                 }
             }
 
-            $thisticket->setLabelticket($labelobjects);
+            //$thisticket->setLabelticket($labelobjects);
             $entityManager->flush();
 
             if ($existinglabelIds != NULL) {

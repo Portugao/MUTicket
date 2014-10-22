@@ -133,7 +133,6 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         foreach ($existinglabels as $existinglabel) {
             $existinglabelIds[] = $existinglabel['id'];
-            LogUtil::registerStatus($existinglabel['id']);
         }
 
         $sendmail = $args['sendmessage'];

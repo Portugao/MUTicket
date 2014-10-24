@@ -57,17 +57,21 @@
         <td headers="hstate" align="center" valign="top">
             {$supporter.state|yesno:true}
         </td>
-        <td headers="hitemactions" class="z-right z-nowrap z-w02">
+        <td id="itemactions{$supporter.id}" headers="hitemactions" class="z-right z-nowrap z-w02">
             {if count($supporter._actions) gt 0}
-            {strip}
                 {foreach item='option' from=$supporter._actions}
-                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>
-                        {icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}
-                    </a>
+                    <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>{icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}</a>
                 {/foreach}
-            {/strip}
+                {icon id="itemactions`$supporter.id`trigger" type='options' size='extrasmall' __alt='Actions' class='z-pointer z-hide'}
+                <script type="text/javascript">
+                /* <![CDATA[ */
+                    document.observe('dom:loaded', function() {
+                        muticketInitItemActions('supporter', 'view', 'itemactions{{$supporter.id}}');
+                    });
+                /* ]]> */
+                </script>
             {/if}
-        </td>
+       </td>
     </tr>
     {foreachelse}
         <tr class="z-admintableempty">

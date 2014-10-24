@@ -237,14 +237,16 @@
         </div>       
         </td>
         {/if}    
-        <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
+       {* <td headers="hintactions" align="left" valign="middle" style="white-space: nowrap">
             <a href="{modurl modname='MUTicket' type='user' func='display' ot='ticket' id=$ticket.id}" title="{$ticket.title|replace:"\"":""}">
                 {icon type='display' size='extrasmall' __alt='Details'}
             </a>
-   {* {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
+    {checkpermissionblock component='MUTicket::' instance='.*' level='ACCESS_EDIT'}
+    {if $ticket.createdUserId eq $coredata.user.uid}
             <a href="{modurl modname='MUTicket' type='user' func='edit' ot='ticket' id=$ticket.id}" title="{gt text='Edit'}">
                 {icon type='edit' size='extrasmall' __alt='Edit'}
             </a>
+            {/if}
             <a href="{modurl modname='MUTicket' type='user' func='edit' ot='ticket' astemplate=$ticket.id}" title="{gt text='Reuse for new item'}">
                 {icon type='saveas' size='extrasmall' __alt='Reuse'}
             </a>
@@ -253,8 +255,23 @@
             <a href="{modurl modname='MUTicket' type='user' func='delete' ot='ticket' id=$ticket.id}" title="{gt text='Delete'}">
                 {icon type='delete' size='extrasmall' __alt='Delete'}
             </a>
-    {/checkpermissionblock} *}
-        </td>
+    {/checkpermissionblock} 
+        </td> *}
+                <td id="itemactions{$ticket.id}" headers="hitemactions" class="z-right z-nowrap z-w02">
+                    {if count($ticket._actions) gt 0}
+                        {foreach item='option' from=$ticket._actions}
+                            <a href="{$option.url.type|muticketActionUrl:$option.url.func:$option.url.arguments}" title="{$option.linkTitle|safetext}"{if $option.icon eq 'preview'} target="_blank"{/if}>{icon type=$option.icon size='extrasmall' alt=$option.linkText|safetext}</a>
+                        {/foreach}
+                        {icon id="itemactions`$ticket.id`trigger" type='options' size='extrasmall' __alt='Actions' class='z-pointer z-hide'}
+                        <script type="text/javascript">
+                        /* <![CDATA[ */
+                            document.observe('dom:loaded', function() {
+                                muticketInitItemActions('ticket', 'view', 'itemactions{{$ticket.id}}');
+                            });
+                        /* ]]> */
+                        </script>
+                    {/if}
+                </td>
     </tr>
     {foreachelse}
         <tr class="z-datatableempty">

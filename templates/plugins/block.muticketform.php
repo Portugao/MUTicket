@@ -24,62 +24,69 @@
  */
 function smarty_block_muticketform($params, $content, $view)
 {
-	if ($content) {
-		PageUtil::addVar('stylesheet', 'system/Theme/style/form/style.css');
-		$encodingHtml = (array_key_exists('enctype', $params) ? " enctype=\"$params[enctype]\"" : '');
-		$action = htmlspecialchars(System::getCurrentUri());
-		$classString = '';
-		if (isset($params['cssClass'])) {
-			$classString = "class=\"$params[cssClass]\" ";
-		}
+    if ($content) {
+        PageUtil::addVar('stylesheet', 'system/Theme/style/form/style.css');
+        $encodingHtml = (array_key_exists('enctype', $params) ? " enctype=\"$params[enctype]\"" : '');
+        $action = htmlspecialchars(System::getCurrentUri());
+        $classString = '';
+        if (isset($params['cssClass'])) {
+            $classString = "class=\"$params[cssClass]\" ";
+        }
 
-		// we check if the entrypoint is part of the url
-		$stripentrypoint = ModUtil::getVar('ZConfig', 'shorturlsstripentrypoint');
+        // we check if the entrypoint is part of the url
+        $stripentrypoint = ModUtil::getVar('ZConfig', 'shorturlsstripentrypoint');
 
-		if(strpos($action,"func=display")!==false) {
-			$action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
-		}
+        if(strpos($action,"func=display")!==false) {
+            $action = 'index.php?module=muticket&amp;type=user&amp;func=edit&amp;ot=ticket';
+        }
 
-		if(strpos($action,"/ticket/")!==false) {
-			if ($stripentrypoint == 1) {
-				$action = 'muticket/edit/ot/ticket';
-			}
-			elseif ($stripentrypoint == 0) {
-				$action = 'index.php/muticket/edit/ot/ticket';
-			}
-		}
+        // we get request
+        $request = new Zikula_Request_Http();
+        // we check for id
+        $id = $request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
 
-		$view->postRender();
+        if ($id == 0) {
+            if(strpos($action,"/ticket/")!==false) {
+                if ($stripentrypoint == 1) {
+                    $action = 'muticket/edit/ot/ticket';
+                }
+                elseif ($stripentrypoint == 0) {
+                    $action = 'index.php/muticket/edit/ot/ticket';
+                }
+            }
+        }
 
-		$formId = $view->getFormId();
-		$out = "
-<form id=\"{$formId}\" {$classString}action=\"$action\" method=\"post\"{$encodingHtml}>
-		$content
-<div>
-		{$view->getStateHTML()}
-		{$view->getStateDataHTML()}
-		{$view->getIncludesHTML()}
-		{$view->getCsrfTokenHtml()}
-<input type=\"hidden\" name=\"__formid\" id=\"form__id\" value=\"{$formId}\" />
-<input type=\"hidden\" name=\"FormEventTarget\" id=\"FormEventTarget\" value=\"\" />
-<input type=\"hidden\" name=\"FormEventArgument\" id=\"FormEventArgument\" value=\"\" />
-<script type=\"text/javascript\">
-<!--
-function FormDoPostBack(eventTarget, eventArgument)
-{
-var f = document.getElementById('{$formId}');
-if (!f.onsubmit || f.onsubmit())
-{
-f.FormEventTarget.value = eventTarget;
-f.FormEventArgument.value = eventArgument;
-f.submit();
-}
-}
-// -->
-</script>
-</div>
-</form>
-";
-		return $out;
-	}
+        $view->postRender();
+
+        $formId = $view->getFormId();
+        $out = "
+        <form id=\"{$formId}\" {$classString}action=\"$action\" method=\"post\"{$encodingHtml}>
+        $content
+        <div>
+        {$view->getStateHTML()}
+        {$view->getStateDataHTML()}
+        {$view->getIncludesHTML()}
+        {$view->getCsrfTokenHtml()}
+        <input type=\"hidden\" name=\"__formid\" id=\"form__id\" value=\"{$formId}\" />
+        <input type=\"hidden\" name=\"FormEventTarget\" id=\"FormEventTarget\" value=\"\" />
+        <input type=\"hidden\" name=\"FormEventArgument\" id=\"FormEventArgument\" value=\"\" />
+        <script type=\"text/javascript\">
+        <!--
+        function FormDoPostBack(eventTarget, eventArgument)
+        {
+        var f = document.getElementById('{$formId}');
+        if (!f.onsubmit || f.onsubmit())
+        {
+        f.FormEventTarget.value = eventTarget;
+        f.FormEventArgument.value = eventArgument;
+        f.submit();
+    }
+    }
+    // -->
+    </script>
+    </div>
+    </form>
+    ";
+        return $out;
+    }
 }

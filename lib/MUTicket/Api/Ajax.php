@@ -55,6 +55,9 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         $sendmail = $args['sendmessage'];
         $state = $args['state'];
+        if ($state == 0) {
+            $state = NULL;
+        }
         $actualsupporter = $args['actualsupporter'];
         $userid = $thisticket['owner'];
 

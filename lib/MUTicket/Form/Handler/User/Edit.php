@@ -78,8 +78,10 @@ class MUTicket_Form_Handler_User_Edit extends MUTicket_Form_Handler_User_Base_Ed
             $this->initCategoriesForEdit($entity);
         }
         
+        // we check for func
+        $func = $this->request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
         // We set text field to empty if entity class is ticket
-        if ($entityClass == 'MUTicket_Entity_Ticket') {
+        if ($entityClass == 'MUTicket_Entity_Ticket' && $func == 'display') {
             $entity['text'] = '';
         }
     

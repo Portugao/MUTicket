@@ -216,7 +216,7 @@
         {if $ticket.dueText ne ''}
         {$ticket.dueText}
         {else}
-        {if $ticket.dueDate > $ticket.createdDate}
+        {if $ticket.dueDate > $ticket.updatedDate}
         {$ticket.dueDate|dateformat:datebrief}
         {else}
         {gt text='Not set'}

@@ -109,7 +109,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
 
         $entityManager->flush();
 
-        if ($sendmail == 1) {
+        if ($sendmail == 1 && ($dueText != '' || $thisticket['dueDate'] > $thisticket['updatedDate'])) {
             if ($userid > 1) {
                 $usermail = UserUtil::getVar('email', $userid);
                 MUTicket_Util_Base_Internal::handleChanges('dueDate', $usermail, $thisticket);

@@ -155,16 +155,7 @@ class MUTicket_Form_Handler_Admin_Ticket_Base_Edit extends MUTicket_Form_Handler
      * @return mixed Redirect or false on errors.
      */
     public function handleCommand(Zikula_Form_View $view, &$args)
-    {
-        // we check for ajax currentState chnage if we have to send a mail to
-        // the owner of the ticket
-        $statemessage = $this->request->getPost()->filter('snedStateMessage', 0, FILTER_SANITIZE_NUMBER_INT);
-        
-        if ($statemessage == 1) {
-            // wes end mail
-            
-        }
-        
+    {        
         $result = parent::handleCommand($view, $args);
         if ($result === false) {
             return $result;

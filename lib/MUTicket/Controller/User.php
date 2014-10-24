@@ -101,19 +101,6 @@ class MUTicket_Controller_User extends MUTicket_Controller_Base_User
 	    $func = $this->request->query->filter('func','', FILTER_SANITIZE_STRING);
 	    $ot = $this->request->query->filter('ot','', FILTER_SANITIZE_STRING);
 	    $rated = $this->request->query->filter('rated', 0, FILTER_SANITIZE_NUMBER_INT);
-	        
-	    // check for entity where parent_id is NULL
-	    if ($ot == 'ticket' && $func == 'view') {
-	        if (!empty($where)) {
-	            $where .= 'AND tbl.parent_id IS NULL';
-	        }
-	        else {
-	            $where = 'tbl.parent_id IS NULL';
-	        }
-	    }
-	    else {
-	        $where = $where;
-	    }
 	    	
 	    $ticketstate = 1;
 	     

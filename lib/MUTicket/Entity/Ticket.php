@@ -59,13 +59,13 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                         'icon' => 'preview',
                         'linkTitle' => __('Open preview page', $dom),
                         'linkText' => __('Preview', $dom)
-                );*/
+                );
                 $this->_actions[] = array(
                         'url' => array('type' => 'admin', 'func' => 'display', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
                         'icon' => 'display',
                         'linkTitle' => str_replace('"', '', $this['title']),
                         'linkText' => __('Details', $dom)
-                );
+                );*/
             }
             if (in_array($currentFunc, array('main', 'view', 'display'))) {
                 $component = 'MUTicket:Ticket:';
@@ -93,14 +93,14 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                     );
                 }
             }
-            if ($currentFunc == 'display') {
+           /* if ($currentFunc == 'display') {
                 $this->_actions[] = array(
                         'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket')),
                         'icon' => 'back',
                         'linkTitle' => __('Back to overview', $dom),
                         'linkText' => __('Back to overview', $dom)
                 );
-            }
+            }*/
         }
         if ($currentType == 'user') {
             if (in_array($currentFunc, array('main', 'view'))) {

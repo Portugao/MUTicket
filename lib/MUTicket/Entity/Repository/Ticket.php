@@ -41,7 +41,7 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     {
         $currentModule = ModUtil::getName();//FormUtil::getPassedValue('module', '', 'GETPOST');
         $currentType = FormUtil::getPassedValue('type', 'user', 'GETPOST');
-        if ($currentType == 'admin' && ($currentModule == 'MUTicket' || $currentModule == 'Extensions')) {
+        if ($currentType == 'admin' && $currentModule == 'Extensions') {
             return $qb;
         }
     
@@ -51,6 +51,8 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
             $qb->andWhere('tbl.workflowState IN (:onlineStates)')
             ->setParameter('onlineStates', DataUtil::formatForStore($onlineStates));
         }
+        
+        $qb->andWhere('tbl.parent_id IS NULL');
     
         return $qb;
     }

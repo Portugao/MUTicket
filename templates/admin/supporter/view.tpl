@@ -15,10 +15,14 @@
             {$createTitle}
         </a>
     {/checkpermissionblock}
-
+<form class="z-form" id="supporters_view" action="{modurl modname='MUTicket' type='admin' func='handleselectedentries'}" method="post">
+    <div>
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
+        <input type="hidden" name="ot" value="supporter" />
 
 <table class="z-datatable">
     <colgroup>
+        <col id="cselect" />
         <col id="cusername" />
         <col id="csupportcats" />
         <col id="cstate" />
@@ -26,6 +30,9 @@
     </colgroup>
     <thead>
     <tr>
+        <th id="hselect" scope="col" align="center" valign="middle">
+            <input type="checkbox" id="toggle_supporters" />
+        </th>
         <th id="husername" scope="col" align="left" valign="middle">
             {sortlink __linktext='Username' sort='username' currentsort=$sort sortdir=$sdir modname='MUTicket' type='admin' func='view' ot='supporter'}
         </th>
@@ -42,6 +49,9 @@
 
     {foreach item='supporter' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
+        <td headers="hselect" align="center" valign="top">
+           <input type="checkbox" name="items[]" value="{$supporter.id}" class="supporter_checkbox" />
+        </td>
         <td headers="husername" align="left" valign="top">
             {$supporter.username|notifyfilters:'muticket.filterhook.supporters'}
         </td>
@@ -83,7 +93,31 @@
 
     </tbody>
 </table>
-
-    {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+        {if !isset($showAllEntries) || $showAllEntries ne 1}
+        {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
+        {/if}
+            <fieldset>
+            <label for="muticket_action">{gt text='With selected supporters'}</label>
+            <select id="muticket_action" name="action">
+                <option value="">{gt text='Choose action'}</option>
+                <option value="delete" title="{gt text='Delete content permanently.'}">{gt text='Delete'}</option>
+            </select>
+            <input type="submit" value="{gt text='Submit'}" />
+        </fieldset>
+    </div>
+</form>
 </div>
 {include file='admin/footer.tpl'}
+<script type="text/javascript">
+/* <![CDATA[ */
+    document.observe('dom:loaded', function() {
+    {{* init the "toggle all" functionality *}}
+    if ($('toggle_supporters') != undefined) {
+        $('toggle_supporters').observe('click', function (e) {
+            Zikula.toggleInput('supporters_view');
+            e.stop()
+        });
+    }
+    });
+/* ]]> */
+</script>

@@ -22,8 +22,14 @@
         </a>
     {/if}
 
+<form class="z-form" id="tickets_view" action="{modurl modname='MUTicket' type='admin' func='handleselectedentries'}" method="post">
+    <div>
+        <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
+        <input type="hidden" name="ot" value="ticket" />
+
 <table class="z-datatable">
     <colgroup>
+        <col id="cselect" />
         <col id="ccreatedDate" />
         <col id="ctitle" />
         <col id="ctext" />
@@ -34,6 +40,9 @@
     </colgroup>
     <thead>
     <tr>
+        <th id="hselect" scope="col" align="center" valign="middle">
+            <input type="checkbox" id="toggle_tickets" />
+        </th>
         <th id="hcreatedDate" scope="col" class="z-left">
             {sortlink __linktext='Created Date' sort='createdDate' currentsort=$sort sortdir=$sdir all=$all modname='MUTicket' type='admin' func='view' ot='ticket'}
         </th>
@@ -59,6 +68,9 @@
 
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
+        <td headers="hselect" align="center" valign="top">
+           <input type="checkbox" name="items[]" value="{$ticket.id}" class="ticket_checkbox" />
+        </td>
         <td headers="htitle" class="z-left">
             {$ticket.createdDate|dateformat:datetimelong}
         </td>
@@ -123,6 +135,16 @@
     {if !isset($showAllEntries) || $showAllEntries ne 1}
         {pager rowcount=$pager.numitems limit=$pager.itemsperpage display='page'}
     {/if}
+            <fieldset>
+            <label for="muticket_action">{gt text='With selected tickets'}</label>
+            <select id="muticket_action" name="action">
+                <option value="">{gt text='Choose action'}</option>
+                <option value="delete" title="{gt text='Delete content permanently.'}">{gt text='Delete'}</option>
+            </select>
+            <input type="submit" value="{gt text='Submit'}" />
+        </fieldset>
+    </div>
+</form>
 </div>
 {include file='admin/footer.tpl'}
 

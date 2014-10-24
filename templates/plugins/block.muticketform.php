@@ -44,8 +44,9 @@ function smarty_block_muticketform($params, $content, $view)
         $request = new Zikula_Request_Http();
         // we check for id
         $id = $request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
+        $func = $request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
 
-        if ($id == 0) {
+        if (($id == 0 && $func == 'edit') || ($id > 0 && $func == 'display')) {
             if(strpos($action,"/ticket/")!==false) {
                 if ($stripentrypoint == 1) {
                     $action = 'muticket/edit/ot/ticket';

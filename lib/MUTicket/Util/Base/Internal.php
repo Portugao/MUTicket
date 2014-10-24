@@ -91,8 +91,13 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         }
         
         $messagecontent['body'] .= '<h2>' . $handler->__('Title of ticket')  . ': ' . $ticket['title'] . '</h2>';
+        if ($ticket['currentState'] > 0) {
         $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
-        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />' . '<br />';
+        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />' . '<br />';       
+        } else {
+            $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $handler->__('Not set') . '<br /><br/>';
+            
+        }
 
         $messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';
         $messagecontent['body'] .= '<a href="' . $url . '">' . $url . '</a><br />';

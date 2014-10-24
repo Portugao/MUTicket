@@ -217,60 +217,58 @@ msgstr "Dies ist ein Pflichtfeld."
 
 #: templates/plugins/function.muticketValidationError.php:37
 msgid "Please enter a valid number in this field."
-msgstr "Bitte geben Sie eine gültige Zahl ein."
+msgstr "Bitte gib eine gültige Zahl ein."
 
 #: templates/plugins/function.muticketValidationError.php:38
 msgid ""
 "Please use numbers only in this field. please avoid spaces or other "
 "characters such as dots or commas."
-msgstr ""
-"Nutzen Sie bitte nur Ziffern. Vermeiden Sie Leerzeichen und andere Zeichen!"
+msgstr "Nutze bitte nur Ziffern. Vermeide Leerzeichen und andere Zeichen!"
 
 #: templates/plugins/function.muticketValidationError.php:39
 msgid "Please use letters only (a-z) in this field."
-msgstr "Bitte nutzen Sie Buchstaben (a-z) in diesem Feld."
+msgstr "Bitte nutze Buchstaben (a-z) in diesem Feld."
 
 #: templates/plugins/function.muticketValidationError.php:40
 msgid ""
 "Please use only letters (a-z) or numbers (0-9) only in this field. No spaces "
 "or other characters are allowed."
 msgstr ""
-"Bitte nutzen Sie nur Buchstaben (a-z) oder Ziffern (0-9) in diesem Feld. "
-"Keine Leerzeichen oder andere Zeichen sind erlaubt."
+"Bitte nutze nur Buchstaben (a-z) oder Ziffern (0-9) in diesem Feld. Keine "
+"Leerzeichen oder andere Zeichen sind erlaubt."
 
 #: templates/plugins/function.muticketValidationError.php:41
 msgid "Please enter a valid date."
-msgstr "Bitte geben Sie ein gültiges Datum ein."
+msgstr "Bitte gib ein gültiges Datum ein."
 
 #: templates/plugins/function.muticketValidationError.php:42
 msgid "Please enter a valid email address. For example yourname@example.com ."
 msgstr ""
-"Bitte geben Sie eine gültige mailadresse an: Zum Beispiel: ihrname@beispiel."
-"com."
+"Bitte gib eine gültige mailadresse an: Zum Beispiel: ihrname@beispiel.com."
 
 #: templates/plugins/function.muticketValidationError.php:43
 msgid "Please enter a valid URL."
-msgstr "Bitte geben Sie einen gültigen URL an."
+msgstr "Bitte gib einen gültigen URL an."
 
 #: templates/plugins/function.muticketValidationError.php:44
 msgid ""
 "Please use this date format: dd/mm/yyyy. For example 17/03/2010 for the 17th "
 "of March, 2010."
 msgstr ""
-"Bitte nutzen Sie ein gültiges Format für das Datum: dd/mm/yyyy. Zum "
-"Beispiel: 17/03/2010 für den 17. März 2010."
+"Bitte nutze ein gültiges Format für das Datum: dd/mm/yyyy. Zum Beispiel: "
+"17/03/2010 für den 17. März 2010."
 
 #: templates/plugins/function.muticketValidationError.php:45
 msgid "Please enter a valid $ amount. For example $100.00 ."
-msgstr "Bitte geben Sie einen gültigen $ Betrag an. Zum Beispile $100.00 ."
+msgstr "Bitte gib einen gültigen $ Betrag an. Zum Beispile $100.00 ."
 
 #: templates/plugins/function.muticketValidationError.php:46
 msgid "Please make a selection."
-msgstr "Bitte treffen Sie eine Auswahl."
+msgstr "Bitte triff eine Auswahl."
 
 #: templates/plugins/function.muticketValidationError.php:47
 msgid "Please select one of the above options."
-msgstr "Bitte wählen Sie eine der obigen Optionen."
+msgstr "Bitte wählen eine der obigen Optionen."
 
 #: templates/plugins/function.muticketValidationError.php:50
 msgid "This value must not contain spaces."
@@ -278,7 +276,7 @@ msgstr "Dieses Feld darf keine  Leerzeichen enthalten."
 
 #: templates/plugins/function.muticketValidationError.php:51
 msgid "Please select a valid html colour code."
-msgstr "Bitte wählen Sie einen gültigen html Farbwert."
+msgstr "Bitte wähle einen gültigen html Farbwert."
 
 #: templates/plugins/function.muticketValidationError.php:52
 msgid "Please select an allowed file type."
@@ -288,18 +286,18 @@ msgstr "Bitte wähle einen erlaubten Dateitypen."
 #: templates/plugins/function.muticketValidationError.php:55
 #: templates/plugins/function.muticketValidationError.php:57
 msgid "Please select a value in the past."
-msgstr "Bitte wählen Sie einen Wert in der Vergangenheit."
+msgstr "Bitte wähle einen Wert in der Vergangenheit."
 
 #: templates/plugins/function.muticketValidationError.php:54
 #: templates/plugins/function.muticketValidationError.php:56
 #: templates/plugins/function.muticketValidationError.php:58
 msgid "Please select a value in the future."
-msgstr "Bitte wählen Sie einen Wert in der Zukunft."
+msgstr "Bitte wähle einen Wert in der Zukunft."
 
 #: templates/plugins/modifier.muticketShowRating.php:35
 #: templates/user/rating/include_displayItemListMany.tpl:5
 msgid "You have rated this support answer:"
-msgstr "Sie haben diese Supportantwort bewertet:"
+msgstr "Du hast diese Supportantwort bewertet:"
 
 #: templates/plugins/function.muticketTemplateSelector.php:30
 #: templates/plugins/function.muticketSelectorTemplates.php:29
@@ -520,7 +518,7 @@ msgstr "Fehler! Keine Gruppe vorhanden!"
 #: lib/MUTicket/Form/Handler/Admin/Config.php:127
 msgid "All supporters deleted. You have to save one!"
 msgstr ""
-"Sämtliche Supporter sind gelöscht. Sie sollten einen Supporter anlegen!"
+"Sämtliche Supporter sind gelöscht. Du solltest einen Supporter anlegen!"
 
 #: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:49
 msgid "Sorry. Our support is not available at the moment!"
@@ -663,8 +661,8 @@ msgid ""
 "Notice: This block will not be displayed until you activate the MUTicket "
 "module."
 msgstr ""
-"Achtung: Dieser Block wird nicht angezeigt bis Sie das Modul MUTicket "
-"aktiviert haben."
+"Achtung: Dieser Block wird nicht angezeigt bis Du das Modul MUTicket "
+"aktiviert hast."
 
 #: lib/MUTicket/Base/ItemList.php:191 lib/MUTicket/Block/Base/ItemList.php:191
 #: lib/MUTicket/Block/ItemList.php:150
@@ -731,22 +729,19 @@ msgstr "Fehler! Keine Datei gefunden."
 msgid ""
 "Error! This file type is not allowed. Please choose another file format."
 msgstr ""
-"Fehler! Dieser Dateityp ist nicht erlaubt. Bitte wählen Sie ein gültiges "
-"Format!"
+"Fehler! Dieser Dateityp ist nicht erlaubt. Bitte wähle ein gültiges Format!"
 
 #: lib/MUTicket/Base/UploadHandler.php:147
 #, php-format
 msgid "Error! Your file is too big. Please keep it smaller than %s kilobytes."
 msgstr ""
-"Fehler! Ihre Datei ist zu gross. Bitte machen Sie sie kleiner als %s "
-"Kilobytes."
+"Fehler! Deine Datei ist zu gross. Bitte mache sie kleiner als %s Kilobytes."
 
 #: lib/MUTicket/Base/UploadHandler.php:151
 #, php-format
 msgid "Error! Your file is too big. Please keep it smaller than %s megabytes."
 msgstr ""
-"Fehler! Ihre Datei ist zu gross. Bitte machen Sie sie kleiner als %s "
-"Megabytes."
+"Fehler! Deine Datei ist zu gross. Bitte mache sie kleiner als %s Megabytes."
 
 #: lib/MUTicket/Base/UploadHandler.php:160
 msgid "Error! This file type seems not to be a valid image."
@@ -1266,7 +1261,7 @@ msgstr ""
 
 #: lib/MUTicket/Entity/Supporter.php:47
 msgid "Call statistic and rated tickets of this supporter"
-msgstr "Rufen Sie Statistiken und bewertete Tickets dieses Supporters auf"
+msgstr "Rufe Statistiken und bewertete Tickets dieses Supporters auf"
 
 #: lib/MUTicket/Entity/Supporter.php:48
 msgid "Rating statictics"
@@ -1795,9 +1790,8 @@ msgstr "Besitzer"
 #: templates/user/ticket/view_quickNav.tpl:89
 #: templates/user/ticket/view.tpl:110 templates/user/ticket/edit.tpl:106
 #: templates/user/ticket/view.csv:3
-#, fuzzy
 msgid "Due date"
-msgstr "Erstelldatum"
+msgstr "Fälligkeitsdatum"
 
 #: templates/external/ticket/find.tpl:114
 #: templates/external/ticket/select.tpl:65
@@ -1806,9 +1800,8 @@ msgstr "Erstelldatum"
 #: templates/admin/ticket/edit.tpl:128 templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:90
 #: templates/user/ticket/edit.tpl:115 templates/user/ticket/view.csv:3
-#, fuzzy
 msgid "Due text"
-msgstr "Starttext"
+msgstr "Text für Fälligkeitsdatum"
 
 #: templates/external/ticket/find.tpl:115
 #: templates/external/ticket/select.tpl:66
@@ -2156,7 +2149,7 @@ msgstr "Allgemein"
 
 #: templates/admin/config.tpl:19
 msgid "Here you can manage all basic settings for this application."
-msgstr "Hier können Sie die Basiseinstellungen für das Modul vornehmen."
+msgstr "Hier kannst Du die Basiseinstellungen für das Modul vornehmen."
 
 #: templates/admin/config.tpl:21
 msgid "Supportergroup"
@@ -2165,7 +2158,7 @@ msgstr "Gruppe für Supporter"
 #: templates/admin/config.tpl:22 templates/admin/config.tpl:26
 #: templates/admin/config.tpl:30
 msgid "Input this setting."
-msgstr "Legen Sie diese Einstellung fest!"
+msgstr "Lege diese Einstellung fest!"
 
 #: templates/admin/config.tpl:25
 msgid "Allow rating?"
@@ -2189,7 +2182,7 @@ msgstr "Aktiviere oder aktiviere diese Option"
 
 #: templates/admin/config.tpl:39
 msgid "Do you want to delete all existing supporters?"
-msgstr "Möchten Sie sämtliche Supporter löschen?"
+msgstr "Möchtest Du sämtliche Supporter löschen?"
 
 #: templates/admin/config.tpl:41
 msgid "Delete existing supporters?"
@@ -2208,14 +2201,12 @@ msgid "Enter the message new owner."
 msgstr "Gib die Nachricht für einen neuen Benutzer ein."
 
 #: templates/admin/config.tpl:57
-#, fuzzy
 msgid "Message due date"
-msgstr "Bitte gib das Startdatum der Nachricht ein"
+msgstr "Nachricht für Fälligkeitsdatum"
 
 #: templates/admin/config.tpl:58
-#, fuzzy
 msgid "Enter the message due date."
-msgstr "Bitte gib das Startdatum der Nachricht ein"
+msgstr "Bitte gib die Nachricht für der Nachricht ein"
 
 #: templates/admin/config.tpl:65
 msgid "Update configuration"
@@ -2475,11 +2466,11 @@ msgstr "Inhalt"
 
 #: templates/admin/ticket/edit.tpl:41 templates/user/ticket/edit.tpl:34
 msgid "Enter the title of the ticket"
-msgstr "Geben Sie den Titel des Tickets ein"
+msgstr "Gib den Titel des Tickets ein"
 
 #: templates/admin/ticket/edit.tpl:45 templates/user/ticket/edit.tpl:40
 msgid "Enter the text of the ticket"
-msgstr "Geben Sie den Text des Tickets ein"
+msgstr "Gib den Text des Tickets ein"
 
 #: templates/admin/ticket/edit.tpl:51 templates/admin/ticket/edit.tpl:77
 #: templates/admin/currentState/edit.tpl:46 templates/user/ticket/edit.tpl:46
@@ -2535,7 +2526,6 @@ msgid "Enter a part of the user name to search"
 msgstr "Gib einen Teil des Benutzernamens für die Suche ein"
 
 #: templates/admin/ticket/edit.tpl:114
-#, fuzzy
 msgid "Switch to the user administration"
 msgstr "Wechsel zum Administrationsbereich."
 
@@ -2545,15 +2535,16 @@ msgstr "benutzer managen"
 
 #: templates/admin/ticket/edit.tpl:121 templates/admin/ticket/edit.tpl:123
 #: templates/user/ticket/edit.tpl:108 templates/user/ticket/edit.tpl:110
-#, fuzzy
 msgid "Enter the due date of the ticket"
-msgstr "Bitte gib ein gültiges Datum ein."
+msgstr "Gib das Fälligkeitsdatum des Tickets ein."
 
 #: templates/admin/ticket/edit.tpl:127
 msgid ""
 "If you don\"t want to give a concrete date, you can enter a string like "
 "\"end of november 2013\"."
 msgstr ""
+"Wenn Du kein konkretes Datum eingeben möchtest, kannst Du einen Text wie "
+"Ende November 2013 eingeben."
 
 #: templates/admin/ticket/edit.tpl:129 templates/user/ticket/edit.tpl:116
 msgid "Enter the due text of the ticket"
@@ -2564,9 +2555,8 @@ msgstr "Gib den Text ein"
 #: templates/admin/currentState/include_selectOne.tpl:24
 #: templates/user/currentState/include_selectOne.tpl:18
 #: templates/user/currentState/include_selectOne.tpl:24
-#, fuzzy
 msgid "Choose the current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Wähle den aktuellen Status"
 
 #: templates/admin/ticket/edit.tpl:138 templates/admin/ticket/edit.tpl:159
 msgid "Send Message?"
@@ -2603,9 +2593,8 @@ msgid "Children"
 msgstr "Kinder"
 
 #: templates/admin/ticket/view.csv:7 templates/user/ticket/view.csv:7
-#, fuzzy
 msgid "Labelticket"
-msgstr "Aktuelle Tickets"
+msgstr "Label des Tickets"
 
 #: templates/admin/ticket/delete.tpl:4 templates/user/ticket/delete.tpl:4
 msgid "Delete ticket"
@@ -2613,7 +2602,7 @@ msgstr "Ticket löschen"
 
 #: templates/admin/ticket/delete.tpl:11 templates/user/ticket/delete.tpl:9
 msgid "Do you really want to delete this ticket ?"
-msgstr "Möchten Sie dieses Ticket wirklich löschen?"
+msgstr "Möchtest Du dieses Ticket wirklich löschen?"
 
 #: templates/admin/ticket/delete.tpl:18
 #: templates/admin/currentState/delete.tpl:18
@@ -2706,9 +2695,8 @@ msgstr "Letzte aktuelle Stati"
 #: templates/admin/currentState/view.atom:5
 #: templates/user/currentState/view.rss:12
 #: templates/user/currentState/view.atom:5
-#, fuzzy
 msgid "A direct feed showing the list of current states"
-msgstr "Ein direkter Feed, der eine Liste der Bewertungen anzeigt"
+msgstr "Ein direkter Feed, der eine Liste der aktuellen Stati anzeigt"
 
 #: templates/admin/currentState/include_selectOne.tpl:17
 #: templates/user/currentState/include_selectOne.tpl:17
@@ -2726,7 +2714,6 @@ msgstr "Aktuellen Status erstellen"
 #: templates/admin/rating/view.tpl:62 templates/user/currentState/view.tpl:57
 #: templates/user/supporter/view.tpl:57 templates/user/label/view.tpl:53
 #: templates/user/rating/view.tpl:49
-#, fuzzy
 msgid "View detail page"
 msgstr "Detailseite ansehen"
 
@@ -2734,18 +2721,15 @@ msgstr "Detailseite ansehen"
 #: templates/user/currentState/view.tpl:91
 #: templates/mailz/itemlist_currentState_html.tpl:10
 #: templates/mailz/itemlist_currentState_text.tpl:7
-#, fuzzy
 msgid "No current states found."
-msgstr "Fehler! Keine Datei gefunden."
+msgstr "Keinen aktuellen Status gefunden."
 
 #: templates/admin/currentState/view.tpl:116
-#, fuzzy
 msgid "With selected current states"
-msgstr "Mit gewählter erweiterter Information"
+msgstr "Aktuelle Stati"
 
 #: templates/admin/currentState/view.tpl:118
 #: templates/admin/label/view.tpl:110 templates/admin/rating/view.tpl:96
-#, fuzzy
 msgid "Choose action"
 msgstr "Wähle eine Aktion"
 
@@ -2758,15 +2742,13 @@ msgstr "Aktuellen Stati bearbeiten"
 
 #: templates/admin/currentState/edit.tpl:34
 #: templates/user/currentState/edit.tpl:29
-#, fuzzy
 msgid "Enter the title of the current state"
-msgstr "Erledigt! Aktueller Status erstellt."
+msgstr "Gib den Titel des aktuellen Status ein"
 
 #: templates/admin/currentState/edit.tpl:40
 #: templates/user/currentState/edit.tpl:35
-#, fuzzy
 msgid "Enter the description of the current state"
-msgstr "Erledigt! Aktueller Status erstellt."
+msgstr "Gib die beschreibung des aktuellen Status ein"
 
 #: templates/admin/currentState/edit.tpl:49
 #: templates/user/currentState/edit.tpl:44
@@ -2775,15 +2757,13 @@ msgstr "Erlaubte Dateigröße:"
 
 #: templates/admin/currentState/edit.tpl:63
 #: templates/user/currentState/edit.tpl:58
-#, fuzzy
 msgid "Delete upload icon ?"
-msgstr "Dieses Bild löschen?"
+msgstr "Diesen Icon löschen?"
 
 #: templates/admin/currentState/edit.tpl:108
 #: templates/user/currentState/edit.tpl:103
-#, fuzzy
 msgid "Really delete this current state?"
-msgstr "Diese erweiterten Informationen wirklich löschen?"
+msgstr "Diesen aktuellen Status wirklich löschen?"
 
 #: templates/admin/currentState/delete.tpl:4
 #: templates/user/currentState/delete.tpl:4
@@ -2792,9 +2772,8 @@ msgstr "Aktuellen Status löschen"
 
 #: templates/admin/currentState/delete.tpl:11
 #: templates/user/currentState/delete.tpl:9
-#, fuzzy
 msgid "Do you really want to delete this current state ?"
-msgstr "Wollen Sie diese Bewertung wirklich löschen?"
+msgstr "Willst Du diesen aktuellen Status wirklich löschen?"
 
 #: templates/admin/supporter/view.rss:11 templates/admin/supporter/view.atom:4
 #: templates/user/supporter/view.rss:11 templates/user/supporter/view.atom:4
@@ -2828,7 +2807,7 @@ msgstr "Supporter bearbeiten"
 
 #: templates/admin/supporter/edit.tpl:32 templates/admin/supporter/edit.tpl:36
 msgid "Input the username of the supporter"
-msgstr "Geben Sie den Benutzernamen des Supporters an"
+msgstr "Gib den Benutzernamen des Supporters an"
 
 #: templates/admin/supporter/edit.tpl:34
 msgid "Select a user"
@@ -2836,11 +2815,11 @@ msgstr "Eine  Benutzer wählen"
 
 #: templates/admin/supporter/edit.tpl:43
 msgid "Input the category of the variety"
-msgstr "Geben Sie die Kategorie für diese Variante ein"
+msgstr "Gib die Kategorie für diese Variante ein"
 
 #: templates/admin/supporter/edit.tpl:46 templates/admin/supporter/edit.tpl:50
 msgid "Select a category"
-msgstr "Wählen Sie eine Kategorie"
+msgstr "Wähle eine Kategorie"
 
 #: templates/admin/supporter/edit.tpl:54
 msgid "Is this supporter present?"
@@ -2867,7 +2846,7 @@ msgstr "Supporter löschen"
 #: templates/admin/supporter/delete.tpl:11
 #: templates/user/supporter/delete.tpl:9
 msgid "Do you really want to delete this supporter ?"
-msgstr "Möchten Sie diesen Supporter wirklich löschen?"
+msgstr "Möchtest Du diesen Supporter wirklich löschen?"
 
 #: templates/admin/label/view.rss:11 templates/admin/label/view.atom:4
 #: templates/user/label/view.rss:11 templates/user/label/view.atom:4
@@ -2903,9 +2882,8 @@ msgid "Enter the name of the label"
 msgstr "Gib deb Namen des Labels ein"
 
 #: templates/admin/label/edit.tpl:40 templates/user/label/edit.tpl:35
-#, fuzzy
 msgid "Choose the label color of the label"
-msgstr "Erledigt! Label erstellt."
+msgstr "Wähle die Labelfarbe"
 
 #: templates/admin/label/edit.tpl:48
 msgid "Choose the font color of the label"
@@ -2961,7 +2939,7 @@ msgstr "Bewertung aktualisieren"
 
 #: templates/admin/rating/edit.tpl:34
 msgid "Enter the ratingvalue of the rating"
-msgstr "Wählen Sie den Wert der Bewertung"
+msgstr "Wähle den Wert der Bewertung"
 
 #: templates/admin/rating/edit.tpl:77 templates/user/rating/edit.tpl:52
 msgid "Really delete this rating?"
@@ -2974,7 +2952,7 @@ msgstr "Bewertung löschen"
 
 #: templates/admin/rating/delete.tpl:11 templates/user/rating/delete.tpl:9
 msgid "Do you really want to delete this rating ?"
-msgstr "Wollen Sie diese Bewertung wirklich löschen?"
+msgstr "Willst Du diese Bewertung wirklich löschen?"
 
 #: templates/admin/include_standardfields_display.tpl:11
 msgid "Creation"
@@ -3024,7 +3002,6 @@ msgstr ""
 "laden."
 
 #: templates/contenttype/item_edit.tpl:11
-#, fuzzy
 msgid ""
 "Please select your item here. You can resort the dropdown list and reduce "
 "it's entries by applying filters. On the right side you will see a preview "
@@ -3058,7 +3035,7 @@ msgstr "Entschuldigung! Unser Support ist derzeit nicht erreichbar!"
 
 #: templates/user/ticket/display.tpl:24
 msgid "Do you want to close this ticket?"
-msgstr "Möchten Sie dieses Ticket tatsächlich schliessen?"
+msgstr "Möchtest Du dieses Ticket tatsächlich schliessen?"
 
 #: templates/user/ticket/display.tpl:25
 msgid "Close ticket"
@@ -3069,16 +3046,16 @@ msgid ""
 "You can now close this ticket, if your are sure, that the question of the "
 "customer is answered! Consider you cannot reopen this ticket!"
 msgstr ""
-"Sie können dieses Ticket nun schliessen, wenn Sie sicher sind, dass die "
-"Frage des Kunden beantwortet ist. Bedenken Sie, dass Sie dieses Ticket nicht "
-"wieder öffnen können!"
+"Du kannst dieses Ticket nun schliessen, wenn Du sicher bist, dass die Frage "
+"des Kunden beantwortet ist. Bedenke, dass Du dieses Ticket nicht wieder "
+"öffnen kannst!"
 
 #: templates/user/ticket/display.tpl:28
 msgid ""
 "This ticket is closed. If you have questions again, please open a new ticket!"
 msgstr ""
-"Dieses Ticket ist geschlossen. Wenn Sie eine Frage haben,  erstellen Sie "
-"bitte ein neues Ticket!"
+"Dieses Ticket ist geschlossen. Wenn Du eine Frage hast,  erstelle bitte ein "
+"neues Ticket!"
 
 #: templates/user/ticket/display.tpl:82 templates/user/ticket/display.tpl:181
 msgid "Image"
@@ -3106,7 +3083,7 @@ msgstr "Keins gesetzt."
 
 #: templates/user/ticket/display.tpl:164
 msgid "RATE NOW THIS SUPPORT ANSWER!"
-msgstr "BEWERTEN SIE JETZT DIESE SUPPORTANTWORT!"
+msgstr "BEWERTE JETZT DIESE SUPPORTANTWORT!"
 
 #: templates/user/ticket/view.tpl:15
 msgid "Sorry. At the moment our support is not available!"
@@ -3152,9 +3129,8 @@ msgid "Set label"
 msgstr "Setze Label"
 
 #: templates/user/ticket/view.tpl:232
-#, fuzzy
 msgid "Enter duedate!"
-msgstr "Gib den Folder ein"
+msgstr "Gib das Fälligkeitsdatum ein!"
 
 #: templates/user/ticket/view.tpl:234
 msgid "Enter a text like end of october!"
@@ -3174,11 +3150,11 @@ msgstr ""
 
 #: templates/user/supporter/edit.tpl:29
 msgid "Enter the username of the supporter"
-msgstr "Geben Sie den Benutzernamen des Supporters an"
+msgstr "Gib den Benutzernamen des Supporters an"
 
 #: templates/user/supporter/edit.tpl:35
 msgid "Enter the supportcats of the supporter"
-msgstr "Geben Sie die Kategorien für diesen Supporter ein"
+msgstr "Gib die Kategorien für diesen Supporter ein"
 
 #: templates/user/rating/edit.tpl:50
 msgid "Update rating"

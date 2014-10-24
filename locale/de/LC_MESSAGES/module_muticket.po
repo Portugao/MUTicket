@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: workflows/function.none_permissioncheck.php:55
@@ -78,7 +78,7 @@ msgstr "Inhalt abschicken"
 
 #: workflows/function.none_permissioncheck.php:72
 msgid "Update"
-msgstr "Aktualisierung"
+msgstr "Aktualisieren"
 
 #: workflows/function.none_permissioncheck.php:72
 msgid "Update content."
@@ -2116,9 +2116,8 @@ msgid "Label information"
 msgstr "Labelinformation"
 
 #: templates/external/rating/find.tpl:48
-#, fuzzy
 msgid "Link to the rating"
-msgstr "Link zur Nachricht"
+msgstr "Link zur Bewertung"
 
 #: templates/external/rating/find.tpl:49
 msgid "ID of rating"
@@ -2557,9 +2556,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/ticket/edit.tpl:129 templates/user/ticket/edit.tpl:116
-#, fuzzy
 msgid "Enter the due text of the ticket"
-msgstr "Gib den Robots Text für den Metatag ein"
+msgstr "Gib den Text ein"
 
 #: templates/admin/ticket/edit.tpl:135
 #: templates/admin/currentState/include_selectOne.tpl:18
@@ -2722,9 +2720,8 @@ msgstr "Wähle aktuellen Status"
 #: templates/admin/currentState/edit.tpl:10
 #: templates/user/currentState/view.tpl:10
 #: templates/user/currentState/edit.tpl:9
-#, fuzzy
 msgid "Create current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Aktuellen Status erstellen"
 
 #: templates/admin/currentState/view.tpl:70 templates/admin/label/view.tpl:70
 #: templates/admin/rating/view.tpl:62 templates/user/currentState/view.tpl:57
@@ -2791,9 +2788,8 @@ msgstr "Diese erweiterten Informationen wirklich löschen?"
 
 #: templates/admin/currentState/delete.tpl:4
 #: templates/user/currentState/delete.tpl:4
-#, fuzzy
 msgid "Delete current state"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Aktuellen Status löschen"
 
 #: templates/admin/currentState/delete.tpl:11
 #: templates/user/currentState/delete.tpl:9
@@ -2876,9 +2872,8 @@ msgstr "Möchten Sie diesen Supporter wirklich löschen?"
 
 #: templates/admin/label/view.rss:11 templates/admin/label/view.atom:4
 #: templates/user/label/view.rss:11 templates/user/label/view.atom:4
-#, fuzzy
 msgid "Latest labels"
-msgstr "Wähle die Labels"
+msgstr "Aktuelle Labels"
 
 #: templates/admin/label/view.rss:12 templates/admin/label/view.atom:5
 #: templates/user/label/view.rss:12 templates/user/label/view.atom:5

@@ -2726,7 +2726,7 @@ msgstr "Keinen aktuellen Status gefunden."
 
 #: templates/admin/currentState/view.tpl:116
 msgid "With selected current states"
-msgstr "Aktuelle Stati"
+msgstr "Gewählte aktuelle Stati"
 
 #: templates/admin/currentState/view.tpl:118
 #: templates/admin/label/view.tpl:110 templates/admin/rating/view.tpl:96
@@ -2870,7 +2870,7 @@ msgstr "Keine Labels gefunden"
 
 #: templates/admin/label/view.tpl:108
 msgid "With selected labels"
-msgstr "Gewählter Labels"
+msgstr "Gewählte Labels"
 
 #: templates/admin/label/edit.tpl:7 templates/admin/label/edit.tpl:13
 #: templates/user/label/edit.tpl:7 templates/user/label/edit.tpl:11

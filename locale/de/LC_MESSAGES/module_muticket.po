@@ -2699,9 +2699,8 @@ msgstr[1] "Punkten für die Bewertungen der Kunden"
 #: templates/admin/currentState/view.atom:4
 #: templates/user/currentState/view.rss:11
 #: templates/user/currentState/view.atom:4
-#, fuzzy
 msgid "Latest current states"
-msgstr "Liste aller aktuellen Stati"
+msgstr "Letzte aktuelle Stati"
 
 #: templates/admin/currentState/view.rss:12
 #: templates/admin/currentState/view.atom:5
@@ -2877,9 +2876,8 @@ msgstr "Aktuelle Labels"
 
 #: templates/admin/label/view.rss:12 templates/admin/label/view.atom:5
 #: templates/user/label/view.rss:12 templates/user/label/view.atom:5
-#, fuzzy
 msgid "A direct feed showing the list of labels"
-msgstr "Ein Feed der die Albumliste anzeigt"
+msgstr "Ein Feed der die Labelliste anzeigt"
 
 #: templates/admin/label/view.tpl:57 templates/admin/label/edit.tpl:47
 msgid "Font color"

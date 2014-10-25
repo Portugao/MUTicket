@@ -26,7 +26,7 @@
     {/if} *}
     
 <div id="ticket_table"><p id="rated_tickets" style="cursor: pointer;">{gt text='Show rated answers of this supporter!'}</p>
-<div style="display: none; height: 200px; overflow: auto;"><table class="z-datatable">
+<div style="display: none; height: 150px; overflow: auto;"><table class="z-datatable">
     <colgroup>
         <col id="crating" />
        {* <col id="ctitle" /> *}

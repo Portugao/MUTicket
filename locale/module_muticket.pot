@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 14:39+0000\n"
+"POT-Creation-Date: 2014-10-25 21:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,10 +64,13 @@ msgstr ""
 msgid "Pseudo-state for content which has been deleted from the database."
 msgstr ""
 
-#: workflows/function.none_permissioncheck.php:68 lib/MUTicket/Api/Ajax.php:40
+#: workflows/function.none_permissioncheck.php:68 lib/MUTicket/Api/Ajax.php:39
+#: templates/admin/ticket/view.tpl:142
 #: templates/admin/currentState/view.tpl:121
-#: templates/admin/label/view.tpl:113 templates/admin/rating/view.tpl:99
-#: templates/user/ticket/edit.tpl:191
+#: templates/admin/supporter/view.tpl:104 templates/admin/label/view.tpl:113
+#: templates/admin/rating/view.tpl:99 templates/user/ticket/view.tpl:143
+#: templates/user/ticket/view.tpl:176 templates/user/ticket/view.tpl:205
+#: templates/user/ticket/view.tpl:234 templates/user/ticket/edit.tpl:191
 msgid "Submit"
 msgstr ""
 
@@ -104,23 +107,24 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Label.php:648
 #: lib/MUTicket/Entity/Base/Label.php:691
 #: lib/MUTicket/Entity/Base/Label.php:692 lib/MUTicket/Entity/Ticket.php:91
-#: lib/MUTicket/Entity/Ticket.php:92 lib/MUTicket/Entity/Ticket.php:135
-#: lib/MUTicket/Entity/Ticket.php:136 lib/MUTicket/Entity/CurrentState.php:80
+#: lib/MUTicket/Entity/Ticket.php:92 lib/MUTicket/Entity/CurrentState.php:80
 #: lib/MUTicket/Entity/CurrentState.php:81
 #: lib/MUTicket/Entity/CurrentState.php:124
 #: lib/MUTicket/Entity/CurrentState.php:125
 #: lib/MUTicket/Entity/Supporter.php:78 lib/MUTicket/Entity/Supporter.php:79
 #: lib/MUTicket/Entity/Supporter.php:122 lib/MUTicket/Entity/Supporter.php:123
-#: templates/admin/ticket/delete.tpl:7 templates/admin/ticket/delete.tpl:20
+#: templates/admin/ticket/view.tpl:140 templates/admin/ticket/delete.tpl:7
+#: templates/admin/ticket/delete.tpl:20
 #: templates/admin/currentState/view.tpl:119
 #: templates/admin/currentState/delete.tpl:7
 #: templates/admin/currentState/delete.tpl:20
+#: templates/admin/supporter/view.tpl:102
 #: templates/admin/supporter/delete.tpl:7
 #: templates/admin/supporter/delete.tpl:20 templates/admin/label/view.tpl:111
 #: templates/admin/label/delete.tpl:7 templates/admin/label/delete.tpl:20
 #: templates/admin/rating/view.tpl:97 templates/admin/rating/delete.tpl:7
-#: templates/admin/rating/delete.tpl:20 templates/user/ticket/view.tpl:257
-#: templates/user/ticket/view.tpl:258 templates/user/ticket/delete.tpl:18
+#: templates/admin/rating/delete.tpl:20 templates/user/ticket/view.tpl:255
+#: templates/user/ticket/view.tpl:256 templates/user/ticket/delete.tpl:18
 #: templates/user/currentState/delete.tpl:18
 #: templates/user/supporter/delete.tpl:18 templates/user/label/delete.tpl:18
 #: templates/user/rating/delete.tpl:18
@@ -128,8 +132,10 @@ msgid "Delete"
 msgstr ""
 
 #: workflows/function.none_permissioncheck.php:73
+#: templates/admin/ticket/view.tpl:140
 #: templates/admin/currentState/view.tpl:119
-#: templates/admin/label/view.tpl:111 templates/admin/rating/view.tpl:97
+#: templates/admin/supporter/view.tpl:102 templates/admin/label/view.tpl:111
+#: templates/admin/rating/view.tpl:97
 msgid "Delete content permanently."
 msgstr ""
 
@@ -317,27 +323,27 @@ msgstr ""
 msgid "%1$s: missing parameter '%2$s'"
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:194
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:185
 #: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:185
-#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:140
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:160
 msgid "Done! Ticket created."
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:196
-#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:203
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:187
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:194
 #: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:187
 #: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:194
-#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:146
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:166
 msgid "Done! Ticket updated."
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:200
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:191
 #: lib/MUTicket/Form/Handler/User/Ticket/Base/Edit.php:191
-#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:149
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:169
 msgid "Done! Ticket deleted."
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:229
+#: lib/MUTicket/Form/Handler/Admin/Ticket/Base/Edit.php:220
 #: lib/MUTicket/Form/Handler/Admin/CurrentState/Base/Edit.php:198
 #: lib/MUTicket/Form/Handler/Admin/Label/Base/Edit.php:206
 #: lib/MUTicket/Form/Handler/Admin/Supporter/Base/Edit.php:196
@@ -356,7 +362,7 @@ msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Base/Edit.php:263
 #: lib/MUTicket/Form/Handler/User/Base/Edit.php:263
-#: lib/MUTicket/Form/Handler/User/Edit.php:92
+#: lib/MUTicket/Form/Handler/User/Edit.php:94
 #: lib/MUTicket/Controller/Base/User.php:369
 #: lib/MUTicket/Controller/Base/Admin.php:357
 msgid "Error! Could not determine workflow actions."
@@ -409,12 +415,12 @@ msgid "Error! Deletion attempt failed."
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Base/Config.php:117
-#: lib/MUTicket/Form/Handler/Admin/Config.php:113
+#: lib/MUTicket/Form/Handler/Admin/Config.php:115
 msgid "Error! Failed to set configuration variables."
 msgstr ""
 
 #: lib/MUTicket/Form/Handler/Admin/Base/Config.php:120
-#: lib/MUTicket/Form/Handler/Admin/Config.php:116
+#: lib/MUTicket/Form/Handler/Admin/Config.php:118
 msgid "Done! Module configuration updated."
 msgstr ""
 
@@ -500,11 +506,23 @@ msgstr ""
 msgid "Done! Rating deleted."
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Config.php:66
+#: lib/MUTicket/Form/Handler/Admin/Config.php:43
+#: lib/MUTicket/Entity/Repository/Base/Ticket.php:186
+#: lib/MUTicket/Entity/Repository/Base/Supporter.php:177
+msgid "Yes"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Config.php:44
+#: lib/MUTicket/Entity/Repository/Base/Ticket.php:185
+#: lib/MUTicket/Entity/Repository/Base/Supporter.php:176
+msgid "No"
+msgstr ""
+
+#: lib/MUTicket/Form/Handler/Admin/Config.php:68
 msgid "Error! No groups available!"
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/Admin/Config.php:127
+#: lib/MUTicket/Form/Handler/Admin/Config.php:129
 msgid "All supporters deleted. You have to save one!"
 msgstr ""
 
@@ -512,7 +530,7 @@ msgstr ""
 msgid "Sorry. Our support is not available at the moment!"
 msgstr ""
 
-#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:142
+#: lib/MUTicket/Form/Handler/User/Ticket/Edit.php:162
 msgid "Done! Answer created."
 msgstr ""
 
@@ -657,7 +675,7 @@ msgid "MUTicket items"
 msgstr ""
 
 #: lib/MUTicket/Base/Installer.php:38 lib/MUTicket/Base/Installer.php:138
-#: lib/MUTicket/Installer.php:63
+#: lib/MUTicket/Installer.php:68
 msgid "Doctrine Exception: "
 msgstr ""
 
@@ -685,7 +703,7 @@ msgid ""
 "extension."
 msgstr ""
 
-#: lib/MUTicket/Base/Installer.php:140
+#: lib/MUTicket/Base/Installer.php:140 lib/MUTicket/Installer.php:70
 #, php-format
 msgid ""
 "An error was encountered while dropping the tables for the %s extension."
@@ -797,20 +815,15 @@ msgid ""
 "This plugin shows a list of tickets and other items of the MUTicket module."
 msgstr ""
 
-#: lib/MUTicket/Installer.php:30
+#: lib/MUTicket/Installer.php:30 lib/MUTicket/Installer.php:59
 msgid ""
 "Hi supporter, here you get this ticket to work for the customer by yourself."
 msgstr ""
 
-#: lib/MUTicket/Installer.php:31
+#: lib/MUTicket/Installer.php:31 lib/MUTicket/Installer.php:60
 msgid ""
 "Dear Customer! We assume that we are able to clear your ticket until the "
 "given date"
-msgstr ""
-
-#: lib/MUTicket/Installer.php:65
-#, php-format
-msgid "An error was encountered while dropping the tables for the %s module."
 msgstr ""
 
 #: lib/MUTicket/Version.php:23 templates/user/header.tpl:12
@@ -825,54 +838,62 @@ msgstr ""
 msgid "Done! The ticket is closed!"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:51
+#: lib/MUTicket/Util/Base/Settings.php:52
 msgid "Category: "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:101
+#: lib/MUTicket/Util/Base/Settings.php:102
 msgid "A new ticket on "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:105
+#: lib/MUTicket/Util/Base/Settings.php:104
+msgid "A ticket was edited on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:109
 msgid "An answer to your ticket on "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:108
+#: lib/MUTicket/Util/Base/Settings.php:112
 msgid "An answer to a ticket on "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:181
-#: lib/MUTicket/Util/Base/Settings.php:182
+#: lib/MUTicket/Util/Base/Settings.php:185
+#: lib/MUTicket/Util/Base/Settings.php:186
 msgid "Unable to send message"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:184
+#: lib/MUTicket/Util/Base/Settings.php:188
 msgid "Your ticket was saved and an email sent to our support!"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:187
+#: lib/MUTicket/Util/Base/Settings.php:191
 msgid "Your support answer was saved and an email sent to the customer!"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:211
+#: lib/MUTicket/Util/Base/Settings.php:215
 msgid "Another entry was created by an user on "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:214
+#: lib/MUTicket/Util/Base/Settings.php:217
+msgid "An entry was edited by an user on "
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Settings.php:221
 msgid "There is an answer to your ticket of the support on "
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:216
+#: lib/MUTicket/Util/Base/Settings.php:223
 #: lib/MUTicket/Util/Base/Internal.php:93
 msgid "Title of ticket"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:217
+#: lib/MUTicket/Util/Base/Settings.php:224
 #: templates/external/ticket/find.tpl:106
 #: templates/external/ticket/select.tpl:57
 #: templates/admin/ticket/display.tpl:61
 #: templates/admin/ticket/view_quickNav.tpl:82
-#: templates/admin/ticket/view.tpl:44 templates/admin/ticket/edit.tpl:44
+#: templates/admin/ticket/view.tpl:53 templates/admin/ticket/edit.tpl:44
 #: templates/admin/ticket/view.csv:3 templates/admin/ticket/rating.tpl:50
 #: templates/admin/ticket/rating.tpl:51 templates/admin/ticket/rating.tpl:54
 #: templates/user/ticket/display.tpl:80
@@ -881,8 +902,8 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Settings.php:218
-#: lib/MUTicket/Util/Base/Internal.php:97
+#: lib/MUTicket/Util/Base/Settings.php:225
+#: lib/MUTicket/Util/Base/Internal.php:102
 msgid "Visit this ticket:"
 msgstr ""
 
@@ -911,8 +932,15 @@ msgstr ""
 msgid "To a ticket other labels were set."
 msgstr ""
 
-#: lib/MUTicket/Util/Base/Internal.php:95
+#: lib/MUTicket/Util/Base/Internal.php:96
+#: lib/MUTicket/Util/Base/Internal.php:98
 msgid "Status of ticket"
+msgstr ""
+
+#: lib/MUTicket/Util/Base/Internal.php:98 templates/user/ticket/view.tpl:129
+#: templates/user/ticket/view.tpl:160 templates/user/ticket/view.tpl:190
+#: templates/user/ticket/view.tpl:222
+msgid "Not set"
 msgstr ""
 
 #: lib/MUTicket/Util/Base/ListEntries.php:224
@@ -1073,16 +1101,6 @@ msgid ""
 "Error! Field value must be a valid html colour code [#123 or #123456] (%s)."
 msgstr ""
 
-#: lib/MUTicket/Entity/Repository/Base/Ticket.php:185
-#: lib/MUTicket/Entity/Repository/Base/Supporter.php:176
-msgid "No"
-msgstr ""
-
-#: lib/MUTicket/Entity/Repository/Base/Ticket.php:186
-#: lib/MUTicket/Entity/Repository/Base/Supporter.php:177
-msgid "Yes"
-msgstr ""
-
 #: lib/MUTicket/Entity/Base/Ticket.php:1197
 #: lib/MUTicket/Entity/Base/CurrentState.php:637
 #: lib/MUTicket/Entity/Base/Supporter.php:544
@@ -1116,13 +1134,13 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Rating.php:596
 #: lib/MUTicket/Entity/Base/Rating.php:640
 #: lib/MUTicket/Entity/Base/Label.php:623
-#: lib/MUTicket/Entity/Base/Label.php:667 lib/MUTicket/Entity/Ticket.php:67
-#: lib/MUTicket/Entity/Ticket.php:111 lib/MUTicket/Entity/CurrentState.php:56
+#: lib/MUTicket/Entity/Base/Label.php:667 lib/MUTicket/Entity/Ticket.php:111
+#: lib/MUTicket/Entity/CurrentState.php:56
 #: lib/MUTicket/Entity/CurrentState.php:100
 #: templates/admin/ticket/display.tpl:8
 #: templates/admin/currentState/display.tpl:8
 #: templates/admin/supporter/display.tpl:8 templates/admin/label/display.tpl:8
-#: templates/admin/rating/display.tpl:8 templates/user/ticket/view.tpl:246
+#: templates/admin/rating/display.tpl:8 templates/user/ticket/view.tpl:242
 msgid "Details"
 msgstr ""
 
@@ -1145,14 +1163,14 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Label.php:633
 #: lib/MUTicket/Entity/Base/Label.php:634
 #: lib/MUTicket/Entity/Base/Label.php:677
-#: lib/MUTicket/Entity/Base/Label.php:678
-#: lib/MUTicket/Entity/CurrentState.php:66
+#: lib/MUTicket/Entity/Base/Label.php:678 lib/MUTicket/Entity/Ticket.php:122
+#: lib/MUTicket/Entity/Ticket.php:123 lib/MUTicket/Entity/CurrentState.php:66
 #: lib/MUTicket/Entity/CurrentState.php:67
 #: lib/MUTicket/Entity/CurrentState.php:110
 #: lib/MUTicket/Entity/CurrentState.php:111
 #: lib/MUTicket/Entity/Supporter.php:64 lib/MUTicket/Entity/Supporter.php:65
 #: lib/MUTicket/Entity/Supporter.php:108 lib/MUTicket/Entity/Supporter.php:109
-#: templates/user/ticket/view.tpl:249 templates/user/ticket/view.tpl:250
+#: templates/user/ticket/view.tpl:246 templates/user/ticket/view.tpl:247
 msgid "Edit"
 msgstr ""
 
@@ -1165,7 +1183,7 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Rating.php:612
 #: lib/MUTicket/Entity/Base/Rating.php:656
 #: lib/MUTicket/Entity/Base/Label.php:639
-#: lib/MUTicket/Entity/Base/Label.php:683 templates/user/ticket/view.tpl:252
+#: lib/MUTicket/Entity/Base/Label.php:683 templates/user/ticket/view.tpl:250
 msgid "Reuse for new item"
 msgstr ""
 
@@ -1178,7 +1196,7 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Rating.php:613
 #: lib/MUTicket/Entity/Base/Rating.php:657
 #: lib/MUTicket/Entity/Base/Label.php:640
-#: lib/MUTicket/Entity/Base/Label.php:684 templates/user/ticket/view.tpl:253
+#: lib/MUTicket/Entity/Base/Label.php:684 templates/user/ticket/view.tpl:251
 msgid "Reuse"
 msgstr ""
 
@@ -1201,9 +1219,8 @@ msgstr ""
 #: lib/MUTicket/Entity/Base/Label.php:656
 #: lib/MUTicket/Entity/Base/Label.php:657
 #: lib/MUTicket/Entity/Base/Label.php:700
-#: lib/MUTicket/Entity/Base/Label.php:701 lib/MUTicket/Entity/Ticket.php:100
-#: lib/MUTicket/Entity/Ticket.php:101 lib/MUTicket/Entity/Ticket.php:144
-#: lib/MUTicket/Entity/Ticket.php:145 lib/MUTicket/Entity/CurrentState.php:89
+#: lib/MUTicket/Entity/Base/Label.php:701 lib/MUTicket/Entity/Ticket.php:146
+#: lib/MUTicket/Entity/Ticket.php:147 lib/MUTicket/Entity/CurrentState.php:89
 #: lib/MUTicket/Entity/CurrentState.php:90
 #: lib/MUTicket/Entity/CurrentState.php:133
 #: lib/MUTicket/Entity/CurrentState.php:134
@@ -1348,7 +1365,7 @@ msgstr ""
 msgid "Error! It is not allowed to delete this entity."
 msgstr ""
 
-#: lib/MUTicket/Controller/User.php:288
+#: lib/MUTicket/Controller/User.php:275
 msgid "Sorry! Only parent tickets are directly available in display!"
 msgstr ""
 
@@ -1642,15 +1659,15 @@ msgstr ""
 #: templates/external/currentState/find.tpl:80
 #: templates/external/currentState/select.tpl:31
 #: templates/admin/ticket/view_quickNav.tpl:81
-#: templates/admin/ticket/view.tpl:41 templates/admin/ticket/edit.tpl:40
+#: templates/admin/ticket/view.tpl:50 templates/admin/ticket/edit.tpl:40
 #: templates/admin/ticket/view.csv:3 templates/admin/ticket/rating.tpl:47
 #: templates/admin/currentState/view_quickNav.tpl:33
 #: templates/admin/currentState/view.tpl:51
 #: templates/admin/currentState/edit.tpl:33
 #: templates/admin/currentState/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:81
-#: templates/user/ticket/view.tpl:80 templates/user/ticket/view.tpl:83
-#: templates/user/ticket/view.tpl:86 templates/user/ticket/edit.tpl:33
+#: templates/user/ticket/view.tpl:76 templates/user/ticket/view.tpl:79
+#: templates/user/ticket/view.tpl:82 templates/user/ticket/edit.tpl:33
 #: templates/user/ticket/view.csv:3
 #: templates/user/currentState/view_quickNav.tpl:33
 #: templates/user/currentState/view.tpl:41
@@ -1703,7 +1720,7 @@ msgstr ""
 #: templates/admin/supporter/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:86
 #: templates/user/ticket/view_quickNav.tpl:118
-#: templates/user/ticket/view.tpl:96 templates/user/ticket/view.tpl:100
+#: templates/user/ticket/view.tpl:92 templates/user/ticket/view.tpl:96
 #: templates/user/ticket/edit.tpl:96 templates/user/ticket/view.csv:3
 #: templates/user/supporter/display.tpl:14
 #: templates/user/supporter/view_quickNav.tpl:35
@@ -1718,7 +1735,7 @@ msgstr ""
 #: templates/admin/ticket/display.tpl:89
 #: templates/admin/ticket/view_quickNav.tpl:87
 #: templates/admin/ticket/view_quickNav.tpl:127
-#: templates/admin/ticket/view.tpl:50 templates/admin/ticket/edit.tpl:105
+#: templates/admin/ticket/view.tpl:59 templates/admin/ticket/edit.tpl:105
 #: templates/admin/ticket/view.csv:3 templates/admin/ticket/rating.tpl:61
 #: templates/user/ticket/display.tpl:108
 #: templates/user/ticket/view_quickNav.tpl:87
@@ -1735,7 +1752,7 @@ msgstr ""
 #: templates/admin/ticket/edit.tpl:110 templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:68
 #: templates/user/ticket/view_quickNav.tpl:88
-#: templates/user/ticket/view.tpl:92 templates/user/ticket/view.csv:3
+#: templates/user/ticket/view.tpl:88 templates/user/ticket/view.csv:3
 msgid "Owner"
 msgstr ""
 
@@ -1745,7 +1762,7 @@ msgstr ""
 #: templates/admin/ticket/view_quickNav.tpl:89
 #: templates/admin/ticket/edit.tpl:119 templates/admin/ticket/view.csv:3
 #: templates/user/ticket/view_quickNav.tpl:89
-#: templates/user/ticket/view.tpl:110 templates/user/ticket/edit.tpl:106
+#: templates/user/ticket/view.tpl:106 templates/user/ticket/edit.tpl:106
 #: templates/user/ticket/view.csv:3
 msgid "Due date"
 msgstr ""
@@ -2004,7 +2021,7 @@ msgstr ""
 #: templates/external/supporter/find.tpl:80
 #: templates/external/supporter/select.tpl:31
 #: templates/admin/supporter/view_quickNav.tpl:33
-#: templates/admin/supporter/view.tpl:30 templates/admin/supporter/edit.tpl:31
+#: templates/admin/supporter/view.tpl:37 templates/admin/supporter/edit.tpl:31
 #: templates/admin/supporter/view.csv:3
 #: templates/user/supporter/view_quickNav.tpl:33
 #: templates/user/supporter/view.tpl:41 templates/user/supporter/edit.tpl:28
@@ -2016,7 +2033,7 @@ msgstr ""
 #: templates/external/supporter/select.tpl:32
 #: templates/admin/supporter/display.tpl:14
 #: templates/admin/supporter/view_quickNav.tpl:34
-#: templates/admin/supporter/view.tpl:33 templates/admin/supporter/view.csv:3
+#: templates/admin/supporter/view.tpl:40 templates/admin/supporter/view.csv:3
 #: templates/user/supporter/display.tpl:12
 #: templates/user/supporter/view_quickNav.tpl:34
 #: templates/user/supporter/view.tpl:44 templates/user/supporter/edit.tpl:34
@@ -2037,7 +2054,7 @@ msgid "ID of label"
 msgstr ""
 
 #: templates/external/label/find.tpl:55 templates/external/label/select.tpl:14
-#: templates/admin/label/display.tpl:4 templates/user/ticket/view.tpl:105
+#: templates/admin/label/display.tpl:4 templates/user/ticket/view.tpl:101
 #: templates/user/label/display.tpl:4
 msgid "Label"
 msgstr ""
@@ -2202,16 +2219,17 @@ msgstr ""
 msgid "Updated on %s"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:9 templates/admin/ticket/view.tpl:55
-#: templates/admin/ticket/view.tpl:100 templates/admin/ticket/rating.tpl:66
+#: templates/admin/ticket/display.tpl:9 templates/admin/ticket/view.tpl:64
+#: templates/admin/ticket/view.tpl:112 templates/admin/ticket/rating.tpl:66
 #: templates/admin/currentState/display.tpl:9
 #: templates/admin/currentState/view.tpl:59
 #: templates/admin/currentState/view.tpl:91
 #: templates/admin/supporter/display.tpl:9
-#: templates/admin/supporter/view.tpl:38 templates/admin/label/display.tpl:9
-#: templates/admin/label/view.tpl:59 templates/admin/label/view.tpl:83
-#: templates/admin/rating/display.tpl:9 templates/admin/rating/view.tpl:51
-#: templates/admin/rating/view.tpl:69 templates/user/ticket/view.tpl:113
+#: templates/admin/supporter/view.tpl:45 templates/admin/supporter/view.tpl:75
+#: templates/admin/label/display.tpl:9 templates/admin/label/view.tpl:59
+#: templates/admin/label/view.tpl:83 templates/admin/rating/display.tpl:9
+#: templates/admin/rating/view.tpl:51 templates/admin/rating/view.tpl:69
+#: templates/user/ticket/view.tpl:109 templates/user/ticket/view.tpl:265
 #: templates/user/currentState/display.tpl:8
 #: templates/user/currentState/view.tpl:49
 #: templates/user/currentState/view.tpl:78
@@ -2225,7 +2243,7 @@ msgstr ""
 
 #: templates/admin/ticket/display.tpl:24 templates/admin/ticket/edit.tpl:12
 #: templates/admin/label/display.tpl:23 templates/user/ticket/display.tpl:70
-#: templates/user/ticket/view.tpl:35 templates/user/ticket/edit.tpl:11
+#: templates/user/ticket/view.tpl:31 templates/user/ticket/edit.tpl:11
 #: templates/user/label/display.tpl:21
 msgid "Create ticket"
 msgstr ""
@@ -2242,7 +2260,7 @@ msgstr ""
 msgid "Create label"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:106 templates/admin/ticket/view.tpl:53
+#: templates/admin/ticket/display.tpl:106 templates/admin/ticket/view.tpl:62
 #: templates/admin/ticket/view.csv:4 templates/admin/ticket/rating.tpl:64
 #: templates/user/ticket/display.tpl:110 templates/user/ticket/view.csv:4
 msgid "Parent"
@@ -2250,7 +2268,7 @@ msgstr ""
 
 #: templates/admin/ticket/display.tpl:113
 #: templates/admin/ticket/include_displayItemListMany.tpl:16
-#: templates/admin/ticket/view.tpl:82
+#: templates/admin/ticket/view.tpl:94
 #: templates/admin/ticket/include_displayItemListOne.tpl:13
 #: templates/admin/ticket/rating.tpl:96
 #: templates/admin/currentState/include_displayItemListMany.tpl:16
@@ -2276,7 +2294,7 @@ msgstr ""
 
 #: templates/admin/ticket/display.tpl:113
 #: templates/admin/ticket/include_displayItemListMany.tpl:16
-#: templates/admin/ticket/view.tpl:83
+#: templates/admin/ticket/view.tpl:95
 #: templates/admin/ticket/include_displayItemListOne.tpl:13
 #: templates/admin/ticket/rating.tpl:97
 #: templates/admin/currentState/include_displayItemListMany.tpl:16
@@ -2300,7 +2318,7 @@ msgstr ""
 msgid "Quick view"
 msgstr ""
 
-#: templates/admin/ticket/display.tpl:124 templates/admin/ticket/view.tpl:92
+#: templates/admin/ticket/display.tpl:124 templates/admin/ticket/view.tpl:104
 #: templates/admin/ticket/rating.tpl:106
 msgid "Not set."
 msgstr ""
@@ -2389,19 +2407,30 @@ msgstr ""
 msgid "Show all entries"
 msgstr ""
 
-#: templates/admin/ticket/view.tpl:38 templates/admin/ticket/rating.tpl:55
+#: templates/admin/ticket/view.tpl:47 templates/admin/ticket/rating.tpl:55
 msgid "Created Date"
 msgstr ""
 
-#: templates/admin/ticket/view.tpl:47 templates/user/ticket/view.tpl:96
+#: templates/admin/ticket/view.tpl:56 templates/user/ticket/view.tpl:92
 msgid "Open"
 msgstr ""
 
-#: templates/admin/ticket/view.tpl:113 templates/admin/ticket/rating.tpl:124
-#: templates/user/ticket/view.tpl:266
+#: templates/admin/ticket/view.tpl:125 templates/admin/ticket/rating.tpl:124
+#: templates/user/ticket/view.tpl:278
 #: templates/mailz/itemlist_Ticket_text.tpl:7
 #: templates/mailz/itemlist_Ticket_html.tpl:10
 msgid "No tickets found."
+msgstr ""
+
+#: templates/admin/ticket/view.tpl:137
+msgid "With selected tickets"
+msgstr ""
+
+#: templates/admin/ticket/view.tpl:139
+#: templates/admin/currentState/view.tpl:118
+#: templates/admin/supporter/view.tpl:101 templates/admin/label/view.tpl:110
+#: templates/admin/rating/view.tpl:96
+msgid "Choose action"
 msgstr ""
 
 #: templates/admin/ticket/edit.tpl:9 templates/admin/ticket/edit.tpl:15
@@ -2681,11 +2710,6 @@ msgstr ""
 msgid "With selected current states"
 msgstr ""
 
-#: templates/admin/currentState/view.tpl:118
-#: templates/admin/label/view.tpl:110 templates/admin/rating/view.tpl:96
-msgid "Choose action"
-msgstr ""
-
 #: templates/admin/currentState/edit.tpl:7
 #: templates/admin/currentState/edit.tpl:13
 #: templates/user/currentState/edit.tpl:7
@@ -2743,14 +2767,18 @@ msgstr ""
 msgid "Create supporter"
 msgstr ""
 
-#: templates/admin/supporter/view.tpl:36
+#: templates/admin/supporter/view.tpl:43
 msgid "Present?"
 msgstr ""
 
-#: templates/admin/supporter/view.tpl:75 templates/user/supporter/view.tpl:83
+#: templates/admin/supporter/view.tpl:88 templates/user/supporter/view.tpl:83
 #: templates/mailz/itemlist_Supporter_text.tpl:7
 #: templates/mailz/itemlist_Supporter_html.tpl:10
 msgid "No supporters found."
+msgstr ""
+
+#: templates/admin/supporter/view.tpl:99
+msgid "With selected supporters"
 msgstr ""
 
 #: templates/admin/supporter/edit.tpl:7 templates/admin/supporter/edit.tpl:13
@@ -3028,54 +3056,49 @@ msgstr ""
 msgid "RATE NOW THIS SUPPORT ANSWER!"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:15
+#: templates/user/ticket/view.tpl:11
 msgid "Sorry. At the moment our support is not available!"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:20
+#: templates/user/ticket/view.tpl:16
 msgid "Open Tickets Overview"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:23
+#: templates/user/ticket/view.tpl:19
 msgid "Closed Tickets Overview"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:26
+#: templates/user/ticket/view.tpl:22
 msgid "Ticket Overview"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:67 templates/user/ticket/view.tpl:70
-#: templates/user/ticket/view.tpl:73
+#: templates/user/ticket/view.tpl:63 templates/user/ticket/view.tpl:66
+#: templates/user/ticket/view.tpl:69
 msgid "Created"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:133 templates/user/ticket/view.tpl:164
-#: templates/user/ticket/view.tpl:194 templates/user/ticket/view.tpl:226
-msgid "Not set"
-msgstr ""
-
-#: templates/user/ticket/view.tpl:138
+#: templates/user/ticket/view.tpl:134
 msgid "Set owner"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:144 templates/user/ticket/view.tpl:177
-#: templates/user/ticket/view.tpl:206 templates/user/ticket/view.tpl:236
+#: templates/user/ticket/view.tpl:140 templates/user/ticket/view.tpl:173
+#: templates/user/ticket/view.tpl:202 templates/user/ticket/view.tpl:232
 msgid "Send message?"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:171
+#: templates/user/ticket/view.tpl:167
 msgid "Set current state"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:200
+#: templates/user/ticket/view.tpl:196
 msgid "Set label"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:232
+#: templates/user/ticket/view.tpl:228
 msgid "Enter duedate!"
 msgstr ""
 
-#: templates/user/ticket/view.tpl:234
+#: templates/user/ticket/view.tpl:230
 msgid "Enter a text like end of october!"
 msgstr ""
 

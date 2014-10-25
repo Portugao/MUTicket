@@ -28,7 +28,7 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
      * @var string The default sorting field/expression.
      */
     protected $defaultSortingField = 'createdDate';
-    
+
     /**
      * Adds default filters as where clauses.
      *
@@ -41,19 +41,22 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
     {
         $currentModule = ModUtil::getName();//FormUtil::getPassedValue('module', '', 'GETPOST');
         $currentType = FormUtil::getPassedValue('type', 'user', 'GETPOST');
+        $currentFunc = FormUtil::getPassedValue('func', 'user', 'GETPOST');
         if ($currentType == 'admin' && $currentModule == 'Extensions') {
             return $qb;
         }
-    
+
         if (!in_array('workflowState', array_keys($parameters)) || empty($parameters['workflowState'])) {
             // per default we show approved tickets only
             $onlineStates = array('approved');
             $qb->andWhere('tbl.workflowState IN (:onlineStates)')
             ->setParameter('onlineStates', DataUtil::formatForStore($onlineStates));
         }
-        
-        $qb->andWhere('tbl.parent_id IS NULL');
-    
+
+        if ($currentFunc != 'rating') {
+            $qb->andWhere('tbl.parent_id IS NULL');
+        }
+
         return $qb;
     }
 }

@@ -16,7 +16,7 @@
  */
 class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
 {
- /**
+    /**
      * Post initialise.
      *
      * Run after construction.
@@ -28,135 +28,131 @@ class MUTicket_Controller_Admin extends MUTicket_Controller_Base_Admin
         // Set caching to true by default.
         $this->view->setCaching(Zikula_View::CACHE_DISABLED);
     }
-    
-	/**
-	 * This method is the default function, and is called whenever the application's
-	 * Admin area is called without defining arguments.
-	 *
-	 * @return mixed Output.
-	 */
-	public function main(array $args = array())
-	{
-		// DEBUG: permission check aspect starts
-		$this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
-		// DEBUG: permission check aspect ends
+
+    /**
+     * This method is the default function, and is called whenever the application's
+     * Admin area is called without defining arguments.
+     *
+     * @return mixed Output.
+     */
+    public function main(array $args = array())
+    {
+        // DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
+        // DEBUG: permission check aspect ends
 
 
-		// return viewtemplate
-		return $this->redirect(ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')));
+        // return viewtemplate
+        return $this->redirect(ModUtil::url($this->name, 'admin', 'view', array('ot' => 'supporter')));
 
-	}
+    }
 
-	/**
-	 * This method provides a generic item list overview. We redirect to user area
-	 * if the admin is calling the ticket view
-	 *
-	 * @return redirect
-	 */
-	public function view(array $args = array())
-	{
-		// DEBUG: permission check aspect starts
-		$this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
-		// DEBUG: permission check aspect ends
+    /**
+     * This method provides a generic item list overview. We redirect to user area
+     * if the admin is calling the ticket view
+     *
+     * @return redirect
+     */
+    public function view(array $args = array())
+    {
+        // DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
+        // DEBUG: permission check aspect ends
 
-		if ($args['ot'] == 'ticket') {
-			return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
-		}
-		else {
-			return parent::view($args);	
-		}
+        if ($args['ot'] == 'ticket') {
+            return System::redirect(ModUtil::url($this->name, 'user', 'view', array('ot' => 'ticket')));
+        }
+        else {
+            return parent::view($args);
+        }
 
-	}
+    }
 
-	/**
-	 * This method is the function for showing rating statistics of a supporter
-	 *
-	 *@param string  $ot           Treated object type.
-	 */
+    /**
+     * This method is the function for showing rating statistics of a supporter
+     *
+     *@param string  $ot           Treated object type.
+     */
 
-	public function rating(array $args = array())
-	{
-		// DEBUG: permission check aspect starts
-		$this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
-		// DEBUG: permission check aspect ends
+    public function rating(array $args = array())
+    {
+        // DEBUG: permission check aspect starts
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('MUTicket::', '::', ACCESS_ADMIN));
+        // DEBUG: permission check aspect ends
 
-		$objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->getGet()->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
-		$rated = (isset($args['rated']) && !empty($args['rated'])) ? $args['rated'] : $this->request->getGet()->filter('rated', 0, FILTER_SANITIZE_STRING);
-		$uid = (isset($args['supporter']) && !empty($args['supporter'])) ? $args['supporter'] : $this->request->getGet()->filter('supporter', 0, FILTER_SANITIZE_STRING);
+        $objectType = (isset($args['ot']) && !empty($args['ot'])) ? $args['ot'] : $this->request->query->filter('ot', 'ticket', FILTER_SANITIZE_STRING);
+        $rated = (isset($args['rated']) && !empty($args['rated'])) ? $args['rated'] : $this->request->query->filter('rated', 0, FILTER_SANITIZE_STRING);
+        $uid = (isset($args['supporter']) && !empty($args['supporter'])) ? $args['supporter'] : $this->request->query->filter('supporter', 0, FILTER_SANITIZE_STRING);
 
-		$supporteruid = MUTicket_Util_Model::getExistingSupporterUids($uid);
+        $supporteruid = MUTicket_Util_Model::getExistingSupporterUids($uid);
 
-		$supporterrepository = MUTicket_Util_Model::getSupporterRepository();
+        $supporterrepository = MUTicket_Util_Model::getSupporterRepository();
 
-		$supporter = $supporterrepository->selectById($uid);
-		$supportername = $supporter['username'];
+        $supporter = $supporterrepository->selectById($uid);
+        $supportername = $supporter['username'];
 
-		$repository = $this->entityManager->getRepository('MUTicket_Entity_' . ucfirst($objectType));
+        $serviceManager = ServiceUtil::getManager();
+        $modelHelper = new MUTicket_Util_Model($serviceManager);
 
-		// where clause for getting answers of this supporter
-		$where = 'tbl.createdUserId = ' . DataUtil::formatForStore($supporteruid);
+        // we get a repository for tickets
+        $ticketRepository = $modelHelper->getTicketRepository();
 
-		$selectionArgs = array(
-            'ot' => $objectType,
-            'where' => $where,
-            'orderBy' => $sort . ' ' . $sdir
-		);
+        // where clause for getting answers of this supporter
+        $where = 'tbl.createdUserId = \'' . $supporteruid . '\'';
+        $where .= ' AND ';
+        $where .= 'tbl.parent_id IS NOT NULL';
 
-		// itemcount of tickets of supporter without pagination
-		$counttickets = $repository->selectCount($where, $useJoins = true);
+        // itemcount of not parent tickets of supporter without pagination
+        $counttickets = $ticketRepository->selectCount($where);
 
-		// where clause for getting rated answers of this supporter
-		$where2 = 'tbl.rated = 1';
-		$where2 .= ' AND ';
-		$where2 .= 'tbl.createdUserId = ' . DataUtil::formatForStore($supporteruid);
+        // where clause for getting rated answers of this supporter
+        $where2 = 'tbl.createdUserId = \'' . $supporteruid . '\'';
+        $where2 .= ' AND ';
+        $where2 .= 'tbl.parent_id IS NOT NULL';
+        $where2 .= ' AND ';
+        $where2 .= 'tbl.rated = 1';
+        // item list of rated tickets of supporter with pagination
+        $entities = $ticketRepository->selectWhere($where2, $useJoins = false);
 
-		$orderBy = 'createdDate desc';
+        $total = 0;
 
-		$selectionArgs = array(
-            'ot' => $objectType,
-            'where' => $where,
-            'orderBy' => $sort . ' ' . $sdir
-		);
+        // we get a repository for ratings
+        $ratingrepository = $modelHelper->getRatingRepository();
 
-		// item list of rated tickets of supporter without pagination
-		$entities = $repository->selectWhere($where2, $orderBy, $useJoins = true);
+        foreach ($entities as $entity) {
+            if (is_object($entity)) {
+                $where3 = 'tbl.ticket = \'' . $entity['id'] . '\'';
+            }
+            $rating = $ratingrepository->selectWhere($where3);
+            $total = $total + $rating[0]['ratingvalue'];
+        }
 
-		$total = 0;
-		
-		$ratingrepository = $this->entityManager->getRepository('MUTicket_Entity_Rating');
+        $objectCount = count($entities);
 
-		foreach ($entities as $entity) {
-			$where = 'tbl.ticket = \'' . DataUtil::formatForStore($entity['id']) . '\'';
-			$rating = $ratingrepository->selectWhere($where);
-			$total = $total + $rating[0]['ratingvalue'];
-		}
+        if($total > 0) {
+            $average = $total / $objectCount;
+            $average = round($average, 1);
 
-		$objectCount = count($entities);
+            // percent of rated tickets
+            $percent = $objectCount / $counttickets * 100;
+            $percent = round($percent, 2);
+        } else {
+            $average = 0;
+            $percent = 0;
+        }
 
-		if($total > 0) {
-		$average = $total / $objectCount;
-		$average = round($average, 1);
+        // assign all to template
+        $this->view->assign('items', $entities )
+        ->assign('counttickets', $counttickets)
+        ->assign('objectcount', $objectCount)
+        ->assign('percent', $percent)
+        ->assign('total', $total)
+        ->assign('average', $average)
+        ->assign('supporter', $supportername );
 
-		// percent of rated tickets
-		$percent = $objectCount / $counttickets * 100;
-		$percent = round($percent, 2);
-		} else {
-		    $average = 0;
-		    $percent = 0;
-		}
+        // fetch and return the appropriate template
+        $viewHelper = new MUTicket_Util_View($this->serviceManager);
 
-		// assign all to template
-		$this->view->assign('items', $entities )
-		->assign('counttickets', $counttickets)
-		->assign('objectcount', $objectCount)
-		->assign('percent', $percent)
-		->assign('total', $total)
-		->assign('average', $average)
-		->assign('supporter', $supportername );
-		
-		// fetch and return the appropriate template
-		$viewHelper = new MUTicket_Util_View($this->serviceManager);
-		
-		return $viewHelper->processTemplate($this->view, 'admin', $objectType, 'rating', $args);			
-	}
+        return $viewHelper->processTemplate($this->view, 'admin', $objectType, 'rating', $args);
+    }
 }

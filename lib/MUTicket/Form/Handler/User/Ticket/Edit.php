@@ -94,12 +94,15 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     public function handleCommand(Zikula_Form_View $view, &$args)
     {
+        // we check if the user create a new ticket
+        $id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
+        
         // We get parentid
         // We check if ticket is a parent ticket
         $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
         
         // if supporters may not create tickets
-        if (ModUtil::getVar($this->name, 'supporterTickets') == 0 && $parentid == 0) {
+        if (ModUtil::getVar($this->name, 'supporterTickets') == 0 && $parentid == 0 && $id == 0) {
             $uid = UserUtil::getVar('uid');
             $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
             if (in_array($uid, $supporteruids)) {
@@ -124,6 +127,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
 
             // Get relevant datas for mailing
             $data['id'] = $this->idValues['id'];
+            $data['new'] = $id;
             $data['parentid'] = $parentid;
             $data['title'] = $entity['title'];
             $data['text'] = $entity['text'];
@@ -147,9 +151,9 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
             return parent::getDefaultMessage($args, $success);
         }
 
+        // we check if the entry is a parent ticket
         $parentid = $this->request->getPost()->filter('muticketTicket_ParentItemList' , null, FILTER_SANITIZE_STRING);
          
-
         $message = '';
         switch ($args['commandName']) {
             case 'create':

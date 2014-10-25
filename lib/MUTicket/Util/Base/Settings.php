@@ -37,6 +37,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         $title = $args['title'];
         $text = $args['text'];
         $parentid = $args['parentid'];
+        $id = $args['id'];
 
         $repository = MUTicket_Util_Model::getTicketRepository();
 
@@ -97,7 +98,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         }
 
         if ($parentid == 0) {
-            $entry = $handler->__('A new ticket on ');
+            if ($id == 0) {
+                $entry = $handler->__('A new ticket on ');
+            } else {
+                $entry = $handler->__('A ticket was edited on ');
+            }
         }
         else {
             if ($kind == 'Supporter') {
@@ -145,7 +150,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
             if ($toaddress != '') {
                 if (is_array($toaddress)) {
                     foreach ($toaddress as $address) {
-                        $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $address, $entry, $ticketcategory, $title, $text, $url, $kind);
+                        $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $address, $entry, $ticketcategory, $title, $text, $url, $kind, $id);
                         if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
                             $success = false;
                         }
@@ -155,7 +160,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
                     }
                 }
                 else {
-                    $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind);
+                    $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind, $id);
                     if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
                         $success = false;
                     }
@@ -165,7 +170,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
                 }
             }
         } else {
-            $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind);
+            $messagecontent = MUTicket_Util_Base_Settings::getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind, $id);
             if (!ModUtil::apiFunc('Mailer', 'user', 'sendmessage', $messagecontent)) {
                 $success = false;
             }
@@ -195,7 +200,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
      * get the mail content for the message to send
      * returns array $messagecontent
      */
-    public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind) {
+    public function getMailContent($from, $fromaddress, $toaddress, $entry, $ticketcategory, $title, $text, $url, $kind, $id) {
 
         $serviceManager = ServiceUtil::getManager();
         $handler = new Zikula_Form_View($serviceManager, 'MUTicket');
@@ -206,7 +211,11 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         $messagecontent['toaddress'] = $toaddress;
         $messagecontent['subject'] = $entry . $from . $ticketcategory;
         if ($kind == 'Customer') {
-            $messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+            if ($id == 0) {
+                $messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
+            } else {
+                $messagecontent['body'] = $handler->__('An entry was edited by an user on '). '<h2>' . $from . '</h2>';                               
+            }
         }
         else {
             $messagecontent['body'] = $handler->__('There is an answer to your ticket of the support on '). '<h2>' . $from . '</h2>';

@@ -204,6 +204,22 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
      */
     public function preRemoveCallback()
     {
+        $rating = $this->getRating();
+        if ($rating) {
+            // we get manager
+            $serviceManager = ServiceUtil::getManager();
+            // we get model helper
+            $modelHelper = new MUTicket_Util_Model($serviceManager);
+            // we get a repository
+            $ratingRepository = $modelHelper->getRatingRepository();
+            // we get the rating object
+            $thisRating = $ratingRepository->selectById($rating['id']);
+            // we get a entity manager
+            $entityManager = $serviceManager->getService('doctrine.entitymanager');
+            // we remove
+            $entityManager->remove($thisRating);
+            $entityManager->flush();
+        }
         $this->performPreRemoveCallback();
     }
 

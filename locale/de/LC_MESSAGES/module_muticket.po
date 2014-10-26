@@ -878,7 +878,7 @@ msgstr "Ein neues Ticket auf "
 
 #: lib/MUTicket/Util/Base/Settings.php:104
 msgid "A ticket was edited on "
-msgstr "Ein Ticket wurde bearbeitet auf"
+msgstr "Ein Ticket wurde bearbeitet auf "
 
 #: lib/MUTicket/Util/Base/Settings.php:109
 msgid "An answer to your ticket on "

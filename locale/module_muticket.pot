@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-25 21:06+0000\n"
+"POT-Creation-Date: 2014-10-26 10:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2628,7 +2628,9 @@ msgstr ""
 
 #: templates/admin/ticket/rating.tpl:140
 msgid "answer of this supporter"
-msgstr ""
+msgid_plural "answers of this supporter"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/admin/ticket/rating.tpl:141
 msgid "That are "

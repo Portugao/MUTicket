@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MUTicket\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-25 21:06+0000\n"
+"POT-Creation-Date: 2014-10-26 10:29+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2675,7 +2675,9 @@ msgstr "Kunden bewerteten"
 
 #: templates/admin/ticket/rating.tpl:140
 msgid "answer of this supporter"
-msgstr "Antwort dieses Supporters"
+msgid_plural "answers of this supporter"
+msgstr[0] "Antwort dieses Supporters"
+msgstr[1] "Antworten dieses Supporters"
 
 #: templates/admin/ticket/rating.tpl:141
 msgid "That are "

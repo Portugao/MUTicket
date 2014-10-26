@@ -71,7 +71,7 @@
     {foreach item='ticket' from=$items}
     <tr class="{cycle values='z-odd, z-even'}">
         <td headers="hrating" class="z-left">
-            {$ticket.rating.ratingvalue}
+            {include file='admin/rating/include_displayItemListMany.tpl' items=$ticket.rating}
         </td>
        {* <td headers="htitle" class="z-left">
             {$ticket.title|notifyfilters:'muticket.filterhook.tickets'}
@@ -138,7 +138,7 @@
 {gt text='The supporter created'} <span>{$counttickets}</span> {gt text='answer for customers' plural='answers for customers' tag1=$counttickets count=$counttickets}</div>
 
 <div id="ticketsrated"><h3>{gt text='Number of rated answers'}</h3>
-{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answer of this supporter' plural='answers of this supporter' tag1=$objectcount count=$objectcount}<br />
+{gt text='Customers rated'} <span>{$objectcount}</span> {gt text='answer of this supporter' plural ='answers of this supporter' tag1=$objectcount count=$objectcount}<br />
 {gt text='That are '} <span>{$percent}{gt text='%'}</span> {gt text='of the total answers'}</div>
 </div>
 <div id="statistic_tickets_right">

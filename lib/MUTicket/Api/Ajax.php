@@ -142,7 +142,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $actualsupporter = $args['actualsupporter'];
         $userid = UserUtil::getIdFromName($args['supporter']);
         if ($userid <= 1 || $userid == false) {
-            $userid = UserUtil::getIdFromName($actualsupporter);
+            $userid = $actualsupporter;
         }
 
         $labels = $args['labels'];
@@ -205,7 +205,7 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
         $actualsupporter = $args['actualsupporter'];
         $userid = UserUtil::getIdFromName($args['supporter']);
         if ($userid <= 1 || $userid == false) {
-            $userid = UserUtil::getIdFromName($actualsupporter);
+            $userid = $actualsupporter;
         }
 
         $serviceManager = ServiceUtil::getManager();

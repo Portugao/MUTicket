@@ -18,12 +18,12 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
 {
     /*
      * This function handles the changing of different things of a ticket
-     * for example sending email
+    * for example sending email
     */
     public function handleChanges($kind, $email, $ticket)
     {
-            $messagecontent = self::getContent($kind, $email, $ticket);
-            self::sendMessage($messagecontent);
+        $messagecontent = self::getContent($kind, $email, $ticket);
+        self::sendMessage($messagecontent);
     }
 
     public function sendMessage($messagecontent)
@@ -40,15 +40,15 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
     public function getContent($kind, $email, $ticket)
     {
         include_once 'modules/MUTicket/templates/plugins/modifier.muticketGetCurrentStateDatas.php';
-        
+
         // We get the name of the site
         $from = ModUtil::getVar('ZConfig', 'sitename') . ' ';
         // We get the adminmail
         $fromaddress = ModUtil::getVar('ZConfig', 'adminmail');
-        
+
         $serviceManager = ServiceUtil::getManager();
         $handler = new Zikula_Form_View($serviceManager, 'MUTicket');
-        
+
         $baseurl = System::getBaseUrl();
         $url = $baseurl . ModUtil::url('MUTicket', 'user', 'display', array('ot' => 'ticket', 'id' => $ticket['id']));
 
@@ -66,9 +66,6 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
         if ($kind == 'label') {
             $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
         }
-        if ($kind == 'label') {
-            $messagecontent['subject'] = $handler->__('Changing of labels for a ticket');
-        }
         if ($kind == 'dueDate') {
             $messagecontent['subject'] = $from . ' - ' . $handler->__('Date we try to give you a feedback');
         }
@@ -79,7 +76,7 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
             $messagecontent['body'] = $handler->__('To a ticket was set another current state.') . '<br />';
         }
         if ($kind == 'label') {
-            $messagecontent['body'] = $handler->__('To a ticket other labels were set.') . '<br />';           
+            $messagecontent['body'] = $handler->__('To a ticket other labels were set.') . '<br />';
         }
         if ($kind == 'dueDate') {
             if ($ticket['dueText']) {
@@ -89,14 +86,16 @@ class MUTicket_Util_Base_Internal extends Zikula_AbstractBase
             }
             $messagecontent['body'] = ModUtil::getVar('MUTicket', 'messageDueDate') . ': ' . $datetext .'<br />';
         }
-        
+
         $messagecontent['body'] .= '<h2>' . $handler->__('Title of ticket')  . ': ' . $ticket['title'] . '</h2>';
-        if ($ticket['currentState'] > 0) {
-        $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
-        $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />' . '<br />';       
-        } else {
-            $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $handler->__('Not set') . '<br /><br/>';
-            
+        if ($kind != 'dueDate') {
+            if ($ticket['currentState'] > 0) {
+                $currentState = smarty_modifier_muticketGetCurrentStateDatas($ticket['currentState'], $kind = 'message');
+                $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $currentState['title'] . '<br />' . '<br />';
+            } else {
+                $messagecontent['body'] .= $handler->__('Status of ticket') . ': ' . $handler->__('Not set') . '<br /><br/>';
+
+            }
         }
 
         $messagecontent['body'] .= $handler->__('Visit this ticket:') . '<br />';

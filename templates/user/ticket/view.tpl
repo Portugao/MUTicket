@@ -139,7 +139,7 @@
             </select><br />
             <label for='ownermessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='ownermessage' value='1' /><br />
-            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='hidden' name='actualsupporter' value={$ticket.owner} />
             <input type='submit' value={gt text='Submit'} />
         </form>
         </div>
@@ -172,7 +172,7 @@
             </select><br />
             <label for='statemessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='statemessage' value='1' /><br />
-            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='hidden' name='actualsupporter' value={$ticket.owner} />
             <input type='submit' value={gt text='Submit'} />
         </form>   
         </div> 
@@ -201,7 +201,7 @@
             </select><br />
             <label for='ownermessage'>{gt text='Send message?'}</label>
             <input type='checkbox' name='ownermessage' value='1' /><br />
-            <input type='hidden' name='actualsupporter' value={$data.text} />
+            <input type='hidden' name='actualsupporter' value={$ticket.owner} />
             <input type='submit' value={gt text='Submit'} />
         </form>
         </div> 

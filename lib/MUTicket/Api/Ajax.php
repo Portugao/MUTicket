@@ -221,6 +221,5 @@ class MUTicket_Api_Ajax extends MUTicket_Api_Base_Ajax
                 MUTicket_Util_Base_Internal::handleChanges('supporter', $usermail, $thisticket);
             }
         }
-
     }
 }

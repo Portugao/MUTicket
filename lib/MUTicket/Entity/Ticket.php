@@ -115,7 +115,7 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                 $component = 'MUTicket:Ticket:';
                 $instance = $this->id . '::';
                 if (SecurityUtil::checkPermission($component, $instance, ACCESS_EDIT)) {
-                    if ($this['createdUserId'] == UserUtil::getVar('uid')) {
+                    if ($this['createdUserId'] == UserUtil::getVar('uid') || $this['owner'] == UserUtil::getVar('uid')) {
                         $this->_actions[] = array(
                                 'url' => array('type' => 'user', 'func' => 'edit', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
                                 'icon' => 'edit',

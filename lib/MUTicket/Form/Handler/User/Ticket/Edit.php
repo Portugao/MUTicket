@@ -26,21 +26,9 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     public function initialize(Zikula_Form_View $view)
     {
-        $supporterTickets = MUTicket_Util_View::userForRating(2);
-
         // we rule the text for the button to create tickets or answers
         $func = $this->request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
 
-        // if supporters may not create tickets
-       /* if ($supporterTickets == 0 && $func == 'edit') {
-            $uid = UserUtil::getVar('uid');
-            $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-            if (in_array($uid, $supporteruids)) {
-                $url = ModUtil::url($this->name, 'user', 'view');
-                return LogUtil::registerPermissionError($url);
-            }
-        }*/
-        
         // We check for supportes who are active
         // If there is no supporter active, we break the input process
         $supporteractive = MUTicket_Util_View::checkIfSupporters();
@@ -52,11 +40,18 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         parent::initialize($view);
 
         $id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
+        if ($id > 0) {
+            $repository = MUTicket_Util_Model::getTicketRepository();
+            $entity = $repository->selectById($id);
+            $this->view->assign('owner', $entity['owner']);
+        }
 
         $fileSize = MUTicket_Util_Controller::maxSize();
 
-        // set mode to create
-        $this->mode = 'create';
+        if (($id == 0 && $func == 'edit') || ($id > 0 && $func == 'display')) {
+            // set mode to create
+            $this->mode = 'create';
+        }
 
         // we assign to template
         $this->view->assign('mode', $this->mode)
@@ -67,7 +62,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         // everything okay, no initialization errors occured
         return true;
     }
-    
+
     /**
      * Post-initialise hook.
      *
@@ -75,14 +70,15 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     public function postInitialize()
     {
-        // if supporters may not create tickets
+        // we check if the actual user may create new tickets
+        // we check if the setting for supporter group is enabled
+        // if not we look if the user is a supporter or not
+        $supporterTickets = MUTicket_Util_View::userForRating(2);
+
+        // if user may not create tickets
         if ($supporterTickets == 0 && $func == 'edit') {
-            $uid = UserUtil::getVar('uid');
-            $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-            if (in_array($uid, $supporteruids)) {
-                $url = ModUtil::url($this->name, 'user', 'view');
-                return LogUtil::registerPermissionError($url);
-            }
+            $url = ModUtil::url($this->name, 'user', 'view');
+            return LogUtil::registerPermissionError($url);
         }
         parent::postInitialize();
     }
@@ -94,25 +90,28 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
      */
     public function handleCommand(Zikula_Form_View $view, &$args)
     {
-        // we check if the user create a new ticket
-        $id = $this->request->query->filter('id', 0, FILTER_SANITIZE_NUMBER_INT);
-        
+        // We check if the user create a new parent ticket or edit an existing parent ticket
+        $id = $this->request->request->filter('ticketid', 0, FILTER_SANITIZE_NUMBER_INT);
         // We get parentid
         // We check if ticket is a parent ticket
         $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
-        
-        // if supporters may not create tickets
-        if (ModUtil::getVar($this->name, 'supporterTickets') == 0 && $parentid == 0 && $id == 0) {
-            $uid = UserUtil::getVar('uid');
-            $supporteruids = MUTicket_Util_Model::getExistingSupporterUids();
-            if (in_array($uid, $supporteruids)) {
-                $url = ModUtil::url($this->name, 'user', 'view');
-                return LogUtil::registerPermissionError($url);
-            }
-        } 
-        
+
+        // we get a service manager
+        $serviceManager = ServiceUtil::getManager();
+        // we get a model helper
+        $modelHelper = new MUTicket_Util_Model($serviceManager);
+        // we get a view helper
+        $viewHelper = new MUTicket_Util_View($serviceManager);
+        // we get a setting helper
+        $settingHelper = new MUTicket_Util_Base_Settings($serviceManager);
+        // if user may not create tickets
+        if (ModUtil::getVar($this->name, 'supporterTickets') == 0 && $viewHelper->userForRating(2) == 0 && $parentid == 0 && $id == 0) {
+            $url = ModUtil::url($this->name, 'user', 'view');
+            return LogUtil::registerPermissionError($url);
+        }
+
         $result = parent::handleCommand($view, $args);
-        
+
         if ($result === false) {
             return $result;
         }
@@ -122,7 +121,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
             $formData = $this->view->getValues();
             // we want the array with our field values
             //$entity = $formData[$this->objectTypeLower];
-            $repository = MUTicket_Util_Model::getTicketRepository();
+            $repository = $modelHelper->getTicketRepository();
             $entity = $repository->selectById($this->idValues['id']);
 
             // Get relevant datas for mailing
@@ -133,8 +132,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
             $data['text'] = $entity['text'];
             $data['categories'] = $entity['categories'];
 
-            $message = MUTicket_Util_Base_Settings::handleModvarsPostPersist($data);
-            return LogUtil::registerStatus($message);
+            $message = $settingHelper->handleModvarsPostPersist($data);
         }
     }
 
@@ -156,7 +154,7 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
          
         $message = '';
         switch ($args['commandName']) {
-            case 'create':
+            case 'submit':
                 $message = $this->__('Done! Ticket created.');
                 if ($parentid > 0) {
                     $message = $this->__('Done! Answer created.');
@@ -182,6 +180,9 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         // We check if ticket is a parent ticket
         $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
 
+        $id = $this->request->query->filter('id' , 0, FILTER_SANITIZE_NUMBER_INT);
+        
+        
         // redirect to the list of tickets
         $viewArgs = array('ot' => $this->objectType);
         $url = ModUtil::url($this->name, 'user', 'view', $viewArgs);
@@ -189,10 +190,12 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
         if ($this->mode == 'create' && $parentid == 0) {
             // redirect to just created parent ticket
             $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $this->idValues['id']));
-        } else {
+        } elseif ($this->mode == 'create' && $parentid > 0) {
             // redirect to parent ticket
             $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $parentid));
-        }
+        } elseif ($this->mode == 'edit') {            
+            $url = ModUtil::url($this->name, 'user', 'display', array('ot' => 'ticket', 'id' => $id));
+          }
 
         return $url;
     }

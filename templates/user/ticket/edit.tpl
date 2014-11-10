@@ -101,21 +101,23 @@
                     {formlabel for='rated' __text='Rated'}
                     {formcheckbox group='ticket' id='rated' readOnly=false __title='rated ?' cssClass='' }
                 </div>
-                <input type="hidden" id="owner" value="1" />             
-                <div class="z-formrow muticket_form_hidden">
-                    {formlabel for='dueDate' __text='Due date'}
-                    {if $mode ne 'create'}
+                <input type="hidden" id="owner" name="owner" value="{$owner}" /> 
+                {if $mode ne 'create'}            
+                    <div class="z-formrow muticket_form_hidden">
                         {formdateinput group='ticket' id='dueDate' mandatory=false __title='Enter the due date of the ticket' includeTime=true cssClass='' }
-                    {else}
+                    </div>
+                {else}
+                    <div class="z-formrow muticket_form_hidden">
                         {formdateinput group='ticket' id='dueDate' mandatory=false __title='Enter the due date of the ticket' includeTime=true defaultValue='now' cssClass='' }
-                    {/if}                 
-                </div>            
+                    </div>
+                {/if}           
                 <div class="z-formrow muticket_form_hidden">
                     {gt text='If you do not want to give a concrete date, you can enter a string like "end of november 2013".' assign='toolTip'}
                     {formlabel for='dueText' __text='Due text' class='muticketFormTooltips' title=$toolTip}
                     {formtextinput group='ticket' id='dueText' mandatory=false readOnly=false __title='Enter the due text of the ticket' textMode='singleline' maxLength=255 cssClass='' }
                 </div>
-                <input type="hidden" id="currentState" value="0" />  
+                <input type="hidden" name="currentState" value="0" /> 
+                <input type="hidden" id="ticketid" name="ticketid" value="{$ticketid}" />  
             </fieldset>
         </div>
         {if $func ne 'display'}
@@ -124,7 +126,7 @@
         {* {include file='user/ticket/include_selectOne.tpl' group='ticket' alias='parent' aliasReverse='children' mandatory=false idPrefix='muticketTicket_Parent' linkingItem=$ticket panel=true displayMode='dropdown' allowEditing=false}
         {include file='user/currentState/include_selectOne.tpl' group='ticket' alias='currentState' aliasReverse='ticket' mandatory=false idPrefix='muticketTicket_CurrentState' linkingItem=$ticket panel=true displayMode='dropdown' allowEditing=false} *}
         {if $mode ne 'create'}
-            {include file='user/include_standardfields_edit.tpl' obj=$ticket panel=true}
+            {include file='user/include_standardfields_edit.tpl' obj=$ticket panel=false}
         {/if}
         
         {* include display hooks *}

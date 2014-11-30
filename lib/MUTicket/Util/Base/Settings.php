@@ -16,28 +16,33 @@
  */
 class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
 {
-
     /**
      *
      * Enter description here ...
      * @param int    $args['id']	    	id of the just created answer or ticket
-     * @param string $args['title]      	title of an parent ticket or an answer
-     * @param string $args['text']      	text of an parent ticket or an answer
+     * @param int    $args['new']           id of the edited ticket or 0 if new ticket
+     * @param string $args['title]      	title of a parent ticket or an answer
+     * @param string $args['text']      	text of a parent ticket or an answer
      * @param int    $args['parentid']  	id of the parent ticket
      * @param array  $args['categories']	array of categories of the ticket or answer
      */
     public function handleModvarsPostPersist($args)
     {
+        // We check if the user create a new parent ticket or edit an existing parent ticket
+        $id = $this->request->request->filter('ticketid', 0, FILTER_SANITIZE_NUMBER_INT);
+        
+        LogUtil::registerError($id);
+        
         $serviceManager = ServiceUtil::getManager();
         $handler = new Zikula_Form_View($serviceManager, 'MUTicket');
 
         $lang = ZLanguage::getLanguageCode();
 
         $ticketid = $args['id'];
+        $id = $args['new'];
         $title = $args['title'];
         $text = $args['text'];
         $parentid = $args['parentid'];
-        $id = $args['id'];
 
         $repository = MUTicket_Util_Model::getTicketRepository();
 
@@ -98,10 +103,10 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         }
 
         if ($parentid == 0) {
-            if ($id == 0) {
-                $entry = $handler->__('A new ticket on ');
-            } else {
+            if ($id > 0) {
                 $entry = $handler->__('A ticket was edited on ');
+            } else {
+                $entry = $handler->__('A new ticket on ');
             }
         }
         else {
@@ -138,7 +143,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
                 $toaddress = UserUtil::getVar('email', $ownerid);
             }
         }
-        // get mail of parent ticket creater
+        // get email of parent ticket creater
         if ($kind == 'Supporter') {
             $toaddress = MUTicket_Util_Base_Settings::getMailAddressOfUser($parentid);
         }
@@ -214,7 +219,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
             if ($id == 0) {
                 $messagecontent['body'] = $handler->__('Another entry was created by an user on '). '<h2>' . $from . '</h2>';
             } else {
-                $messagecontent['body'] = $handler->__('An entry was edited by an user on '). '<h2>' . $from . '</h2>';                               
+                $messagecontent['body'] = $handler->__('An entry was edited by an user on '). '<h2>' . $from . '</h2>';
             }
         }
         else {

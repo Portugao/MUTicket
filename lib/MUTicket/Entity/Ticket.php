@@ -31,6 +31,21 @@ use DoctrineExtensions\StandardFields\Mapping\Annotation as ZK;
 class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
 {
     /**
+     * Bidirectional - One parent [ticket] has many children [tickets] (INVERSE SIDE).
+     *
+     * @ORM\OneToMany(targetEntity="MUTicket_Entity_Ticket", mappedBy="parent")
+     * @ORM\JoinTable(name="muticket_parentchildren",
+     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id" )
+     },
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id" )
+     }
+     * )
+     * @ORM\OrderBy({"createdDate" = "ASC"})
+     * @var MUTicket_Entity_Ticket[] $children.
+     */
+    protected $children = null;
+
+    /**
      * Unidirectional - Many ticketlabel [tickets] have many labelticket [labels] (OWNING SIDE).
      *
      * @ORM\ManyToMany(targetEntity="MUTicket_Entity_Label")
@@ -93,13 +108,13 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                     );
                 }
             }
-           /* if ($currentFunc == 'display') {
-                $this->_actions[] = array(
-                        'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket')),
-                        'icon' => 'back',
-                        'linkTitle' => __('Back to overview', $dom),
-                        'linkText' => __('Back to overview', $dom)
-                );
+            /* if ($currentFunc == 'display') {
+             $this->_actions[] = array(
+                     'url' => array('type' => 'admin', 'func' => 'view', 'arguments' => array('ot' => 'ticket')),
+                     'icon' => 'back',
+                     'linkTitle' => __('Back to overview', $dom),
+                     'linkText' => __('Back to overview', $dom)
+             );
             }*/
         }
         if ($currentType == 'user') {
@@ -130,13 +145,13 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
                             'linkText' => __('Reuse', $dom)
                     );*/
                 }
-               /* if (SecurityUtil::checkPermission($component, $instance, ACCESS_DELETE)) {
-                    $this->_actions[] = array(
-                            'url' => array('type' => 'user', 'func' => 'delete', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
-                            'icon' => 'delete',
-                            'linkTitle' => __('Delete', $dom),
-                            'linkText' => __('Delete', $dom)
-                    );
+                /* if (SecurityUtil::checkPermission($component, $instance, ACCESS_DELETE)) {
+                 $this->_actions[] = array(
+                         'url' => array('type' => 'user', 'func' => 'delete', 'arguments' => array('ot' => 'ticket', 'id' => $this['id'])),
+                         'icon' => 'delete',
+                         'linkTitle' => __('Delete', $dom),
+                         'linkText' => __('Delete', $dom)
+                 );
                 }*/
             }
             if ($currentFunc == 'display') {
@@ -219,7 +234,17 @@ class MUTicket_Entity_Ticket extends MUTicket_Entity_Base_Ticket
             // we remove
             $entityManager->remove($thisRating);
             $entityManager->flush();
+        }        
+        
+        $request = new Zikula_Request_Http();
+        $func = $request->query->filter('func', 'main', FILTER_SANITIZE_STRING);
+        if ($func != '') {
+            $parentid = $this->getId();
+            $serviceManager = ServiceUtil::getManager();
+            $modelHelper = new MUTicket_Util_Model($serviceManager);
+            $modelHelper->deleteChildren($parentid);
         }
+        
         $this->performPreRemoveCallback();
     }
 

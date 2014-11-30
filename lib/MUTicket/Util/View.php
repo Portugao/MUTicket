@@ -76,32 +76,34 @@ class MUTicket_Util_View extends MUTicket_Util_Base_View
 
     /**
      *
-     * this method is for checking if an supporter may create a ticket or if a user may rate
-     *
+     * this method is for checking if an user may create a ticket or if a user may rate
      * @param $ckeck      for what we wish to check 1 = for rating, 2 for creating tickets
      *
      * return int.
      */
-    public static function userForRating($check = 1) {
-
-        $supporterTickets = 0;
+    public static function userForRating($check = 1) 
+    {
+        // get actual userid
+        $userid = UserUtil::getVar('uid');
+        
+        // get the supporterids
+        $supporterids = MUTicket_Util_Model::getExistingSupporterUids();
          
         if ($check == 2) {
             $supporterTickets = ModUtil::getVar('MUTicket', 'supporterTickets');
-            if ($supporterTickets == 1) {
+            if ($supporterTickets === true) {
                 $kind = 1;
 
             } else {
-                $kind = 0;
+                if (in_array($userid, $supporterids)) {
+                    $kind = 0;
+                } else {
+                    $kind = 1;
+                }
             }
             return $kind;
         }
 
-        // get the supporterids
-        $supporterids = MUTicket_Util_Model::getExistingSupporterUids();
-
-        // get actual userid
-        $userid = UserUtil::getVar('uid');
         if (in_array($userid, $supporterids)) {
             $kind = 0;
         }

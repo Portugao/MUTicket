@@ -16,200 +16,225 @@
  */
 class MUTicket_Util_Model extends MUTicket_Util_Base_Model
 {
-	public function updateTicket($args) {
+    public function updateTicket($args) {
 
-		$entity = $args['entity'];
+        $entity = $args['entity'];
 
-		$serviceManager = ServiceUtil::getManager();
-		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
 
-		if ($entity == null) {
-			System::redirect($redirecturl);
-		}
-		$entity->setRated(1);
+        if ($entity == null) {
+            System::redirect($redirecturl);
+        }
+        $entity->setRated(1);
 
-		$entityManager->flush();
+        $entityManager->flush();
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * This function closes a ticket called by dual window
-	 * @param id   id of the ticket to close
-	 */
+    /**
+     * This function closes a ticket called by dual window
+     * @param id   id of the ticket to close
+     */
 
-	public function closeTicket($id) {
+    public function closeTicket($id) {
 
-		// build ticket repository
-		$repository = MUTicket_Util_Model::getTicketRepository();
+        // build ticket repository
+        $repository = MUTicket_Util_Model::getTicketRepository();
 
-		$entity = $repository->selectById($id);
+        $entity = $repository->selectById($id);
 
-		$serviceManager = ServiceUtil::getManager();
-		$entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
 
-		$entity->setState(0);
+        $entity->setState(0);
 
-		$entityManager->flush();
+        $entityManager->flush();
 
-		LogUtil::registerStatus($this->__('Done! The ticket is closed!'));
+        LogUtil::registerStatus($this->__('Done! The ticket is closed!'));
 
-	}
+    }
 
-	/**
-	 *
-	 * This method is for getting an array of the original uids
-	 * for existing supporters or a single uid, if $id is set
-	 *
-	 * @ return array or int
-	 */
-	public static function getExistingSupporterUids($id = 0) {
+    /**
+     * This function closes a ticket called by dual window
+     * @param id   id of the ticket to close
+     */
 
-		$repository = MUTicket_Util_Model::getSupporterRepository();
+    public function deleteChildren($id) {
 
-		if ($id == 0) {
-			$supporters = $repository->selectWhere();
-				
-			$supporternames = array();
+        // build ticket repository
+        $repository = MUTicket_Util_Model::getTicketRepository();
+         
+        $where = 'tbl.parent_id = \'' . DataUtil::formatForStore($id) . '\'';
 
-			foreach ($supporters as $supporter) {
-				$supporternames[] = $supporter['username'];
-			}
+        $entities = $repository->selectWhere($where);
 
-			$supporteruids = array();
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
 
-			foreach ($supporternames as $supportername) {
-				$supporteruids[] = UserUtil::getIdFromName($supportername);
-			}
-		}
-		else {
-			$supporter = $repository->selectById($id);
-			$supportername = $supporter['username'];
-			$supporteruids = UserUtil::getIdFromName($supportername);
-		}
+        foreach ($entities as $entity){ 
+            $thisentity = $repository->selectById($entity['id']);
 
-		return $supporteruids;
-	}
+            $entityManager->remove($thisentity);
+            $entityManager->flush();
+        }
+    }
 
-	/**
-	 *
-	 * This method is for getting an array of supporter email addresses for
-	 * supporters that are active
-	 *
-	 * @ return array
-	 */
-	public static function getSupporterMails($catid = '') {
+    /**
+     *
+     * This method is for getting an array of the original uids
+     * for existing supporters or a single uid, if $id is set
+     *
+     * @ return array or int
+     */
+    public static function getExistingSupporterUids($id = 0) {
 
-		$repository = MUTicket_Util_Model::getSupporterRepository();
+        $repository = MUTicket_Util_Model::getSupporterRepository();
 
-		$where = 'tbl.state = 1';
+        if ($id == 0) {
+            $supporters = $repository->selectWhere();
 
-		$supporters = $repository->selectWhere($where);
+            $supporternames = array();
 
-		$supporternames = array();
+            foreach ($supporters as $supporter) {
+                $supporternames[] = $supporter['username'];
+            }
 
-		foreach ($supporters as $supporter) {
-			if ($catid != '') {
-				$supportercats = $supporter['supportcats'];
-				$cats = unserialize($supportercats);
-				foreach ($cats as $cat) {
-					if ($cat == $catid) {
-						$status = true;
-						break;					
+            $supporteruids = array();
 
-					}
-					else {
-						$status = false;
-					}
-				}
-				if ($status == true) {
-					$supporternames[] = $supporter['username'];
-				}
-			}
-			else {
-				$supporternames[] = $supporter['username'];
-			}
-		}
-		
-		// if no supporter is available with the relevant category
-		// we take all supporters to send an email to
-		if (empty($supporternames)) {
-			foreach ($supporters as $supporter) {
-				$supporternames[] = $supporter['username'];;
-			}
-		}
+            foreach ($supporternames as $supportername) {
+                $supporteruids[] = UserUtil::getIdFromName($supportername);
+            }
+        }
+        else {
+            $supporter = $repository->selectById($id);
+            $supportername = $supporter['username'];
+            $supporteruids = UserUtil::getIdFromName($supportername);
+        }
 
-		$supporteruids = array();
+        return $supporteruids;
+    }
 
-		foreach ($supporternames as $supportername) {
-			$supporteruids[] = UserUtil::getIdFromName($supportername);
-		}
-		$supportermailadresses = array();
+    /**
+     *
+     * This method is for getting an array of supporter email addresses for
+     * supporters that are active
+     *
+     * @ return array
+     */
+    public static function getSupporterMails($catid = '') {
 
-		foreach ($supporteruids as $supporteruid) {
-			$supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
-		}
+        $repository = MUTicket_Util_Model::getSupporterRepository();
 
-		return $supportermailadresses;
-	}
+        $where = 'tbl.state = 1';
 
-	/**
-	 *
-	 This method is for getting a repository for ratings
-	 *
-	 */
+        $supporters = $repository->selectWhere($where);
 
-	public static function getRatingRepository() {
+        $supporternames = array();
 
-		$serviceManager = ServiceUtil::getManager();
-		$entityManager = $serviceManager->getService('doctrine.entitymanager');
-		$repository = $entityManager->getRepository('MUTicket_Entity_Rating');
+        foreach ($supporters as $supporter) {
+            if ($catid != '') {
+                $supportercats = $supporter['supportcats'];
+                $cats = unserialize($supportercats);
+                foreach ($cats as $cat) {
+                    if ($cat == $catid) {
+                        $status = true;
+                        break;
 
-		return $repository;
-	}
+                    }
+                    else {
+                        $status = false;
+                    }
+                }
+                if ($status == true) {
+                    $supporternames[] = $supporter['username'];
+                }
+            }
+            else {
+                $supporternames[] = $supporter['username'];
+            }
+        }
 
-	/**
-	 *
-	 This method is for getting a repository for tickets
-	 *
-	 */
+        // if no supporter is available with the relevant category
+        // we take all supporters to send an email to
+        if (empty($supporternames)) {
+            foreach ($supporters as $supporter) {
+                $supporternames[] = $supporter['username'];;
+            }
+        }
 
-	public static function getTicketRepository() {
+        $supporteruids = array();
 
-		$serviceManager = ServiceUtil::getManager();
-		$entityManager = $serviceManager->getService('doctrine.entitymanager');
-		$repository = $entityManager->getRepository('MUTicket_Entity_Ticket');
+        foreach ($supporternames as $supportername) {
+            $supporteruids[] = UserUtil::getIdFromName($supportername);
+        }
+        $supportermailadresses = array();
 
-		return $repository;
-	}
-	
-	/**
-	 *
-	 This method is for getting a repository for labels
-	 *
-	 */
-	
-	public static function getLabelRepository() {
-	
-	    $serviceManager = ServiceUtil::getManager();
-	    $entityManager = $serviceManager->getService('doctrine.entitymanager');
-	    $repository = $entityManager->getRepository('MUTicket_Entity_Label');
-	
-	    return $repository;
-	}
+        foreach ($supporteruids as $supporteruid) {
+            $supportermailadresses[] = UserUtil::getVar('email', $supporteruid);
+        }
 
-	/**
-	 *
-	 This method is for getting a repository for supporters
-	 *
-	 */
+        return $supportermailadresses;
+    }
 
-	public static function getSupporterRepository() {
+    /**
+     *
+     This method is for getting a repository for ratings
+     *
+     */
 
-		$serviceManager = ServiceUtil::getManager();
-		$entityManager = $serviceManager->getService('doctrine.entitymanager');
-		$repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+    public static function getRatingRepository() {
 
-		return $repository;
-	}
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $repository = $entityManager->getRepository('MUTicket_Entity_Rating');
+
+        return $repository;
+    }
+
+    /**
+     *
+     This method is for getting a repository for tickets
+     *
+     */
+
+    public static function getTicketRepository() {
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $repository = $entityManager->getRepository('MUTicket_Entity_Ticket');
+
+        return $repository;
+    }
+
+    /**
+     *
+     This method is for getting a repository for labels
+     *
+     */
+
+    public static function getLabelRepository() {
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $repository = $entityManager->getRepository('MUTicket_Entity_Label');
+
+        return $repository;
+    }
+
+    /**
+     *
+     This method is for getting a repository for supporters
+     *
+     */
+
+    public static function getSupporterRepository() {
+
+        $serviceManager = ServiceUtil::getManager();
+        $entityManager = $serviceManager->getService('doctrine.entitymanager');
+        $repository = $entityManager->getRepository('MUTicket_Entity_Supporter');
+
+        return $repository;
+    }
 }

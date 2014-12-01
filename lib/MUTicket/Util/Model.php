@@ -57,8 +57,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
     }
 
     /**
-     * This function closes a ticket called by dual window
-     * @param id   id of the ticket to close
+     * This function deletes all children tickets of a parent ticket
+     * @param id   id of the parent ticket
      */
 
     public function deleteChildren($id) {

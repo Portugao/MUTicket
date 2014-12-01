@@ -91,14 +91,21 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
     public function handleCommand(Zikula_Form_View $view, &$args)
     {
         // We check if the user create a new parent ticket or edit an existing parent ticket
-        $id = (int) $this->request->query->filter('id', 0, FILTER_VALIDATE_INT);
+        $id = $this->request->query->filter('id', 0, FILTER_VALIDATE_INT);
+        // if no isset id we set id to 0
+        if (!isset($id)) {
+            $id = 0;
+        }
 
-        LogUtil::registerError($id);
         // We get parentid
         // We check if ticket is a parent ticket
-        $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_SANITIZE_NUMBER_INT);
-        LogUtil::registerError($parentid);
-        
+        $parentid = $this->request->request->filter('muticketTicket_ParentItemList' , 0, FILTER_VALIDATE_INT);
+
+        // if no isset parentid we set parentid to 0
+        if (!isset($parentid)) {
+            $parentid = 0;
+        }
+      
         // we get a service manager
         $serviceManager = ServiceUtil::getManager();
         // we get a model helper

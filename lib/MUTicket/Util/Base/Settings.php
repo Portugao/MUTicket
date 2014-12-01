@@ -29,10 +29,8 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
     public function handleModvarsPostPersist($args)
     {
         // We check if the user create a new parent ticket or edit an existing parent ticket
-        $id = $this->request->request->filter('ticketid', 0, FILTER_SANITIZE_NUMBER_INT);
-        
-        LogUtil::registerError($id);
-        
+        //$id = $this->request->request->filter('ticketid', 0, FILTER_SANITIZE_NUMBER_INT);
+              
         $serviceManager = ServiceUtil::getManager();
         $handler = new Zikula_Form_View($serviceManager, 'MUTicket');
 
@@ -60,7 +58,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
             foreach ($categories as $category) {
                 $name = $category->getCategory()->getName();
                 $display_name = $category->getCategory()->getDisplayName();
-                $id = $category->getCategory()->getId();
+                $categoryid = $category->getCategory()->getId();
 
                 if (isset($display_name[$lang]) && !empty($display_name[$lang])) {
                     $ticketcategory .= $display_name[$lang];
@@ -69,7 +67,7 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
                     $ticketcategory .= $name;
                 }
                  
-                $ticketcategory2 = $id;
+                $ticketcategory2 = $categoryid;
             }
         }
         else {
@@ -103,10 +101,10 @@ class MUTicket_Util_Base_Settings extends Zikula_AbstractBase
         }
 
         if ($parentid == 0) {
-            if ($id > 0) {
-                $entry = $handler->__('A ticket was edited on ');
+            if ($id == 0) {
+                $entry = $handler->__('A new ticket on ');               
             } else {
-                $entry = $handler->__('A new ticket on ');
+                $entry = $handler->__('A ticket was edited on ');
             }
         }
         else {

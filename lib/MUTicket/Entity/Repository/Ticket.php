@@ -59,4 +59,24 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
 
         return $qb;
     }
+    
+    /**
+     * Builds a generic Doctrine query supporting WHERE and ORDER BY.
+     *
+     * @param string  $where    The where clause to use when retrieving the collection (optional) (default='').
+     * @param string  $orderBy  The order-by clause to use when retrieving the collection (optional) (default='').
+     * @param boolean $useJoins Whether to include joining related objects (optional) (default=true).
+     * @param boolean $slimMode If activated only some basic fields are selected without using any joins (optional) (default=false).
+     *
+     * @return Doctrine\ORM\QueryBuilder query builder instance to be further processed
+     */
+    protected function _intBaseQuery($where = '', $orderBy = '', $useJoins = true, $slimMode = false)
+    {
+        $qb = parent::_intBaseQuery($where = '', $orderBy = '', $useJoins = true, $slimMode = false);
+        
+        $orderBy = 'createdDate DESC';
+        $this->_intBaseQueryAddOrderBy($qb, $orderBy);
+        
+        return $qb;
+    }
 }

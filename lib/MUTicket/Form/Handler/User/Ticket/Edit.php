@@ -143,6 +143,8 @@ class MUTicket_Form_Handler_User_Ticket_Edit extends MUTicket_Form_Handler_User_
             $data['categories'] = $entity['categories'];
 
             $message = $settingHelper->handleModvarsPostPersist($data);
+            
+            return $message;
         }
     }
 

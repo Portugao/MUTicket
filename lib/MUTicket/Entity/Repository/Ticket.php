@@ -71,10 +71,34 @@ class MUTicket_Entity_Repository_Ticket extends MUTicket_Entity_Repository_Base_
      * @return Doctrine\ORM\QueryBuilder query builder instance to be further processed
      */
     protected function _intBaseQuery($where = '', $orderBy = '', $useJoins = true, $slimMode = false)
-    {
-        $qb = parent::_intBaseQuery($where = '', $orderBy = '', $useJoins = true, $slimMode = false);
+    {        
+        // normally we select the whole table
+        $selection = 'tbl';
         
+        if ($slimMode === true) {
+            // but for the slim version we select only the basic fields, and no joins
+        
+            $titleField = $this->getTitleFieldName();
+            $selection = 'tbl.id';
+            if ($titleField != '') {
+                $selection .= ', tbl.' . $titleField;
+            }
+            $useJoins = false;
+        }
+        
+        if ($useJoins === true) {
+            $selection .= $this->addJoinsToSelection();
+        }
+        
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select($selection)
+        ->from('MUTicket_Entity_Ticket', 'tbl');
+        
+        if ($useJoins === true) {
+            $this->addJoinsToFrom($qb);
+        }
         $orderBy = 'createdDate DESC';
+        $this->_intBaseQueryAddWhere($qb, $where);
         $this->_intBaseQueryAddOrderBy($qb, $orderBy);
         
         return $qb;

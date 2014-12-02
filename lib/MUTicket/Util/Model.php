@@ -88,24 +88,21 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      * @ return array or int
      */
-    public static function getExistingSupporterUids($id = 0) {
+    public static function getExistingSupporterUids($id = '') 
+    {
+        $supporterRepository = self::getSupporterRepository();
 
-        $repository = MUTicket_Util_Model::getSupporterRepository();
-
-        if ($id == 0) {
-            $supporters = $repository->selectWhere();
-
-            $supporternames = array();
+        if ($id == '') {
+            $supporters = $supporterRepository->selectWhere();
 
             foreach ($supporters as $supporter) {
                 $supporternames[] = $supporter['username'];
             }
 
-            $supporteruids = array();
-
             foreach ($supporternames as $supportername) {
                 $supporteruids[] = UserUtil::getIdFromName($supportername);
             }
+
         }
         else {
             $supporter = $repository->selectById($id);
@@ -123,8 +120,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      * @ return array
      */
-    public static function getSupporterMails($catid = '') {
-
+    public static function getSupporterMails($catid = '') 
+    {
         $repository = MUTicket_Util_Model::getSupporterRepository();
 
         $where = 'tbl.state = 1';
@@ -184,8 +181,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      */
 
-    public static function getRatingRepository() {
-
+    public static function getRatingRepository() 
+    {
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
         $repository = $entityManager->getRepository('MUTicket_Entity_Rating');
@@ -199,8 +196,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      */
 
-    public static function getTicketRepository() {
-
+    public static function getTicketRepository() 
+    {
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
         $repository = $entityManager->getRepository('MUTicket_Entity_Ticket');
@@ -214,8 +211,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      */
 
-    public static function getLabelRepository() {
-
+    public static function getLabelRepository() 
+    {
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
         $repository = $entityManager->getRepository('MUTicket_Entity_Label');
@@ -229,8 +226,8 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
      *
      */
 
-    public static function getSupporterRepository() {
-
+    public static function getSupporterRepository() 
+    {
         $serviceManager = ServiceUtil::getManager();
         $entityManager = $serviceManager->getService('doctrine.entitymanager');
         $repository = $entityManager->getRepository('MUTicket_Entity_Supporter');

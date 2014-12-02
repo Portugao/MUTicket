@@ -17,132 +17,134 @@
  */
 class MUTicket_Form_Handler_Admin_Edit extends MUTicket_Form_Handler_Admin_Base_Edit
 {
-	/**
-	 * Custom initialisation tasks.
-	 */
-	public function postInitialize()
-	{
+    /**
+     * Custom initialisation tasks.
+     */
+    public function postInitialize()
+    {
 
-		parent::postInitialize();
+        parent::postInitialize();
 
-		$supportergroup = $this->getVar('supportergroup');
+        $supportergroup = $this->getVar('supportergroup');
 
-		ModUtil::dbInfoLoad('Groups');
-		ModUtil::dbInfoLoad('Categories');
-		ModUtil::dbInfoLoad('Users');
-		$tables = DBUtil::getTables();
-		$group_membership_column = $tables['group_membership_column'];
-		$categoryregistry_column = $tables['categories_registry_column'];
-		$categorycategory_column = $tables['categories_category_column'];
-		$users_column = $tables['users_column'];
+        ModUtil::dbInfoLoad('Groups');
+        ModUtil::dbInfoLoad('Categories');
+        ModUtil::dbInfoLoad('Users');
+        $tables = DBUtil::getTables();
+        $group_membership_column = $tables['group_membership_column'];
+        $categoryregistry_column = $tables['categories_registry_column'];
+        $categorycategory_column = $tables['categories_category_column'];
+        $users_column = $tables['users_column'];
 
-		// make dropdownlist for categories
+        // make dropdownlist for categories
 
-		//get categories for the ticket table
+        //get categories for the ticket table
 
-		$where2 = "WHERE $categoryregistry_column[modname] = '" . DataUtil::formatForStore('MUTicket') . "' AND $categoryregistry_column[table] = '" . DataUtil::formatForStore('Ticket') . "'";
+        $where2 = "WHERE $categoryregistry_column[modname] = '" . DataUtil::formatForStore('MUTicket') . "' AND $categoryregistry_column[table] = '" . DataUtil::formatForStore('Ticket') . "'";
 
-		$categorypaths = DBUtil::selectObjectArray('categories_registry', $where2);
-		if ($categorypaths == false) {
-			$statuscategory = 0;
-			LogUtil::registerError($this->__('Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!'));
-		}
-		else {
-			$statuscategory = 1;
-		}
+        $categorypaths = DBUtil::selectObjectArray('categories_registry', $where2);
+        if ($categorypaths == false) {
+            $statuscategory = 0;
+            LogUtil::registerError($this->__('Attention! There is no category path available for the ticket table. So you can not use categories. If you want to use them, please apply one!'));
+        }
+        else {
+            $statuscategory = 1;
+        }
 
-		//get subcategories of the maincategory
+        //get subcategories of the maincategory
 
-		$supportcats = array();
+        $supportcats = array();
 
-		$lang = ZLanguage::getLanguageCode();
+        $lang = ZLanguage::getLanguageCode();
 
-		if (is_array($categorypaths) && count($categorypaths) > 0) {
-		foreach ($categorypaths as $categorypath) {
-			$where3 = "WHERE $categorycategory_column[parent_id] = '" . DataUtil::formatForStore($categorypath[category_id]) . "'";
-			$categories = DBUtil::selectObjectArray('categories_category',$where3);
-			foreach ($categories as $category) {
-				if (isset($category['display_name'][$lang]) && !empty($category['display_name'][$lang])) {
-					$displayname = unserialize($category['display_name']);
-					// showing category name depending on running language
-					$supportcats[] = array('value' => $category['id'], 'text' => $displayname[$lang]);
-				} else if (isset($category['name']) && !empty($category['name'])) {
-					// showing category standard name
-					$supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
-				}
-			}
-		}
-		}
-		else {
-			$supportcats[] = array('value' => 0, 'text' => $this->__('No Category'));
-		}
+        if (is_array($categorypaths) && count($categorypaths) > 0) {
+            foreach ($categorypaths as $categorypath) {
+                $where3 = "WHERE $categorycategory_column[parent_id] = '" . DataUtil::formatForStore($categorypath[category_id]) . "'";
+                $categories = DBUtil::selectObjectArray('categories_category',$where3);
+                foreach ($categories as $category) {
+                    if (isset($category['display_name']) && !empty($category['display_name'])) {
+                        $displayname = unserialize($category['display_name']);
+                        if ($displayname[$lang]) {
+                            // showing category name depending on running language
+                            $supportcats[] = array('value' => $category['id'], 'text' => $displayname[$lang]);
 
-		// make dropdownlist for users
+                        } else if (isset($category['name']) && !empty($category['name'])) {
+                            // showing category standard name
+                            $supportcats[] = array('value' => $category['id'], 'text' => $category['name']);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            $supportcats[] = array('value' => 0, 'text' => $this->__('No Category'));
+        }
 
-		// get existing supporters
+        // make dropdownlist for users
+        // get existing supporters
 
-		$repository = $this->entityManager->getRepository('MUTicket_Entity_Supporter');
+        $repository = $this->entityManager->getRepository('MUTicket_Entity_Supporter');
 
-		$allSupporters = $repository->selectWhere();
+        $allSupporters = $repository->selectWhere();
 
-		$existingUsers = array();
+        $existingUsers = array();
 
-		// get template vars of supporter
-		$supporter = $this->view->get_template_vars('supporter');
+        // get template vars of supporter
+        $supporter = $this->view->get_template_vars('supporter');
 
-		// put the existing supporter into the array, if editing a supporter without this supporter
-		foreach ($allSupporters as $supporter2) {
-			if ($supporter2['username'] != $supporter['username'] ) {
-				$existingUsers[] = $supporter2['username'];
-			}
-		}
+        // put the existing supporter into the array, if editing a supporter without this supporter
+        foreach ($allSupporters as $supporter2) {
+            if ($supporter2['username'] != $supporter['username'] ) {
+                $existingUsers[] = $supporter2['username'];
+            }
+        }
 
-		// get supporter ids
-		$userids = MUTicket_Util_View::getSupporterIds();
+        // get supporter ids
+        $userids = MUTicket_Util_View::getSupporterIds();
 
-		$where5 = "WHERE $users_column[uid] IN ($userids)";
+        $where5 = "WHERE $users_column[uid] IN ($userids)";
 
-		// get users from system which are not supporters and members of the correct group
-		$users = DBUtil::selectObjectArray('users', $where5);
+        // get users from system which are not supporters and members of the correct group
+        $users = DBUtil::selectObjectArray('users', $where5);
 
-		$supportusers = array();
+        $supportusers = array();
 
-		if (is_array($users)) {
-			foreach ($users as $user) {
-				if($user[uid] != 1 && (in_array($user['uname'], $existingUsers)) == false) {
-					$supportusers[] = array('value' => $user['uname'], 'text' => $user['uname']);
-				}
-			}
-		}
-		else {
-			LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
-		}
+        if (is_array($users)) {
+            foreach ($users as $user) {
+                if($user[uid] != 1 && (in_array($user['uname'], $existingUsers)) == false) {
+                    $supportusers[] = array('value' => $user['uname'], 'text' => $user['uname']);
+                }
+            }
+        }
+        else {
+            LogUtil::registerError($this->__('Attention! There is no other user in the supporter group!'));
+        }
 
-		// we get the id of the supporter to edit
-		$id = $this->request->query->filter('id' , 0, FILTER_SANITIZE_NUMBER_INT);
-		// if we want to edit a supporter we assign the saved categories
-		if ($id > 0) {
-			$supportertoedit = $repository->selectById($id);
-			if ($statuscategory == 1) {
-			$savedcats = $supportertoedit['supportcats'];
-			$savedcats = unserialize($savedcats);
-			}
-			else {
-				$savedcats[0] = 0;
-			}
-			$this->view->assign('savedcats', $savedcats);
-		}
-		// else nothing to do
-		else {
+        // we get the id of the supporter to edit
+        $id = $this->request->query->filter('id' , 0, FILTER_SANITIZE_NUMBER_INT);
+        // if we want to edit a supporter we assign the saved categories
+        if ($id > 0) {
+            $supportertoedit = $repository->selectById($id);
+            if ($statuscategory == 1) {
+                $savedcats = $supportertoedit['supportcats'];
+                $savedcats = unserialize($savedcats);
+            }
+            else {
+                $savedcats[0] = 0;
+            }
+            $this->view->assign('savedcats', $savedcats);
+        }
+        // else nothing to do
+        else {
 
-		}
+        }
 
-		$supporter['supportcatsItems'] = $supportcats;
-		$supporter['usernameItems'] = $supportusers;
-		$this->view->assign('supporter', $supporter)
-		           ->assign('statuscategory', $statuscategory);
+        $supporter['supportcatsItems'] = $supportcats;
+        $supporter['usernameItems'] = $supportusers;
+        $this->view->assign('supporter', $supporter)
+        ->assign('statuscategory', $statuscategory);
 
-		return true;
+        return true;
 
-	}
+    }
 }

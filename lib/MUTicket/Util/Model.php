@@ -105,7 +105,7 @@ class MUTicket_Util_Model extends MUTicket_Util_Base_Model
 
         }
         else {
-            $supporter = $repository->selectById($id);
+            $supporter = $supporterRepository->selectById($id);
             $supportername = $supporter['username'];
             $supporteruids = UserUtil::getIdFromName($supportername);
         }

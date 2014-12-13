@@ -1,6 +1,66 @@
 CHANGELOG
 ---------
 
-Changes in MUTicket 1.0.1
+Changes in MUTicket 1.1.0
 
-closed #38 Enable in the settings now, that users that are in the supportergroup can create tickets
+fixed #21 correct link in email now
+
+fixed #32
+
+fixed #33 possible to set a due date in frontend
+
+fixed #34 we have labels now
+
+fixed #35 supporters are changable now
+
+fixed #36 supporters can mark a ticket as adapted
+
+fixed #38 Enable in the settings now, that users that are in the supportergroup can create tickets
+
+fixed #39 hook container only if one activated
+
+fixed #40 modvar rating renamed
+
+fixed #41 state works now
+
+fixed #42 button is available
+
+fixed #43 validation works
+
+fixed #44 redirect works now
+
+fixed #45 categories get saved now
+
+fixed #46 we can edit a current state without deleting owner
+
+fixed #47 editing possible
+
+fixed #48 redirect is correct now
+
+fixed #49 in backend only tickets to delete
+
+fixed #50 dialog window is away, other solution in template
+
+fixed #51 all entries set to approved
+
+fixed #52 reorderd columns in view
+
+fixed #53 workflow entry for all entries
+
+fixed #54 complete notifications
+
+fixed #55 quick navigation works
+
+fixed #56 answers are possible now
+
+fixed #57 no problems with disabled supporters may create tickets
+
+fixed #58 no problems with labels left
+
+fixed #59 plural implemented
+
+fixed #60 creation of tickets possible
+
+
+
+
